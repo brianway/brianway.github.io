@@ -1,0 +1,40 @@
+---
+layout: default
+title: Contact
+comment: true
+---
+
+<div class="article">
+    <h3 class="title">{{ page.title }}</h3>
+    <div class="about">
+
+        <div class="about-text">
+            <p>{{ site.data.author.simpleIntro }}</p>
+            {{ site.data.author.detailIntro }}
+        </div>
+        <div class="about-image">
+            <img src="{{ site.data.author.imageLink }}" />
+        </div>
+    </div>
+    <div class="fn-clear"></div>
+	<h4>Follow Me</h4></br>
+    <div>
+        {% for item in site.data.followme %}
+        <a href="{{ item.link }}" target="_blank"><img src="{{ item.pic }}" width="30px" height="30px"></a>
+		 &nbsp;
+        {% endfor %}		
+    </div>
+    <div class="fn-clear"></div>
+    <div class="contact">
+        <a href="mailto:{{ site.data.author.email }}">{{ site.data.author.email }}</a>
+    </div>
+    <div class="comment">
+        {% if site.disqus.config %}
+        <div id="disqus_thread"></div>
+        {% else %}
+            {% if site.duoshuo.config %}
+            <div class="ds-thread"></div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
