@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!--
-         **
-         * Auther:      掌心
-         * Contact:     http://www.zhanxin.info
-         * Create:      2013.08.10
-         * Theme Name:  Kunka
-         * Authorize:   BY-NC-SA
-         **
-        -->
         <meta charset="utf-8">
         <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
         <!-- meta -->
@@ -115,7 +106,7 @@
             </div>
         </div>
         <div class="foot">
-            <div class="footer">
+            <div class="footer">		
                 <p>Copyright 2013. All rights reserved. Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>, Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin.info</a>.</p>
             </div>
         </div>
@@ -133,18 +124,20 @@
                 })();
             </script>
             {% else %}
-                {% if site.duoshuo.config %}
-                <script type="text/javascript">
-                    var duoshuoQuery = {short_name:"{{ site.duoshuo.id }}"};
-                    (function() {
-                        var ds = document.createElement('script');
-                        ds.type = 'text/javascript';ds.async = true;
-                        ds.src = 'http://static.duoshuo.com/embed.js';
-                        ds.charset = 'UTF-8';
-                        (document.getElementsByTagName('head')[0]
-                        || document.getElementsByTagName('body')[0]).appendChild(ds);
-                    })();
-                </script>
+            {% if site.duoshuo.config %}
+				<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+				<script type="text/javascript">
+				var duoshuoQuery = {short_name:"brianway"};
+					(function() {
+						var ds = document.createElement('script');
+						ds.type = 'text/javascript';ds.async = true;
+						ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+						ds.charset = 'UTF-8';
+						(document.getElementsByTagName('head')[0] 
+						 || document.getElementsByTagName('body')[0]).appendChild(ds);
+					})();
+					</script>
+				<!-- 多说公共JS代码 end -->		
                 {% endif %}
             {% endif %}
         {% endif %}

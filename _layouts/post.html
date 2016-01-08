@@ -24,7 +24,15 @@ comment: true
         <div id="disqus_thread"></div>
         {% else %}
             {% if site.duoshuo.config %}
-            <div class="ds-thread"></div>
+			<ul class="ds-recent-visitors" data-num-items="100"></ul> 
+			<!-- 多说评论框 start -->
+					<div class="ds-thread" 
+						data-thread-key="{{ page.id }}"
+						data-title="{{ page.title }}" 
+						data-url="{{page.url}} "
+						data-image="{{ site.image }}">
+					</div>
+			<!-- 多说评论框 end -->
             {% endif %}
         {% endif %}
     </div>

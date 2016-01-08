@@ -1,0 +1,11 @@
+---
+layout: post
+title:  在github搭建个人网站
+date:   2016-01-07 22:35:11
+category: "github"
+tags: "github"
+---
+
+
+先搜篇中文博客了解下流程，再根据下面的官方文档**按顺序**看一遍就差不多了。
+

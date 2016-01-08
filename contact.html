@@ -26,6 +26,7 @@ comment: true
     </div>
     <div class="fn-clear"></div>
     <div class="contact">
+		<h4>email</h4></br>
         <a href="mailto:{{ site.data.author.email }}">{{ site.data.author.email }}</a>
     </div>
     <div class="comment">
@@ -33,7 +34,15 @@ comment: true
         <div id="disqus_thread"></div>
         {% else %}
             {% if site.duoshuo.config %}
-            <div class="ds-thread"></div>
+            <ul class="ds-recent-visitors" data-num-items="100"></ul> 
+            <!-- 多说评论框 start -->
+					<div class="ds-thread" 
+						data-thread-key="{{ page.id }}"
+						data-title="{{ page.title }}" 
+						data-url="{{page.url}} "
+						data-image="{{ site.image }}">
+					</div>
+			<!-- 多说评论框 end -->
             {% endif %}
         {% endif %}
     </div>
