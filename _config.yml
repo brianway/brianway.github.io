@@ -1,118 +1,37 @@
-# Where things are
-source:       .
-destination:  ./_site
-plugins_dir:  ./_plugins
-layouts_dir:  ./_layouts
-data_dir:     ./_data
-paginate:     8
+# Site settings
+title: Brian's Personal Website
+email: weichuyang@163.com
+nav_text: "Student | Coder"
+description: 魏楚阳的博客
+# > # this means to ignore newlines until "baseurl:"
+#   Write an awesome description for your new site here. You can edit this
+#   line in _config.yml. It will appear in your document head meta (for
+#   Google search results) and in your feed.xml site description.
 
-# Handling Reading
-safe:         false
-include:      [".htaccess"]
-exclude:      []
-keep_files:   [".git", ".svn"]
-encoding:     "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-textile_ext:  "textile"
+# baseurl: "" # the subpath of your site, e.g. /blog/
+# url: "http://yourdomain.com" # the base hostname & protocol for your site
+# twitter_username: jekyllrb
+github_username: brianway
+permalink: /:year/:month/:day/:title/
 
-# Filtering Content
-show_drafts:  null
-limit_posts:  0
-future:       true
-unpublished:  false
+#########################################
+# for duoshuo.com commenting system, uncomment following line if you do not want to include duoshuo.com. 
+duoshuo_shortname: brianway
+duoshuo_url: "http://brianway.github.io"
+# disqus.com commenting system. please note that it is exclusive with duoshuo.com
+#disqus_shortname: lixizhi
+#disqus_url: "http://lixizhi.github.io"
+#########################################
 
-#Gems
-gems: [jekyll-paginate]
+# Build settings
+markdown: kramdown
+highlighter: pygments
 
-# Conversion
-markdown:     kramdown
-#markdown: redcarpet
-highlighter:  pygments
-#highlighter:  rouge
-lsi:          false
-excerpt_separator: "\n\n"
-
-
-# Markdown Processors
-rdiscount:
-  extensions: []
-
-redcarpet:
-  extensions: []
+# highlight
+# highlighter: pygments
+# highlighter: rouge
+# highlighter: false
 
 
-kramdown:
-  input: GFM
-  auto_ids:       true
-  footnote_nr:    1
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  enable_coderay: true
-
-  coderay:
-    coderay_wrap:              div
-    coderay_line_numbers:      inline
-    coderay_line_number_start: 1
-    coderay_tab_width:         4
-    coderay_bold_every:        10
-    coderay_css:               style
-
-
-
-
-# Serving
-detach:       false
-port:         4000
-host:         127.0.0.1
-baseurl:      "" # does not include hostname
-
-# Outputting
-permalink:     date
-paginate_path: /page:num
-timezone:      null
-
-
-#Site config
-title: Live For Show
-description: This is Brian's Blog Site.
-keywords: brainway blog site
-gitpage: http://brianway.github.io/
-#url: http://127.0.0.1:4000/
-feed: /atom.xml
-favicon: http://jekyllrb.com/favicon.png
-
-#Nav config
-nav:
-  - text: 首页
-    url: /index.html
-  - text: 分类目录 
-    url: /categories.html
-  - text: 文章归档
-    url: /archives.html
-  - text: 联系我
-    url: /contact.html
-  - text: 友情链接
-    url: /links.html
-
-
-
-#googleAnaly, your id link UA-12345678-X
-googleAnaly:
-  config: true
-  id: UA-40169250-1
-
-#comment config
-disqus:
-  config: false
-  id: piznblog
-
-duoshuo:
-  config: true
-  id: zhanxin
-
-#Pagination
-paginate: 5
+paginate: 10
 paginate_path: "page:num"
-
-

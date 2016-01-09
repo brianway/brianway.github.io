@@ -2,8 +2,8 @@ name: brianway
 email: weichuyang@163.com
 imageLink: "/images/gena.jpg"
 simpleIntro: 我是「魏楚阳」，一个处在学习期的小白。
-detailIntro:
-  <p> 单身，单身，单身。重要的事情说三遍。</p>
-  <p> 梦想还是要有的，万一实现了呢？</p>
-  <p>《炉石传说》天梯传说，竞技场12胜，高校星联赛武汉赛区季军（游戏ID：闷声发大财#5462）</p>
+WebsiteIntro:
+    <h2 id="welcome-to-my-website">Welcome to My Website</h2>
+    <p>This is the place where I share my ideas on topics like 
+    <a href="https://docs.oracle.com/javase/8/docs/api/">Java </a>and something else</p>
 

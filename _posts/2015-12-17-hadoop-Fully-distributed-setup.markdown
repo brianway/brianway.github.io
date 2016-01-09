@@ -4,8 +4,11 @@ title:  hadoop完全分布式模式的安装和配置步骤
 date:   2015-12-17 22:35:11
 category: "hadoop"
 tags: "hadoop"
+comments: true
 ---
 
+* content
+{:toc}
 
 本文是入门教程，以**hadoop-1.2.1**为例，介绍hadoop完全分布式的部署和配置步骤
 
@@ -40,7 +43,7 @@ tags: "hadoop"
 ### 1.配置hosts文件和hadoop-env.sh文件
 - 修改/etc/host，使彼此能解析主机名
 
-```
+~~~
 root@RfidLabMaster:/etc# cat hosts
 127.0.0.1 localhost
 127.0.1.1       localhost.localdomain   localhost
@@ -53,7 +56,7 @@ ff02::2 ip6-allrouters
 120.25.162.238 RfidLabMaster
 120.27.138.14  RfidLabSlave1
 120.27.137.211 RfidLabSlave2
-```
+~~~
 
 - 进入hadoop的解压目录，编辑conf/hadoop-env.sh(版本不同，配置文件位置有所变化)
 
@@ -85,7 +88,7 @@ ff02::2 ip6-allrouters
 - 修改core-site.xml文件
 在`<configuration></configuration>`标签中添加：
 
-```xml
+~~~xml
 <property>
  <name>fs.default.name</name>
   <value>hdfs://RfidLabMaster:9000</value>
@@ -94,12 +97,12 @@ ff02::2 ip6-allrouters
   <name>hadoop.tmp.dir</name>
 <value>/home/brian/hadoopdir/tmp</value>
 </property>
-```
+~~~
 
 - 修改hdfs-site.xml文件
 在`<configuration></configuration>`标签中添加：
 
-```xml
+~~~xml
 <property>
 <name>dfs.name.dir</name>
 <value>/home/brian/hadoopdir/name</value> #hadoop的name目录路径
@@ -115,12 +118,12 @@ ff02::2 ip6-allrouters
   <!-- 我们的集群有两个结点，所以rep两份 -->
   <value>2</value>
 </property>
-```
+~~~
 
 - 修改mapred-site.xml文件
 在`<configuration></configuration>`标签中添加：
 
-```xml
+~~~xml
 <property>
   <name>mapred.job.tracker</name>
   <value>hdfs://RfidLabMaster:9001</value>
@@ -129,21 +132,21 @@ ff02::2 ip6-allrouters
   <name>mapred.local.dir</name>
  <value>/home/brian/hadoopdir/local</value>
 </property>
-```
+~~~
 
 ### 4.修改masters和slaves文件
 conf/masters
 
-```
+~~~
 RfidLabMaster
-```
+~~~
 
 conf/slaves
 
-```
+~~~
 RfidLabSlave1
 RfidLabSlave2
-```
+~~~
 
 ### 5.向各个节点复制hadoop
 
@@ -162,22 +165,22 @@ RfidLabSlave2
 ## 结果
 主节点
 
-```
+~~~
 brian@RfidLabMaster:~/hadoop-1.2.1/logs$ jps
 26721 JobTracker
 26449 NameNode
 26889 Jps
 26633 SecondaryNameNode
-```
+~~~
 
 从节点
 
-```
+~~~
 brian@RfidLabSlave1:~$ jps
 20402 Jps
 20204 DataNode
 20302 TaskTracker
-```
+~~~
 
 查看日志文件，均无ERROR和异常
 

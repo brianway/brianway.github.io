@@ -4,8 +4,11 @@ title:  java基础巩固笔记(1)-反射
 date:   2016-01-08 12:39:11
 category: "java"
 tags: "java"
+comments: true
 ---
 
+* content
+{:toc}
 
 **反射：将类的属性和方法映射成相应的类。**
 
@@ -37,7 +40,7 @@ tags: "java"
 - 基本类型以为数组不能直接转换为Object[]
 - `java.util.Arrays`的`asList`方法API看看
 
-```java
+~~~java
 public class ReflectTest {
     public static void main(String[] args) {
         int [] a1 = new int[]{1,2,3};
@@ -61,11 +64,11 @@ public class ReflectTest {
         System.out.println(Arrays.asList(s1));//[abc]
     }
 }
-```
+~~~
 
 输出：
 
-```
+~~~
 true
 class [I
 class [[I
@@ -73,7 +76,7 @@ true
 class java.lang.Object
 [[I@1540e19d]
 [abc]
-```
+~~~
 
 乱入：
 hashcode与内存泄露问题
@@ -97,7 +100,7 @@ hashcode与内存泄露问题
 - 类名.class.getResourceAsStream(str),实质还是调用类加载器。
 源码截取(java.lang包下的Class.java)：
 
-```java
+~~~java
  public InputStream getResourceAsStream(String name) {
     name = resolveName(name);
     ClassLoader cl = getClassLoader0();
@@ -107,7 +110,7 @@ hashcode与内存泄露问题
     }
     return cl.getResourceAsStream(name);
 }
-```
+~~~
 
 关于路径str，写法有点讲究。
 
@@ -123,9 +126,9 @@ hashcode与内存泄露问题
 ## 内省(Instropector) & JavaBean
 JavaBean读取属性x的值的流程：变大写、补前缀、获取方法。
 
-```
+~~~
 "x"-->"X"-->"getX"-->"MethodGetX"
-```
+~~~
 
 - 自己用内省操作
 
