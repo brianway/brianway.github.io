@@ -37,7 +37,7 @@ comments: true
 - 对于元素同类型的数组，同维数组，class一样
 - 不同维，class不同
 - 不同维的，父类都是Object,一样
-- 基本类型以为数组不能直接转换为Object[]
+- 基本类型一维数组不能直接转换为Object[]
 - `java.util.Arrays`的`asList`方法API看看
 
 ~~~java
