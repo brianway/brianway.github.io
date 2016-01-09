@@ -2,7 +2,12 @@
     <!-- duoshuo.com javascript include code. -->    
     {% if site.duoshuo_url %}
       <div class="post-area post comment">
-        <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ site.duoshuo_url }}{{ page.url }}"></div>
+        <div class="ds-thread" 
+			data-thread-key="{{ page.url }}" 
+			data-title="{{ page.title }}" 
+			data-image="{{ site.data.author.image }}"
+			data-url="{{ site.duoshuo_url }}{{ page.url }}">
+		</div>
       </div>
 	  <script type="text/javascript">
 		var duoshuoQuery = {short_name:"{{ site.duoshuo_shortname }}"};
