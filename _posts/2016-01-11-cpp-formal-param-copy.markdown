@@ -28,53 +28,53 @@ using namespace std;
 class str 
 {
 private: 
-    char *st; 
+	char *st; 
 public:  
-    str(char *a) {
-		set(a);
-		cout<<"构造函数：str addr "<<this<<"  st addr "<<&st<<"  st point to  "<<(void *)st<<"  st  "<<st<<endl; 
-	}  
-    str & operator==(str  a) {//二元操作符“==”，参数类型和后者一致
-    	cout<<"op:形参 str a addr  "<<&a<<"  a.st addr  "<<&(a.st)<<"  a.st point to  "<<(void *)(a.st)<<" a.st content  "<<(a.st)<<endl;
-		delete st; 
-		set(a.st);
-	 	return *this;
-   }  
-   str & operator=(str const &  a) {//二元操作符“=”，参数类型和后者一致
+  str(char *a) {
+	set(a);
+	cout<<"构造函数：str addr "<<this<<"  st addr "<<&st<<"  st point to  "<<(void *)st<<"  st  "<<st<<endl; 
+  }  
+  str & operator==(str  a) {//二元操作符“==”，参数类型和后者一致
+	cout<<"op:形参 str a addr  "<<&a<<"  a.st addr  "<<&(a.st)<<"  a.st point to  "<<(void *)(a.st)<<" a.st content  "<<(a.st)<<endl;
+	delete st; 
+	set(a.st);
+	return *this;
+  }  
+  str & operator=(str const &  a) {//二元操作符“=”，参数类型和后者一致
    //str & operator=(str  &  a) {//二元操作符“=”，参数类型和后者一致
-		cout<<"op:形参 str const & a addr  "<<&a<<"  a.st addr  "<<&(a.st)<<"  a.st point to  "<<(void *)(a.st)<<" a.st content  "<<(a.st)<<endl;
-		delete st; 
-		set(a.st);
-	 	return *this;
-   }  
+	cout<<"op:形参 str const & a addr  "<<&a<<"  a.st addr  "<<&(a.st)<<"  a.st point to  "<<(void *)(a.st)<<" a.st content  "<<(a.st)<<endl;
+	delete st; 
+	set(a.st);
+	return *this;
+  }  
 
-    void show(){cout<<"show func: "<<st<<endl;} 
-    ~str(){
-		cout<<"~str:before str addr "<<this<<"  st addr "<<&st<<"  st point to  "<<(void *)(st)<<"  st content "<<st<<endl; 
-		delete st;
-		//cout<<"~str:after  str addr "<<this<<"  st addr "<<&st<<"  st point to  "<<(void *)(st)<<"  st content "<<st<<endl; 
-	}  
-    void set(char *s)//初始化st 
-    {   
-		cout<<"set:before new st addr  "<<&st<<"  st point to  "<<(void *)(st)<<endl;
-		st = new char[strlen(s)+1];//先分配空间，否则野指针,+1存"\0"
-		cout<<"set:after new st addr  "<<&st<<"  st point to  "<<(void *)(st)<<endl;
-		if(st)
-		strcpy(st,s); 
-    } 
+  void show(){cout<<"show func: "<<st<<endl;} 
+  ~str(){
+	cout<<"~str:before str addr "<<this<<"  st addr "<<&st<<"  st point to  "<<(void *)(st)<<"  st content "<<st<<endl; 
+	delete st;
+	//cout<<"~str:after  str addr "<<this<<"  st addr "<<&st<<"  st point to  "<<(void *)(st)<<"  st content "<<st<<endl; 
+  }  
+  void set(char *s)//初始化st 
+  {   
+	cout<<"set:before new st addr  "<<&st<<"  st point to  "<<(void *)(st)<<endl;
+	st = new char[strlen(s)+1];//先分配空间，否则野指针,+1存"\0"
+	cout<<"set:after new st addr  "<<&st<<"  st point to  "<<(void *)(st)<<endl;
+	if(st)
+	strcpy(st,s); 
+  } 
 };  
 
 int  main()  
 {
-    str s1("he"),
-    s2("she"); 
-    s1.show(),
-    s2.show(); 
-    //s2=s1;  
+	str s1("he"),
+	s2("she"); 
+	s1.show(),
+	s2.show(); 
+	//s2=s1;  
 	s2==s1;
-    s1.show(),
-    s2.show();
-    return 0;
+	s1.show(),
+	s2.show();
+	return 0;
 } 
 ~~~
 
