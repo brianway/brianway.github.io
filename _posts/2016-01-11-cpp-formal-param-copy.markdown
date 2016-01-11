@@ -2,8 +2,8 @@
 layout: post
 title:  简单谈谈C++中的函数形参与浅拷贝
 date:   2016-01-11 21:35:10
-category: c++
-tags: [c++, examples]
+category: cpp
+tags: [cpp, examples]
 comments: true
 ---
 
