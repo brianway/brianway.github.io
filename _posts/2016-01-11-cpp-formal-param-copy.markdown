@@ -2,8 +2,8 @@
 layout: post
 title:  简单谈谈C++中的函数形参与浅拷贝
 date:   2016-01-11 21:35:10
-category: cpp
-tags: [cpp, examples]
+category: c++
+tags: [c++, examples]
 comments: true
 ---
 
@@ -17,7 +17,7 @@ comments: true
 
 
 字面上都知道，一个是值传递，一个是传引用，但具体区别是什么呢？
-这里定义一个`str`类，只有一个`private char*st`变量；有几个基本的函数，重载了`=`和`==`运算符，`str & operator=(str const & a)`和`str & operator==(str a)`,用于用不同方式实现赋值代码如下：
+这里定义一个`str`类，只有一个`private char*st`变量；有几个基本的函数，重载了`=`和`==`运算符，`str & operator=(str const & a)`和`str & operator==(str a)`,用于用不同方式实现赋值。代码如下：
 
 ## 代码
 
