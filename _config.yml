@@ -26,6 +26,7 @@ duoshuo_url: "http://brianway.github.io"
 markdown: kramdown
 highlighter: pygments
 
+
 # highlight
 # highlighter: pygments
 # highlighter: rouge
