@@ -14,9 +14,8 @@ comments: true
 
 最近要考C++，复习过程中遇到一些问题，总结记录一下。文中代码均在[ideone在线编译器](http://ideone.com)中运行的
 
+字面上都知道，函数传递参数有值传递和引用传递，但具体区别是什么呢？除了一个传对象拷贝，一个传对象本身之外，还有哪些影响？
 
-
-字面上都知道，一个是值传递，一个是传引用，但具体区别是什么呢？
 这里定义一个`str`类，只有一个`private char*st`变量；有几个基本的函数，重载了`=`和`==`运算符，`str & operator=(str const & a)`和`str & operator==(str a)`,用于用不同方式实现赋值。代码如下：
 
 ## 代码
@@ -123,8 +122,12 @@ show func: he
 
 ## 分析
 
-可以看出，主要区别在于,参数类型不是引用时，形参为值传递，**默认的复制构造函数就是简单的把成员变量依次赋值**，所以`str a`的st和`s1`的st指向的同一段内存，函数`str & operator==(str a)`执行完会调用析构函数，释放st所指向的内存并设指针为空，所以为null。而使用函数`str & operator=(str const & a)`，则不会代用析构函数。由于这里未对变量a做修改，所以去掉const不影响，不过最好保留。
+- 使用`str & operator==(str a)`重载时，s1的地址为`0xbfce5374`，a的地址为`0xbfce537c`,确实是另外创建了新变量a，但是，两者的st均指向同一个地址`0x9bffa10`
+- 使用`str & operator=(str const & a)`重载时，s1和a的地址均为`0xbff47b38`
+- 两次输出的区别在于使用值传递时，即第一个输出结果多了一句输出：`~str:before str addr 0xbfce537c st addr 0xbfce537c st point to 0x9bffa10 st content he`
 
+
+可以看出，主要区别在于,参数类型不是引用时，形参为值传递，**默认的复制构造函数就是简单的把成员变量依次赋值**，所以`str a`的st和`s1`的st指向的同一段内存，函数`str & operator==(str a)`执行完，自动变量a会销毁，调用析构函数，释放st所指向的内存并设指针为空，所以为null。而使用函数`str & operator=(str const & a)`，则不会代用析构函数。由于这里未对变量a做修改，所以去掉const不影响，不过最好保留。
 
 ## 关于拷贝
 

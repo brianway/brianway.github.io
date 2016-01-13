@@ -56,7 +56,8 @@ Deprecation: You appear to have pagination turned on, but you haven't included t
 
 解决：[jekyll-paginate gem](https://teamtreehouse.com/community/jekyllpaginate-gem)
 
-2.markdown显示问题
+3.markdown显示问题
+
 这里很蛋疼，我写markdown的习惯是代码都是前后各三个反单引号包起来的。使用kramdown解析markdown不能对含三个反单引号的代码块进行识别，默认按单行代码处理，缩进都没了；使用redcarpet能识别代码块，但没高亮，rouge又提示什么要下1.3版本，反正神烦。
 
 解决：
@@ -64,7 +65,7 @@ Deprecation: You appear to have pagination turned on, but you haven't included t
 - [Syntax highlighting markdown code blocks in Jekyll (without using liquid tags)](http://stackoverflow.com/questions/8648390/syntax-highlighting-markdown-code-blocks-in-jekyll-without-using-liquid-tags)
 - [Jekyll kramdown配置](http://blog.javachen.com/2015/06/30/jekyll-kramdown-config.html)
 
-3.jekyll build失败报错
+4.jekyll build失败报错
 解决：[Jekyll/Ruby Kramdown Missing Dependency](http://stackoverflow.com/questions/31417469/jekyll-ruby-kramdown-missing-dependency)
 
 

@@ -27,7 +27,6 @@ markdown: kramdown
 highlighter: pygments
 
 
-
 # highlight
 # highlighter: pygments
 # highlighter: rouge
