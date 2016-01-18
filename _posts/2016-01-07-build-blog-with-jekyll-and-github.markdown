@@ -66,6 +66,7 @@ Deprecation: You appear to have pagination turned on, but you haven't included t
 - [Jekyll kramdown配置](http://blog.javachen.com/2015/06/30/jekyll-kramdown-config.html)
 
 4.jekyll build失败报错
+
 解决：[Jekyll/Ruby Kramdown Missing Dependency](http://stackoverflow.com/questions/31417469/jekyll-ruby-kramdown-missing-dependency)
 
 
