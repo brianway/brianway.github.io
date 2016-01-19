@@ -19,7 +19,7 @@ comments: true
 ## 写在前面
 
 - 本文是先安装windows再安装linux，并通过windows引导linux的启动项。这样方便linux的反复重装、折腾等。
-- 光盘安装和U盘安装基本差不多，只是U盘安装多了把镜像文件写到U盘制成启动盘的过程，启动时对应选择*U从SB启动*/*从CD-ROM启动*即可
+- 光盘安装和U盘安装基本差不多，只是U盘安装多了把镜像文件写到U盘制成启动盘的过程，启动时对应选择*从USB启动*/*从CD-ROM启动*即可
 - 由于我有win7的光盘，就没研究怎么刻录win7到U盘
 - 关于每一步的截图，文末的【参考资料】里别人已经截的很完善了，我就没重复造轮子(*知乎那个李彬的答案关于EasyBCD使用有问题，那是硬盘启动，而非U盘，U盘没那么麻烦*)
 - 该文只是综合各个参考资料，按照安装顺序、更全面的把每一步需要注意的关键点用文字整理记录
@@ -133,16 +133,16 @@ comments: true
 
 第5步
 
-- 首先需要更新下依赖：
+- 首先需要更新一下依赖：
 
-```shell
+~~~shell
 sudo apt-get update
 sudo apt-get upgrade
-```
+~~~
 
 - 校园网认证使用mentohust,可以在linux公社下载，[mentohust下载地址](http://linux.linuxidc.com/2013%E5%B9%B4%E8%B5%84%E6%96%99/1%E6%9C%88/20%E6%97%A5/Ubuntu%E4%B8%8B%E4%BD%BF%E7%94%A8MentoHUST%E4%BB%A3%E6%9B%BF%E9%94%90%E6%8D%B7%E8%AE%A4%E8%AF%81%E4%B8%8A%E7%BD%91/),用户和密码都是`www.linuxidc.com`
 - 下载地址位于`http://linux.linuxidc.com/`的"/2013年资料/1月/20日/Ubuntu下使用MentoHUST代替锐捷认证上网"，或者"pub/ubuntu/Ubuntu 11.04校园网锐捷认证上网"下
-- 可参考参考[Ubuntu下使用MentoHUST搞定 锐捷校园网认证网络](http://www.linuxidc.com/Linux/2013-10/91157.htm)和[Ubuntu下Mentohust的配置](http://www.linuxidc.com/Linux/2013-10/91158.htm)这两篇文章
+- 可参考[Ubuntu下使用MentoHUST搞定 锐捷校园网认证网络](http://www.linuxidc.com/Linux/2013-10/91157.htm)和[Ubuntu下Mentohust的配置](http://www.linuxidc.com/Linux/2013-10/91158.htm)这两篇文章
 
 ------
 
