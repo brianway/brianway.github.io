@@ -11,7 +11,7 @@ comments: true
 {:toc}
 
 
-nuthc1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，只剩下对应的控制脚本`bin/crawl`，感觉在在IDEA里面调试不方便，所以我了解了下shell脚本,根据nutch2.3的`bin/crawl`和`bin/nutch`脚本，把`bin/crawl`翻译成了java的Crawl类以便在IDEA里面调试
+nutch1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，只剩下对应的控制脚本`bin/crawl`，感觉在IDEA里面调试不方便，所以我了解了下shell脚本,根据nutch2.3的`bin/crawl`和`bin/nutch`脚本，把`bin/crawl`翻译成了java的Crawl类以便在IDEA里面调试
 
 
 ## 代码设计说明
@@ -21,7 +21,7 @@ nuthc1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，
 - 主要的业务逻辑在`public int run(String[] args)`方法里
 - 程序主入口是`main`，调用`ToolRunner.run(NutchConfiguration.create(), new Crawl(), args);`执行上面的`run`方法
 - `public void binNutch4j(String jobName,String commandLine,String options)`相当于`bin/crawl`脚本里函数`__bin_nutch`的功能
-- `public int runJob(String jobName,String commandLine,String options)`相当于脚本bin/nutch的功能，这里没有像脚本中那样用`if-else`，也没有使用`switch-case`,而是采用反射创建相应的job
+- `public int runJob(String jobName,String commandLine,String options)`相当于脚本`bin/nutch`的功能，这里没有像脚本中那样用`if-else`，也没有使用`switch-case`,而是采用反射创建相应的job
 - `public void preConfig(Configuration conf,String options)`用于根据带`-D`参数 commonOptions等指令设置每个Job的配置项
 - `CLASS_MAP`是静态(`static`)属性，一个记录JobName和对应的类名的映射关系的哈希表(`HashMap`)
 
