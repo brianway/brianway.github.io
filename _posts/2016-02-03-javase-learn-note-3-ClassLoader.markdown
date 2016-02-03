@@ -10,8 +10,7 @@ comments: true
 * content
 {:toc}
 
-
-#类加载器
+# 类加载器
 
 java类加载器就是在运行时在JVM中动态地加载所需的类，java类加载器基于三个机制：委托，可见，单一。
 

@@ -14,7 +14,7 @@ icon: glyphicon-paperclip
 
 {% for contact in site.data.links %}
 	{% assign i = contact[1] %}
-###{{ i.message }}
+### {{ i.message }}
 ---
 		{% for link in i.items %}
 - [{{ link.text }}]({{ link.url }}) 

@@ -16,7 +16,7 @@ icon: glyphicon-folder-open
 
     {% if forloop.first %}
 	
-##{{this_year}}年-{{this_month}}月
+## {{this_year}}年-{{this_month}}月
 --------------
     {% endif %}
 
@@ -26,11 +26,11 @@ icon: glyphicon-folder-open
 	
     {% else %}
       {% if this_year != next_year %}
-##{{next_year}}年-{{next_month}}月
+## {{next_year}}年-{{next_month}}月
 --------------
       {% else %}    
         {% if this_month != next_month %}
-##{{next_year}}年-{{next_month}}月
+## {{next_year}}年-{{next_month}}月
 --------------
         {% endif %}
       {% endif %}
