@@ -1,6 +1,6 @@
 message: API/开发官网
 items:
-  - text: JAVA API
+  - text: JAVA 8 API
     url: https://docs.oracle.com/javase/8/docs/api/
   - text: maven中央仓库
     url: http://mvnrepository.com/
