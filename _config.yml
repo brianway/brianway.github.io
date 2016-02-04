@@ -34,6 +34,9 @@ highlighter: rouge
 # highlighter: rouge
 # highlighter: false
 
+#Gems
+gems: [jekyll-paginate]
 
+#Pagination
 paginate: 10
 paginate_path: "page:num"
