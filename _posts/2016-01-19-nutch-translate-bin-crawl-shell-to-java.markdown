@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  将nutch2.3的bin/crawl脚本改写为java类
-date:   2016-01-19 21:01:11
+date:   2016-01-19 21:01:11 +08:00
 category: nutch
 tags: [nutch, shell]
 comments: true

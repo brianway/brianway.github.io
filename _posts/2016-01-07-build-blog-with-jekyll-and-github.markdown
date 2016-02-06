@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  在github搭建个人网站
-date:   2016-01-07 22:35:11
+date:   2016-01-07 22:35:11 +08:00
 category: "github"
 tags: "github"
 comments: true

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  java基础巩固笔记(5)-多线程之共享数据
-date:   2016-02-06 14:20:12
+date:   2016-02-06 14:20:12 +08:00
 category: "java"
 tags: "java"
 comments: true

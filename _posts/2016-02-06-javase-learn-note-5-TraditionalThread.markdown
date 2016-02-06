@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  java基础巩固笔记(5)-多线程之传统多线程
-date:   2016-02-06 14:18:12
+date:   2016-02-06 14:18:12 +08:00
 category: "java"
 tags: "java"
 comments: true

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  光盘和U盘安装win7和ubuntu14.04全步骤
-date:   2016-01-18 18:36:10
+date:   2016-01-18 18:36:10 +08:00
 category: linux
 tags: [linux, ubuntu]
 comments: true

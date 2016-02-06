@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  一个例子记住C++对象的生存周期
-date:   2016-01-11 22:41:10
+date:   2016-01-11 22:41:10 +08:00
 category: cpp
 tags: [cpp, examples]
 comments: true

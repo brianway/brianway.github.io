@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  java基础巩固笔记(4)-实现AOP功能的封装与配置的小框架
-date:   2016-02-03 22:46:12
+date:   2016-02-03 22:46:12 +08:00
 category: "java"
 tags: "java"
 comments: true

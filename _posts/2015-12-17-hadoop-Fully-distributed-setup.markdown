@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  hadoop完全分布式模式的安装和配置步骤
-date:   2015-12-17 22:35:11
+date:   2015-12-17 22:35:11 +08:00
 category: "hadoop"
 tags: "hadoop"
 comments: true
