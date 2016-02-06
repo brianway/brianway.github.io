@@ -22,9 +22,9 @@ duoshuo_url: "http://brianway.github.io"
 #disqus_url: "http://lixizhi.github.io"
 #########################################
 
-#timezone: '+0800'
+timezone: '+0800'
 
-timezone: 'Asia/Shanghai'
+#timezone: 'Asia/Shanghai'
 
 # Build settings
 markdown: kramdown
