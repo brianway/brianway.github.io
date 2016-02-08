@@ -14,9 +14,6 @@ comments: true
 
 对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下
 
-## 基础概念
-
-
 
 ## 请求(Request)
 
@@ -25,7 +22,7 @@ comments: true
 ### 请求头字段
 
 - Accept:用于告诉服务器，客户机支持的数据类型
-- Accept:用于告诉服务器，客户机采用的编码
+- Accept-Charset:用于告诉服务器，客户机采用的编码
 - Accept-Encoding:用于告诉服务器，客户机支持数据压缩格式
 - Accept-Language:客户机的语言环境
 - Host:客户机通过这个头告诉服务器，想访问的主机名

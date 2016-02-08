@@ -10,6 +10,9 @@
 - text: CSDN
   pic:  "/images/csdn-icon.png"
   link: http://blog.csdn.net/h3243212/
+- text: Linkedin
+  pic: "/images/linkedin-icon.png"
+  link: https://cn.linkedin.com/in/weichuyang
 - text: renren
   pic: "/images/renren-icon.png"
   link: http://www.renren.com/390148187

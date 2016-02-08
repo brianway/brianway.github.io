@@ -22,9 +22,9 @@ API文档
 
 JSP本质是一个servlet.
 
-每个JSP页面在第一次被访问时，WEB容器会吧请求交给JSP引擎(即一个JAVA程序)处理。JSP引擎先将JSP翻译成一个`_jspServlet`(实质也是一个servlet)，然后按照servlet的调用方式进行调用。
+每个JSP页面在第一次被访问时，WEB容器会把请求交给JSP引擎(即一个JAVA程序)处理。JSP引擎先将JSP翻译成一个`_jspServlet`(实质也是一个servlet)，然后按照servlet的调用方式进行调用。
 
-- 服务器会将jsp先翻译成servlet，这个servlet位于tomcat服务器`work`目录，这jsp类的父类是`org.apache.jasper.runtime.HttpJspBase`,这个`HttpJspBas`类继承自`HttpServlet`
+- 服务器会将jsp先翻译成servlet，这个servlet位于tomcat服务器`work`目录，这jsp类的父类是`org.apache.jasper.runtime.HttpJspBase`,这个`HttpJspBase`类继承自`HttpServlet`
 - 向服务器发请求会调用servlet的service方法;同样地，访问jsp会调用这个JSP类的`_jspService`方法。
 - JSP中的标签语言会在`_jspService`方法中通过`out.write()`写出来；JSP中的Java代码会原封不动的搬到`_jspService`方法中。
 - 在`_jspService`方法中提前准备好了一些对象供JSP调用，如：`out,page,application,request,response`等等。
@@ -200,12 +200,12 @@ Class PageContext的API文档
 
 javaweb中的四个域:
 
-- application域:应用程序范围,servletContext,对应的常量`APPLICATION_SCOPE`
+- application域:应用程序范围,servletContext,对应的常量`PageContext.APPLICATION_SCOPE`
 - session域:会话范围,session,对应的常量`PageContext.SESSION_SCOPE`
 - resquet域:请求范围,request,对应的常量`PageContext.REQUEST_SCOPE`
 - page域:页面范围,pageContext,对应的常量`PageContext.PAGE_SCOPE`
 
-**`findAttribute(java.lang.String name)`**查找各个域中的属性，是``PageContext`从父类`javax.servlet.jsp.JspContext`继承的，实现了父类的抽象方法。会**依次**从`page,request,session,application`域中寻找相应的属性，找到为止。
+**`findAttribute(java.lang.String name)`**查找各个域中的属性，是`PageContext`从父类`javax.servlet.jsp.JspContext`继承的，实现了父类的抽象方法。会**依次**从`page,request,session,application`域中寻找相应的属性，找到为止。
 
 ## jsp映射和查错
 
@@ -229,9 +229,9 @@ JavaBean是一个遵循特定写法的java类，JavaBean常用于封装数据，
 
 JSP中提供了三个关于JavaBean的标签：
 
-- <jsp:useBean>:用于在JSP页面中查找或实例化一个JavaBean组件
-- <jsp:setProperty>:用于在JSP页面中设置一个JavaBean组件的属性
-- <jsp:getProperty>:用于在JSP页面中获取一个JavaBean组件的属性
+- `<jsp:useBean>`:用于在JSP页面中查找或实例化一个JavaBean组件
+- `<jsp:setProperty`用于在JSP页面中设置一个JavaBean组件的属性
+- `<jsp:getProperty>`:用于在JSP页面中获取一个JavaBean组件的属性
 
 一些细节
 

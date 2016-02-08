@@ -26,7 +26,7 @@ API文档
 
 生命周期相关方法(life-cycle methods)
 
-Servlet的生命周期通过java.servlet.Servlet接口中的init（）、service（）、和destroy（）方法表示。Servlet的生命周期有四个阶段：加载并实例化、初始化、请求处理、销毁。（见文末【参考链接】）
+Servlet的生命周期通过`java.servlet.Servlet`接口中的`init()`、`service()`、和`destroy()`方法表示。Servlet的生命周期有四个阶段：加载并实例化、初始化、请求处理、销毁。（见文末【参考链接】）
 
 
 
@@ -121,7 +121,7 @@ Properties properties = new Properties();//map
 properties.load(in);
 ~~~
 
-2.通过`servletContex`的`getRealPath`方法得到资源的绝对路径，再通过传统方式(`FileInputStream`)读取
+2.通过`servletContext`的`getRealPath`方法得到资源的绝对路径，再通过传统方式(`FileInputStream`)读取
 
 3.通过类装载器去读，`ClassLoader`的`getResourceAsStream`(如果读取资源文件的程序不是servlet)，文件不能太大。**只装载一次**，所以如要读到更新后的数据，通过类装载的方式得到资源文件的位置，再通过传统方式读取资源文件的数据（用`getResource`得到path，再用`FileInputStream`）
 
