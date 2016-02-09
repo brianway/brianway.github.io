@@ -8,3 +8,27 @@ WebsiteIntro:
     <a href="https://docs.oracle.com/javase/8/docs/api/">Java </a>and something else</p>
     <p>欢迎留下脚印，这也是对我的鼓励和的肯定~</p>
 
+community:
+  - text: GitHub 
+    pic:  "/images/github-icon.png"
+    link: https://github.com/brianway
+  - text: oschina 
+    pic:  "/images/oschina-icon.png"
+    link: http://my.oschina.net/brianway	
+  - text: CSDN
+    pic:  "/images/csdn-icon.png"
+    link: http://blog.csdn.net/h3243212/
+  - text: SegmentFault
+    pic: "/images/segmentfault-icon.png"
+    link: http://segmentfault.com/blog/brianway
+
+follow:
+  - text: sinaweibo
+    pic: "/images/sinaweibo-icon.png"
+    link: http://weibo.com/brianway
+  - text: Linkedin
+    pic: "/images/linkedin-icon.png"
+    link: https://cn.linkedin.com/in/weichuyang
+  - text: renren
+    pic: "/images/renren-icon.png"
+    link: http://www.renren.com/390148187

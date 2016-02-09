@@ -26,18 +26,22 @@ comments: true
 
 ## 联系我
 
-{% for i in site.data.followme %}
-- [**{{i.text}}**]({{ i.link }})
-{% endfor %}
 
+{% for i in site.data.author.follow %}[{{i.text}}]({{ i.link }})|{% endfor %}
 
+---
+
+## 我的社区
+
+{% for i in site.data.author.community %}[{{i.text}}]({{ i.link }})|{% endfor %}
 
 
 
 
 ---
 
-## 关于本站   
+## 关于本站  
+
 
 这个博客主要用于记录一个菜鸟的成长之路
 
