@@ -44,6 +44,7 @@ github：
     - [java基础巩固笔记(5)-多线程之传统多线程](http://my.oschina.net/brianway/blog/614175)
     - [java基础巩固笔记(5)-多线程之共享数据](http://my.oschina.net/brianway/blog/614176)
     - [java基础巩固笔记(5)-多线程之线程并发库](http://my.oschina.net/brianway/blog/614177)
+	- [java基础巩固笔记(6)-注解](http://my.oschina.net/brianway/blog/618037)
   - [javaweb](http://my.oschina.net/brianway/blog?catalog=3475425)
     - [javaweb入门笔记(1)-Tomcat](http://my.oschina.net/brianway/blog/614205)
     - [javaweb入门笔记(2)-http入门](http://my.oschina.net/brianway/blog/614213)
