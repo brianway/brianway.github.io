@@ -139,4 +139,6 @@ show func: he
 系统提供的拷贝(如默认拷贝构造函数等)只能实现浅拷贝，深拷贝必须自定义
 
 
+----
 
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

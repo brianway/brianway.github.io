@@ -225,3 +225,9 @@ class BoundedBuffer {
 
 >* [深入浅出 Java Concurrency (29): 线程池 part 2 Executor 以及Executors](http://www.blogjava.net/xylz/archive/2010/12/21/341281.html)
 >* [《深入浅出 Java Concurrency》目录](http://www.blogjava.net/xylz/archive/2010/07/08/325587.html)
+
+
+
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

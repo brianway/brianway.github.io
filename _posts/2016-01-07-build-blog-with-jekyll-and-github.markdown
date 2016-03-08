@@ -78,3 +78,6 @@ Deprecation: You appear to have pagination turned on, but you haven't included t
 >* [陈俊的网：浮生志](http://chenjun.com/links.html)
 >* [kunka](https://github.com/pizn/kunka)
 
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

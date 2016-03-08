@@ -119,3 +119,8 @@ mail---------------------------Web应用所在目录
 
 > [Tomcat安装、配置、优化及负载均衡详解
 ](http://www.cnblogs.com/rocomp/p/4802396.html)
+
+
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

@@ -107,3 +107,8 @@ fun( )函数体内的自动对象FunObj被撤消时调用析构函数 !
 
 
 ![内存分配](http://7xph6d.com1.z0.glb.clouddn.com/cpp_%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)
+
+
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

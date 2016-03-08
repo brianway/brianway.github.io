@@ -4,9 +4,9 @@ image: "/images/Jaina.jpg"
 simpleIntro: 我是「魏楚阳」，一个处在学习期的小白。
 WebsiteIntro:
     <h2 id="welcome-to-my-website">Welcome to My Website</h2>
-    <p>This is the place where I share my ideas on topics like 
-    <a href="https://docs.oracle.com/javase/8/docs/api/">Java </a>and something else</p>
-    <p>欢迎留下脚印，这也是对我的鼓励和的肯定~</p>
+    <p>This is the place where I share my ideas.</p>
+    <P>You can also visit me on <a href="http://blog.csdn.net/h3243212/">@CSDN</a> or <a href="http://my.oschina.net/brianway">@oschina</a>.</P>
+    <p>欢迎留下脚印，这也是对我的鼓励和肯定~</p>
 
 community:
   - text: GitHub 

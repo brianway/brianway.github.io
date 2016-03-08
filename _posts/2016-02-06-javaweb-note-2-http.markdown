@@ -69,3 +69,7 @@ comments: true
 - Content-Range:制定了返回web资源的字节范围，格式：`n1-n2/n_total`
 
 
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+

@@ -156,3 +156,7 @@ class NetworkClassLoader extends ClassLoader {
 >* [java类加载机制工作原理](http://ju.outofmemory.cn/entry/142486)
 >* [Java类加载器总结 - 寂静大海 - 博客频道 - CSDN.NET](http://blog.csdn.net/gjanyanlig/article/details/6818655)
 
+
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

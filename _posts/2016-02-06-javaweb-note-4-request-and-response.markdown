@@ -146,3 +146,8 @@ mail---------------------------Web应用所在目录
 ### 防盗链
 
 读取`referer`请求头，不合要求则重定向。
+
+
+----
+
+> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
