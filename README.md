@@ -46,11 +46,12 @@ Also thanks for [LiXizhi](https://github.com/LiXizhi),who improves the theme.
 
 | Time        | update |  
 | :--------:  | :----- |
-| 2016.01.08  | set up this website,using theme kunka         |  
-| 2016.01.09  | change theme from kunka to wiki       		  | 
-| 2016.02.04  | update jekyll from 2.x to 3.0.2       		  |  
+| 2016.02.06  | post 19 new articles,mybatis series           |
 | 2016.02.06  | post 9 new articles,java&javaweb series       |
- 
+| 2016.02.04  | update jekyll from 2.x to 3.0.2       		  |  
+| 2016.01.09  | change theme from kunka to wiki       		  | 
+| 2016.01.08  | set up this website,using theme kunka         |  
+
 
 
 
