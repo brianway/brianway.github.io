@@ -2,8 +2,6 @@ message: 大牛博客
 items:
   - text: 黄亿华(webmagic作者)oschina
     url: http://my.oschina.net/flashsword/blog?fromerr=DbMDvE8w
-  - text: 黄亿华个人博客
-    url: http://code4craft.github.io/
   - text: 廖雪峰(git教程作者)
     url: http://www.liaoxuefeng.com/
   - text: 刘帝伟(中南大学，机器学习方向)
