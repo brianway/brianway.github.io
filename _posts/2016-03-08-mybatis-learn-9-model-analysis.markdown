@@ -49,21 +49,21 @@ comments: true
 	
 - usre和orders：
 
-user---->orders：一个用户可以创建多个订单，一对多
+user--->orders：一个用户可以创建多个订单，一对多
 orders--->user：一个订单只由一个用户创建，一对一
 
 - orders和orderdetail：
 
 orders--->orderdetail：一个订单可以包括多个订单明细，因为一个订单可以购买多个商品，每个商品的购买信息在orderdetail记录，一对多关系
 
-orderdetail--> orders：一个订单明细只能包括在一个订单中，一对一
+orderdetail---> orders：一个订单明细只能包括在一个订单中，一对一
 
 
 - orderdetail和itesm：
 
 orderdetail--->itesms：一个订单明细只对应一个商品信息，一对一
 
-items--> orderdetail:一个商品可以包括在多个订单明细 ，一对多
+items---> orderdetail:一个商品可以包括在多个订单明细 ，一对多
 
 再分析数据库级别没有关系的表之间是否有业务关系：
 

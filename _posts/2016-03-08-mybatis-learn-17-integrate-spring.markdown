@@ -132,7 +132,7 @@ public interface UserDao {
 }
 ~~~
 
-dao接口实现类需要注入`SqlSessoinFactory`，通过spring进行注入。这里spring声明配置方式，配置dao的bean：
+dao接口实现类需要注入`SqlSessoinFactory`，通过spring进行注入。这里spring声明配置方式，配置dao的bean
 
 **让UserDaoImpl实现类继承SqlSessionDaoSupport**
 

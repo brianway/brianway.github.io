@@ -38,9 +38,13 @@ mybatis框架
 ## mybatis框架执行过程
 
 1、配置mybatis的配置文件，SqlMapConfig.xml（名称不固定）
+
 2、通过配置文件，加载mybatis运行环境，创建SqlSessionFactory会话工厂(SqlSessionFactory在实际使用时按单例方式)
+
 3、通过SqlSessionFactory创建SqlSession。SqlSession是一个面向用户接口（提供操作数据库方法），实现对象是线程不安全的，建议sqlSession应用场合在方法体内。
+
 4、调用sqlSession的方法去操作数据。如果需要提交事务，需要执行SqlSession的commit()方法。
+
 5、释放资源，关闭SqlSession
 
 
@@ -68,10 +72,8 @@ SqlMapConfig.xml配置文件：可以配置properties属性、别名、mapper加
 ## 输入映射和输出映射
 
 - 输入映射：
-
-parameterType：指定输入参数类型可以简单类型、pojo、hashmap。
-
-对于综合查询，建议parameterType使用包装的pojo，有利于系统 扩展。
+  - parameterType：指定输入参数类型可以简单类型、pojo、hashmap。
+  - 对于综合查询，建议parameterType使用包装的pojo，有利于系统扩展。
 
 - 输出映射：
 	- resultType：查询到的列名和resultType指定的pojo的属性名一致，才能映射成功。

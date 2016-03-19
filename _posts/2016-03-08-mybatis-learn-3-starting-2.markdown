@@ -188,7 +188,7 @@ comments: true
 ~~~xml
 <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
           SELECT LAST_INSERT_ID()
-        </selectKey>
+</selectKey>
 ~~~
 
 如果没有在上面的配置中配置`resultType`，则会报下面的异常
@@ -216,12 +216,18 @@ Caused by: org.apache.ibatis.executor.ExecutorException: A query was run and no 
 - `#{}`和`${}`
 
 `#{}`表示一个占位符号，`#{}`接收输入参数，类型可以是简单类型，pojo、hashmap。
-如果接收简单类型，#{}中可以写成value或其它名称。
+
+如果接收简单类型，`#{}`中可以写成value或其它名称。
+
 `#{}`接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性...的方式获取对象属性值。
 
+
 `${}`表示一个拼接符号，会引用sql注入，所以**不建议使用`${}`**。
+
 `${}`接收输入参数，类型可以是简单类型，pojo、hashmap。
-如果接收简单类型，${}中只能写成value。
+
+如果接收简单类型，`${}`中只能写成value。
+
 `${}`接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性...的方式获取对象属性值。
 
 

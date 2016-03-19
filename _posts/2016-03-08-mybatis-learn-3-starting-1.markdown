@@ -319,13 +319,17 @@ DEBUG [main] - Returned connection 1596467899 to pool.
 
 
 - `#{}`和`${}`
+
 `#{}`表示一个占位符号;
+
 `${}`表示一个拼接符号，会引起sql注入，所以不建议使用
 
 
 - `selectOne`和`selectList`
+
 `selectOne`表示查询一条记录进行映射，使用`selectList`也可以使用，只不过只有一个对象
-`selectList`表示查询出一个列表(参数记录)进行映射，不嗯能够使用`selectOne`查，不然会报下面的错:
+
+`selectList`表示查询出一个列表(参数记录)进行映射，不能够使用`selectOne`查，不然会报下面的错:
 
 ~~~
 org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 3

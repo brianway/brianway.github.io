@@ -13,7 +13,7 @@ comments: true
 
 本文主要讲解SqlMapConfig配置文件
 
-> 参考[mybatis – MyBatis 3 | Configuration](http://www.mybatis.org/mybatis-3/configuration.html)
+> 参考[mybatis – MyBatis 3 `|` Configuration](http://www.mybatis.org/mybatis-3/configuration.html)
 
 SqlMapConfig.xml中配置的内容和顺序如下
 
