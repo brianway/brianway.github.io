@@ -20,7 +20,7 @@ comments: true
 
 爱技术，爱吹逼，热爱生活。
 
-最喜欢的游戏是《炉石传说》,天梯传说+竞技场12胜,[武汉高校星联赛季军](http://csl.blizzard.cn/articles/2/178#wh)
+最喜欢的游戏是《炉石传说》,天梯传说+竞技场12胜,[武汉高校星联赛季军](/images/heartstone-prize.png)
 
 ---
 

@@ -11,7 +11,7 @@ You can see the Site by clicking [here](http://brianway.github.io/)
 Runing on Github + Jekyll theme by [Gaohaoyang](https://github.com/Gaohaoyang/gaohaoyang.github.io)
 Also thanks for [LiXizhi](https://github.com/LiXizhi),who improves the theme.
 
-这是我的个人网站，基于jekyll。如果觉得不错，请先在这个仓库上点个star吧，这也是对我的肯定和鼓励，谢谢了。
+这是我的个人网站，基于jekyll。**如果觉得不错，请先在这个仓库上点个star吧**，这也是对我的肯定和鼓励，谢谢了。
 
 我的个人网站地址: [Brian's Personal Website](http://brianway.github.io/)
 
@@ -46,6 +46,7 @@ Also thanks for [LiXizhi](https://github.com/LiXizhi),who improves the theme.
 
 | Time        | update |  
 | :--------:  | :----- |
+| 2016.03.30  | post 22 new articles,springmvc series         |
 | 2016.03.10  | post 19 new articles,mybatis series           |
 | 2016.02.06  | post 9 new articles,java&javaweb series       |
 | 2016.02.04  | update jekyll from 2.x to 3.0.2       		  |  
