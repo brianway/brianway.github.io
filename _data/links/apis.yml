@@ -4,8 +4,8 @@ items:
     url: https://docs.oracle.com/javase/8/docs/api/
   - text: maven中央仓库
     url: http://mvnrepository.com/
-  - text: apache-nutch 1.7 API
-    url: http://nutch.apache.org/apidocs/apidocs-1.7/
+  - text: Spring Framework API
+    url: http://docs.spring.io/spring/docs/current/javadoc-api/
   - text: webmagic
     url: http://code4craft.github.io/webmagic/docs/
   - text: Android
