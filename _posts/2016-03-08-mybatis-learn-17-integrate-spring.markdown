@@ -2,16 +2,17 @@
 layout: post
 title:  mybatis学习笔记(17)-spring和mybatis整合
 date:   2016-03-08 10:39:17 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要将如何将spring和mybatis整合，只是作简单的示例，没有使用Maven构建。并展示mybatis与spring整合后如何进行原始dao开发和mapper代理开发。
+
+
 
 
 ## 整合思路
@@ -41,7 +42,7 @@ jar包：
 
 `sqlSessionFactory`在mybatis和spring的整合包下。
 
-~~~xml
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -80,13 +81,13 @@ jar包：
         <property name="dataSource" ref="dataSource" />
     </bean>
 </beans>
-~~~
+```
 
 ## 原始dao开发(和spring整合后)
 
 - User.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -112,31 +113,31 @@ jar包：
 
 
 </mapper>
-~~~
+```
 
 在SqlMapconfig.xml中加载User.xml
 
-~~~xml
+```xml
  <!-- 加载映射文件-->
 <mappers>
     <mapper resource="sqlmap/User.xml"/>
 </mappers>  
-~~~
+```
 
 - dao(实现类继承``SqlSessionDaoSupport``)
 
-~~~java
+```java
 public interface UserDao {
     //根据id查询用户信息
     public User findUserById(int id) throws Exception;
 }
-~~~
+```
 
 dao接口实现类需要注入`SqlSessoinFactory`，通过spring进行注入。这里spring声明配置方式，配置dao的bean
 
 **让UserDaoImpl实现类继承SqlSessionDaoSupport**
 
-~~~java
+```java
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{
 
 
@@ -150,22 +151,22 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{
     }
 
 }
-~~~
+```
 
 - 配置dao
 
 在applicationContext.xml中配置dao
 
-~~~xml
+```xml
 <!-- 原始dao接口 -->
 <bean id="userDao" class="com.iot.ssm.dao.UserDaoImpl">
     <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 </bean>
-~~~
+```
 
 - 测试程序
 
-~~~java
+```java
 public class UserDaoImplTest {
 
 	private ApplicationContext applicationContext;
@@ -188,7 +189,7 @@ public class UserDaoImplTest {
 	}
 
 }
-~~~
+```
 
 
 ## mapper代理开发
@@ -196,17 +197,17 @@ public class UserDaoImplTest {
 
 - mapper.java
 
-~~~java
+```java
 public interface UserMapper {
     //根据id查询用户信息
     User findUserById(int id) throws Exception;
 
 }
-~~~
+```
 
 - mapper.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -225,12 +226,12 @@ public interface UserMapper {
 
 
 </mapper>
-~~~
+```
 
 
 - 通过`MapperFactoryBean`创建代理对象
 
-~~~xml
+```xml
  <!-- mapper配置
     MapperFactoryBean：根据mapper接口生成代理对象
     -->
@@ -240,14 +241,14 @@ public interface UserMapper {
         <property name="mapperInterface" value="com.iot.ssm.mapper.UserMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 </bean>
-~~~
+```
 
 此方法问题：需要针对每个mapper进行配置，麻烦。
 
 
 - 通过`MapperScannerConfigurer`进行mapper扫描（建议使用）
 
-~~~xml
+```xml
 <!-- mapper批量扫描，从mapper包中扫描出mapper接口，自动创建代理对象并且在spring容器中注册
     遵循规范：将mapper.java和mapper.xml映射文件名称保持一致，且在一个目录 中
     自动扫描出来的mapper的bean的id为mapper类名（首字母小写）
@@ -260,11 +261,11 @@ public interface UserMapper {
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 
 </bean>
-~~~
+```
 
 - 测试代码
 
-~~~java
+```java
 package com.iot.mybatis.mapper;
 
 import com.iot.ssm.mapper.UserMapper;
@@ -301,13 +302,13 @@ public class UserMapperTest {
 	}
 
 }
-~~~
+```
 
 
 
 ## 遇到的问题
 
-~~~
+```
 org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [D:\intellij\workspace\spring-mybatis\out\production\spring-mybatis\com\iot\ssm\mapper\UserMapper.class]; nested exception is java.lang.IllegalArgumentException
 
 	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:281)
@@ -355,7 +356,7 @@ Caused by: java.lang.IllegalArgumentException
 	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:101)
 	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:257)
 	... 35 more
-~~~
+```
 
 
 - 搜到的答案

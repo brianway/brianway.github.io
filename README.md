@@ -46,6 +46,7 @@ Also thanks for [LiXizhi](https://github.com/LiXizhi),who improves the theme.
 
 | Time        | update |  
 | :--------:  | :----- |
+| 2016.04.28  | update the blog theme                         |
 | 2016.03.30  | post 22 new articles,springmvc series         |
 | 2016.03.10  | post 19 new articles,mybatis series           |
 | 2016.02.06  | post 9 new articles,java&javaweb series       |

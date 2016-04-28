@@ -2,8 +2,8 @@
 layout: post
 title:  mybatis学习笔记(7)-输出映射
 date:   2016-03-08 10:39:07 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
@@ -11,6 +11,8 @@ comments: true
 {:toc}
 
 本文主要讲解mybatis的输出映射。
+
+
 
 
 输出映射有两种方式
@@ -30,7 +32,7 @@ comments: true
 
 - mapper.xml
 
-~~~xml
+```xml
  <!-- 用户信息综合查询总数
         parameterType：指定输入类型和findUserList一样
         resultType：输出结果类型
@@ -38,11 +40,11 @@ comments: true
     <select id="findUserCount" parameterType="com.iot.mybatis.po.UserQueryVo" resultType="int">
         SELECT count(*) FROM user WHERE user.sex=#{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'
     </select>
-~~~
+```
 
 - mapper.java
 
-~~~java
+```java
     //用户信息综合查询总数
 	@Test
 	public void testFindUserCount() throws Exception {
@@ -67,7 +69,7 @@ comments: true
 
 
 	}
-~~~
+```
 
 
 - 小结
@@ -83,17 +85,17 @@ comments: true
 
 - 输出单个pojo对象，方法返回值是单个对象类型
 
-~~~java
+```java
 //根据id查询用户信息
 public User findUserById(int id) throws Exception;
-~~~
+```
 
 - 输出pojo对象list，方法返回值是List<Pojo>
 
-~~~java
+```java
 //根据用户名列查询用户列表
 public List<User> findUserByName(String name) throws Exception;
-~~~
+```
 
 
 **生成的动态代理对象中是根据mapper方法的返回值类型确定是调用`selectOne`(返回单个对象调用)还是`selectList` （返回集合对象调用 ）.**
@@ -115,7 +117,7 @@ mybatis中使用resultMap完成高级输出结果映射。(一对多，多对多
 
 - 定义reusltMap
 
-~~~xml
+```xml
 <!-- 定义resultMap
 	将SELECT id id_,username username_ FROM USER 和User类中的属性作一个映射关系
 	
@@ -138,11 +140,11 @@ mybatis中使用resultMap完成高级输出结果映射。(一对多，多对多
 	 	<result column="username_" property="username"/>
 	 
 	 </resultMap>
-~~~
+```
 
 - 使用resultMap作为statement的输出映射类型
 
-~~~xml
+```xml
 <!-- 使用resultMap进行输出映射
         resultMap：指定定义的resultMap的id，如果这个resultMap在其它的mapper文件，前边需要加namespace
         -->
@@ -150,18 +152,18 @@ mybatis中使用resultMap完成高级输出结果映射。(一对多，多对多
         SELECT id id_,username username_ FROM USER WHERE id=#{value}
     </select>
 
-~~~
+```
 
 - mapper.java
 
-~~~java
+```java
 //根据id查询用户信息，使用resultMap输出
 public User findUserByIdResultMap(int id) throws Exception;
-~~~
+```
 
 - 测试代码
 
-~~~java
+```java
 @Test
 public void testFindUserByIdResultMap() throws Exception {
 
@@ -178,7 +180,7 @@ public void testFindUserByIdResultMap() throws Exception {
 
 
 }
-~~~
+```
 
 
 ### 小结 

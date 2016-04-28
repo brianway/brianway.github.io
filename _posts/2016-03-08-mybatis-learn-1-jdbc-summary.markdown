@@ -2,8 +2,8 @@
 layout: post
 title:  mybatis学习笔记(1)-对原生jdbc程序中的问题总结
 date:   2016-03-08 10:38:01 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis jdbc
 comments: true
 ---
 
@@ -11,6 +11,8 @@ comments: true
 {:toc}
 
 本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo
+
+
 
 
 ## jdbc编程步骤
@@ -46,7 +48,7 @@ comments: true
 
 ## 参考代码
 
-~~~java
+```java
 package com.iot.mybatis.jdbc;
 
 //import java.sql.*;
@@ -121,7 +123,7 @@ public class JdbcTest {
 
 }
 
-~~~
+```
 
 
 

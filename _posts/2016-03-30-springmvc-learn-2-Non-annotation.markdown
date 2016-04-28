@@ -2,22 +2,22 @@
 layout: post
 title:  springmvc学习笔记(2)-非注解的处理器映射器和适配器
 date:   2016-03-30 14:28:02 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要介绍非注解的处理器映射器和适配器配置
+
+
 
 
 ## 非注解的处理器映射器
 
-~~~xml
+```xml
  <!-- 配置Handler -->
 <bean id="itemsController" name="/queryItems.action" class="com.iot.ssm.controller.ItemsController"/>
 
@@ -36,19 +36,19 @@ comments: true
         </props>
     </property>
 </bean>
-~~~
+```
 
 多个映射器可并存，前端控制器判断url能让哪些映射器处理就让正确的映射器处理
 
 
 ## 非注解的处理器适配器
 
-~~~
+```
  <!-- 处理器适配器
      所有处理器适配器都实现了HandlerAdapter接口
      -->
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
-~~~
+```
 
 要求编写的Handler实现`Controller`接口
 
@@ -56,7 +56,7 @@ comments: true
 
 要求编写的Handler实现`HttpRequestHandler`接口
 
-~~~java
+```java
 package com.iot.ssm.controller;
 
 import com.iot.ssm.po.Items;
@@ -99,16 +99,16 @@ public class ItemsController2 implements HttpRequestHandler{
 
     }
 }
-~~~
+```
 
 
 `HttpRequestHandler`适配器的`handleRequest`方法返回为`void`,没有返回`ModelAndView`，可通过response修改响应内容,比如返回json数据：
 
-~~~java
+```java
 response.setCharacterEncoding("utf-8");
 response.setContentType("application/json;charset=utf-8");
 response.getWriter().write("json串");
-~~~
+```
 
 
 ----

@@ -2,19 +2,20 @@
 layout: post
 title:  mybatis学习笔记(18)-mybatis逆向工程
 date:   2016-03-08 10:39:18 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 mybaits需要程序员自己编写sql语句,mybatis官方提供逆向工程,可以针对单表自动生成mybatis执行所需要的代码（mapper.java,mapper.xml、po..）
 
 企业实际开发中，常用的逆向工程方式：由数据库的表生成java代码。
+
+
+
 
 先附上官网链接：
 
@@ -52,7 +53,7 @@ MyBatis Generator (MBG) can be run in the following ways:
 ### 生成代码配置文件
 
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
@@ -120,7 +121,7 @@ MyBatis Generator (MBG) can be run in the following ways:
 		</table> -->
 	</context>
 </generatorConfiguration>
-~~~
+```
 
 需要注意的位置：
 
@@ -132,7 +133,7 @@ MyBatis Generator (MBG) can be run in the following ways:
 
 ### 执行生成程序
 
-~~~java
+```java
 public void generator() throws Exception{
 
 	List<String> warnings = new ArrayList<String>();
@@ -147,11 +148,11 @@ public void generator() throws Exception{
 	myBatisGenerator.generate(null);
 
 } 
-~~~
+```
 
 日志输出：
 
-~~~
+```
 2016-02-27 16:29:46,419 [main] DEBUG [org.mybatis.generator.internal.db.DatabaseIntrospector] - Retrieving column information for table "items"
 2016-02-27 16:29:46,477 [main] DEBUG [org.mybatis.generator.internal.db.DatabaseIntrospector] - Found column "id", data type 4, in table "mybatis001..items"
 2016-02-27 16:29:46,477 [main] DEBUG [org.mybatis.generator.internal.db.DatabaseIntrospector] - Found column "name", data type 12, in table "mybatis001..items"
@@ -176,7 +177,7 @@ public void generator() throws Exception{
 2016-02-27 16:29:46,706 [main] DEBUG [org.mybatis.generator.internal.db.DatabaseIntrospector] - Found column "birthday", data type 91, in table "mybatis001..user"
 2016-02-27 16:29:46,706 [main] DEBUG [org.mybatis.generator.internal.db.DatabaseIntrospector] - Found column "sex", data type 1, in table "mybatis001..user"
 2016-02-27 16:29:46,706 [main] DEBUG [org.mybatis.generator.internal.db.DatabaseIntrospector] - Found column "address", data type 12, in table "mybatis001..user"
-~~~
+```
 
 生成后的代码：
 
@@ -188,7 +189,7 @@ public void generator() throws Exception{
 
 测试ItemsMapper中的方法
 
-~~~java
+```java
 package com.iot.ssm.mapper;
 
 import static org.junit.Assert.*;
@@ -271,7 +272,7 @@ public class ItemsMapperTest {
 	}
 
 }
-~~~
+```
 
 
 ----

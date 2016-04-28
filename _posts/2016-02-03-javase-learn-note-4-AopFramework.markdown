@@ -2,17 +2,18 @@
 layout: post
 title:  java基础巩固笔记(4)-实现AOP功能的封装与配置的小框架
 date:   2016-02-03 22:46:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 代理 AOP
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文通过是动态代理实现的AOP功能的封装与配置的小框架.加深对动态代理和AOP编程的理解
+
+
+
 
 ## 设计
 
@@ -28,12 +29,12 @@ comments: true
 - `xxx.advice`代表通知接口的某个实现类
 - `xxx.target`代表委托类
 
-~~~
+```
 #xxx=java.util.ArrayList
 xxx=com.iot.proxy.aopframework.ProxyFactoryBean
 xxx.advice=com.iot.proxy.MyAdvice
 xxx.target=java.util.ArrayList
-~~~
+```
 
 包:`com.iot.proxy.aopframework`,有如下几个类/接口：
 
@@ -51,7 +52,7 @@ xxx.target=java.util.ArrayList
 
 ### `Advice`接口
 
-~~~java
+```java
 package com.iot.proxy.aopframework;
 
 import java.lang.reflect.Method;
@@ -62,11 +63,11 @@ public interface Advice {
     void beforeMethod(Method method);
     void aftereMethod(Method method);
 }
-~~~
+```
 
 ### `MyAdvice`类
 
-~~~java
+```java
 package com.iot.proxy.aopframework;
 
 import java.lang.reflect.Method;
@@ -88,12 +89,12 @@ public class MyAdvice implements Advice{
         System.out.println(method.getName()+" cost total "+ (endTime-beginTime));
     }
 }
-~~~
+```
 
 
 ### `BeanFactory`类
 
-~~~java
+```java
 package com.iot.proxy.aopframework;
 
 import java.io.IOException;
@@ -149,11 +150,11 @@ public class BeanFactory {
         return bean;
     }
 }
-~~~
+```
 
 ### `ProxyFactoryBean`类
 
-~~~java
+```java
 package com.iot.proxy.aopframework;
 
 import java.lang.reflect.InvocationHandler;
@@ -200,12 +201,12 @@ public class ProxyFactoryBean {
         this.advice = advice;
     }
 }
-~~~
+```
 
 
 ### `AopFrameWorkTest`类
 
-~~~java
+```java
 package com.iot.proxy.aopframework;
 
 import java.io.InputStream;
@@ -222,7 +223,7 @@ public class AopFrameWorkTest {
         ((Collection) bean).clear();
     }
 }
-~~~
+```
 
 ## 输出
 
@@ -230,19 +231,19 @@ public class AopFrameWorkTest {
 
 输出为：
 
-~~~
+```
 com.sun.proxy.$Proxy0
 clear before at 0
 clear cost total 0
-~~~
+```
 
 - 配置`xxx=java.util.ArrayList`
 
 输出为：
 
-~~~
+```
 java.util.ArrayList
-~~~
+```
 
 
 可以看出，只改变配置文件，就可改变代码的运行结果，从而达到灵活的效果

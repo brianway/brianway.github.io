@@ -2,17 +2,17 @@
 layout: post
 title:  springmvc学习笔记(22)-springmvc开发小结
 date:   2016-03-30 14:28:22 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 总结
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文对springmvc系列博文进行小结
+
+
 
 
 ## springmvc框架
@@ -33,12 +33,12 @@ comments: true
 
 ### 使用注解方式的处理器映射器和适配器
 
-~~~xml
+```xml
 <!--注解映射器 -->
 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 <!--注解适配器 -->
 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
-~~~
+```
 
 在实际开发，使用`<mvc:annotation-driven>`代替上边处理器映射器和适配器配置。
 
@@ -83,7 +83,7 @@ springmvc所支持参数绑定：
 
 将定义的Converter实现类注入到处理器适配器中。
 
-~~~xml
+```xml
 <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 
 <!-- conversionService -->
@@ -96,7 +96,7 @@ springmvc所支持参数绑定：
 		</list>
 	</property>
 </bean>
-~~~
+```
 
 
 ### springmvc和struts2区别
@@ -185,7 +185,7 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
 
 在注解适配器中加入`messageConverters`
 
-~~~xml
+```xml
 
 <!--注解适配器 -->
 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -195,7 +195,7 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
 	</list>
 	</property>
 </bean>
-~~~
+```
 
 **注意：如果使用`<mvc:annotation-driven />`则不用定义上边的内容。**
 

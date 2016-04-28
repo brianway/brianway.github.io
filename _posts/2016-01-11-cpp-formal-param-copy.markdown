@@ -3,7 +3,7 @@ layout: post
 title:  简单谈谈C++中的函数形参与浅拷贝
 date:   2016-01-11 21:35:10 +08:00
 category: cpp
-tags: [cpp, examples]
+tags: cpp examples
 comments: true
 ---
 
@@ -16,11 +16,15 @@ comments: true
 
 字面上都知道，函数传递参数有值传递和引用传递，但具体区别是什么呢？除了一个传对象拷贝，一个传对象本身之外，还有哪些影响？
 
+
+
+
+
 这里定义一个`str`类，只有一个`private char*st`变量；有几个基本的函数，重载了`=`和`==`运算符，`str & operator=(str const & a)`和`str & operator==(str a)`,用于用不同方式实现赋值。代码如下：
 
 ## 代码
 
-~~~cpp
+```cpp
 #include <iostream> 
 #include <string.h> 
 using namespace std; 
@@ -75,11 +79,11 @@ int  main()
 	s2.show();
 	return 0;
 } 
-~~~
+```
 
 -  使用`str & operator==(str  a)`重载的输出：
 
-~~~
+```
 set:before new st addr  0xbfce5374  st point to  0xb785c680
 set:after new st addr  0xbfce5374  st point to  0x9bffa10
 构造函数：str addr 0xbfce5374  st addr 0xbfce5374  st point to  0x9bffa10  st  he
@@ -96,13 +100,13 @@ show func:
 show func: he
 ~str:before str addr 0xbfce5378  st addr 0xbfce5378  st point to  0x9bffa20  st content he
 ~str:before str addr 0xbfce5374  st addr 0xbfce5374  st point to  0x9bffa10  st content 
-~~~
+```
 
 注意第二次两行`show`之前的那句`~str:before str addr 0xbfce537c  st addr 0xbfce537c  st point to  0x9bffa10  st content he`
 
 - 使用`str & operator=(str const &  a)`重载,将`main`中`s2==s1;`注释掉，使用`s2=s1;`, 输出：
 
-~~~
+```
 set:before new st addr  0xbff47b38  st point to  0x804aba0
 set:after new st addr  0xbff47b38  st point to  0x9693a10
 构造函数：str addr 0xbff47b38  st addr 0xbff47b38  st point to  0x9693a10  st  he
@@ -118,7 +122,7 @@ show func: he
 show func: he
 ~str:before str addr 0xbff47b3c  st addr 0xbff47b3c  st point to  0x9693a20  st content he
 ~str:before str addr 0xbff47b38  st addr 0xbff47b38  st point to  0x9693a10  st content he
-~~~
+```
 
 ## 分析
 

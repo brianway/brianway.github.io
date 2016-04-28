@@ -2,25 +2,25 @@
 layout: post
 title:  mybatis学习笔记(3)-入门程序二
 date:   2016-03-08 10:38:04 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis examples
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 添加、删除、更新用户
+
+
+
 
 
 ## 映射文件
 
  - User.xml,在入门程序一基础上增加
 
-~~~xml
+```xml
 
     <!-- 添加用户
         parameterType：指定输入 参数类型是pojo（包括 用户信息）
@@ -72,7 +72,7 @@ comments: true
         where id=#{id}
     </update>
 
-~~~
+```
 
 
 (注：这里的`birthday`字段在mysql表中是DATE类型，在User类中`birthday`属性是java的`java.util.Date`类型，并没有进行转换就插入成功了。
@@ -86,7 +86,7 @@ comments: true
 
 - User.java,在入门程序一基础上增加三个测试方法
 
-~~~java
+```java
   // 添加用户信息
     @Test
     public void insertUserTest() throws IOException {
@@ -180,21 +180,21 @@ comments: true
 
     }
 
-~~~
+```
 
 
 - 自增主键返回
 
-~~~xml
+```xml
 <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
           SELECT LAST_INSERT_ID()
 </selectKey>
-~~~
+```
 
 如果没有在上面的配置中配置`resultType`，则会报下面的异常
 
 
-~~~
+```
 org.apache.ibatis.exceptions.PersistenceException: 
 ### Error updating database.  Cause: org.apache.ibatis.executor.ExecutorException: A query was run and no Result Maps were found for the Mapped Statement 'test.insertUser!selectKey'.  It's likely that neither a Result Type nor a Result Map was specified.
 ### The error may exist in sqlmap/User.xml
@@ -208,7 +208,7 @@ org.apache.ibatis.exceptions.PersistenceException:
 Caused by: org.apache.ibatis.executor.ExecutorException: A query was run and no Result Maps were found for the Mapped Statement 'test.insertUser!selectKey'.  It's likely that neither a Result Type nor a Result Map was specified.
 
 
-~~~
+```
 
 
 ## 总结

@@ -2,17 +2,18 @@
 layout: post
 title:  springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定
 date:   2016-03-30 14:28:13 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 注解
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定
+
+
+
 
 ## 数组绑定
 
@@ -26,15 +27,15 @@ comments: true
 
 - controller方法定义：
 
-~~~java
+```java
 // 批量删除 商品信息
 @RequestMapping("/deleteItems")
 public String deleteItems(Integer[] items_id) throws Exception
-~~~
+```
 
 - 页面定义：
 
-~~~jsp
+```jsp
 <c:forEach items="${itemsList }" var="item">
 <tr>
     <td><input type="checkbox" name="items_id" value="${item.id}"/></td>
@@ -47,7 +48,7 @@ public String deleteItems(Integer[] items_id) throws Exception
 
 </tr>
 </c:forEach>
-~~~
+```
 
 
 
@@ -67,7 +68,7 @@ public String deleteItems(Integer[] items_id) throws Exception
 
 使用List接收页面提交的批量数据，通过包装pojo接收，在包装pojo中定义`list<pojo>`属性
 
-~~~java
+```java
 public class ItemsQueryVo {
 
     //商品信息
@@ -78,10 +79,10 @@ public class ItemsQueryVo {
 
     //批量商品信息
     private List<ItemsCustom> itemsList;
-~~~
+```
 
 
-~~~java
+```java
 // 批量修改商品提交
 // 通过ItemsQueryVo接收批量提交的商品信息，将商品信息存储到itemsQueryVo中itemsList属性中。
 @RequestMapping("/editItemsAllSubmit")
@@ -89,11 +90,11 @@ public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception {
 
     return "success";
 }
-~~~
+```
 
 - 页面定义：
 
-~~~jsp
+```jsp
 <c:forEach items="${itemsList }" var="item" varStatus="status">
     <tr>
 
@@ -104,7 +105,7 @@ public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception {
 
     </tr>
 </c:forEach>
-~~~
+```
 
 name的格式：
 
@@ -126,16 +127,16 @@ name的格式：
 
 - 包装类中定义Map对象如下：
 
-~~~java
+```java
 Public class QueryVo {
 private Map<String, Object> itemInfo = new HashMap<String, Object>();
   //get/set方法..
 }
-~~~
+```
 
 - 页面定义如下：
 
-~~~java
+```java
 <tr>
 <td>学生信息：</td>
 <td>
@@ -144,17 +145,17 @@ private Map<String, Object> itemInfo = new HashMap<String, Object>();
 .. .. ..
 </td>
 </tr>
-~~~
+```
 
 
 
 - Contrller方法定义如下：
 
-~~~java
+```java
 public String useraddsubmit(Model model,QueryVo queryVo)throws Exception{
 System.out.println(queryVo.getStudentinfo());
 }
-~~~
+```
 
 
 

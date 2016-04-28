@@ -2,17 +2,17 @@
 layout: post
 title:  springmvc学习笔记(3)-注解的处理器映射器和适配器
 date:   2016-03-30 14:28:03 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要介绍注解的处理器映射器和适配器相关配置
+
+
 
 
 ## 默认加载
@@ -29,18 +29,18 @@ comments: true
 
 ## 注解的处理器映射器和适配器
 
-~~~xml
+```xml
 <!-- 注解的映射器 -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
 <!-- 注解的适配器 -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
     
-~~~
+```
 
 或者
 
-~~~xml
+```xml
     <!-- 使用mvc:annotation-driven代替上面两个注解映射器和注解适配的配置
      mvc:annotation-driven默认加载很多的参数绑定方法，
      比如json转换解析器默认加载了，如果使用mvc:annotation-driven则不用配置上面的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
@@ -48,13 +48,13 @@ comments: true
      -->
     <mvc:annotation-driven></mvc:annotation-driven>
 
-~~~
+```
 
 ## 开发注解Handler
 
 使用注解的映射器和注解的适配器。(使用注解的映射器和注解的适配器必须配对使用)
 
-~~~java
+```java
 //使用@Controller来标识它是一个控制器
 @Controller
 public class ItemsController3 {
@@ -91,11 +91,11 @@ public class ItemsController3 {
         return modelAndView;
     }
 }
-~~~
+```
 
 ## 在spring容器中加载Handler
 
-~~~xml
+```xml
 <!-- 对于注解的Handler 可以单个配置
     实际开发中加你使用组件扫描
     -->
@@ -104,7 +104,7 @@ public class ItemsController3 {
 	这里让扫描controller，指定controller的包
 	 -->
     <context:component-scan base-package="com.iot.ssm.controller"></context:component-scan>
-~~~
+```
 
 
 

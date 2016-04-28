@@ -2,16 +2,18 @@
 layout: post
 title:  java基础巩固笔记(4)-代理
 date:   2016-02-03 22:43:13 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 代理
 comments: true
 ---
 
 * content
 {:toc}
 
-
 代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。
+
+
+
 
 ## 概念
 代理是一种设计模式，其目的是为其他对象提供一个代理以控制对某个对象的访问，代理类负责为委托类预处理消息，过滤消息并转发消息以及进行消息被委托类执行后的后续处理。为了保持行为的一致性，代理类和委托类通常会实现相同的接口
@@ -39,7 +41,7 @@ API:
 
 - 查看代理类方法列表信息
 
-~~~java
+```java
 package com.iot.proxy;
 
 import java.lang.reflect.*;
@@ -104,11 +106,11 @@ public class ProxyTest {
 
 
 }
-~~~
+```
 
 输出结果：
 
-~~~
+```
 class com.sun.proxy.$Proxy0
 -------------constructors list-------------
 com.sun.proxy.$Proxy0(java.lang.reflect.InvocationHandler)
@@ -144,11 +146,11 @@ wait(long)
 getClass()
 notify()
 notifyAll()
-~~~
+```
 
 - 创建实例对象
 
-~~~java
+```java
 /**
  * 测试创建实例对象
  * @throws NoSuchMethodException
@@ -193,11 +195,11 @@ private static void createProxyInstance( ) throws NoSuchMethodException, Illegal
     System.out.println(proxy2.getClass().getName());
 
 }
-~~~
+```
 
 输出结果：
 
-~~~
+```
 before invoke method: add
 before invoke method: add
 before invoke method: size
@@ -205,7 +207,7 @@ before invoke method: size
 before invoke method: toString
 [aaa, bbb]
 com.sun.proxy.$Proxy0
-~~~
+```
 
 上述代码相关说明:
 
@@ -247,16 +249,16 @@ com.sun.proxy.$Proxy0
 
 定义`Advice`接口
 
-~~~java
+```java
 public interface Advice {
     void beforeMethod(Method method);
     void aftereMethod(Method method);
 }
-~~~
+```
 
 一个实现`Advice`接口的类`MyAdvice`,用于打印执行方法前和执行后的时间
 
-~~~java
+```java
 import java.lang.reflect.Method;
 
 public class MyAdvice implements Advice{
@@ -273,11 +275,11 @@ public class MyAdvice implements Advice{
         System.out.println(method.getName()+" cost total "+ (endTime-beginTime));
     }
 }
-~~~
+```
 
 定义一个`getProxy`方法创建实例对象,接收两个参数:目标和通知
 
-~~~java
+```java
 private static Object getProxy(final Object target,final Advice advice){
     Object proxy = Proxy.newProxyInstance(
             target.getClass().getClassLoader(),
@@ -294,21 +296,21 @@ private static Object getProxy(final Object target,final Advice advice){
     );
     return proxy;
 }
-~~~
+```
 
 
 调用：
 
-~~~java
+```java
 Collection proxy3 = (Collection) getProxy(new ArrayList(),new MyAdvice());
 proxy3.add("111");
 proxy3.add("222");
 System.out.println(proxy3.size());
-~~~
+```
 
 输出:
 
-~~~
+```
 add before at 0
 add cost total 0
 add before at 1454433980839
@@ -316,7 +318,7 @@ add cost total 0
 size before at 1454433980839
 size cost total 0
 2
-~~~
+```
 
 
 ## 参考资料

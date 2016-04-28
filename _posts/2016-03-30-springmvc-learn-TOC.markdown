@@ -2,25 +2,26 @@
 layout: post
 title:  springmvc+mybatis学习笔记(汇总)
 date:   2016-03-30 17:40:00 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 总结
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 笔记分为两大部分：mybatis和springmvc
 
 - [mybatis](http://blog.csdn.net/h3243212/article/category/6110387)
 - [springmvc](http://blog.csdn.net/h3243212/article/category/6110387)
 
-
 笔记内容主要是mybatis和springmvc的一些基本概念和使用方法，涉及概念介绍、环境搭建、编程细节、运行调试等方面。
 
 这套笔记整体偏入门和应用，适合快速上手，对底层实现和机理并未做过多分析。我后续会研读spring源码，并把学习的收获写成博客分享出来，根据情况再开一个仓库或者贴博客链接。
+
+
+
+
 
 -----
 

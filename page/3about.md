@@ -1,9 +1,8 @@
 ---
 layout: page
-title: Me
+title: About
 permalink: /about/
-icon: glyphicon-user
-comments: true
+icon: heart
 ---
 
 * content
@@ -12,7 +11,6 @@ comments: true
 
 ## 关于我
 
-----
 
 > 2017年我就要找工作了，希望做服务器/数据分析相关方向
 
@@ -20,7 +18,7 @@ comments: true
 
 爱技术，爱吹逼，热爱生活。
 
-最喜欢的游戏是《炉石传说》,天梯传说+竞技场12胜,[武汉高校星联赛季军](/images/heartstone-prize.png)
+最喜欢的游戏是《炉石传说》,天梯传说+竞技场12胜,[武汉高校星联赛季军](http://7xsna4.com2.z0.glb.clouddn.com/heartstone-prize.png)
 
 ---
 
@@ -59,5 +57,50 @@ comments: true
 
 Comment below to exchange link with me.  
 
+
+## Comments
+
+{% if site.duoshuo_shortname %}
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="{{ site.url }}{{ page.url }}" data-title="{{page.title}}" data-url="{{ site.url }}{{ page.url }}"></div>
+<!-- 多说评论框 end -->
+{% endif %}
+
+{% if site.disqus_shortname %}
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+
+var disqus_config = function () {
+this.page.url = '{{ site.url }}{{ page.url }}'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '{{ site.url }}{{ page.url }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//{{site.disqus_shortname}}.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+{% endif %}
+
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('.left a')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
 
 

@@ -2,17 +2,17 @@
 layout: post
 title:  springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结
 date:   2016-03-30 14:28:21 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc debug 总结
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法
+
+
 
 
 ## 遇到的问题
@@ -37,7 +37,7 @@ comments: true
 
 ### BeanCreationException
 
-~~~
+```
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in file [D:\intellij\workspace\learnssm-firstssm\target\learnssm-firstssm-1.0-SNAPSHOT\WEB-INF\classes\spring\applicationContext-dao.xml]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0': Initialization of bean failed; nested exception is java.lang.NoClassDefFoundError: org/aspectj/weaver/reflect/ReflectionWorld$ReflectionWorldException
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:478)
 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
@@ -50,11 +50,11 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
 	  ....省略
-~~~
+```
 
 是少依赖的问题，输入`mvn dependency:tree`打依赖树：
 
-~~~
+```
 D:\intellij\workspace\learnssm-firstssm>mvn dependency:tree
 [INFO] Scanning for projects...
 [INFO]
@@ -91,12 +91,12 @@ D:\intellij\workspace\learnssm-firstssm>mvn dependency:tree
 [INFO] Finished at: 2016-03-03T20:06:00+08:00
 [INFO] Final Memory: 11M/126M
 [INFO] ------------------------------------------------------------------------
-~~~
+```
 
 少了spring-aspects,spring-core等依赖，加上
 
 
-~~~xml
+```xml
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
@@ -120,16 +120,16 @@ D:\intellij\workspace\learnssm-firstssm>mvn dependency:tree
     <artifactId>spring-test</artifactId>
     <version>${spring.version}</version>
 </dependency>
-~~~
+```
 
 spring版本统一设置
 
-~~~xml
+```xml
 <properties>
     <!-- jar 版本设置 -->
     <spring.version>4.2.4.RELEASE</spring.version>
 </properties>
-~~~
+```
 
 
 ### mybatis绑定错误
@@ -171,7 +171,7 @@ spring版本统一设置
 
 在web.xml添加post乱码filter
 
-~~~xml
+```xml
 <!-- post乱码过虑器 -->
 <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
@@ -185,7 +185,7 @@ spring版本统一设置
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
-~~~
+```
 
 以上可以解决post请求乱码问题。解决后调试如图
 
@@ -199,10 +199,10 @@ spring版本统一设置
 
 另外一种方法对参数进行重新编码：
 
-~~~java
+```java
 String userName = new 
 String(request.getParamter("userName").getBytes("ISO8859-1"),"utf-8")
-~~~
+```
 
 ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
 
@@ -227,11 +227,11 @@ ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
 
 在pom.xml文件的设置编码即可
 
-~~~
+```
 <properties>  
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
 </properties>  
-~~~
+```
 
 
 ### json格式数据问题
@@ -259,13 +259,13 @@ debug窗里报下面的错误：
 
 多加一个依赖`jackson-databind`（之前只加了`jackson-mapper-asl`的依赖， 间接依赖`jackson-core-asl`，但还不够。
 
-~~~xml
+```xml
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
     <version>2.7.2</version>
 </dependency>
-~~~
+```
 
 
 ## 还没弄懂但不影响运行的问题
@@ -274,14 +274,14 @@ debug窗里报下面的错误：
 
 - web.xml节选
 
-~~~xml
+```xml
  <!-- 加载spring容器 -->
 <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>WEB-INF/classes/spring/applicationContext-*.xml</param-value>
     <!--  <param-value>classpath:spring/applicationContext-*.xml</param-value>-->
  </context-param>
-~~~
+```
 
 ![加载spring容器报红](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png)
 
@@ -297,7 +297,7 @@ debug窗里报下面的错误：
 
 在自定义参数绑定时，spring.xml的配置如下：
 
-~~~xml
+```xml
 <!-- 自定义参数绑定 -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <!-- 转换器 -->
@@ -308,7 +308,7 @@ debug窗里报下面的错误：
            </list>
         </property>
     </bean>
-~~~
+```
 
 其中`<list>`标签会报红，但不影响运行。去掉`<list>`标签，也可以运行成功。原因我还不知道，以后阅读源码会研究下这个问题。
 
@@ -318,7 +318,7 @@ debug窗里报下面的错误：
 
 输入`mvn  dependency:analyze`进行依赖分析
 
-~~~
+```
 [INFO]
 [INFO] --- maven-dependency-plugin:2.8:analyze (default-cli) @ learnssm-firstssm ---
 [WARNING] Used undeclared dependencies found:
@@ -346,7 +346,7 @@ debug窗里报下面的错误：
 [INFO] Final Memory: 16M/164M
 [INFO] ------------------------------------------------------------------------
 
-~~~
+```
 
 可以看到里面有:
 
@@ -358,15 +358,15 @@ debug窗里报下面的错误：
 
 至于说使用了未声明的包就不知道为啥了，比如
 
-~~~
+```
 [WARNING]    org.springframework:spring-context:jar:4.2.4.RELEASE:compile
 [WARNING]    org.springframework:spring-web:jar:4.2.4.RELEASE:compile
 [WARNING]    org.springframework:spring-beans:jar:4.2.4.RELEASE:compile
-~~~
+```
 
 都被`org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile`依赖，这点可以从依赖树看到
 
-~~~
+```
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ learnssm-firstssm ---
 [INFO] com.iot.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT
 [INFO] +- org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile
@@ -376,7 +376,7 @@ debug窗里报下面的错误：
 [INFO] |  |     \- aopalliance:aopalliance:jar:1.0:compile
 [INFO] |  +- org.springframework:spring-expression:jar:4.2.4.RELEASE:compile
 [INFO] |  \- org.springframework:spring-web:jar:4.2.4.RELEASE:compile
-~~~
+```
 
 总之，上面未解决的问题，我会留意，如果有大神指导原因，请不吝赐教。
 

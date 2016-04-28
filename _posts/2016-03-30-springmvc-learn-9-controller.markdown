@@ -2,24 +2,24 @@
 layout: post
 title:  springmvc学习笔记(9)-springmvc整合mybatis之controller
 date:   2016-03-30 14:28:09 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文介绍如何配置springmvc配置文件和web.xml，以及如何编写controller,jsp
+
+
 
 
 ## springmvc.xml
 
 在`resources/spring`文件下下创建springmvc.xml文件，配置处理器映射器、适配器、视图解析器。
 
-~~~xml
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -55,14 +55,14 @@ comments: true
     </bean>
 
 </beans>
-~~~
+```
 
 ## 配置web.xml
 
 
 参考入门程序，web.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
@@ -115,7 +115,7 @@ comments: true
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
-~~~
+```
 
 这个文件有两个作用：
 
@@ -130,7 +130,7 @@ comments: true
 ## 编写Controller(就是Handler)
 
 
-~~~java
+```java
 package com.iot.learnssm.firstssm.controller;
 
 
@@ -182,13 +182,13 @@ public class ItemsController {
 
 
 }
-~~~
+```
 
 ## 编写jsp
 
 服务器路径为`WEB-INF/jsp/items/itemsList.jsp`
 
-~~~jsp
+```jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -233,7 +233,7 @@ public class ItemsController {
 </body>
 
 </html>
-~~~
+```
 
 
 

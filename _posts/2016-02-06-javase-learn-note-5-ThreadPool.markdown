@@ -2,19 +2,21 @@
 layout: post
 title:  java基础巩固笔记(5)-多线程之线程并发库
 date:   2016-02-06 14:23:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 多线程
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要概述`java.util.concurrent`包下的相关类和使用方法
 
 > [Package java.util.concurrent](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/package-summary.html)
+
+
+
+
 
 ## 原子性操作类
 
@@ -39,7 +41,7 @@ comments: true
 
 例子：`newFixedThreadPool`
 
-~~~java
+```java
 ExecutorService threadPool = Executors.newFixedThreadPool(3);
 for(int i=0;i<10;i++){
     threadPool.execute(new Runnable() {
@@ -49,7 +51,7 @@ for(int i=0;i<10;i++){
         }
     });
 }
-~~~
+```
 
 
 单线程`newSingleThreadExecutor`可用于重启
@@ -60,7 +62,7 @@ for(int i=0;i<10;i++){
 
 例子：类似Timer的定时执行
 
-~~~java
+```java
 Executors.newScheduledThreadPool(3).scheduleAtFixedRate(
             new Runnable() {
                 @Override
@@ -69,7 +71,7 @@ Executors.newScheduledThreadPool(3).scheduleAtFixedRate(
                 }
             },3,1, TimeUnit.SECONDS
     );
-~~~
+```
 
 ### Callable&Future
 
@@ -88,7 +90,7 @@ Lock功能类似传统多线程技术里的`synchronized`，实现线程互斥�
 
 例子
 
-~~~java
+```java
 class A{
     private Lock lock = new ReentrantLock();
     
@@ -101,7 +103,7 @@ class A{
         }
     }
 }
-~~~
+```
 
 - 读写锁
 
@@ -109,7 +111,7 @@ class A{
 
 javaDoc文档读写锁例子,缓存:
 
-~~~java
+```java
 class CachedData {
    Object data;
    volatile boolean cacheValid;
@@ -142,7 +144,7 @@ class CachedData {
      }
    }
  }
-~~~
+```
 
 
 重点注意在释放写锁前加读锁那部分代码，注释为` // Downgrade by acquiring read lock before releasing write lock`。自己挂了写锁，再挂读锁是可以的，这面涉及的技巧以后再研究。
@@ -155,7 +157,7 @@ javaDoc文档例子，可阻塞队列
 
 [class BoundedBuffer例子](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/locks/Condition.html)
 
-~~~java
+```java
 class BoundedBuffer {
    final Lock lock = new ReentrantLock();
    final Condition notFull  = lock.newCondition(); 
@@ -193,7 +195,7 @@ class BoundedBuffer {
      }
    }
  }
-~~~
+```
 
 使用了两个`condition`
 

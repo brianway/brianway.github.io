@@ -2,20 +2,19 @@
 layout: post
 title:  springmvc学习笔记(1)-框架原理和入门配置
 date:   2016-03-30 14:28:01 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 安装部署
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要介绍springmvc的框架原理，并通过一个入门程序展示环境搭建，配置以及部署调试。
 
-
 springmvc是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合。
+
+
 
 
 ## springmvc框架原理
@@ -81,27 +80,27 @@ pom.xml文件
 
 添加依赖
 
-~~~xml
+```xml
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>
     <version>4.2.4.RELEASE</version>
 </dependency>
-~~~
+```
 
 加上下面的标签会生成Artifacts
 
-~~~xml
+```xml
 <packaging>war</packaging>
-~~~
+```
 
 build标签的finalName要和Artifacts的output directory一致
 
-~~~xml
+```xml
 <build>
     <finalName>springmvc-2nd-1.0-SNAPSHOT</finalName>
 </build>
-~~~
+```
 
 
 ### 配置文件
@@ -110,7 +109,7 @@ build标签的finalName要和Artifacts的output directory一致
 
 web.xml
 
-~~~xml
+```xml
 <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -122,9 +121,9 @@ web.xml
         <param-value>classpath:springmvc.xml</param-value>
     </init-param>
 </servlet>
-~~~
+```
 
-~~~xml
+```xml
 <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
     <!--
@@ -136,28 +135,28 @@ web.xml
     -->
     <url-pattern>*.action</url-pattern>
 </servlet-mapping>
-~~~
+```
 
 - 配置Handler
 
 将编写Handler在spring容器加载
 
-~~~xml
+```xml
 <!-- 配置Handler -->
 <bean name="/queryItems.action" class="com.iot.ssm.controller.ItemsController"/>
 
-~~~
+```
 
 - 配置处理器映射器
 
 在classpath下的springmvc.xml中配置处理器映射器
 
-~~~xml
+```xml
 <!-- 处理器映射器
     将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)
 -->
 <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
-~~~
+```
 
 
 - 配置处理器适配器
@@ -169,11 +168,11 @@ web.xml
 
 源码
 
-~~~java
+```java
 public boolean supports(Object handler) {
         return handler instanceof Controller;
 }
-~~~
+```
 
 此适配器能执行实现`Controller`接口的Handler
 
@@ -183,35 +182,35 @@ public boolean supports(Object handler) {
 
 需要配置解析jsp的视图解析器
 
-~~~xml
+```xml
  <!-- 视图解析器
     解析jsp,默认使用jstl,classpath下要有jstl的包
     -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
-~~~
+```
 
 
 在springmvc.xml中视图解析器配置前缀和后缀：
 
-~~~xml
+```xml
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 配置jsp路径的前缀 -->
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <!-- 配置jsp路径的后缀 -->
         <property name="suffix" value=".jsp"/>
 </bean>
-~~~
+```
 
 程序中不用指定前缀和后缀：
 
-~~~java
+```java
 //指定视图
 //下边的路径，如果在视图解析器中配置jsp的路径前缀和后缀，修改为items/itemsList
 //modelAndView.setViewName("/WEB-INF/jsp/items/itemsList.jsp");
 
 //下边的路径配置就可以不在程序中指定jsp路径的前缀和后缀
 modelAndView.setViewName("items/itemsList");
-~~~
+```
 
 
 

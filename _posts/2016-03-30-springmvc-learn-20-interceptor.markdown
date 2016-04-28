@@ -2,17 +2,17 @@
 layout: post
 title:  springmvc学习笔记(20)-拦截器
 date:   2016-03-30 14:28:20 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要介绍springmvc中的拦截器，包括拦截器定义和的配置，然后演示了一个链式拦截的测试示例，最后通过一个登录认证的例子展示了拦截器的应用
+
+
 
 
 ## 拦截定义
@@ -20,7 +20,7 @@ comments: true
 定义拦截器，实现`HandlerInterceptor`接口。接口中提供三个方法。
 
 
-~~~java
+```java
 public class HandlerInterceptor1 implements HandlerInterceptor{
     //进入 Handler方法之前执行
     //用于身份认证、身份授权
@@ -44,7 +44,7 @@ public class HandlerInterceptor1 implements HandlerInterceptor{
 
     }
 }
-~~~
+```
 
 可以从名称和参数看出各个接口的顺序和作用:
 
@@ -67,7 +67,7 @@ public class HandlerInterceptor1 implements HandlerInterceptor{
 
 springmvc拦截器针对HandlerMapping进行拦截设置，如果在某个HandlerMapping中配置拦截，经过该HandlerMapping映射成功的handler最终使用该拦截器。
 
-~~~xml
+```xml
 <bean
 	class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
 	<property name="interceptors">
@@ -79,7 +79,7 @@ springmvc拦截器针对HandlerMapping进行拦截设置，如果在某个Handle
 </bean>
 	<bean id="handlerInterceptor1" class="springmvc.intercapter.HandlerInterceptor1"/>
 	<bean id="handlerInterceptor2" class="springmvc.intercapter.HandlerInterceptor2"/>
-~~~
+```
 
 一般不推荐使用。
 
@@ -87,7 +87,7 @@ springmvc拦截器针对HandlerMapping进行拦截设置，如果在某个Handle
 
 springmvc配置类似全局的拦截器，springmvc框架将配置的类似全局的拦截器注入到每个HandlerMapping中。
 
-~~~xml
+```xml
  <!--拦截器 -->
 <mvc:interceptors>
     <!--多个拦截器,顺序执行 -->
@@ -101,7 +101,7 @@ springmvc配置类似全局的拦截器，springmvc框架将配置的类似全�
         <bean class="com.iot.learnssm.firstssm.interceptor.HandlerInterceptor2"></bean>
     </mvc:interceptor>
 </mvc:interceptors>
-~~~
+```
 
 ## 拦截测试
 
@@ -111,7 +111,7 @@ springmvc配置类似全局的拦截器，springmvc框架将配置的类似全�
 
 - 1.两个拦截器都放行
 
-~~~
+```
 DEBUG [http-apr-8080-exec-1] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-1] - Looking up handler method for path /items/queryItems.action
 DEBUG [http-apr-8080-exec-1] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
@@ -134,14 +134,14 @@ HandlerInterceptor2...afterCompletion
 HandlerInterceptor1...afterCompletion
 DEBUG [http-apr-8080-exec-1] - Successfully completed request
 
-~~~
+```
 
 总结：preHandle方法按顺序执行，postHandle和afterCompletion按拦截器配置的逆向顺序执行。
 
 
 2.拦截器1放行，拦截器2不放行
 
-~~~
+```
 DEBUG [http-apr-8080-exec-8] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-8] - Looking up handler method for path /items/queryItems.action
 DEBUG [http-apr-8080-exec-8] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
@@ -151,7 +151,7 @@ HandlerInterceptor1...preHandle
 HandlerInterceptor2...preHandle
 HandlerInterceptor1...afterCompletion
 DEBUG [http-apr-8080-exec-8] - Successfully completed request
-~~~
+```
 
 总结：
 
@@ -163,7 +163,7 @@ DEBUG [http-apr-8080-exec-8] - Successfully completed request
 
 3.两个拦截器都不放
 
-~~~
+```
 DEBUG [http-apr-8080-exec-9] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-9] - Looking up handler method for path /items/queryItems.action
 DEBUG [http-apr-8080-exec-9] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
@@ -171,7 +171,7 @@ DEBUG [http-apr-8080-exec-9] - Returning cached instance of singleton bean 'item
 DEBUG [http-apr-8080-exec-9] - Last-Modified value for [/ssm1/items/queryItems.action] is: -1
 HandlerInterceptor1...preHandle
 DEBUG [http-apr-8080-exec-9] - Successfully completed request
-~~~
+```
 
 总结：
 
@@ -181,7 +181,7 @@ DEBUG [http-apr-8080-exec-9] - Successfully completed request
 
 4.拦截器1不放行，拦截器2放行
 
-~~~
+```
 DEBUG [http-apr-8080-exec-8] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-8] - Looking up handler method for path /items/queryItems.action
 DEBUG [http-apr-8080-exec-8] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
@@ -189,7 +189,7 @@ DEBUG [http-apr-8080-exec-8] - Returning cached instance of singleton bean 'item
 DEBUG [http-apr-8080-exec-8] - Last-Modified value for [/ssm1/items/queryItems.action] is: -1
 HandlerInterceptor1...preHandle
 DEBUG [http-apr-8080-exec-8] - Successfully completed request
-~~~
+```
 
 和两个拦截器都不行的结果一致，因为拦截器1先执行，没放行
 
@@ -216,7 +216,7 @@ DEBUG [http-apr-8080-exec-8] - Successfully completed request
 
 ### 登陆controller方法
 
-~~~java
+```java
 @Controller
 public class LoginController {
     // 登陆
@@ -244,14 +244,14 @@ public class LoginController {
         return "redirect:/items/queryItems.action";
     }
 }
-~~~
+```
 
 
 ###	登陆认证拦截实现
 
 - 代码实现
 
-~~~java
+```java
 /**
  * Created by brian on 2016/3/8.
  * 登陆认证拦截器
@@ -313,11 +313,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
 }
-~~~
+```
 
 - 拦截器配置
 
-~~~xml
+```xml
 <!--拦截器 -->
 <mvc:interceptors>
     <!--多个拦截器,顺序执行 -->
@@ -328,7 +328,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     </mvc:interceptor>
     
     ...省略
-~~~
+```
 
 
 

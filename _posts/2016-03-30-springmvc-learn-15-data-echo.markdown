@@ -2,17 +2,18 @@
 layout: post
 title:  springmvc学习笔记(15)-数据回显
 date:   2016-03-30 14:28:15 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文介绍springmvc中数据回显的几种实现方法
+
+
+
 
 
 数据回显：提交后，如果出现错误，将刚才提交的数据回显到刚才的提交页面。
@@ -30,7 +31,7 @@ comments: true
 
 在商品查询列表页面，通过商品类型查询商品信息。在controller中定义商品类型查询方法，最终将商品类型传到页面。
 
-~~~java
+```java
  // 商品分类
 //itemtypes表示最终将方法返回值放在request中的key
 @ModelAttribute("itemtypes")
@@ -42,12 +43,12 @@ public Map<String, String> getItemTypes() {
 
     return itemTypes;
 }
-~~~
+```
 
 页面上可以得到itemTypes数据。
 
 
-~~~jsp
+```jsp
 <td>
     商品名称：<input name="itemsCustom.name" />
     商品类型：
@@ -57,14 +58,14 @@ public Map<String, String> getItemTypes() {
         </c:forEach>
     </select>
 </td>
-~~~
+```
 
 3.使用最简单方法使用model，可以不用`@ModelAttribute`
 
-~~~java
+```java
 //可以直接使用model将提交pojo回显到页面
 //model.addAttribute("items", itemsCustom);
-~~~
+```
 
 
 ## 简单类型数据回显

@@ -2,18 +2,18 @@
 layout: post
 title:  mybatis学习笔记(12)-多对多查询
 date:   2016-03-08 10:39:12 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 本文实现多对多查询，查询用户及用户购买商品信息。
+
+
+
 
 ## 示例
 
@@ -24,7 +24,7 @@ comments: true
 
 - sql
 
-~~~sql
+```sql
 SELECT 
   orders.*,
   user.username,
@@ -43,7 +43,7 @@ FROM
   orderdetail,
   items
 WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdetail.items_id = items.id
-~~~
+```
 
 
 - 映射思路
@@ -59,7 +59,7 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
 
 - mapper.xml
 
-~~~xml
+```xml
 <!-- 查询用户及购买的商品信息，使用resultmap -->
 <select id="findUserAndItemsResultMap" resultMap="UserAndItemsResultMap">
    SELECT
@@ -81,11 +81,11 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
       items
     WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdetail.items_id = items.id
 </select>
-~~~
+```
 
 - resultMap
 
-~~~xml
+```xml
 <!-- 查询用户及购买的商品 -->
 <resultMap type="com.iot.mybatis.po.User" id="UserAndItemsResultMap">
     <!-- 用户信息 -->
@@ -127,14 +127,14 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
 
     </collection>
 </resultMap>
-~~~
+```
 
 - mapper.java
 
-~~~java
+```java
 //查询用户购买商品信息
 public List<User>  findUserAndItemsResultMap()throws Exception;
-~~~
+```
 
 ## 多对多查询总结
 

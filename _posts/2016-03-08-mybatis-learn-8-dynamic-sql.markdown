@@ -2,23 +2,24 @@
 layout: post
 title:  mybatis学习笔记(8)-动态sql
 date:   2016-03-08 10:39:08 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 mybatis核心,对sql语句进行灵活操作，通过表达式进行判断，对sql进行灵活拼接、组装。
+
+
+
 
 ## if判断
 
 - mapper.xml
 
-~~~xml
+```xml
 <!-- 用户信息综合查询
     #{userCustom.sex}:取出pojo包装对象中性别值
     ${userCustom.username}：取出pojo包装对象中用户名称
@@ -59,23 +60,23 @@ mybatis核心,对sql语句进行灵活操作，通过表达式进行判断，对
     </where>
 </select>
 
-~~~
+```
 
 - 测试结果
 
 1.注释掉`testFindUserList()`方法中的`userCustom.setUsername("张三");`
 
 
-~~~java
+```java
 //由于这里使用动态sql，如果不设置某个值，条件不会拼接在sql中
 userCustom.setSex("1");
 //userCustom.setUsername("张三");
 userQueryVo.setUserCustom(userCustom);
-~~~
+```
 
 输出
 
-~~~
+```
 DEBUG [main] - Checking to see if class com.iot.mybatis.mapper.UserMapper matches criteria [is assignable to Object]
 DEBUG [main] - Checking to see if class com.iot.mybatis.mapper.UserMapperTest matches criteria [is assignable to Object]
 DEBUG [main] - Opening JDBC Connection
@@ -85,27 +86,27 @@ DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE user.sex=?
 DEBUG [main] - ==> Parameters: 1(String)
 DEBUG [main] - <==      Total: 6
 [User [id=10, username=张三, sex=1, birthday=Thu Jul 10 00:00:00 CST 2014, address=北京市], User [id=16, username=张小明, sex=1, birthday=null, address=河南郑州], User [id=22, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=24, username=张三丰, sex=1, birthday=null, address=河南郑州], User [id=25, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=28, username=王小军, sex=1, birthday=Tue Feb 23 00:00:00 CST 2016, address=河南郑州]]
-~~~
+```
 
 可以看到sql语句为`reparing: SELECT * FROM user WHERE user.sex=? `，没有username的部分
 
 
 2.`userQueryVo`设为null,则`userCustom`为null
 
-~~~java
+```java
 //List<UserCustom> list = userMapper.findUserList(userQueryVo);
 List<UserCustom> list = userMapper.findUserList(null);
-~~~
+```
 
 输出
 
-~~~
+```
 DEBUG [main] - ==>  Preparing: SELECT * FROM user 
 DEBUG [main] - ==> Parameters: 
 DEBUG [main] - <==      Total: 9
 [User [id=1, username=王五, sex=2, birthday=null, address=null], User [id=10, username=张三, sex=1, birthday=Thu Jul 10 00:00:00 CST 2014, address=北京市], User [id=16, username=张小明, sex=1, birthday=null, address=河南郑州], User [id=22, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=24, username=张三丰, sex=1, birthday=null, address=河南郑州], User [id=25, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=26, username=王五, sex=null, birthday=null, address=null], User [id=27, username=王大军, sex=2, birthday=Tue Feb 23 00:00:00 CST 2016, address=河南郑州], User [id=28, username=王小军, sex=1, birthday=Tue Feb 23 00:00:00 CST 2016, address=河南郑州]]
 
-~~~
+```
 
 可以看到sql语句变为了`SELECT * FROM user`
 
@@ -117,7 +118,7 @@ DEBUG [main] - <==      Total: 9
 
 - 定义sql片段
 
-~~~xml
+```xml
 <!-- 定义sql片段
 id：sql片段的唯 一标识
 
@@ -134,11 +135,11 @@ id：sql片段的唯 一标识
         </if>
     </if>
 </sql>
-~~~
+```
 
 - 引用sql片段
 
-~~~xml
+```xml
 <!-- 用户信息综合查询
     #{userCustom.sex}:取出pojo包装对象中性别值
     ${userCustom.username}：取出pojo包装对象中用户名称
@@ -153,7 +154,7 @@ id：sql片段的唯 一标识
         <!-- 在这里还要引用其它的sql片段  -->
     </where>
 </select>
-~~~
+```
 
 ## foreach标签
 
@@ -169,7 +170,7 @@ id：sql片段的唯 一标识
 
 - 在输入参数类型中添加`List<Integer> ids`传入多个id
 
-~~~java
+```java
 public class UserQueryVo {
 
     //传入多个id
@@ -178,11 +179,11 @@ public class UserQueryVo {
     getter、setter方法
     。。。
 }
-~~~
+```
 
 - 修改mapper.xml
 
-~~~xml
+```xml
 <if test="ids!=null">
     <!-- 使用 foreach遍历传入ids
     collection：指定输入 对象中集合属性
@@ -206,14 +207,14 @@ public class UserQueryVo {
     </foreach> -->
 
 </if>
-~~~
+```
 
 
 - 测试代码
 
 在`testFindUserList`中加入
 
-~~~java
+```java
 //传入多个id
 List<Integer> ids = new ArrayList<Integer>();
 ids.add(1);
@@ -221,7 +222,7 @@ ids.add(10);
 ids.add(16);
 //将ids通过userQueryVo传入statement中
 userQueryVo.setIds(ids);
-~~~
+```
 
 
 

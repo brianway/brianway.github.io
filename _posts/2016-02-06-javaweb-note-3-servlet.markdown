@@ -2,15 +2,13 @@
 layout: post
 title:  javaweb入门笔记(3)-Servlet
 date:   2016-02-06 18:29:12 +08:00
-category: "javaweb"
-tags: "javaweb"
+category: javaweb
+tags: javaweb servlet
 comments: true
 ---
 
 * content
 {:toc}
-
-
 
 ## servlet入门
 
@@ -18,6 +16,10 @@ comments: true
 
 - 编写一个java类，实现servlet接口
 - 把开发好的java类部署到web服务器
+
+
+
+
 
 API文档
 
@@ -37,7 +39,7 @@ Servlet的生命周期通过`java.servlet.Servlet`接口中的`init()`、`servic
 
 2.在`classes`目录新建一个`FirstServlet`
 
-~~~java
+```java
 package org.iot;
 
 import java.io.*;
@@ -49,7 +51,7 @@ public class FirstServlet extends GenericServlet{
 		out.write("hello servlet!!!".getBytes());
 	}
 }
-~~~
+```
 
 3.编译，`javac -cp %CATALINA_HOME%/lib/servlet-api.jar  -d . FirstServlet.java`,命令行手动编译参考[这里](http://www.iitshare.com/under-the-cmd-compile-the-java.html)
 
@@ -115,11 +117,11 @@ ServletContext域：
 
 模板代码(注意文件位置不同写路径会不同)：
 
-~~~java
+```java
 InputStream in = this.getServletContext().getResourceAsStream("/WEB-INF/classes/org/iot/servlet/db.properties");
 Properties properties = new Properties();//map
 properties.load(in);
-~~~
+```
 
 2.通过`servletContext`的`getRealPath`方法得到资源的绝对路径，再通过传统方式(`FileInputStream`)读取
 

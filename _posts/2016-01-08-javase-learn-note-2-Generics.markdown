@@ -2,8 +2,8 @@
 layout: post
 title:  java基础巩固笔记(2)-泛型
 date:   2016-01-08 14:14:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java
 comments: true
 ---
 
@@ -11,6 +11,9 @@ comments: true
 {:toc}
 
 本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。
+
+
+
 
 # 泛型
 将集合中的元素限定为一个特定的类型。
@@ -28,24 +31,24 @@ comments: true
 
 - 参数化类型和原始类型相互兼容
 
-~~~java
+```java
 ArrayList  collection1 = new ArrayList<Integer>();//通过,无warning
 ArrayList<Integer> collection2 = new ArrayList();//通过,有warning
-~~~
+```
 
 - 参数化类型不考虑类型参数的继承关系
 
-~~~java
+```java
 ArrayList<String> collection3 = new ArrayList<Object>();//编译不通过
 ArrayList<Object> collection4 = new ArrayList<String>();//编译不通过
-~~~
+```
 
 但是
 
-~~~java
+```java
 ArrayList collection5 = new ArrayList<Integer>();
 ArrayList<String> collection6 = collection5;//编译通过
-~~~
+```
 
 ---
 
@@ -56,35 +59,35 @@ ArrayList<String> collection6 = collection5;//编译通过
 
 - 限定通配符的上边界
 
-~~~java
+```java
 ArrayList<? extends Number > collection1= new ArrayList<Integer >();//编译通过
 ArrayList<? extends Number > collection2= new ArrayList<String>();//编译不通过
-~~~
+```
 
 - 限定通配符的下边界
 
-~~~java
+```java
 ArrayList<? super Integer > collection3= new ArrayList<Number >();//编译通过
 ArrayList<? super Integer > collection4= new ArrayList<String>();//编译不通过
-~~~
+```
 
 ---
 
 ## 自定义泛型方法
 C++模板函数
 
-~~~cpp
+```cpp
 template <class T> T add(T x, T y){
     return (T)(x+y);
 }
-~~~
+```
     
 而java的泛型基本上完全在编译器中实现，用于编译器执行类型检查和类型判断，然后生成普通的**非泛型**的字节码，这种实现技术为“擦除”(erasure)。
 
 ### "擦除"实例
 泛型是提供给javac编译器使用的，限定集合的输入类型，编译器编译带类型说明的集合时会去掉“类型”信息。
 
-~~~java
+```java
 public class GenericTest {
     public static void main(String[] args) {
         new GenericTest().testType();
@@ -101,21 +104,21 @@ public class GenericTest {
         //class均为java.util.ArrayList,并无实际类型参数信息
     }
 }
-~~~
+```
 
 输出
 
-~~~
+```
 true
 java.util.ArrayList
-~~~
+```
 
 *使用反射可跳过编译器，往某个泛型集合加入其它类型数据。*
 
 只有引用类型才能作为泛型方法的实际参数。
 例子：
 
-~~~java
+```java
 public class GenericTest {
     public static void main(String[] args) {
         swap(new String[]{"111","222"},0,1);//编译通过
@@ -133,12 +136,12 @@ public class GenericTest {
         a[j] = temp;
     }
 }
-~~~
+```
 
 但注意基本类型**有时**可以作为实参，因为有**自动装箱**和**拆箱**。
 例子(编译通过了)：
 
-~~~java
+```java
 public class GenericTest {
     public static void main(String[] args) {
         new GenericTest().testType();
@@ -153,16 +156,16 @@ public class GenericTest {
         return y;
     }
 }
-~~~
+```
 
 同时，该例还表明，**当实参不一致时，T取交集，即第一个共同的父类。**
 另外，如果用`Number b = biggerOne(3,5.5);`改为`String c = biggerOne(3,5.5);`则编译报错:
 
-~~~
+```
 Error:(17, 29) java: 不兼容的类型: 推断类型不符合上限
     推断: java.lang.Number&java.lang.Comparable<? extends java.lang.Number&java.lang.Comparable<?>>
     上限: java.lang.String,java.lang.Object
-~~~
+```
 
 但是有一点没搞清楚，我在IDEA里面单步调试，发现结果如下图：
 ![泛型调试截图-1](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E6%B3%9B%E5%9E%8B%E8%B0%83%E8%AF%95%E6%88%AA%E5%9B%BE-1.png)
@@ -215,7 +218,7 @@ Error:(17, 29) java: 不兼容的类型: 推断类型不符合上限
 ##  自定义泛型类
 例子
 
-~~~java
+```java
 public class GenericDao<T>{
     public void add(T x){
     }
@@ -242,14 +245,14 @@ public class GenericDao<T>{
     }
     
 }
-~~~
+```
 
 注意：当一个变量被声明为泛型时，只能被实例变量和方法调用(还有内嵌类型)，而不能被静态变量和静态方法调用。*因为静态成员是被所参数化的类所共享的，所以静态成员不应该有类级别的类型参数*。
 
 ### 泛型方法和泛型类的比较
 例子：
 
-~~~java
+```java
 public class A<T>(){
     //泛型类的成员方法，该T受A后面的T的限制
     public T memberFunc(){
@@ -267,7 +270,7 @@ public class A<T>(){
         Set<Integer> set=  A<String>().findByConditions("s");
     }
 }
-~~~
+```
 
 这里`Integer i = A<String>().findByUserName("s");`会编译报错：
 
@@ -283,7 +286,7 @@ public class A<T>(){
 把泛型变量当成方法的参数，利用Method类的getGenericParameterTypes方法来获取泛型的实际类型参数
 例子：
 
-~~~java
+```java
 public class GenericTest {
     public static void main(String[] args) throws Exception {
         getParamType();
@@ -310,16 +313,16 @@ public class GenericTest {
     }
 
 }
-~~~
+```
 
 输出结果：
 
-~~~
+```
 java.util.Map<java.lang.Integer, java.lang.String>
 interface java.util.Map
 class java.lang.Integer
 class java.lang.String
-~~~
+```
 
 ----
 

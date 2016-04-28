@@ -2,17 +2,18 @@
 layout: post
 title:  springmvc学习笔记(7)-springmvc整合mybatis之mapper
 date:   2016-03-30 14:28:07 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文记录springmvc整合dao的配置
+
+
+
 
 ## 整合dao
 
@@ -20,23 +21,23 @@ comments: true
 
 - 数据库配置文件db.properties
 
-~~~
+```
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8
 jdbc.username=root
 jdbc.password=123
-~~~
+```
 
 - 日志配置文件log4j.properties
 
-~~~
+```
 # Global logging configuration
 log4j.rootLogger=DEBUG, stdout
 # Console output...
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender
 log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
-~~~
+```
 
 ### sqlMapConfig.xml
 
@@ -44,7 +45,7 @@ mybatis自己的配置文件
 
 在resources目录下新建mybatis文件夹，并新建sqlMapConfig.xml文件
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
@@ -68,7 +69,7 @@ mybatis自己的配置文件
 
     </mappers> -->
 </configuration>
-~~~
+```
 
 
 ### applicationContext-dao.xml
@@ -83,7 +84,7 @@ mybatis自己的配置文件
 
 
 
-~~~xml
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -126,7 +127,7 @@ mybatis自己的配置文件
 
 </beans>
 
-~~~
+```
 
 
 ### 逆向工程生成po类及mapper(单表增删改查)
@@ -140,7 +141,7 @@ mybatis自己的配置文件
 
 - ItemsMapperCustom.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.iot.learnssm.firstssm.mapper.ItemsMapperCustom" >
@@ -170,20 +171,20 @@ mybatis自己的配置文件
   	</select>
   	
 </mapper>
-~~~
+```
 
 - ItemsMapperCustom.java
 
-~~~java
+```java
 public interface ItemsMapperCustom {
     //商品查询列表
     List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo)throws Exception;
 }
-~~~
+```
 
 - po类`ItemsCustom`
 
-~~~java
+```java
 package com.iot.learnssm.firstssm.po;
 
 /**
@@ -193,11 +194,11 @@ package com.iot.learnssm.firstssm.po;
 public class ItemsCustom extends Items{
     //添加商品信息的扩展属性
 }
-~~~
+```
 
 - 输入pojo的包装类
 
-~~~java
+```java
 package com.iot.learnssm.firstssm.po;
 
 /**
@@ -227,7 +228,7 @@ public class ItemsQueryVo {
         this.itemsCustom = itemsCustom;
     }
 }
-~~~
+```
 
 
 整合好dao后的工程目录如图

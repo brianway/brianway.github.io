@@ -2,22 +2,20 @@
 layout: post
 title:  javaweb入门笔记(1)-Tomcat
 date:   2016-02-06 17:55:12 +08:00
-category: "javaweb"
-tags: "javaweb"
+category: javaweb
+tags: javaweb tomcat
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
-
 下载链接
 
 >* [Apache Jakarta Project](http://jakarta.apache.org)
 >* [Tomcat官网](http://tomcat.apache.org/)
+
+
 
 
 ## Tomcat目录层次结构
@@ -70,7 +68,7 @@ tomcat的`conf/server.xml`:`<Host>`元素->`<Context>`,一个`<Context>`对应�
 
 4.web应用的组成结构
 
-~~~
+```
 mail---------------------------Web应用所在目录
            |----html、jsp、css、js等文件，根目录下的文件外界可以直接访问
            |----WEB-INF目录
@@ -78,7 +76,7 @@ mail---------------------------Web应用所在目录
                     |---------lib目录(java类运行所需的jar包)
                     |---------web.xml(web应用的配置文件)
              WEB-INF 这个目录下的文件外界无法直接访问，由web服务器负责调用
-~~~
+```
 
 
 ## Tomcat体系结构

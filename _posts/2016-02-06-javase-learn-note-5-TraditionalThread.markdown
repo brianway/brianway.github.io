@@ -2,28 +2,27 @@
 layout: post
 title:  java基础巩固笔记(5)-多线程之传统多线程
 date:   2016-02-06 14:18:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 多线程
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 # 传统线程技术
+
+
 
 
 ## 传统创建线程方式
 
 1.继承Thread类，覆盖run方法
 
-~~~java
+```java
 Thread t = new Thread();
 t.start();
-~~~
+```
 
 2.实现Runnable接口
 
@@ -39,20 +38,20 @@ Runnable不是线程，是线程要运行的代码的宿主。
 
 `Thread`类的`run`方法源码
 
-~~~java
+```java
 public void run() {
     if (target != null) {
         target.run();
     }
 }
-~~~
+```
 
 `Thread`类的`target`属性
 
-~~~java
+```java
 /* What will be run. */
 private Runnable target;
-~~~
+```
 
 `target`属性由`private void init(ThreadGroup g, Runnable target, String name,long stackSize, AccessControlContext acc)`方法初始化。`init`方法在`Thread`类的构造方法里被调用
 
@@ -71,7 +70,7 @@ API：
 
 例子：一个定时器实现交替2秒、3秒打印
 
-~~~java
+```java
 static int count = 0;
 public static void main(String[] args) {
 
@@ -86,7 +85,7 @@ public static void main(String[] args) {
     //3s后开启定时器
     new Timer().schedule(new MyTimerTask(),3000);
 }
-~~~
+```
 
 可以使用`quarlz`开源工具
 
@@ -116,7 +115,7 @@ public static void main(String[] args) {
 
 代码：
 
-~~~java
+```java
 /**
  * Created by brian on 2016/2/4.
  */
@@ -173,7 +172,7 @@ class Business{
         this.notify();
     }
 }
-~~~
+```
 
 判断条件时，while与if的区别:while防止伪唤醒
 

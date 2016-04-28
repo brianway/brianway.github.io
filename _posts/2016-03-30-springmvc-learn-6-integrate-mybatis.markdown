@@ -2,16 +2,17 @@
 layout: post
 title:  springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)
 date:   2016-03-30 14:28:06 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc mybatis maven IDEA
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。
+
+
 
 
 
@@ -50,7 +51,7 @@ comments: true
 
 pom.xml文件
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -156,7 +157,7 @@ pom.xml文件
     </dependencies>
     
 </project>
-~~~
+```
 
 这里添加的依赖可能有多的,但总比少包好，我开始就是引少了依赖(springframework的依赖只引用了spring-mvc,连spring-core都没引)，导致报错,以后会出一篇博客专门讲这个系列笔记中debug相关问题。
 

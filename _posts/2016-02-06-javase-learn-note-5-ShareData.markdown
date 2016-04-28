@@ -2,18 +2,17 @@
 layout: post
 title:  java基础巩固笔记(5)-多线程之共享数据
 date:   2016-02-06 14:20:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 多线程
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 本文主要总结线程共享数据的相关知识，主要包括两方面:一是某个线程内如何共享数据，保证各个线程的数据不交叉；一是多个线程间如何共享数据，保证数据的一致性。
+
+
 
 
 ## 线程范围内共享数据
@@ -22,7 +21,7 @@ comments: true
 
 例子
 
-~~~java
+```java
 package com.iot.thread;
 
 import java.util.HashMap;
@@ -66,18 +65,18 @@ public class ThreadScopeShareData {
 }
 
 
-~~~
+```
 
 
 上述代码偶尔会报异常：
 
-~~~
+```
 Exception in thread "Thread-0" java.lang.NullPointerException
 	at com.iot.thread.ThreadScopeShareData$A.get(ThreadScopeShareData.java:29)
 	at com.iot.thread.ThreadScopeShareData$1.run(ThreadScopeShareData.java:21)
 	at java.lang.Thread.run(Thread.java:745)
 
-~~~
+```
 
 具体原因还不知道
 
@@ -100,7 +99,7 @@ API:
 
 示例代码:
 
-~~~java
+```java
 package com.iot.thread;
 
 import java.util.Random;
@@ -191,7 +190,7 @@ class MyThreadScopeData{
         return reVal;
     }
 }
-~~~
+```
 
 
 ## 多线程访问共享数据
@@ -208,7 +207,7 @@ class MyThreadScopeData{
 
 设计5个线程，其中三个线程每次对j增加1，另外两个线程对j每次减少1
 
-~~~java
+```java
 package com.iot.thread;
 
 /**
@@ -265,7 +264,7 @@ class MutiShareData{
         this.j = j;
     }
 }
-~~~
+```
 
 
 

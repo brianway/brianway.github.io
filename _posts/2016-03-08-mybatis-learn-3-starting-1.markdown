@@ -2,8 +2,8 @@
 layout: post
 title:  mybatis学习笔记(3)-入门程序一
 date:   2016-03-08 10:38:03 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis examples
 comments: true
 ---
 
@@ -13,8 +13,10 @@ comments: true
 mybatis入门程序
 
 
-## 工程结构
 
+
+
+## 工程结构
 
 在IDEA中新建了一个普通的java项目，新建文件夹lib,加入jar包,工程结构如图。
 
@@ -24,7 +26,7 @@ mybatis入门程序
 
 - log4j.properties
 
-~~~
+```
 # Global logging configuration
 log4j.rootLogger=DEBUG, stdout
 # Console output...
@@ -32,13 +34,13 @@ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
 log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
 
-~~~
+```
 
 
 
 - SqlMapConfig.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
@@ -60,13 +62,13 @@ log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
     </environments>
 
 </configuration>
-~~~
+```
 
 ## 映射文件
 
 - sqlmap/User.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -102,25 +104,25 @@ log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
 
 
 </mapper>
-~~~
+```
 
 
 
 
 在sqlMapConfig.xml中加载User.xml
 
-~~~xml
+```xml
 <!-- 加载映射文件-->
 <mappers>
     <mapper resource="sqlmap/User.xml"/>
 </mappers>
-~~~
+```
 
 ## 程序代码
 
 - po类`User.java`
 
-~~~java
+```java
 package com.iot.mybatis.po;
 
 import java.util.Date;
@@ -183,12 +185,12 @@ public class User {
     }
 }
 
-~~~
+```
 
 
 - 测试代码
 
-~~~java
+```java
 package com.iot.mybatis.first;
 
 import com.iot.mybatis.po.User;
@@ -258,14 +260,14 @@ public class MybatisFirst {
 
 
 }
-~~~
+```
 
 
 输出：
 
 - `findUserByIdTest()`
 
-~~~
+```
 DEBUG [main] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
 DEBUG [main] - PooledDataSource forcefully closed/removed all connections.
 DEBUG [main] - PooledDataSource forcefully closed/removed all connections.
@@ -281,11 +283,11 @@ User [id=1, username=王五, sex=2, birthday=null, address=null]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@6ebc05a6]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@6ebc05a6]
 DEBUG [main] - Returned connection 1857815974 to pool.
-~~~
+```
 
 - `findUserByNameTest()`
 
-~~~
+```
 DEBUG [main] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
 DEBUG [main] - PooledDataSource forcefully closed/removed all connections.
 DEBUG [main] - PooledDataSource forcefully closed/removed all connections.
@@ -301,7 +303,7 @@ DEBUG [main] - <==      Total: 3
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@5f282abb]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@5f282abb]
 DEBUG [main] - Returned connection 1596467899 to pool.
-~~~
+```
 
 
 
@@ -331,9 +333,9 @@ DEBUG [main] - Returned connection 1596467899 to pool.
 
 `selectList`表示查询出一个列表(参数记录)进行映射，不能够使用`selectOne`查，不然会报下面的错:
 
-~~~
+```
 org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 3
-~~~
+```
 
 
 ----

@@ -2,17 +2,18 @@
 layout: post
 title:  springmvc学习笔记(10)-springmvc注解开发之商品修改功能
 date:   2016-03-30 14:28:10 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 注解
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文以商品修改为例，记录springmvc的注解开发，包括mapper,service,controller,@RequestMapping,controller方法的返回值等
+
+
+
 
 ## 需求
 
@@ -35,7 +36,7 @@ mapper：
 
 在`com.iot.learnssm.firstssm.service.ItemsService`中添加两个接口
 
-~~~java
+```java
   //根据id查询商品信息
     /**
      *
@@ -58,12 +59,12 @@ mapper：
      */
      void updateItems(Integer id,ItemsCustom itemsCustom) throws Exception;
 
-~~~
+```
 
 在`com.iot.learnssm.firstssm.service.impl.ItemsServiceImpl`中实现接口，增加`itemsMapper`属性
 
 
-~~~java
+```java
 @Autowired
 private ItemsMapper itemsMapper;
 
@@ -88,7 +89,7 @@ public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
     itemsCustom.setId(id);
     itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
 }
-~~~
+```
 
 ## 开发controller
 
@@ -97,7 +98,7 @@ public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
 - 商品信息修改页面显示
 - 商品信息修改提交
 
-~~~java
+```java
 //使用@Controller来标识它是一个控制器
 @Controller
 //为了对url进行分类管理 ，可以在这里定义根路径，最终访问url是根路径+子路径
@@ -168,7 +169,7 @@ public class ItemsController {
 
 }
 
-~~~
+```
 
 
 
@@ -181,27 +182,27 @@ public class ItemsController {
 
 - 窄化请求映射
 
-~~~java
+```java
 //使用@Controller来标识它是一个控制器
 @Controller
 //为了对url进行分类管理 ，可以在这里定义根路径，最终访问url是根路径+子路径
 //比如：商品列表：/items/queryItems.action
 @RequestMapping("/items")
 public class ItemsController {
-~~~
+```
 
 
 - 限制http请求方法
 
 出于安全性考虑，对http的链接进行方法限制。
 
-~~~java
+```java
 //商品信息修改页面显示
     //@RequestMapping("/editItems")
     //限制http请求方法，可以post和get
 	@RequestMapping(value="/editItems",method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView editItems()throws Exception {
-~~~
+```
 
 如果限制请求为post方法，进行get请求，即将上面代码的注解改为`@RequestMapping(value="/editItems",method={RequestMethod.POST})`
 
@@ -226,7 +227,7 @@ public class ItemsController {
 
 真正视图(jsp路径)=前缀+逻辑视图名+后缀
 
-~~~java
+```java
 @RequestMapping(value="/editItems",method={RequestMethod.POST,RequestMethod.GET})
 //@RequestParam里边指定request传入参数名称和形参进行绑定。
 //通过required属性指定参数是否必须要传入
@@ -243,7 +244,7 @@ public String editItems(Model model)throws Exception {
 
     return "items/editItems";
 }
-~~~
+```
 
 2.redirect重定向
 
@@ -251,19 +252,19 @@ public String editItems(Model model)throws Exception {
 
 redirect重定向特点：浏览器地址栏中的url会变化。修改提交的request数据无法传到重定向的地址。因为重定向后重新进行request（request无法共享）
 
-~~~java
+```java
 //重定向到商品查询列表
 //return "redirect:queryItems.action";
-~~~
+```
 
 3.forward页面转发
 
 通过forward进行页面转发，浏览器地址栏url不变，request可以共享。
 
-~~~java
+```java
 //页面转发
 return "forward:queryItems.action";
-~~~
+```
 
 
 
@@ -281,11 +282,11 @@ return "forward:queryItems.action";
 
 3.也可以通过response指定响应结果，例如响应json数据如下：
 
-~~~java
+```java
 response.setCharacterEncoding("utf-8");
 response.setContentType("application/json;charset=utf-8");
 response.getWriter().write("json串");
-~~~
+```
 
 
 ----

@@ -2,16 +2,17 @@
 layout: post
 title:  mybatis学习笔记(16)-mybatis整合ehcache
 date:   2016-03-08 10:39:16 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis 缓存
 comments: true
 ---
 
 * content
 {:toc}
 
-
 ehcache是一个分布式缓存框架
+
+
 
 ## 分布缓存
 
@@ -32,7 +33,7 @@ mybatis提供了一个`cache`接口，如果要实现自己的缓存逻辑，实
 mybatis和ehcache整合，mybatis和ehcache整合包中提供了一个cache接口的实现类。
 
 
-~~~java
+```java
 package org.apache.ibatis.cache;
 
 import java.util.concurrent.locks.ReadWriteLock;
@@ -108,12 +109,12 @@ public interface Cache {
   ReadWriteLock getReadWriteLock();
 
 }
-~~~
+```
 
 
 mybatis默认实现cache类是：
 
-~~~java
+```java
 package org.apache.ibatis.cache.impl;
 
 import java.util.HashMap;
@@ -179,7 +180,7 @@ public class PerpetualCache implements Cache {
   }
 
 }
-~~~
+```
 
 ### 整合ehcache
 
@@ -189,21 +190,21 @@ public class PerpetualCache implements Cache {
    
 配置mapper中`cache`中的`type`为ehcache对cache接口的实现类型
 
-~~~xml
+```xml
  <!-- 开启本mapper的namespace下的二级缓存
     type：指定cache接口的实现类的类型，mybatis默认使用PerpetualCache
     要和ehcache整合，需要配置type为ehcache实现cache接口的类型
     <cache />
     -->
     <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
-~~~
+```
 
 ### 加入ehcache的配置文件
 
 在classpath下配置ehcache.xml
 
 
-~~~xml
+```xml
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
 	<diskStore path="F:\develop\ehcache" />
@@ -218,7 +219,7 @@ public class PerpetualCache implements Cache {
 		memoryStoreEvictionPolicy="LRU">
 	</defaultCache>
 </ehcache>
-~~~
+```
 
 ----
 

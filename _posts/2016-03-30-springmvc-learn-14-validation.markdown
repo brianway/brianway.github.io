@@ -2,16 +2,17 @@
 layout: post
 title:  springmvc学习笔记(14)-springmvc校验
 date:   2016-03-30 14:28:14 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。
+
+
 
 
 ## 校验理解
@@ -47,23 +48,23 @@ springmvc使用hibernate的校验框架validation(和hibernate没有任何关系
 
 这里我们添加maven依赖
 
-~~~xml
+```xml
 <!-- hibernate 校验 -->
 <dependency>
     <groupId>org.hibernate</groupId>
     <artifactId>hibernate-validator</artifactId>
     <version>5.2.4.Final</version>
 </dependency>
-~~~
+```
 
 查看maven依赖树
 
-~~~
+```
 [INFO] \- org.hibernate:hibernate-validator:jar:5.2.4.Final:compile
 [INFO]    +- javax.validation:validation-api:jar:1.1.0.Final:compile
 [INFO]    +- org.jboss.logging:jboss-logging:jar:3.2.1.Final:compile
 [INFO]    \- com.fasterxml:classmate:jar:1.1.0:compile
-~~~
+```
 
 可以看到，另外两个jar包被`hibernate-validator`依赖，所以不用再额外添加了。
 
@@ -73,7 +74,7 @@ springmvc使用hibernate的校验框架validation(和hibernate没有任何关系
 
 - 在springmvc.xml中添加
 
-~~~xml
+```xml
 <!-- 校验器 -->
 <bean id="validator"
       class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -96,23 +97,23 @@ springmvc使用hibernate的校验框架validation(和hibernate没有任何关系
     <!-- 对资源文件内容缓存时间，单位秒 -->
     <property name="cacheSeconds" value="120" />
 </bean>
-~~~
+```
 
 - 校验器注入到处理器适配器中
 
-~~~xml
+```xml
 <mvc:annotation-driven conversion-service="conversionService"
                        validator="validator">
 </mvc:annotation-driven>
-~~~
+```
 
 - 在CustomValidationMessages.properties配置校验错误信息：
 
-~~~
+```
 #添加校验的错误提示信息
 items.name.length.error=请输入1到30个字符的商品名称
 items.createtime.isNUll=请输入商品的生产日期
-~~~
+```
 
 
 ## 在pojo中添加校验规则
@@ -120,7 +121,7 @@ items.createtime.isNUll=请输入商品的生产日期
 在ItemsCustom.java中添加校验规则：
 
 
-~~~java
+```java
 public class Items {
     private Integer id;
     //校验名称在1到30字符中间
@@ -136,12 +137,12 @@ public class Items {
     //非空校验
     @NotNull(message="{items.createtime.isNUll}")
     private Date createtime;
-~~~
+```
 
 
 ## 捕获和显示校验错误信息
 
-~~~java
+```java
 @RequestMapping("/editItemsSubmit")
 public String editItemsSubmit(
         Model model,
@@ -149,11 +150,11 @@ public String editItemsSubmit(
         Integer id,
         @Validated ItemsCustom itemsCustom,
         BindingResult bindingResult)throws Exception {
-~~~
+```
 
 - 在controller中将错误信息传到页面即可
 
-~~~
+```
 //获取校验错误信息
 if(bindingResult.hasErrors()){
     // 输出错误信息
@@ -172,18 +173,18 @@ if(bindingResult.hasErrors()){
     // 出错重新到商品修改页面
     return "items/editItems";
 }
-~~~
+```
 
 - 页面显示错误信息：
 
-~~~jsp
+```jsp
 <!-- 显示错误信息 -->
 <c:if test="${allErrors!=null }">
 	<c:forEach items="${allErrors }" var="error">
 		${ error.defaultMessage}<br/>
 	</c:forEach>
 </c:if>
-~~~
+```
 
 ## 分组校验
 
@@ -198,28 +199,28 @@ if(bindingResult.hasErrors()){
 
 1.校验分组
 
-~~~java
+```java
 public interface ValidGroup1 {
 	//接口中不需要定义任何方法，仅是对不同的校验规则进行分组
 	//此分组只校验商品名称长度
 
 }
-~~~
+```
 
 
 2.在校验规则中添加分组
 
-~~~java
+```java
 //校验名称在1到30字符中间
 //message是提示校验出错显示的信息
 //groups：此校验属于哪个分组，groups可以定义多个分组
 @Size(min=1,max=30,message="{items.name.length.error}",groups = {ValidGroup1.class})
 private String name;
-~~~
+```
 
 3.在controller方法使用指定分组的校验
 
-~~~java
+```java
 // value={ValidGroup1.class}指定使用ValidGroup1分组的校验
 @RequestMapping("/editItemsSubmit")
 public String editItemsSubmit(
@@ -228,7 +229,7 @@ public String editItemsSubmit(
         Integer id,
         @Validated(value = ValidGroup1.class)ItemsCustom itemsCustom,
         BindingResult bindingResult)throws Exception {
-~~~
+```
 
 
 

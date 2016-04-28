@@ -2,17 +2,17 @@
 layout: post
 title:  mybatis学习笔记(4)-开发dao方法
 date:   2016-03-08 10:39:04 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文讲解SqlSession，并对两种方法(原始dao开发和mapper代理开发)分别做简单展示
+
+
 
 
 ## SqlSession使用范围
@@ -42,7 +42,7 @@ comments: true
 
 ### dao接口
 
-~~~java
+```java
 public interface UserDao {
     //根据id查询用户信息
     public User findUserById(int id) throws Exception;
@@ -56,11 +56,11 @@ public interface UserDao {
     //删除用户信息
     public void deleteUser(int id) throws Exception;
 }
-~~~
+```
 
 ### dao接口实现类
 
-~~~java
+```java
 package com.iot.mybatis.dao;
 
 import com.iot.mybatis.po.User;
@@ -131,11 +131,11 @@ public class UserDaoImpl implements UserDao{
         sqlSession.close();
     }
 }
-~~~
+```
 
 ### 测试代码
 
-~~~java
+```java
 package com.iot.mybatis.dao;
 
 import java.io.InputStream;
@@ -181,7 +181,7 @@ public class UserDaoImplTest {
 
 }
 
-~~~
+```
 
 ### 总结原始dao开发问题
 
@@ -204,13 +204,13 @@ public class UserDaoImplTest {
 
 - 在mapper.xml中namespace等于mapper接口地址
 
-~~~xml
+```xml
 <!--
  namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离
  注意：使用mapper代理方法开发，namespace有特殊重要的作用,namespace等于mapper接口地址
  -->
 <mapper namespace="com.iot.mybatis.mapper.UserMapper">
-~~~
+```
 
 - mapper.java接口中的方法名和mapper.xml中statement的id一致
 
@@ -218,30 +218,30 @@ public class UserDaoImplTest {
 
 - mapper.java接口中的方法返回值类型和mapper.xml中statement的resultType指定的类型一致。
 
-~~~xml
+```xml
 <select id="findUserById" parameterType="int" resultType="com.iot.mybatis.po.User">
     SELECT * FROM  user  WHERE id=#{value}
 </select>
-~~~
+```
 
-~~~java
+```java
 //根据id查询用户信息
 public User findUserById(int id) throws Exception;
-~~~
+```
 
 总结：以上开发规范主要是对下边的代码进行统一生成：
 
-~~~java
+```java
 User user = sqlSession.selectOne("test.findUserById", id);
 sqlSession.insert("test.insertUser", user);
-~~~
+```
 
 
 ### 代码
 
 - mapper.xml
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -328,19 +328,19 @@ sqlSession.insert("test.insertUser", user);
     </update>
     
 </mapper>
-~~~
+```
 
 - 在SqlMapConfig.xml中加载映射文件
 
-~~~xml
+```xml
 <mappers>  
     <mapper resource="mapper/UserMapper.xml"/>  
 </mappers>  
-~~~
+```
 
 - UserMapper.java
 
-~~~java
+```java
 public interface UserMapper {
     //根据id查询用户信息
     public User findUserById(int id) throws Exception;
@@ -357,12 +357,12 @@ public interface UserMapper {
     //更新用户
     public void updateUser(User user)throws Exception;
 }
-~~~
+```
 
 
 - UserMapperTest/java
 
-~~~java
+```java
 public class UserMapperTest {  
   
   
@@ -394,7 +394,7 @@ public class UserMapperTest {
         System.out.println(user.getUsername());  
     }  
 }  
-~~~
+```
 
 
 ### 一些问题总结

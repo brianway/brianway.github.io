@@ -2,16 +2,18 @@
 layout: post
 title:  mybatis学习笔记(14)-查询缓存之一级缓存
 date:   2016-03-08 10:39:14 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis 缓存
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。
+
+
+
 
 
 ## 查询缓存
@@ -52,7 +54,7 @@ mybatis默认支持一级缓存，不需要在配置文件去配置。
 
 测试代码
 
-~~~java
+```java
 // 一级缓存测试
 @Test
 public void testCache1() throws Exception {
@@ -79,13 +81,13 @@ public void testCache1() throws Exception {
 	sqlSession.close();
 
 }
-~~~
+```
 
 
 
 1.不执行更新操作，输出:
 
-~~~
+```
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 110771485.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
@@ -97,11 +99,11 @@ User [id=1, username=王五, sex=2, birthday=null, address=null]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
 DEBUG [main] - Returned connection 110771485 to pool.
-~~~
+```
 
 2.取消测试代码中更新的的注释，输出：
 
-~~~
+```
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 110771485.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
@@ -120,7 +122,7 @@ User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
 DEBUG [main] - Returned connection 110771485 to pool.
-~~~
+```
 
 
 
@@ -130,7 +132,7 @@ DEBUG [main] - Returned connection 110771485 to pool.
 
 一个service方法中包括 很多mapper方法调用。
 
-~~~
+```
 service{
 	//开始执行时，开启事务，创建SqlSession对象
 	//第一次调用mapper的方法findUserById(1)
@@ -138,7 +140,7 @@ service{
 	//第二次调用mapper的方法findUserById(1)，从一级缓存中取数据
 	//方法结束，sqlSession关闭
 }
-~~~
+```
 
 如果是执行两次service调用查询相同的用户信息，不走一级缓存，因为session方法结束，sqlSession就关闭，一级缓存就清空。
 

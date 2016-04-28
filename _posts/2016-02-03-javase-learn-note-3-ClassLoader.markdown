@@ -2,8 +2,8 @@
 layout: post
 title:  java基础巩固笔记(3)-类加载器
 date:   2016-02-03 22:38:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java
 comments: true
 ---
 
@@ -14,13 +14,14 @@ comments: true
 
 java类加载器就是在运行时在JVM中动态地加载所需的类，java类加载器基于三个机制：委托，可见，单一。
 
+
+
+
 把classpath下的那些.class文件加载进内存，处理后成为字节码，这些工作是类加载器做的。
 
 - **委托机制**指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。
 - **可见性机制**指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。
 - **单一性机制**指的是一个类只能被同一种加载器加载一次。
-
-
 
 
 ## 默认类加载器
@@ -33,18 +34,18 @@ java类加载器就是在运行时在JVM中动态地加载所需的类，java类
 *类加载器也是java类，而BootStrap不是。*
 验证代码：
 
-~~~java
+```java
 public class ClassLoaderTest {
     public static void main(String[] args) {
         System.out.println(System.class.getClassLoader());
     }
 }
-~~~
+```
 输出：`null`
 
 如果使用`System.out.println(System.class.getClassLoader().toString);`，则报空指针异常:
 
-~~~
+```
 Exception in thread "main" java.lang.NullPointerException
 	at com.iot.classloader.ClassLoaderTest.main(ClassLoaderTest.java:10)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -52,7 +53,7 @@ Exception in thread "main" java.lang.NullPointerException
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:483)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
-~~~
+```
 
 可见，System类是由BootStrap类加载器加载。
 
@@ -90,7 +91,7 @@ API:
 
 `loadClass`方法的源码
 
-~~~java
+```java
 protected Class<?> loadClass(String name, boolean resolve)
     throws ClassNotFoundException
 {
@@ -128,11 +129,11 @@ protected Class<?> loadClass(String name, boolean resolve)
         return c;
     }
 }
-~~~
+```
 
 API文档中的例子:
 
-~~~java
+```java
 class NetworkClassLoader extends ClassLoader {
      String host;
      int port;
@@ -147,7 +148,7 @@ class NetworkClassLoader extends ClassLoader {
           . . .
      }
  }
-~~~
+```
 
 
 

@@ -2,16 +2,17 @@
 layout: post
 title:  mybatis学习笔记(15)-查询缓存之二级缓存
 date:   2016-03-08 10:39:15 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis 缓存
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要讲mybatis的二级缓存，二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。
+
+
 
 
 ## 二级缓存原理
@@ -42,14 +43,14 @@ mybaits的二级缓存是mapper范围级别，除了在SqlMapConfig.xml设置二
 |:---|:---|:---|:---|
 |cacheEnabled|对在此配置文件下的所有cache 进行全局性开/关设置。|	true/false |	true|
 
-~~~xml
+```xml
 <!-- 开启二级缓存 -->
 <setting name="cacheEnabled" value="true"/>
-~~~
+```
 
 在UserMapper.xml中开启二缓存，UserMapper.xml下的sql执行完成会存储到它的缓存区域（HashMap）。
 
-~~~xml
+```xml
 <mapper namespace="com.iot.mybatis.mapper.UserMapper">
 <!-- 开启本mapper的namespace下的二级缓存-->
 <cache />
@@ -57,22 +58,22 @@ mybaits的二级缓存是mapper范围级别，除了在SqlMapConfig.xml设置二
 ...
 
 </mapper>
-~~~
+```
 
 
 ## 调用pojo类实现序列化接口
 
-~~~java
+```java
 public class User implements Serializable{
     ....
 }
-~~~
+```
 
 为了将缓存数据取出执行反序列化操作，因为二级缓存数据存储介质多种多样，不一定在内存。
 
 ## 测试方法
 
-~~~java
+```java
 // 二级缓存测试
 @Test
 public void testCache2() throws Exception {
@@ -107,13 +108,13 @@ public void testCache2() throws Exception {
 
 	sqlSession2.close();
 }
-~~~
+```
 
 
 
 1.无更新，输出
 
-~~~
+```
 DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 103887628.
@@ -127,12 +128,12 @@ DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Returned connection 103887628 to pool.
 DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.5
 User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
-~~~
+```
 
 2.有更新，输出
 
 
-~~~
+```
 DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 103887628.
@@ -166,7 +167,7 @@ User [id=1, username=张明明, sex=2, birthday=null, address=null]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Returned connection 103887628 to pool.
-~~~
+```
 
 
 ## useCache配置

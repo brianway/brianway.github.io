@@ -3,15 +3,16 @@ layout: post
 title:  将nutch2.3的bin/crawl脚本改写为java类
 date:   2016-01-19 21:01:11 +08:00
 category: nutch
-tags: [nutch, shell]
+tags: nutch shell 
 comments: true
 ---
 
 * content
 {:toc}
 
-
 nutch1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，只剩下对应的控制脚本`bin/crawl`，感觉在IDEA里面调试不方便，所以我了解了下shell脚本,根据nutch2.3的`bin/crawl`和`bin/nutch`脚本，把`bin/crawl`翻译成了java的Crawl类以便在IDEA里面调试
+
+
 
 
 ## 代码设计说明
@@ -42,7 +43,7 @@ nutch1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，
 
 `Crawl`类加到在`org.apache.nutch.crawl`包下，源码如下：
 
-~~~java
+```java
 package org.apache.nutch.crawl;
 
 /**
@@ -350,7 +351,7 @@ public class Crawl extends NutchTool implements Tool{
 
 }
 
-~~~
+```
 
 
 

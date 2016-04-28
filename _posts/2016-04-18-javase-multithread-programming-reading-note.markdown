@@ -2,16 +2,18 @@
 layout: post
 title:  java多线程核心技术梳理(附源码)
 date:   2016-04-18 16:18:01 +08:00
-category: "javase"
-tags: "javase"
+category: java
+tags: java 多线程 总结
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文对多线程基础知识进行梳理，主要包括多线程的基本使用，对象及变量的并发访问，线程间通信，lock的使用，定时器，单例模式，以及线程状态与线程组。
+
+
+
 
 ## 写在前面
 

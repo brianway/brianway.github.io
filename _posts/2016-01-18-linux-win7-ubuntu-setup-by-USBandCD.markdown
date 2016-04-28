@@ -3,16 +3,15 @@ layout: post
 title:  光盘和U盘安装win7和ubuntu14.04全步骤
 date:   2016-01-18 18:36:10 +08:00
 category: linux
-tags: [linux, ubuntu]
+tags: linux ubuntu 安装部署
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。
+
 
 
 
@@ -135,10 +134,10 @@ comments: true
 
 - 首先需要更新一下依赖：
 
-~~~shell
+```shell
 sudo apt-get update
 sudo apt-get upgrade
-~~~
+```
 
 - 校园网认证使用mentohust,可以在linux公社下载，[mentohust下载地址](http://linux.linuxidc.com/2013%E5%B9%B4%E8%B5%84%E6%96%99/1%E6%9C%88/20%E6%97%A5/Ubuntu%E4%B8%8B%E4%BD%BF%E7%94%A8MentoHUST%E4%BB%A3%E6%9B%BF%E9%94%90%E6%8D%B7%E8%AE%A4%E8%AF%81%E4%B8%8A%E7%BD%91/),用户和密码都是`www.linuxidc.com`
 - 下载地址位于`http://linux.linuxidc.com/`的"/2013年资料/1月/20日/Ubuntu下使用MentoHUST代替锐捷认证上网"，或者"pub/ubuntu/Ubuntu 11.04校园网锐捷认证上网"下

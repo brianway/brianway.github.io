@@ -2,17 +2,18 @@
 layout: post
 title:  javaweb入门笔记(6)-JSP技术
 date:   2016-02-06 18:46:12 +08:00
-category: "javaweb"
-tags: "javaweb"
+category: javaweb
+tags: javaweb
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 JSP：Java Server Pages，一种动态web资源的开发技术
+
+
+
 
 API文档
 
@@ -34,7 +35,7 @@ JSP本质是一个servlet.
 
 示例1:`demo1.jsp`
 
-~~~JSP
+```JSP
 <%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -56,12 +57,12 @@ JSP本质是一个servlet.
 </body>
 </html>
 
-~~~
+```
 
 
 示例2：`_jspService`方法中代码片段
 
-~~~java
+```java
 out.write("\r\n");
 out.write("\r\n");
 out.write("<html>\r\n");
@@ -77,11 +78,11 @@ out.write(date.toGMTString());
 out.write("\r\n");
 out.write("</body>\r\n");
 out.write("</html>\r\n");
-~~~
+```
 
 示例3:`_jspService`方法中一些定义的对象
 
-~~~java
+```java
 final javax.servlet.jsp.PageContext pageContext;
 final javax.servlet.ServletContext application;
 final javax.servlet.ServletConfig config;
@@ -89,7 +90,7 @@ javax.servlet.jsp.JspWriter out = null;
 final java.lang.Object page = this;
 javax.servlet.jsp.JspWriter _jspx_out = null;
 javax.servlet.jsp.PageContext _jspx_page_context = null;
-~~~
+```
 
 -------
 
@@ -113,7 +114,7 @@ javax.servlet.jsp.PageContext _jspx_page_context = null;
 
 page指令语法：
 
-~~~JSP
+```JSP
 <%@ page
 [ language="java" ]
 [ extends="package.class" ]
@@ -127,7 +128,7 @@ page指令语法：
 [ contentType="mimeType [ ;charset=characterSet ]" | "text/html ; charset=ISO-8859-1" ]
 [ isErrorPage="true | false" ]
 %>
-~~~
+```
 
 - `errorPage`:错误提示页面。也可在`web.xml`的`<error-page>`标签配置，异常处理页面。在page指令设置的优先级高于在`web.xml`配置。
 - `pageEncoding`:JSP引擎以何种码表翻译JSP,该值需和JSP文件的保存编码一致，且若要在浏览器正确显示，还要和`contentType`一致。
@@ -170,19 +171,19 @@ JSP引擎在调用JSP对应的`_jspServlet`时，会传递和创建9个web开发
 
 例子：
 
-~~~JSP
+```JSP
 <%
     out.write("out.write<br/>");
 	response.getWriter().write("response.getWriter.write<br/>");
 %>
-~~~
+```
 
 浏览器显示：
 
-~~~
+```
 response.getWriter.write
 out.write
-~~~
+```
 
 可见，由于out有缓冲，所以后显示。
 

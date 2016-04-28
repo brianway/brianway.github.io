@@ -2,8 +2,8 @@
 layout: post
 title:  mybatis学习笔记(2)-mybatis概述
 date:   2016-03-08 10:38:02 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
@@ -12,6 +12,10 @@ comments: true
 
 
 本文对mybatis做一个简单介绍，包括框架原理，执行过程，开发方法，输入输出映射以及动态sql,我会在后续的系列文章中一一详细说明
+
+
+
+
 
 ## mybatis 介绍
 
@@ -22,8 +26,6 @@ mybatis托管到goolecode下，再后来托管到github下(https://github.com/my
 mybatis让程序将主要精力放在sql上，通过mybatis提供的映射方式，自由灵活生成（半自动化，大部分需要程序员编写sql）满足需要sql语句。
 
 mybatis可以将向 preparedStatement中的输入参数自动进行输入映射，将查询结果集灵活映射成java对象。（输出映射）
-
-
 
 
 

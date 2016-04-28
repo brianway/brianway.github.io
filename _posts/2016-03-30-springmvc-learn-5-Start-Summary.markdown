@@ -2,17 +2,18 @@
 layout: post
 title:  springmvc学习笔记(5)-入门程序小结
 date:   2016-03-30 14:28:05 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 通过入门程序理解springmvc前端控制器、处理器映射器、处理器适配器、视图解析器用法。并附上入门程序的非注解的完整的配置文件，注解的完整配置文件。
+
+
+
 
 ## 入门程序配置小结
 
@@ -34,18 +35,18 @@ comments: true
 注解的处理器适配器（掌握）
 注解处理器适配器和注解的处理器映射器是**配对使用**。理解为不能使用非注解映射器进行映射。
 
-~~~xml
+```xml
 <mvc:annotation-driven></mvc:annotation-driven> 
-~~~
+```
 
 可以代替下边的配置：
 
-~~~xml
+```xml
 <!--注解映射器 -->  
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>  
     <!--注解适配器 -->  
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>  
-~~~
+```
 
 
 
@@ -53,7 +54,7 @@ comments: true
 
 `src/main/resources/springmvc.xml`
 
-~~~xml
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -81,12 +82,12 @@ comments: true
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
 
 </beans>
-~~~
+```
 
 
 ## 注解的完整配置文件
 
-~~~xml
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -131,7 +132,7 @@ comments: true
     </bean>
 
 </beans>
-~~~
+```
 
 
 ----

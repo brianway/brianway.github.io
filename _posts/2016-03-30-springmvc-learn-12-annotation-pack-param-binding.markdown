@@ -2,16 +2,17 @@
 layout: post
 title:  springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定
 date:   2016-03-30 14:28:12 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 注解
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要介绍注解开发的介绍包装类型的参数绑定
+
+
 
 
 ## 需求
@@ -44,7 +45,7 @@ comments: true
 
 - 包装类ItemsQueryVo中部分属性：
 
-~~~java
+```java
 public class ItemsQueryVo {
 
     //商品信息
@@ -52,7 +53,7 @@ public class ItemsQueryVo {
 
     //为了系统 可扩展性，对原始生成的po进行扩展
     private ItemsCustom itemsCustom;
-~~~
+```
 
 可见，`ItemsQueryVo`中属性`itemsCustom`和页面参数中一致
 

@@ -2,18 +2,17 @@
 layout: post
 title:  springmvc学习笔记(18)-json数据交互
 date:   2016-03-30 14:28:18 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc json
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 本文主要介绍如何在springmvc中进行json数据的交互，先是环境准备和配置，然后分别展示了“输入json串，输出是json串”和“输入key/value，输出是json串”两种情况下的交互
+
+
 
 
 ## springmvc进行json交互
@@ -33,7 +32,7 @@ json数据格式在接口调用中、html页面中较常用，json格式比较�
 
 最开始我少了`jackson-databind`依赖，程序各种报错。
 
-~~~xml
+```xml
 
 <!-- json 转换-->
 <dependency>
@@ -47,24 +46,24 @@ json数据格式在接口调用中、html页面中较常用，json格式比较�
     <artifactId>jackson-mapper-asl</artifactId>
     <version>1.9.13</version>
 </dependency>
-~~~
+```
 
 查看依赖树
 
-~~~
+```
 [INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.7.2:compile
 [INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.7.0:compile
 [INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.7.2:compile
 [INFO] \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
 [INFO]    \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
-~~~
+```
 
 
 ### 配置json转换器
 
 在注解适配器中加入`messageConverters`
 
-~~~xml
+```xml
 
 <!--注解适配器 -->
 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -74,7 +73,7 @@ json数据格式在接口调用中、html页面中较常用，json格式比较�
 	</list>
 	</property>
 </bean>
-~~~
+```
 
 **注意：如果使用`<mvc:annotation-driven />`则不用定义上边的内容。**
 
@@ -84,7 +83,7 @@ json数据格式在接口调用中、html页面中较常用，json格式比较�
 
 - jsp页面
 
-~~~jsp
+```jsp
 <%--
   Created by IntelliJ IDEA.
   User: brian
@@ -110,17 +109,17 @@ json数据格式在接口调用中、html页面中较常用，json格式比较�
 <input type="button" onclick="responseJson()" value="请求key/value，输出是json"/>
 </body>
 
-~~~
+```
 
 - controller
 
 
-~~~java
+```java
 @Controller
 public class JsonTest {
     省略
 }
-~~~
+```
 
 - 测试结果
 
@@ -131,7 +130,7 @@ public class JsonTest {
 
 - jsp页面
 
-~~~jsp
+```jsp
 //请求json，输出是json
 function requestJson(){
 
@@ -148,11 +147,11 @@ function requestJson(){
     });
 
 }
-~~~
+```
 
 - controller
 
-~~~java
+```java
  //请求json串(商品信息)，输出json(商品信息)
 //@RequestBody将请求的商品信息的json串转成itemsCustom对象
 //@ResponseBody将itemsCustom转成json输出
@@ -162,7 +161,7 @@ public @ResponseBody ItemsCustom requestJson(@RequestBody ItemsCustom itemsCusto
     //@ResponseBody将itemsCustom转成json输出
     return itemsCustom;
 }
-~~~
+```
 
 - 测试结果
 
@@ -179,7 +178,7 @@ public @ResponseBody ItemsCustom requestJson(@RequestBody ItemsCustom itemsCusto
 
 - jsp页面
 
-~~~jsp
+```jsp
 //请求key/value，输出是json
 function responseJson(){
 
@@ -197,12 +196,12 @@ function responseJson(){
     });
 
 }
-~~~
+```
 
 - controller
 
 
-~~~java
+```java
  //请求key/value，输出json
 @RequestMapping("/responseJson")
 public @ResponseBody ItemsCustom responseJson(ItemsCustom itemsCustom){
@@ -210,7 +209,7 @@ public @ResponseBody ItemsCustom responseJson(ItemsCustom itemsCustom){
     //@ResponseBody将itemsCustom转成json输出
     return itemsCustom;
 }
-~~~
+```
 
 - 测试结果
 

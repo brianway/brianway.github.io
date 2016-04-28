@@ -2,16 +2,17 @@
 layout: post
 title:  mybatis学习笔记(6)-输入映射
 date:   2016-03-08 10:39:06 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文主要讲解mybatis的输入映射。
+
+
 
 
 通过parameterType指定输入参数的类型，类型可以是
@@ -24,7 +25,7 @@ comments: true
 
 - 定义包装类型pojo
 
-~~~java
+```java
 package com.iot.mybatis.po;
 
 /**
@@ -49,20 +50,20 @@ public class UserQueryVo {
     //....
 
 }
-~~~
+```
 
 其中，UserCustom类继承User
 
-~~~java
+```java
 public class UserCustom extends User{
 }
-~~~
+```
 
 - mapper.xml
 
 在UserMapper.xml中定义用户信息综合查询（查询条件复杂，通过高级查询进行复杂关联查询）。
 
-~~~xml
+```xml
     <!-- 用户信息综合查询
         #{userCustom.sex}:取出pojo包装对象中性别值
         ${userCustom.username}：取出pojo包装对象中用户名称
@@ -71,26 +72,26 @@ public class UserCustom extends User{
             resultType="com.iot.mybatis.po.UserCustom">
         SELECT * FROM user WHERE user.sex=#{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'
     </select>
-~~~
+```
 
 注意不要将`#{userCustom.sex}`中的`userCustom`写成`UserCustom`,前者指属性名(由于使用IDE提示自动补全，所以只是把类型名首字母小写了)，后者指类型名，这里是`UserQueryVo`类中的`userCustom`属性，是**属性名**。写错会报如下异常：
 
-~~~
+```
 org.apache.ibatis.exceptions.PersistenceException: 
 ### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'
 ### Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'
-~~~
+```
 
 - mapper.java
 
-~~~java
+```java
 //用户信息综合查询
 public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
-~~~
+```
 
 - 测试代码
 
-~~~java
+```java
 //用户信息的综合 查询
 	@Test
 	public void testFindUserList() throws Exception {
@@ -115,7 +116,7 @@ public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
 
 
 	}
-~~~
+```
 
 ----
 

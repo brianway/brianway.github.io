@@ -2,29 +2,30 @@
 layout: post
 title:  springmvc学习笔记(8)-springmvc整合mybatis之service
 date:   2016-03-30 14:28:08 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文记录如何整合service,包括定义spring接口，在spring容器配置service以及事务控制。让spring管理service接口。
+
+
 
 
 ## 定义service接口
 
-~~~java
+```java
 public interface ItemsService {
     //商品查询列表
     List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo) throws Exception;
 
 }
-~~~
+```
 
-~~~java
+```java
 public class ItemsServiceImpl implements ItemsService {
 
     @Autowired
@@ -34,14 +35,14 @@ public class ItemsServiceImpl implements ItemsService {
         return itemsMapperCustom.findItemsList(itemsQueryVo);
     }
 }
-~~~
+```
 
 ## 在spring容器配置service
 
 
 在`resources/spring`下创建applicationContext-service.xml，文件中配置service。
 
-~~~xml
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
@@ -50,13 +51,13 @@ public class ItemsServiceImpl implements ItemsService {
     <bean id="itemsService" class="com.iot.learnssm.firstssm.service.impl.ItemsServiceImpl"/>
 
 </beans>
-~~~
+```
 
 ## 事务控制
 
 在`resources/spring`下创建applicationContext-transaction.xml，在applicationContext-transaction.xml中使用spring声明式事务控制方法。
 
-~~~xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -95,7 +96,7 @@ public class ItemsServiceImpl implements ItemsService {
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.iot.learnssm.firstssm.service.impl.*.*(..))"/>
     </aop:config>
 </beans>
-~~~
+```
 
 
 

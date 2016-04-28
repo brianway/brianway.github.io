@@ -2,18 +2,18 @@
 layout: post
 title:  springmvc学习笔记(11)-springmvc注解开发之简单参数绑定
 date:   2016-03-30 14:28:11 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc 注解
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 本文主要介绍注解开发的简单参数绑定，包括简单类型、简单pojo以及自定义绑定实现类型转换
+
+
+
 
 ## spring参数绑定过程
 
@@ -45,14 +45,14 @@ springmvc中，接收页面提交的数据是通过方法形参来接收。而�
 ![指定传入参数未传入报错](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%8C%87%E5%AE%9A%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0%E6%9C%AA%E4%BC%A0%E5%85%A5%E6%8A%A5%E9%94%99.png)
 
 
-~~~java
+```java
 @RequestMapping(value="/editItems",method={RequestMethod.POST,RequestMethod.GET})
 //@RequestParam里边指定request传入参数名称和形参进行绑定。
 //通过required属性指定参数是否必须要传入
 //通过defaultValue可以设置默认值，如果id参数没有传入，将默认值和形参绑定。
 public String editItems(Model model,@RequestParam(value="id",required=true) Integer items_id)throws Exception {
 
-~~~
+```
 
 
 ## pojo绑定
@@ -65,7 +65,7 @@ public String editItems(Model model,@RequestParam(value="id",required=true) Inte
 
 页面定义：
 
-~~~jsp
+```jsp
 <table width="100%" border=1>
 <tr>
 	<td>商品名称</td>
@@ -75,11 +75,11 @@ public String editItems(Model model,@RequestParam(value="id",required=true) Inte
 	<td>商品价格</td>
 	<td><input type="text" name="price" value="${itemsCustom.price }"/></td>
 </tr>
-~~~
+```
 
 controller的pojo形参的定义：
 
-~~~java
+```java
 public class Items {
     private Integer id;
 
@@ -92,7 +92,7 @@ public class Items {
     private Date createtime;
 
     private String detail;
-~~~
+```
 
 
 ## 自定义参数绑定实现日期类型绑定
@@ -106,7 +106,7 @@ public class Items {
 
 - 自定义日期类型绑定
 
-~~~java
+```java
 public class CustomDateConverter implements Converter<String,Date>{
     public Date convert(String s) {
         //实现 将日期串转成日期类型(格式是yyyy-MM-dd HH:mm:ss)
@@ -125,16 +125,16 @@ public class CustomDateConverter implements Converter<String,Date>{
 
     }
 }
-~~~
+```
 
 
 - 配置方式
 
-~~~xml
+```xml
 <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
-~~~
+```
 
-~~~xml
+```xml
 <!-- 自定义参数绑定 -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <!-- 转换器 -->
@@ -145,7 +145,7 @@ public class CustomDateConverter implements Converter<String,Date>{
            </list>
         </property>
     </bean>
-~~~
+```
 
 
 ## springmvc和struts2的区别 

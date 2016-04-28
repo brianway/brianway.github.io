@@ -2,17 +2,17 @@
 layout: post
 title:  mybatis学习笔记(10)-一对一查询
 date:   2016-03-08 10:39:10 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文使用两种方式(resultType和resultMap)实现一对一查询，查询订单信息，关联查询创建订单的用户信息
+
+
 
 
 ## resultType实现
@@ -28,7 +28,7 @@ comments: true
 
 由于orders表中有一个外键（user_id），通过外键关联查询用户表只能查询出一条记录，可以使用内连接。
 
-~~~sql
+```sql
 SELECT 
   orders.*,
   USER.username,
@@ -38,7 +38,7 @@ FROM
   orders,
   USER 
 WHERE orders.user_id = user.id
-~~~
+```
 
 - 创建pojo
 
@@ -50,7 +50,7 @@ WHERE orders.user_id = user.id
 
 对应数据表的几个pojo类(Items,Orderdetail,Orders)就是把该类的属性名设为和数据表列字段名相同，并为这些属性添加getter和setter，在这里就不贴代码了，只贴出对应于关联查询的自定义pojo类`OrdersCustom`的代码
 
-~~~java
+```java
 package com.iot.mybatis.po;
 
 /**
@@ -94,13 +94,13 @@ public class OrdersCustom extends Orders{
 
 }
 
-~~~
+```
 
 
 
 - mapper.xml
 
-~~~xml
+```xml
  <!-- 查询订单关联查询用户信息 -->
 <select id="findOrdersUser"  resultType="com.iot.mybatis.po.OrdersCustom">
   SELECT
@@ -113,16 +113,16 @@ public class OrdersCustom extends Orders{
       user
     WHERE orders.user_id = user.id
 </select>
-~~~
+```
 
 
 - mapper.java
 
-~~~java
+```java
 //查询订单关联查询用户信息
 public List<OrdersCustom> findOrdersUser()throws Exception;
 }
-~~~
+```
 
 
 
@@ -133,7 +133,7 @@ public List<OrdersCustom> findOrdersUser()throws Exception;
 - 定义resultMap
 
 
-~~~xml
+```xml
 <!-- 订单查询关联用户的resultMap
 将整个查询的结果映射到com.iot.mybatis.po.Orders中
  -->
@@ -165,13 +165,13 @@ public List<OrdersCustom> findOrdersUser()throws Exception;
     </association>
 </resultMap>
 
-~~~
+```
 
 
 - statement定义
 
 
-~~~xml
+```xml
 <!-- 查询订单关联查询用户信息 -->
 <select id="findOrdersUserResultMap" resultMap="OrdersUserResultMap">
     SELECT
@@ -184,18 +184,18 @@ public List<OrdersCustom> findOrdersUser()throws Exception;
     user
     WHERE orders.user_id = user.id
 </select>
-~~~
+```
 
 - mapper.java
 
-~~~java
+```java
 //查询订单关联查询用户使用resultMap
 public List<Orders> findOrdersUserResultMap()throws Exception;
-~~~
+```
 
 - 测试代码
 
-~~~java
+```java
 @Test
 public void testFindOrdersUserResultMap() throws Exception {
 
@@ -211,7 +211,7 @@ public void testFindOrdersUserResultMap() throws Exception {
 
 	sqlSession.close();
 }
-~~~
+```
 
 ## resultType和resultMap实现一对一查询小结
 

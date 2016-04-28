@@ -2,17 +2,18 @@
 layout: post
 title:  springmvc学习笔记(16)-异常处理器
 date:   2016-03-30 14:28:16 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置
+
+
+
 
 
 ## 异常处理思路
@@ -35,7 +36,7 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
 
 对不同的异常类型定义异常类，继承Exception。
 
-~~~java
+```java
 package com.iot.learnssm.firstssm.exception;
 
 /**
@@ -60,7 +61,7 @@ public class CustomException  extends  Exception{
         this.message = message;
     }
 }
-~~~
+```
 
 ## 全局异常处理器
 
@@ -78,7 +79,7 @@ public class CustomException  extends  Exception{
 springmvc提供一个`HandlerExceptionResolver`接口
 
 
-~~~java
+```java
    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         //handler就是处理器适配器要执行Handler对象（只有method）
         //解析出异常类型
@@ -114,11 +115,11 @@ springmvc提供一个`HandlerExceptionResolver`接口
 
     }
 }
-~~~
+```
 
 ## 错误页面
 
-~~~jsp
+```jsp
 <%--
   Created by IntelliJ IDEA.
   User: Brian
@@ -135,16 +136,16 @@ springmvc提供一个`HandlerExceptionResolver`接口
 ${message}
 </body>
 </html>
-~~~
+```
 
 ## 在springmvc.xml配置全局异常处理器
 
-~~~xml
+```xml
 <!-- 全局异常处理器
 只要实现HandlerExceptionResolver接口就是全局异常处理器
 -->
 <bean class="com.iot.learnssm.firstssm.exception.CustomExceptionResolver"></bean>
-~~~
+```
 
 全局异常处理器只有一个，配置多个也没用。
 
@@ -156,7 +157,7 @@ ${message}
 
 - 在商品修改的controller方法中抛出异常 .
 
-~~~java
+```java
 public String editItems(Model model,@RequestParam(value="id",required=true) Integer items_id)throws Exception {
 
     //调用service根据商品id查询商品信息
@@ -173,11 +174,11 @@ public String editItems(Model model,@RequestParam(value="id",required=true) Inte
 
     return "items/editItems";
 }
-~~~
+```
 
 - 在service接口中抛出异常：
 
-~~~java
+```java
 public ItemsCustom findItemsById(Integer id) throws Exception {
     Items items = itemsMapper.selectByPrimaryKey(id);
     if(items==null){
@@ -195,7 +196,7 @@ public ItemsCustom findItemsById(Integer id) throws Exception {
 
     return itemsCustom;
 }
-~~~
+```
 
 
 - 如果与业务功能相关的异常，建议在service中抛出异常。

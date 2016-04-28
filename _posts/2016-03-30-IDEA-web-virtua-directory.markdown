@@ -2,17 +2,17 @@
 layout: post
 title:  在intellij IDEA中为web应用创建图片虚拟目录(详细截图)
 date:   2016-03-30 14:28:00 +08:00
-category: "springmvc"
-tags: "IDEA"
+category: springmvc
+tags: IDEA springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图
+
+
 
 
 ## 工程配置和环境

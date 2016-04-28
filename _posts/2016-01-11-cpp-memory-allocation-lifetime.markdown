@@ -3,7 +3,7 @@ layout: post
 title:  一个例子记住C++对象的生存周期
 date:   2016-01-11 22:41:10 +08:00
 category: cpp
-tags: [cpp, examples]
+tags: cpp examples
 comments: true
 ---
 
@@ -13,6 +13,10 @@ comments: true
 
 最近要考C++，复习过程中遇到一些问题，总结记录一下。文中代码均在[ideone在线编译器](http://ideone.com)中运行的。
 
+
+
+
+
 ## 代码
 代码说明：
 
@@ -21,7 +25,7 @@ comments: true
 - main方法新建了类A的局部自动对象`MainObj`,调用`fun`方法
 - 外面新建了A的的外部静态对象`ExStaObj`和外部对象`GblObj`
 
-~~~cpp
+```cpp
 #include <iostream>
 #include <string.h>
 using namespace std;
@@ -63,11 +67,11 @@ int main( )
 
 static A ExStaObj("外部静态对象ExStaObj");
 A GblObj("外部对象GblObj"); 
-~~~
+```
 
 输出：
 
-~~~
+```
 外部静态对象ExStaObj被创建时调用构造函数 ! 
 外部对象GblObj被创建时调用构造函数 ! 
 主函数体内的自动对象MainObj被创建时调用构造函数 ! 
@@ -83,7 +87,7 @@ fun( )函数体内的自动对象FunObj被撤消时调用析构函数 !
 内部静态对象InStaObj被撤消时调用析构函数 ! 
 外部对象GblObj被撤消时调用析构函数 ! 
 外部静态对象ExStaObj被撤消时调用析构函数 ! 
-~~~
+```
 
 若将`A GblObj("外部对象GblObj"); `写在`static A ExStaObj("外部静态对象ExStaObj");`前面，则输出时两者顺序也颠倒。
 

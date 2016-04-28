@@ -2,17 +2,18 @@
 layout: post
 title:  mybatis学习笔记(11)-一对多查询
 date:   2016-03-08 10:39:11 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文实现一对多查询，查询订单及订单明细的信息
+
+
+
 
 ## 示例
 
@@ -22,7 +23,7 @@ comments: true
 确定关联查询表：订单明细表
 在一对一查询基础上添加订单明细表关联即可。
 
-~~~sql
+```sql
 SELECT 
   orders.*,
   user.username,
@@ -37,7 +38,7 @@ FROM
   user,
   orderdetail
 WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id
-~~~
+```
 
 **注意上面的`orderdetail.id (AS) orderdetail_id`,这里需要取别名，否则由于orders表也有id字段，在后面映射时会冲突**
 
@@ -55,14 +56,14 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id
 
 - 在orders中添加list订单明细属性
 
-~~~java
+```java
 //订单明细
 private List<Orderdetail> orderdetails;
-~~~
+```
 
 - mapper.xml
 
-~~~xml
+```xml
 <!-- 查询订单关联查询用户及订单明细，使用resultmap -->
 <select id="findOrdersAndOrderDetailResultMap" resultMap="OrdersAndOrderDetailResultMap">
    SELECT
@@ -80,11 +81,11 @@ private List<Orderdetail> orderdetails;
       orderdetail
     WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id
 </select>
-~~~
+```
 
 - resultMap定义
 
-~~~xml
+```xml
 <!-- 订单及订单明细的resultMap
 使用extends继承，不用在中配置订单信息和用户信息的映射
  -->
@@ -111,15 +112,15 @@ private List<Orderdetail> orderdetails;
     </collection>
 
 </resultMap>
-~~~
+```
 
 
 - mapper.java
 
-~~~java
+```java
 //查询订单(关联用户)及订单明细
 public List<Orders>  findOrdersAndOrderDetailResultMap()throws Exception;
-~~~
+```
 
 
 ## 小结

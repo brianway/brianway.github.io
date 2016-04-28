@@ -2,17 +2,18 @@
 layout: post
 title:  javaweb入门笔记(5)-cookie和session
 date:   2016-02-06 18:44:12 +08:00
-category: "javaweb"
-tags: "javaweb"
+category: javaweb
+tags: javaweb 
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 Cookie是客户端技术；Session是服务器端技术。
+
+
+
 
 API:
 
@@ -43,7 +44,7 @@ session基于cookie实现，将`JSESSIONID`写回浏览器，这个cookie(`JSESS
 
 示例代码片段：
 
-~~~java
+```java
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     HttpSession session = req.getSession();
     String sessionid = session.getId();
@@ -52,7 +53,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
     cookie.setMaxAge(30*60);
     resp.addCookie(cookie);
 }
-~~~
+```
 
 ### 应用案例
 
@@ -72,7 +73,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 
 防止表单重复提交之令牌例子：
 
-~~~java
+```java
 package org.iot.data;
 
 import sun.misc.BASE64Encoder;
@@ -113,7 +114,7 @@ public class TokenProcessor {//令牌
         }
     }
 }
-~~~
+```
 
 
 ## 三个域对象

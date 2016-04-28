@@ -2,16 +2,18 @@
 layout: post
 title:  mybatis学习笔记(9)-订单商品数据模型分析
 date:   2016-03-08 10:39:09 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis examples
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文对接下来几篇博客中用到的数据模型进行分析，并附上建表sql文件和测试数据文件
+
+
+
 
 ##	数据模型分析思路
 
@@ -75,7 +77,7 @@ orders和items之间可以通过orderdetail表建立关系。
 
 ## 订单商品数据模型建表sql
 
-~~~sql
+```sql
 /*
 SQLyog v10.2 
 MySQL - 5.1.72-community : Database - mybatis
@@ -146,11 +148,11 @@ CREATE TABLE `user` (
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-~~~
+```
 
 测试数据
 
-~~~sql
+```sql
 /*
 SQLyog v10.2 
 MySQL - 5.1.72-community : Database - mybatis
@@ -186,7 +188,7 @@ insert  into `user`(`id`,`username`,`birthday`,`sex`,`address`) values (1,'王�
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-~~~
+```
 
 
 

@@ -2,18 +2,20 @@
 layout: post
 title:  mybatis学习笔记(13)-延迟加载
 date:   2016-03-08 10:39:13 +08:00
-category: "mybatis"
-tags: "mybatis"
+category: mybatis
+tags: mybatis
 comments: true
 ---
 
 * content
 {:toc}
 
-
 resultMap可以实现高级映射（使用`association`、`collection`实现一对一及一对多映射），`association`、`collection`具备延迟加载功能。
 
 延迟加载：先从单表查询、需要时再从关联表去关联查询，大大提高数据库性能，因为查询单表要比关联查询多张表速度要快。
+
+
+
 
 
 需求：
@@ -32,29 +34,29 @@ resultMap可以实现高级映射（使用`association`、`collection`实现一�
 
 在查询订单的statement中使用association去延迟加载（执行）下边的satatement(关联查询用户信息)
 
-~~~xml
+```xml
 <!-- 查询订单关联查询用户，用户信息需要延迟加载 -->
 <select id="findOrdersUserLazyLoading" resultMap="OrdersUserLazyLoadingResultMap">
     SELECT * FROM orders
 </select>
-~~~
+```
 
 2.关联查询用户信息
 
 通过上边查询到的订单信息中user_id去关联查询用户信息,使用UserMapper.xml中的findUserById
 
-~~~xml
+```xml
 <select id="findUserById" parameterType="int" resultType="com.iot.mybatis.po.User">
     SELECT * FROM  user  WHERE id=#{value}
 </select>
-~~~
+```
 
 上边先去执行findOrdersUserLazyLoading，当需要去查询用户的时候再去执行findUserById，通过resultMap的定义将延迟加载执行配置起来。
 
 
 - 延迟加载resultMap
 
-~~~xml
+```xml
 <!-- 延迟加载的resultMap -->
 <resultMap type="com.iot.mybatis.po.Orders" id="OrdersUserLazyLoadingResultMap">
     <!--对订单信息进行映射配置  -->
@@ -81,22 +83,22 @@ resultMap可以实现高级映射（使用`association`、`collection`实现一�
     </association>
 
 </resultMap>
-~~~
+```
 
 **与非延迟加载的主要区别就在`association`标签属性多了`select`和`column`**
 
-~~~xml
+```xml
 <association property="user"  javaType="com.iot.mybatis.po.User"
              select="com.iot.mybatis.mapper.UserMapper.findUserById"
              column="user_id">
-~~~
+```
 
 - mapper.java
 
-~~~java
+```java
 //查询订单关联查询用户，用户信息是延迟加载
 public List<Orders> findOrdersUserLazyLoading()throws Exception;
-~~~
+```
 
 
 
@@ -120,7 +122,7 @@ mybatis默认没有开启延迟加载，需要在SqlMapConfig.xml中setting配�
 
 在SqlMapConfig.xml中配置：
 
-~~~xml
+```xml
 <settings>
     <!-- 打开延迟加载 的开关 -->
     <setting name="lazyLoadingEnabled" value="true"/>
@@ -129,11 +131,11 @@ mybatis默认没有开启延迟加载，需要在SqlMapConfig.xml中setting配�
     <!-- 开启二级缓存 -->
    <!-- <setting name="cacheEnabled" value="true"/>-->
 </settings>
-~~~
+```
 
 - 测试代码
 
-~~~java
+```java
 // 查询订单关联查询用户，用户信息使用延迟加载
 @Test
 public void testFindOrdersUserLazyLoading() throws Exception {
@@ -150,7 +152,7 @@ public void testFindOrdersUserLazyLoading() throws Exception {
 		System.out.println(user);
 	}
 }
-~~~
+```
 
 
 ## 延迟加载思考
@@ -179,15 +181,15 @@ public void testFindOrdersUserLazyLoading() throws Exception {
 
 我为了验证延迟加载前的user是否为空，在Orders类中加入了
 
-~~~java
+```java
 public void print(){
     System.out.println("----test-print-----"+user+"   user==null: "+(user==null));
 }
-~~~
+```
 
 测试代码如下：
 
-~~~java
+```java
 // 查询订单关联查询用户，用户信息使用延迟加载
 @Test
 public void testFindOrdersUserLazyLoading() throws Exception {
@@ -206,13 +208,13 @@ public void testFindOrdersUserLazyLoading() throws Exception {
 	}
 
 }
-~~~
+```
 
 然后分别run和debug
 
 - run输出
 
-~~~
+```
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 110771485.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
@@ -222,35 +224,35 @@ DEBUG [main] - <==      Total: 3
 ----test-print-----null   user==null: true
 ----test-print-----null   user==null: true
 ----test-print-----null   user==null: true
-~~~
+```
 
 - debug输出
 
 在`List<Orders> list = ordersMapperCustom.findOrdersUserLazyLoading();`打断点，运行完这句,日志输出为：
 
-~~~
+```
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 1219273867.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@48aca48b]
 DEBUG [main] - ==>  Preparing: SELECT * FROM orders 
 DEBUG [main] - ==> Parameters: 
 DEBUG [main] - <==      Total: 3
-~~~
+```
 
 但是当你点开`list`属性时，控制台又输出了，而且可以看到list里的user是有内容的
 
-~~~
+```
 DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
 DEBUG [main] - ==> Parameters: 10(Integer)
 DEBUG [main] - <==      Total: 1
-~~~
+```
 
 运行完所有程序，控制台输出为：
 
-~~~
+```
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 1219273867.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@48aca48b]
@@ -266,7 +268,7 @@ DEBUG [main] - <==      Total: 1
 ----test-print-----User [id=1, username=王五, sex=2, birthday=null, address=null]   user==null: false
 ----test-print-----User [id=1, username=王五, sex=2, birthday=null, address=null]   user==null: false
 ----test-print-----User [id=10, username=张三, sex=1, birthday=Thu Jul 10 00:00:00 CST 2014, address=北京市]   user==null: false
-~~~
+```
 
 
 所以，我觉得应该是在debug时，查看属性的话，IDEA会自动调用get相应的方法，从而触发user的查询。延迟加载的源码实现以后我会阅读，把这个问题弄清楚。

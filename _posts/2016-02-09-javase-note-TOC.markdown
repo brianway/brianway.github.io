@@ -2,23 +2,23 @@
 layout: post
 title:  我的java&javaweb学习笔记(汇总)
 date:   2016-02-09 15:00:00 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 总结
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 笔记分为两大部分：javase和javaweb
 
 - [javase](http://my.oschina.net/brianway/blog?catalog=3475426)
 - [javaweb](http://my.oschina.net/brianway/blog?catalog=3475425)
 
-
 笔记内容主要是对一些基础特性和编程细节进行总结整理，适合了解java基础语法，想进一步深入学习的人
+
+
+
 
 ----
 

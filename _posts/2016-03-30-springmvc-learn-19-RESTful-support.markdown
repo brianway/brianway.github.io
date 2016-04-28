@@ -2,17 +2,17 @@
 layout: post
 title:  springmvc学习笔记(19)-RESTful支持
 date:   2016-03-30 14:28:19 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc RESTful
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析
+
+
 
 
 ## 概念
@@ -55,7 +55,7 @@ RESTful（即Representational State Transfer的缩写）其实是一个开发理
 
 输出json使用`@ResponseBody`将java对象输出json。
 
-~~~java
+```java
 //查询商品信息，输出json
 //itemsView/{id}里边的{id}表示占位符，通过@PathVariable获取占位符中的参数，
 //@PathVariable中名称要和占位符一致，形参名无需和其一致
@@ -69,7 +69,7 @@ public @ResponseBody ItemsCustom itemsView(@PathVariable("id") Integer items_id)
     return itemsCustom;
 
 }
-~~~
+```
 
 `@RequestMapping(value="/ itemsView/{id}")`：`{×××}`占位符，请求的URL可以是`/viewItems/1`或`/viewItems/2`，通过在方法中使用`@PathVariable`获取{×××}中的×××变量。`@PathVariable`用于将请求URL中的模板变量映射到功能处理方法的参数上。
 
@@ -78,7 +78,7 @@ public @ResponseBody ItemsCustom itemsView(@PathVariable("id") Integer items_id)
 
 ### REST方法的前端控制器配置
 
-~~~xml
+```xml
 <!-- springmvc前端控制器，rest配置 -->
 <servlet>
     <servlet-name>springmvc_rest</servlet-name>
@@ -94,7 +94,7 @@ public @ResponseBody ItemsCustom itemsView(@PathVariable("id") Integer items_id)
     <servlet-name>springmvc_rest</servlet-name>
     <url-pattern>/</url-pattern>
 </servlet-mapping>
-~~~
+```
 
 
 访问结果如图：
@@ -109,12 +109,12 @@ public @ResponseBody ItemsCustom itemsView(@PathVariable("id") Integer items_id)
 
 在springmvc.xml中添加静态资源解析方法。
 
-~~~xml
+```xml
 <!-- 静态资源解析
     包括 ：js、css、img、..
      -->
 <mvc:resources location="/js/" mapping="/js/**"/>
-~~~
+```
 
 这时访问`http://localhost:8080/ssm1/js/jquery-1.4.4.min.js`，可以在浏览器中看到js的内容
 

@@ -2,18 +2,21 @@
 layout: post
 title:  在github搭建个人网站
 date:   2016-01-07 22:35:11 +08:00
-category: "github"
-tags: "github"
+category: github
+tags: github 安装部署
 comments: true
 ---
 
 * content
 {:toc}
 
-
 先搜篇中文博客了解下流程，再根据下面的官方文档**按顺序**看一遍就差不多了。
 
 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。
+
+
+
+
 
 ## 参考教程
 
@@ -41,18 +44,18 @@ comments: true
 ## 遇到的问题
 1.windows下安装ruby的devkit遇到问题
 
-~~~
+```
 Invalid configuration or no Rubies listed. Please fix 'config.yml'
 and rerun 'ruby dk.rb install'
-~~~
+```
 
 解决：[How do I configure config.yml so that I can install devkit?](http://stackoverflow.com/questions/20810653/how-do-i-configure-config-yml-so-that-i-can-install-devkit)
 
 2.kunka主题jekyll build问题
 
-~~~
+```
 Deprecation: You appear to have pagination turned on, but you haven't included the `jekyll-paginate` gem. Ensure you have `gems: [jekyll-paginate]` in your configuration fil e.
-~~~
+```
 
 解决：[jekyll-paginate gem](https://teamtreehouse.com/community/jekyllpaginate-gem)
 

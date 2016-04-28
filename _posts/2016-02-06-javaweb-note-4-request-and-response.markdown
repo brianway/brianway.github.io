@@ -2,20 +2,20 @@
 layout: post
 title:  javaweb入门笔记(4)-request和response
 date:   2016-02-06 18:30:12 +08:00
-category: "javaweb"
-tags: "javaweb"
+category: javaweb
+tags: javaweb
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
 API:
 
 >* [Interface HttpServletResponse](https://tomcat.apache.org/tomcat-8.0-doc/servletapi/index.html?javax/servlet/http/HttpServletResponse.html)
 >* [Interface HttpServletRequest](https://tomcat.apache.org/tomcat-8.0-doc/servletapi/index.html?javax/servlet/http/HttpServletRequest.html)
+
+
 
 
 ## response
@@ -125,14 +125,14 @@ url后面如果有中文数据，需要编码后再提交
 
 例子:目录结构如下
 
-~~~
+```
 mail---------------------------Web应用所在目录
            |----form1.html
            |----WEB-INF目录
                     |---------classes目录
                     |---------lib目录
                     |---------web.xml
-~~~
+```
 
 1. `request.getRequestDispatcher("/form1.html")`
 2. `response.sendRedirect("mail/form1.html")`

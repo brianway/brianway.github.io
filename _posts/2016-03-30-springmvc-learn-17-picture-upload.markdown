@@ -2,16 +2,18 @@
 layout: post
 title:  springmvc学习笔记(17)-上传图片
 date:   2016-03-30 14:28:17 +08:00
-category: "springmvc"
-tags: "springmvc"
+category: springmvc
+tags: springmvc
 comments: true
 ---
 
 * content
 {:toc}
 
-
 本文展示如何在springmvc中上传图片
+
+
+
 
 
 ## springmvc中对多部件类型解析
@@ -22,7 +24,7 @@ comments: true
 
 在springmvc.xml中配置multipart类型解析器。
 
-~~~xml
+```xml
 <!-- 文件上传 -->
 <bean id="multipartResolver"
       class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -31,27 +33,27 @@ comments: true
         <value>5242880</value>
     </property>
 </bean>
-~~~
+```
 
 ## 加入上传图片的jar
 
 添加依赖
 
-~~~xml
+```xml
 <!-- 文件上传 -->
 <dependency>
     <groupId>commons-fileupload</groupId>
     <artifactId>commons-fileupload</artifactId>
     <version>1.3.1</version>
 </dependency>
-~~~
+```
 
 依赖树
 
-~~~
+```
 [INFO] \- commons-fileupload:commons-fileupload:jar:1.3.1:compile
 [INFO]    \- commons-io:commons-io:jar:2.2:compile
-~~~
+```
 
 可以看到，其实还间接依赖了`commons-io:commons-io:jar`
 
@@ -71,7 +73,7 @@ comments: true
 
 - 页面
 
-~~~jsp
+```jsp
 <tr>
 	<td>商品图片</td>
 	<td>
@@ -82,13 +84,13 @@ comments: true
 		<input type="file"  name="items_pic"/>
 	</td>
 </tr>
-~~~
+```
 
 - controller方法
 
 修改：商品修改controller方法：
 
-~~~java
+```java
 @RequestMapping("/editItemsSubmit")
     public String editItemsSubmit(
             Model model,
@@ -99,9 +101,9 @@ comments: true
             BindingResult bindingResult,
             MultipartFile items_pic
     )throws Exception {
-~~~
+```
 
-~~~java
+```java
  //原始名称
 String originalFilename = items_pic.getOriginalFilename();
 //上传图片
@@ -123,7 +125,7 @@ if(items_pic!=null && originalFilename!=null && originalFilename.length()>0){
     itemsCustom.setPic(newFileName);
 
 }
-~~~
+```
 
 
 

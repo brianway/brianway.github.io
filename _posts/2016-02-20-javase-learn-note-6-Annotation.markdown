@@ -2,18 +2,17 @@
 layout: post
 title:  java基础巩固笔记(6)-注解
 date:   2016-02-20 17:45:12 +08:00
-category: "java"
-tags: "java"
+category: java
+tags: java 注解
 comments: true
 ---
 
 * content
 {:toc}
 
-
-
-
 注解（Annotation），也叫元数据。一种代码级别的说明。它是JDK1.5及以后版本引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、字段、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。
+
+
 
 
 API
@@ -28,29 +27,29 @@ A,B,C解释如下：
 
 A:注解类
 
-~~~java
+```java
 @interface A{
 }
-~~~
+```
 
 B:应用了“注解类”的类
 
-~~~java
+```java
 @A
 Class B{
 }
-~~~
+```
 
 C:对“应用了注解类的类”进行反射操作的类
 
-~~~java
+```java
 Class C{
    public void f(){
      B.class.isAnnotationPresent(A.class);
      A a = B.class.getAnnotion(A.class);
    }
 }
-~~~
+```
 
 ## 元注解
 
@@ -60,17 +59,17 @@ Class C{
 
 表示在什么级别保存该注解信息。可选的参数值在枚举类型 `RetentionPolicy`中，包括`RetentionPolicy.SOURCE`,`RetentionPolicy.CLASS`(默认),`RetentionPolicy.RUNTIME`分别对应：java源文件-->class文件-->内存中的字节码
 
-~~~
+```
 RetentionPolicy.SOURCE 注解将被编译器丢弃 
 RetentionPolicy.CLASS 注解在class文件中可用，但会被VM丢弃
 RetentionPolicy.RUNTIME VM将在运行期也保留注释，因此可以通过反射机制读取注解的信息。 
-~~~
+```
 
 - `@Target`
 
 表示该注解用于什么地方，可能的值在枚举类`ElemenetType`中,包括
 
-~~~
+```
 ElemenetType.CONSTRUCTOR 构造器声明 
 ElemenetType.FIELD 域声明（包括 enum 实例） 
 ElemenetType.LOCAL_VARIABLE 局部变量声明 
@@ -78,7 +77,7 @@ ElemenetType.METHOD 方法声明
 ElemenetType.PACKAGE 包声明 
 ElemenetType.PARAMETER 参数声明 
 ElemenetType.TYPE 类，接口（包括注解类型）或enum声明 
-~~~
+```
 
 - `@Documented`
 
@@ -119,7 +118,7 @@ ElemenetType.TYPE 类，接口（包括注解类型）或enum声明
 
 - `A.java`
 
-~~~java
+```java
 package com.iot.annotation;
 
 import java.lang.annotation.*;
@@ -134,11 +133,11 @@ public @interface A {
     int id() default 0;
     Class<Long> gid();
 }
-~~~
+```
 
 - `B.java`
 
-~~~java
+```java
 package com.iot.annotation;
 
 import java.util.HashMap;
@@ -176,11 +175,11 @@ public class B {
     }
 }
 
-~~~
+```
 
 - `C.java`
 
-~~~java
+```java
 package com.iot.annotation;
 
 import java.lang.annotation.Annotation;
@@ -262,7 +261,7 @@ public class C {
 
 }
 
-~~~
+```
 
 ## 参考资料
 
