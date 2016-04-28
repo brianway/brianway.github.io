@@ -12,17 +12,19 @@ icon: th-list
         <hr>
         <ul>
             {% for category in site.categories %}
-            <h2 id="{{category | first}}">{{category | first}}</h2>
+            <h2 id="{{category | first}}">{{category | first}} </h2>
                 {% for posts in category  %}
                     {% for post in posts %}
                         {% if post.url %}
                         <li>
-                            <time>
+						  {% include category.html %}
+                          <!--  <time>
                             {{ post.date | date:"%F" }} {{ post.date | date: "%a" }}.
-                            </time>
+                            </time>-->
+							
                             <a class="title" href="{{ post.url }}">{{ post.title }}</a>
 
-                            {% include category.html %}
+                            
                             {% include tag.html %}
                         </li>
                         {% endif %}

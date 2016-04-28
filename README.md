@@ -29,7 +29,7 @@ Runing on Github + Jekyll theme by [Gaohaoyang](https://github.com/Gaohaoyang/ga
 
 - create "_data" dir to store my personal infomation,not in the "_config.yml"
 - the data in "Links" page also loaded from "_data" dir.
-- modify the "Archive" page,make month desplayed
+- modify the "Archive" page,make month displayed
 - extract the comment part,reuse the "_include/comments.html" file
 
 
