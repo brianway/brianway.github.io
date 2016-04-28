@@ -2,6 +2,8 @@ message: 学习网站
 items:
   - text: Coursera 
     url: https://www.coursera.org/
+  - text: BitTiger官网
+    url: http://www.bittiger.io/
   - text: BitTiger slack  
     url: https://bittigerfamily.slack.com/messages
   - text: ITeye 
