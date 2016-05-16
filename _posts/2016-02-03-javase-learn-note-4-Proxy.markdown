@@ -217,7 +217,7 @@ com.sun.proxy.$Proxy0
 - `Object`类只有的`hashCode`, `equals`, or `toString`方法会被交到`InvocationHandler`，其他方法自己有实现，不交给handler,所以最后打印结果为`com.sun.proxy.$Proxy0`而不是`Collection`
 
 
-- `InvocationHandler`对象的运行原理**
+- `InvocationHandler`对象的运行原理
 
 `InvocationHandler`接口只有一个`invoke`方法，每次调用代理类的方法，即调用了`InvocationHandler`对象的`invoke`方法
 

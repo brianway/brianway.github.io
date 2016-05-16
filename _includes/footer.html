@@ -1,12 +1,11 @@
 <footer class="site-footer">
 
 
-  <div class="wrapper">
-      <p class="description">
-          {% if site.description_footer %}
-          {{site.description_footer}}
-          {% endif %}
-      </p>
+    <div class="wrapper">
+
+        <p class="description">
+            {% if site.description_footer %} {{site.description_footer}} {% endif %}
+        </p>
         <p class="contact">
             Contact me at:
             {% if site.github_username %}
@@ -37,20 +36,18 @@
             {% if site.facebook_username %}
             <a href="https://www.facebook.com/{{site.facebook_username}}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
             {% endif %}
-		
+        </p>
+        <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
-           <span>
+            <span>
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
-		
             <span>
                 Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
             </span>
         </p>
-
-  </div>
+    </div>
 </footer>
-<script src="{{ "/js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
-
-
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

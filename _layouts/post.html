@@ -63,12 +63,8 @@ layout: default
 
 
         <h2 id="comments">Comments</h2>
-		
-   
-	   {% include comments.html %}
-  
+        {% include comments.html %}
 
-       
 
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
@@ -95,11 +91,10 @@ layout: default
  * target _blank
  */
 (function() {
-    var aTags = document.querySelectorAll('article a')
+    var aTags = document.querySelectorAll('article a:not([id])')
     for (var i = 0; i < aTags.length; i++) {
         aTags[i].setAttribute('target', '_blank')
     }
 }());
 </script>
-<script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script>
 <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
