@@ -12,7 +12,8 @@ comments: true
 
 
 华中科技大学图像分析与理解课程项目--3D Rigid Object Tracking.
-每周最新进展可参看[Time Line](#time-line)和[To Do List](#to-do-list)
+
+每周最新进展概况可参看[Time Line](#time-line),详细进度可参看[Details](#details)
 
 
 
@@ -31,22 +32,23 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 3D object tracking can be especially difficult when the objects are moving fast relative to the frame rate. Another situation that increases the complexity of the problem is when the tracked object changes orientation over time. For these situations the tracking system usually employs a motion model which describes how the image of the target might change for different possible motions of the object.
 
 
+## To Do List
+
+计划逐步扩充并实现下面的任务
+
+- [x] 选定项目题目，组队确定组员，创建项目链接(2016.5.13~2016.5.19)
+- [x] 阅读相关论文，确定实现方案(1~2周)
+- [ ] 代码实现，PC上验证和测试方案(2周)
+- [ ] 移植到移动端，在安卓设备上实现(1周)
+
 
 ## Time Line
 
 | Time        | details |  
 | :--------:  | :----- |
 | 2016.05.16  | choose the project 5,create the projetct link |
+| 2016.05.26  | meet OpenCV,read two references,test one method |
 
-
-
-## To Do List
-
-计划逐步扩充并实现下面的任务
-
-- [x] 选定项目题目，组队确定组员，创建项目链接
-- [ ] 阅读相关论文，确定实现方案
-- [ ] 待更新
 
 
 
@@ -60,8 +62,63 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 
 ## Reference
 
-> [1]. Multiple 3D Object Tracking for Augmented Reality, In ISMAR, 2008.
-> [2]. https://www.ssontech.com/tutes/tuteobj.html
-> [3]. Manipulator and Object Tracking for In-Hand 3D Object Modeling, IN IJRR, 2011.
-> [4]. Robust Statistics for 3D Object Tracking, In ICRA 2006.
-> [5]. Real-time 3D Object Pose Estimation and Tracking for Natural Landmark Based Visual Servo. In IROS, 2008.
+>* [1]. Multiple 3D Object Tracking for Augmented Reality, In ISMAR, 2008.
+>* [2]. https://www.ssontech.com/tutes/tuteobj.html
+>* [3]. Manipulator and Object Tracking for In-Hand 3D Object Modeling, IN IJRR, 2011.
+>* [4]. Robust Statistics for 3D Object Tracking, In ICRA 2006.
+>* [5]. Real-time 3D Object Pose Estimation and Tracking for Natural Landmark Based Visual Servo. In IROS, 2008.
+>* [6]. [OpenCV Tutorial C++](http://opencv-srf.blogspot.my/2010/09/object-detection-using-color-seperation.html)
+
+
+--------------------
+
+
+## Details 
+
+项目详细进展
+
+### week one 
+
+因为之前从来都没有接触过3D object tracking，所以这一周我们主要是从算法入手，选择性地详细阅读了两篇参考文献，了解一下实现步骤。
+
+为了熟悉一下openCV，我们运行了一个tracking ball的小程序，没有考虑物体的3D信息：
+
+![http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_trackingball.jpg](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_trackingball.jpg)
+
+
+3D object tracking的复杂性在于要估计物体姿态，逼近物体表面，而不是简单地用一个方形或者圆形的框把物体框住。由于没有采集深度信息的设备，如Kinect等，我们只能利用基于模型的方法来实现。
+
+> [1] Youngmin Park, Vincent Lepetit, Woontack Woo. Multiple 3D Object Tracking for Augmented Reality.
+
+Proposed 方法把object detection和tracking结合起来了，可以满足实时性要求，并且同时可以tracking多个object，这是当时其他方法做不到的。
+
+Proposed 方法由两个可以并行的模型组成，object detection和object tracking，如下图所示：
+
+![图像处理课_reference1-proposed方法.png](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_reference1-proposed%E6%96%B9%E6%B3%95.png)
+
+
+用于表示物体的数据结构：
+
+包括几何信息和目标物体的外形。几何信息是一个存储在一系列三角形中的标准CAD 3D模型；外形信息则是由一些关键帧(keyframe)集合提供，这些关键帧主要是从不同视角拍摄物体，一般3、4个关键帧就足以360°覆盖整个物体。在每一个关键帧中，提取出特征点，也被称为keypoints，然后通过在3D模型上进行back-projecting的方式确定这些keypoints的3D位置，keypoints及其3D位置也被存储起来。
+
+来自所有objects的所有N个keyframes被分到多个不同的子集中，每个子集中含有f个keyframe.
+
+- (1) object detection：用reference[8]中的方法来匹配输入帧和关键帧，会得到两者之间特征点的匹配数，然后用RANSAC和non-iterative P-n-P算法来估测物体的pose。**[这里得到的是matched keypoints]**
+- (2) frame-by-frame tracking：有两个目的：一是只要物体出现了就会被检测出来，以此达到tracking的目的；二是消除了单独的object detection可能产生的抖动。具体做法是：在每一帧输入中提取特征点，用基于cross-correlation和local search的方法将这些特征点和前面一帧中提取的特征点进行匹配。**[这里得到的是“temporal keypoints”]**
+- (3) 将temporal keypoints和matched keypoints进行融合来估测物体的姿态
+
+
+第一篇文章是2008年的，proposed方法可以实现多目标tracking，但是在实时性上可能效果不太好，作者也说的比较委婉。于是我们阅读了下面一篇文献，是2012年的。
+
+> [2] Changhyun Choi and Henrik I. Christensen. Real-time 3D Model-based Tracking Using Edge and Keypoint Features for Robotic Manipulation. 
+
+主要步骤：
+
+- 先用keypoints完成Global Pose Estimation(GPE)中的estimate the initial pose步骤
+- 然后用edge做tracking, 即Local Pose Estimation(LPE)
+
+![图像处理课_reference2-LPE.png](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_reference2-LPE.png)
+
+和[1]一样，这里也用到了事先存储好的关键帧（keyframe）集合；先得到当前帧的SURF keypoints，再利用这些keypoints将当前帧和关键帧match；keypoints的3D坐标也是通过在CAD model上进行back-projecting得到的，从而可以进行pose estimation。
+
+这篇文章的实验部分写的比较详细，尤其是我们在第一篇文章中不知道CAD模型怎么获取等，在这篇文章中都有讲到。相比之下，这篇文章的方法更复杂，速度非常快，我们准备尝试实现该文章的算法，具体的细节下次再更新~
