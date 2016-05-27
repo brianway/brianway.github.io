@@ -2,7 +2,7 @@
 layout: post
 title:  在github搭建个人网站
 date:   2016-01-07 22:35:11 +08:00
-category: github
+category: 其他
 tags: github 安装部署
 comments: true
 ---

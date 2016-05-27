@@ -2,7 +2,7 @@
 layout: post
 title:  java基础巩固笔记(6)-注解
 date:   2016-02-20 17:45:12 +08:00
-category: java
+category: 编程语言
 tags: java 注解
 comments: true
 ---

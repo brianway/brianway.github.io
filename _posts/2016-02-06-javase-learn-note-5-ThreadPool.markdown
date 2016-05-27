@@ -2,7 +2,7 @@
 layout: post
 title:  java基础巩固笔记(5)-多线程之线程并发库
 date:   2016-02-06 14:23:12 +08:00
-category: java
+category: 编程语言
 tags: java 多线程
 comments: true
 ---

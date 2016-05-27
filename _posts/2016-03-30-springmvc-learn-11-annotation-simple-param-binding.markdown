@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(11)-springmvc注解开发之简单参数绑定
 date:   2016-03-30 14:28:11 +08:00
-category: springmvc
+category: web开发
 tags: springmvc 注解
 comments: true
 ---

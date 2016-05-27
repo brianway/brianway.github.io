@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(13)-延迟加载
 date:   2016-03-08 10:39:13 +08:00
-category: mybatis
+category: web开发
 tags: mybatis
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(2)-非注解的处理器映射器和适配器
 date:   2016-03-30 14:28:02 +08:00
-category: springmvc
+category: web开发
 tags: springmvc
 comments: true
 ---

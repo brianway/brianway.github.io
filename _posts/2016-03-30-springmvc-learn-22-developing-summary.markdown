@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(22)-springmvc开发小结
 date:   2016-03-30 14:28:22 +08:00
-category: springmvc
+category: web开发
 tags: springmvc 总结
 comments: true
 ---

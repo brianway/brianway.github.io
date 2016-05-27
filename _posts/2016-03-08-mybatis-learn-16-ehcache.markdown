@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(16)-mybatis整合ehcache
 date:   2016-03-08 10:39:16 +08:00
-category: mybatis
+category: web开发
 tags: mybatis 缓存
 comments: true
 ---

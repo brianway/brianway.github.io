@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(17)-spring和mybatis整合
 date:   2016-03-08 10:39:17 +08:00
-category: mybatis
+category: web开发
 tags: mybatis springmvc
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc+mybatis学习笔记(汇总)
 date:   2016-03-30 17:40:00 +08:00
-category: springmvc
+category: web开发
 tags: springmvc 总结
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  javaweb入门笔记(4)-request和response
 date:   2016-02-06 18:30:12 +08:00
-category: javaweb
+category: web开发
 tags: javaweb
 comments: true
 ---

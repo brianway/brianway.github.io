@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(15)-查询缓存之二级缓存
 date:   2016-03-08 10:39:15 +08:00
-category: mybatis
+category: web开发
 tags: mybatis 缓存
 comments: true
 ---

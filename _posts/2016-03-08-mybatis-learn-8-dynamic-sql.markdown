@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(8)-动态sql
 date:   2016-03-08 10:39:08 +08:00
-category: mybatis
+category: web开发
 tags: mybatis
 comments: true
 ---

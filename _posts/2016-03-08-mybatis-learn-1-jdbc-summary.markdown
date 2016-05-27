@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(1)-对原生jdbc程序中的问题总结
 date:   2016-03-08 10:38:01 +08:00
-category: mybatis
+category: web开发
 tags: mybatis jdbc
 comments: true
 ---

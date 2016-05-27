@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(11)-一对多查询
 date:   2016-03-08 10:39:11 +08:00
-category: mybatis
+category: web开发
 tags: mybatis
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(18)-json数据交互
 date:   2016-03-30 14:28:18 +08:00
-category: springmvc
+category: web开发
 tags: springmvc json
 comments: true
 ---

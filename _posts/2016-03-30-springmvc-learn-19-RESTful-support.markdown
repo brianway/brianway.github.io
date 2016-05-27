@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(19)-RESTful支持
 date:   2016-03-30 14:28:19 +08:00
-category: springmvc
+category: web开发
 tags: springmvc RESTful
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  javaweb入门笔记(6)-JSP技术
 date:   2016-02-06 18:46:12 +08:00
-category: javaweb
+category: web开发
 tags: javaweb
 comments: true
 ---

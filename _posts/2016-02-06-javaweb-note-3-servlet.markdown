@@ -2,7 +2,7 @@
 layout: post
 title:  javaweb入门笔记(3)-Servlet
 date:   2016-02-06 18:29:12 +08:00
-category: javaweb
+category: web开发
 tags: javaweb servlet
 comments: true
 ---

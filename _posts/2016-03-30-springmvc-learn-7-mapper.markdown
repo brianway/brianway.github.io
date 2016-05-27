@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(7)-springmvc整合mybatis之mapper
 date:   2016-03-30 14:28:07 +08:00
-category: springmvc
+category: web开发
 tags: springmvc mybatis
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  java多线程核心技术梳理(附源码)
 date:   2016-04-18 16:18:01 +08:00
-category: java
+category: 编程语言
 tags: java 多线程 总结
 comments: true
 ---

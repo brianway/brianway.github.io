@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(9)-springmvc整合mybatis之controller
 date:   2016-03-30 14:28:09 +08:00
-category: springmvc
+category: web开发
 tags: springmvc mybatis
 comments: true
 ---

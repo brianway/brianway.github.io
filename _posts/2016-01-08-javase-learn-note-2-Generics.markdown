@@ -2,7 +2,7 @@
 layout: post
 title:  java基础巩固笔记(2)-泛型
 date:   2016-01-08 14:14:12 +08:00
-category: java
+category: 编程语言
 tags: java
 comments: true
 ---

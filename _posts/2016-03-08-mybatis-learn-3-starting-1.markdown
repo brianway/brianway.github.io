@@ -2,7 +2,7 @@
 layout: post
 title:  mybatis学习笔记(3)-入门程序一
 date:   2016-03-08 10:38:03 +08:00
-category: mybatis
+category: web开发
 tags: mybatis examples
 comments: true
 ---

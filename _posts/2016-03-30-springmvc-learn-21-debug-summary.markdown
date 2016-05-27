@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结
 date:   2016-03-30 14:28:21 +08:00
-category: springmvc
+category: web开发
 tags: springmvc debug 总结
 comments: true
 ---

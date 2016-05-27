@@ -2,7 +2,7 @@
 layout: post
 title:  springmvc学习笔记(14)-springmvc校验
 date:   2016-03-30 14:28:14 +08:00
-category: springmvc
+category: web开发
 tags: springmvc
 comments: true
 ---

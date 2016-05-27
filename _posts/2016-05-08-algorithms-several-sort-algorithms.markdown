@@ -2,8 +2,8 @@
 layout: post
 title:  几种常见排序算法
 date:   2016-05-08 14:19:00 +08:00
-category: algorithms
-tags: algorithms
+category: 算法
+tags: algorithms 总结
 comments: true
 ---
 
@@ -38,7 +38,8 @@ total order:
 - Transitivity(传递性): if v ≤ w and w ≤ x, then v ≤ x.
 - Totality: either v ≤ w or w ≤ v or both.
 
-*注意： The `<=` operator for double is not a total order *，violates totality: (Double.NaN `<=` Double.NaN) is false
+
+*注意： The `<=` operator for double is not a total order*，violates totality: (Double.NaN `<=` Double.NaN) is false
 
 
 通用代码：
