@@ -48,7 +48,7 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 | :--------:  | :----- |
 | 2016.05.16  | choose the project 5,create the projetct link |
 | 2016.05.26  | meet OpenCV,read two references,test one method |
-
+| 2016.06.02  | Android  preparing |
 
 
 
@@ -122,3 +122,57 @@ Proposed 方法由两个可以并行的模型组成，object detection和object 
 和[1]一样，这里也用到了事先存储好的关键帧（keyframe）集合；先得到当前帧的SURF keypoints，再利用这些keypoints将当前帧和关键帧match；keypoints的3D坐标也是通过在CAD model上进行back-projecting得到的，从而可以进行pose estimation。
 
 这篇文章的实验部分写的比较详细，尤其是我们在第一篇文章中不知道CAD模型怎么获取等，在这篇文章中都有讲到。相比之下，这篇文章的方法更复杂，速度非常快，我们准备尝试实现该文章的算法，具体的细节下次再更新~
+
+
+### week two
+
+
+本周主要完成安卓的准备工作
+
+1.功能需求：
+
+-（1）调用手机的相机进行拍照
+-（2）对拍照得到的图像进行轮廓识别和描点（由于目前图像3D识别相关的c算法还未完成，这里先用google的人脸识别功能代替）
+-（3）小组主页的展示
+
+2.实现效果：
+
+菜单见下图（菜单中包含照相、分析、关于我们三部分）
+
+![图像处理课_week2-菜单](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week2-%E8%8F%9C%E5%8D%95.jpg)
+
+
+
+3.相关知识点：
+
+-（1）菜单的动画效果：
+
+这里的动画效果采用的是属性动画（ValueAnimator），相比于原始动画，属性动画的点击效果会随动画的位置改变而改变这更加符合响应时的逻辑，而且属性动画的可定制性更高可以
+做出更酷炫的效果。属性动画的原理是基于TimeInterpolator和TypeEvaluator的。如果将属性值的变化过程看做一个数学函数的话，从动画效果上来看它是连续的，但实际上它还是
+离散的，因为它实际上也就是通过插入中间值（简称插值）从而”一帧一帧”完成动画的，那每一帧在哪里取，取多少呢？这也就是ValueAnimator类主要完成的作用。
+TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少。
+
+-（2）调用相机功能：
+
+调用相机的原理是通过使用startActivityForResult来启动相机组件，拍照完成后通过onActivityResult方法可以获取到拍照得到的图像，进而可以对图像进行处理。在这里需要做一个
+适配。需要判断当前android手机的版本是6.0以前的还是6.0以后的（>=6.0）,因为android6.0以后采用的是运行时的权限机制，需要在运行时由用户自行决定是否开启某项
+权限（这里主要是两个权限：调用相机和访问存储空间），这就需要在代码中加入额外的逻辑。
+
+-（3）人脸识别：
+
+这里调用的是google人脸识别的api，其识别原理是先对人眼进行识别，然后再得到其余的相关点。人脸识别的过程相对比较耗时，因此我们通过使用AsyncTask将其放入异步线程中执行
+防止其对主线程的阻塞。在AsyncTask类中有三个主要的方法，分别是onPreExecute（）、doInBackground（）、onPostExecute（）。首先在onPreExecute中初始化加载对话框提示用户
+正在进行加载，然后将人脸识别的任务放在异步的doInBackground方法中进行执行，最后onPostExecute方法回到主线程来取消加载对话框并显示人脸识别后的图像。
+
+![图像处理课_week2-识别人脸](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week2-%E8%AF%86%E5%88%AB%E4%BA%BA%E8%84%B8.jpg)
+
+-（4）app中内嵌web页面：
+
+这里我们使用的是WebView来做的内嵌页面。通过对WebView设置加载客户端和访问Url地址可以使其显示相关网页上的内容。这里需要注意的是要开启JavaScript配置，这样显示出来的
+页面才具有交互性。并且设置加载客户端时需要覆盖shouldOverrideUrlLoading方法，这样页面才能在app程序中运行，而不是调用系统的浏览器运行。最后还需要覆盖该activity
+界面的onKeyDown方法，设置按下返回键时判断WebView能否返回上一页面，若能返回则返回上一页面，否则退出这个activity。
+
+好吧，这周的工作就到此为止啦，下周将继续研究和实现java使用jni调用c算法的部分~
+
+
+
