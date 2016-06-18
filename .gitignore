@@ -25,3 +25,6 @@ sea-modules
 .cache
 .sass-cache
 Gemfile.lock
+.bundle
+vendor
+

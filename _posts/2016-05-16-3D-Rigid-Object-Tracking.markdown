@@ -62,9 +62,9 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 
 ## Reference
 
->* [1]. Multiple 3D Object Tracking for Augmented Reality, In ISMAR, 2008.
+>* [1]. [Multiple 3D Object Tracking for Augmented Reality, In ISMAR, 2008.](http://delivery.acm.org/10.1145/1610000/1605357/04637336.pdf)
 >* [2]. https://www.ssontech.com/tutes/tuteobj.html
->* [3]. Manipulator and Object Tracking for In-Hand 3D Object Modeling, IN IJRR, 2011.
+>* [3]. [Manipulator and Object Tracking for In-Hand 3D Object Modeling, IN IJRR, 2011.](http://rse-lab.cs.washington.edu/papers/ijrr-11-tracking.pdf))
 >* [4]. Robust Statistics for 3D Object Tracking, In ICRA 2006.
 >* [5]. Real-time 3D Object Pose Estimation and Tracking for Natural Landmark Based Visual Servo. In IROS, 2008.
 >* [6]. [OpenCV Tutorial C++](http://opencv-srf.blogspot.my/2010/09/object-detection-using-color-seperation.html)
@@ -184,7 +184,7 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 由于端午过节，更新晚了。
 
 
-上周完成了两个任务，一是单目摄像机的标定，主要是利用棋盘格子和opencv的｀calibrateCamera()｀函数，计算摄像机的内参矩阵和RT矩阵。那么对于图像平面上的二维点，可以求出对应的三维坐标，找到物体平面和图像平面之间的关系，如图所示：
+上周完成了两个任务，一是单目摄像机的标定，主要是利用棋盘格子和opencv的`calibrateCamera()`函数，计算摄像机的内参矩阵和RT矩阵。那么对于图像平面上的二维点，可以求出对应的三维坐标，找到物体平面和图像平面之间的关系，如图所示：
 
 ![week3-平面](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week3-%E5%B9%B3%E9%9D%A2.png)
 
