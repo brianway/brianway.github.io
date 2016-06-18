@@ -38,8 +38,8 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 
 - [x] 选定项目题目，组队确定组员，创建项目链接(2016.5.13~2016.5.19)
 - [x] 阅读相关论文，确定实现方案(1~2周)
-- [ ] 代码实现，PC上验证和测试方案(2周)
-- [ ] 移植到移动端，在安卓设备上实现(1周)
+- [x] 代码实现，PC上验证和测试方案(2周)
+- [x] 移植到移动端，在安卓设备上实现(1周)
 
 
 ## Time Line
@@ -50,13 +50,21 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 | 2016.05.26  | meet OpenCV,read two references,test one method |
 | 2016.06.02  | Android  preparing |
 | 2016.06.10  | Monocular camera calibration and find corner on the object by Checkerboard|
+| 2016.06.16  | Implement PC demo all by our own and complete the android version with Vuforia|
 
 
 ## Video
 
-暂时展示一个旅游视频
+- PC端演示视频
 
-<embed src="http://player.youku.com/player.php/sid/XOTQ3MTAwMzMy/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" />
+
+<embed src="http://player.youku.com/player.php/sid/XMTYxMTIyMzU0MA==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" />
+
+
+- Android端演示视频
+
+
+<embed src="http://player.youku.com/player.php/sid/XMTYxMDQyODg2OA==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" />
 
 
 
@@ -64,7 +72,7 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 
 >* [1]. [Multiple 3D Object Tracking for Augmented Reality, In ISMAR, 2008.](http://delivery.acm.org/10.1145/1610000/1605357/04637336.pdf)
 >* [2]. https://www.ssontech.com/tutes/tuteobj.html
->* [3]. [Manipulator and Object Tracking for In-Hand 3D Object Modeling, IN IJRR, 2011.](http://rse-lab.cs.washington.edu/papers/ijrr-11-tracking.pdf))
+>* [3]. [Manipulator and Object Tracking for In-Hand 3D Object Modeling, IN IJRR, 2011.](http://rse-lab.cs.washington.edu/papers/ijrr-11-tracking.pdf)
 >* [4]. Robust Statistics for 3D Object Tracking, In ICRA 2006.
 >* [5]. Real-time 3D Object Pose Estimation and Tracking for Natural Landmark Based Visual Servo. In IROS, 2008.
 >* [6]. [OpenCV Tutorial C++](http://opencv-srf.blogspot.my/2010/09/object-detection-using-color-seperation.html)
@@ -73,11 +81,11 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 --------------------
 
 
-## Details 
+## Details
 
 项目详细进展
 
-### week one 
+### week 1
 
 因为之前从来都没有接触过3D object tracking，所以这一周我们主要是从算法入手，选择性地详细阅读了两篇参考文献，了解一下实现步骤。
 
@@ -110,7 +118,7 @@ Proposed 方法由两个可以并行的模型组成，object detection和object 
 
 第一篇文章是2008年的，proposed方法可以实现多目标tracking，但是在实时性上可能效果不太好，作者也说的比较委婉。于是我们阅读了下面一篇文献，是2012年的。
 
-> [2] Changhyun Choi and Henrik I. Christensen. Real-time 3D Model-based Tracking Using Edge and Keypoint Features for Robotic Manipulation. 
+> [2] Changhyun Choi and Henrik I. Christensen. Real-time 3D Model-based Tracking Using Edge and Keypoint Features for Robotic Manipulation.
 
 主要步骤：
 
@@ -124,7 +132,7 @@ Proposed 方法由两个可以并行的模型组成，object detection和object 
 这篇文章的实验部分写的比较详细，尤其是我们在第一篇文章中不知道CAD模型怎么获取等，在这篇文章中都有讲到。相比之下，这篇文章的方法更复杂，速度非常快，我们准备尝试实现该文章的算法，具体的细节下次再更新~
 
 
-### week two
+### week 2
 
 
 本周主要完成安卓的准备工作
@@ -179,7 +187,7 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 好吧，这周的工作就到此为止啦，下周将继续研究和实现java使用jni调用c算法的部分~
 
 
-### week three
+### week 3
 
 由于端午过节，更新晚了。
 
@@ -197,5 +205,61 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 
 
 
+### week 4
 
+俗话说的好，deadline是第一生产力。这周我们完成了PC端的简单demo以及android端的程序，演示视频已在[Video](#video)部分更新。
+
+
+- PC部分
+
+在之前阅读了一些参考文献后，对3d物体追踪的步骤有了基本了解，但由于对CAD等3维模型不熟悉，加上时间比较紧迫，我们降低了实验难度和实现结果的预期，对实验条件进行了简化(如:采用规则物体)并只使用长方体框出物体并进行姿态估计，而不是做到实时勾勒出物体的轮廓。
+
+效果如图(tracking的框画漏了)，具体可看视频部分：
+
+![PC](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-PC.png)
+
+
+实现思路是选择一帧图像作为参考，具体而言就是，在棋盘图像上放置物体，利用棋盘对摄像头进行标定，并计算出棋盘坐标系。然后找出图中物体的特征点，计算ORB特征描述。对物体的特征点进行kmeans聚类，可以得到物体的中心点，在中心点处的棋盘坐标系上以长方体给出物体的姿态估计。
+
+后面对物体的追踪部分就是找出物体特征点，计算其ORB特征描述(正好我们组之前论文阅读汇报作业里读的论文就是`BRIEF`，也算学以致用吧)，并与参考帧进行特征点匹配。计算匹配特征点之间的单应性矩阵，然后对初始姿态的长方体角点进行变换，更新物体姿态。
+
+
+环境配置：Python 2.7.6 + openCV 2.4.10，Ubuntu 14.04
+
+
+
+
+- Android部分
+
+本来计划是在PC端实现算法，然后封装起来，在移动端通过JNI调用，但由于时间不够App最后的功能实现使用的是Vuforia的SDK中的算法（也是基于openGL实现的，封装成接口，可以直接调用）。
+
+3D物体追踪主要涉及两个方面：
+
+1. 物体的特征提取
+2. 根据1中得到的物体特征进行物体识别和追踪
+
+其中物体的特征识别使用的是Vuforia的Scanner软件，将物体放在定标纸可以定标的区域，然后对物体进行360度的拍摄扫描得到物体的特征信息如图（示例中扫描的物体为一个鼠标）
+
+![scanner](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-scanner.png)
+
+
+特征信息会保存到一个od文件中。在Vuforia的开发者平台上，开发者可以创建自己的数据库，在数据库中添加刚刚得到的od文件，之后便可以下载得到这个od文件对应的xml数据文件，这个xml数据文件会在后面我们设计的app中用到。
+
+接下来就是我们自己app的部分了，首先需要进行一些环境的配置：
+
+1. 将开发者网站上下载的sdk文件放置到libs文件夹下，并在build.gradle文件依赖中设置编译这个sdk；
+2. 新建一个jniLibs文件夹，将算法主体的libVuforia.so（封装了调用openGL的算法）放置到该文件夹下，在build.gradle文件配置.so文件使其可以被正确引用；
+3. 将开发者网站中注册得到的license key配置到Vuforia的初始代码中；
+4. 将先前得到的xml数据文件放到项目的assets文件中。
+
+配置完成以后就是界面和实现的部分了。进入物体追踪界面时首先会进行任务的初始化，初始化包括：
+
+1. 初始化框住物体的openGL view，这个view是基于android的GLSurfaceView实现的；
+2. 渲染器的初始化，这里的渲染器是基于GLSurfaceView里的内部类Renderer来实现的；
+3. Vuforia任务初始化，初始化后将其绑定到2的渲染器上，在渲染器上通过设置Texture可以设置渲染器的渲染材质，将渲染器绑定到openGL view上。
+
+初始化时界面背景为黑色，且中间会显示一个进度条代表正在进行初始化，初始化完毕以后显示摄像头界面并取消进度条。初始化完成以后就可开始物体的识别和追踪了。该activity设置了GestureListener实现了手势监听，单击屏幕中要追踪的物体则会显示一个正方体块将目标物体包住（这里需要借助定标纸），与此同时会初始化一个Object Tracker来跟踪物体实时位置变化使包络能和物体一起移动。现在拖动定标纸，就可以看到正方形包络和物体一起发生移动，效果如下图，具体可看视频部分。
+
+
+![android](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-PC.png)
 
