@@ -261,5 +261,5 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 初始化时界面背景为黑色，且中间会显示一个进度条代表正在进行初始化，初始化完毕以后显示摄像头界面并取消进度条。初始化完成以后就可开始物体的识别和追踪了。该activity设置了GestureListener实现了手势监听，单击屏幕中要追踪的物体则会显示一个正方体块将目标物体包住（这里需要借助定标纸），与此同时会初始化一个Object Tracker来跟踪物体实时位置变化使包络能和物体一起移动。现在拖动定标纸，就可以看到正方形包络和物体一起发生移动，效果如下图，具体可看视频部分。
 
 
-![android](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-PC.png)
+![android](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-Android.png)
 
