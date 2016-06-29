@@ -2,7 +2,7 @@
 layout: post
 title:  hadoop完全分布式模式的安装和配置步骤
 date:   2015-12-17 22:35:11 +08:00
-category: hadoop
+category: 分布式系统
 tags: hadoop 安装部署
 comments: true
 ---
