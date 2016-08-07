@@ -135,13 +135,11 @@ docker inspect ${container_id}
 
 参考链接
 
-> [Reference - ADD or COPY](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/add-or-copy)
-> [Stackoverflow - Docker COPY vs ADD](http://stackoverflow.com/questions/24958140/docker-copy-vs-add)
+>* [Reference - ADD or COPY](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/add-or-copy)
+>* [Stackoverflow - Docker COPY vs ADD](http://stackoverflow.com/questions/24958140/docker-copy-vs-add)
 
 
 
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
