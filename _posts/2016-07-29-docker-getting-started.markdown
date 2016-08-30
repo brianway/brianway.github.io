@@ -100,7 +100,7 @@ Mac下有两种安装方式供选
 
 docker的内部主要有三种资源/组件
 
-- docker images : **build component**,只可读
+- docker images : **build** component,只可读
 - docker registries : **distribution** component,images共享库
 - docker containers : **run** component
 
