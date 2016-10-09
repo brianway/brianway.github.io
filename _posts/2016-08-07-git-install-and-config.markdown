@@ -84,6 +84,7 @@ fi
 - 方法三：使用[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)并启用git plugins
 
 检查下支持的shell:`cat /etc/shells`
+
 查看当前shell:`echo $SHELL`
 
 
