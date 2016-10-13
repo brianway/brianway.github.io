@@ -2,8 +2,8 @@
 layout: post
 title:  几种常见排序算法
 date:   2016-05-08 14:19:00 +08:00
-category: 算法
-tags: algorithms 总结
+category: 算法和数据结构
+tags: 算法 总结
 comments: true
 ---
 
@@ -34,7 +34,7 @@ Java中很多类已经实现了`Comparable<T>`接口，用户也可自定义类�
 
 total order:
 
-- Antisymmetry(反对称性): if v ≤ w and w ≤ v, then v = w. 
+- Antisymmetry(反对称性): if v ≤ w and w ≤ v, then v = w.
 - Transitivity(传递性): if v ≤ w and w ≤ x, then v ≤ x.
 - Totality: either v ≤ w or w ≤ v or both.
 
@@ -180,9 +180,9 @@ java实现：
 public static void sort(Comparable[] a) {
     int N = a.length;
 
-    // 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ... 
+    // 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ...
     int h = 1;
-    while (h < N/3) h = 3*h + 1; 
+    while (h < N/3) h = 3*h + 1;
 
     while (h >= 1) {
         // h-sort the array
@@ -216,7 +216,7 @@ correct variant: between i and N – 1
 
 
 - Mergesort--Java sort for objects.
-- Quicksort--Java sort for primitive types. 
+- Quicksort--Java sort for primitive types.
 
 
 下面看看这两种排序算法
@@ -242,17 +242,17 @@ correct variant: between i and N – 1
    - 右半边的当前元素**小于**左半边的当前元素(取右半边的元素)
    - 右半边的当前元素**大于/等于**左半边的当前元素(取左半边的元素)
 
-   
+
 merging java实现：
 
 ```java
  // stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
 private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
     // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
- 
+
     // copy to aux[]
     for (int k = lo; k <= hi; k++) {
-        aux[k] = a[k]; 
+        aux[k] = a[k];
     }
 
     // merge back to a[]
@@ -308,7 +308,7 @@ java实现：
 ```java
 public class MergeBU{
    private static void merge(...){ /* as before */ }
- 
+
    public static void sort(Comparable[] a){
      int N = a.length;
      Comparable[] aux = new Comparable[N];
@@ -357,7 +357,7 @@ private static int partition(Comparable[] a, int lo, int hi) {
     int i = lo;
     int j = hi + 1;
     Comparable v = a[lo];
-    while (true) { 
+    while (true) {
 
         // find item on lo to swap
         while (less(a[++i], v))
@@ -390,7 +390,7 @@ public static void sort(Comparable[] a) {
 }
 
 // quicksort the subarray from a[lo] to a[hi]
-private static void sort(Comparable[] a, int lo, int hi) { 
+private static void sort(Comparable[] a, int lo, int hi) {
     if (hi <= lo) return;
     int j = partition(a, lo, hi);
     sort(a, lo, j-1);
@@ -445,7 +445,7 @@ private static void sort(Comparable[] a, int lo, int hi) {
 
 ```java
 // quicksort the subarray a[lo .. hi] using 3-way partitioning
-private static void sort(Comparable[] a, int lo, int hi) { 
+private static void sort(Comparable[] a, int lo, int hi) {
     if (hi <= lo) return;
     int lt = lo, gt = hi;
     Comparable v = a[lo];
@@ -457,12 +457,12 @@ private static void sort(Comparable[] a, int lo, int hi) {
         else              i++;
     }
 
-    // a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]. 
+    // a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi].
     sort(a, lo, lt-1);
     sort(a, gt+1, hi);
 }
 ```
-  
+
 
 
 ## Heapsort(堆排序)
@@ -489,7 +489,7 @@ public static void sort(Comparable[] pq) {
     //堆的构造
     for (int k = N/2; k >= 1; k--)
         sink(pq, k, N);
-    
+
     //下沉排序
     while (N > 1) {
         exch(pq, 1, N--);
@@ -555,5 +555,3 @@ Significance： In-place sorting algorithm with N log N worst-case.
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
