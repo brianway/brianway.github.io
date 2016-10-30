@@ -43,6 +43,7 @@ icon: heart
 
 这个博客主要用于记录一个菜鸟的成长之路
 
+2016.10.30 | 读完了《图解http》，《敏捷软件开发》，《Head First 设计模式》，《Java 并发编程实战》；二刷coursera上普林斯顿的"算法 Part I"，完成所有编程作业并获得98.4%（[成绩单](http://7xph6d.com1.z0.glb.clouddn.com/%E9%9A%8F%E7%AC%94_part-I-total.png)）；阅读了部分[《Elasticsearch: The Definitive Guide》](https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html)
 2016.08.30 | 使用Spring Boot+mysql+jQuery+Bootstrap 参与开发了一个Zookeeper网页管理工具;学习了docker的基本使用;了解了JUnit+Mockito,CAS认证,nginx等相关知识;大致刷完了《spring 3.x 企业开发实战》，并整理相关代码至github仓库 [spring-learning](https://github.com/brianway/spring-learning)
 2016.06.26 | 三门课结课，准备数学考试和图像课大作业([3D Rigid Object Tracking](http://brianway.github.io/2016/05/16/3D-Rigid-Object-Tracking/))，处理学校琐事；阅读《spring 3.x 企业开发实战》至第六章；买了Mac Pro和RealForce静电容键盘，熟悉系统和软件；手里很多笔记是半成品，所以暂未发布
 2016.04.28 | 看了部分solr官方reference guide；《lucene in action》读了一半；看完了《java多线程编程核心技术》(高洪岩)，代码都自己实现了并整理上传到我的github仓库 [java-learning](https://github.com/brianway/java-learning)；刷完了coursera上普林斯顿的算法课程["算法 Part I"](https://www.coursera.org/course/algs4partI);
@@ -64,6 +65,3 @@ Comment below to exchange link with me.
 ## Comments
 
 {% include comments.html %}
-
-
-
