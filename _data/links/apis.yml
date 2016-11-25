@@ -1,12 +1,12 @@
 message: API/开发官网
 items:
-  - text: JAVA 8 API
+  - text: Java 8 API
     url: https://docs.oracle.com/javase/8/docs/api/
-  - text: maven中央仓库
+  - text: Maven Central Repository
     url: http://mvnrepository.com/
   - text: Spring Framework API
     url: http://docs.spring.io/spring/docs/current/javadoc-api/
+  - text: Elasticsearch
+    url: https://www.elastic.co/guide/index.html
   - text: webmagic
     url: http://code4craft.github.io/webmagic/docs/
-  - text: Android
-    url: http://developer.android.com/reference/packages.html
