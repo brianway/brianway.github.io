@@ -1,10 +1,12 @@
 message: 大牛博客
 items:
-  - text: 黄亿华(webmagic作者)oschina
-    url: http://my.oschina.net/flashsword/blog?fromerr=DbMDvE8w
+  - text: 陈皓(耗叔,15年软件开发相关工作经验,8年以上项目和团队管理经验)
+    url: http://coolshell.cn/
+  - text: 黄亿华(webmagic作者)
+    url: http://my.oschina.net/flashsword/blog
   - text: 廖雪峰(git教程作者)
     url: http://www.liaoxuefeng.com/
-  - text: peng_gong(北航毕业，就职google)
+  - text: peng_gong(北航毕业,就职google)
     url: http://lucida.me/
   - text: 刘易友(软件工程师)
     url: http://stamen.iteye.com/
