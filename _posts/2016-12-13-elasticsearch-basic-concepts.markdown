@@ -33,7 +33,7 @@ comments: true
 - 集群(cluster)：集群由一个或者多个节点组成，由名称唯一标识
 - 节点(node)：一个单独的 Elasticsearch 实例
 - 索引(index)：文档的集合
-- 类型(type)：文档的逻辑分类/分区
+- 类型(type)：索引的逻辑分类/分区
 - 文档(document)：能够被索引的信息基础单元
 - 分片(shard)：索引的物理分区，是一个最小的 Lucene 索引单元。分为 primary shard(主分片) 和 replica shard(简称replicas)。
 - 副本/备份(replicas)：主分片的备份
