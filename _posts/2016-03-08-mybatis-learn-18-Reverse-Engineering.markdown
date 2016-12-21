@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(18)-mybatis逆向工程
 date:   2016-03-08 10:39:18 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -67,17 +67,17 @@ MyBatis Generator (MBG) can be run in the following ways:
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8" 
+			connectionURL="jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8"
 			userId="root"
 			password="123">
 		</jdbcConnection>
 		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
-			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg"
 			userId="yycg"
 			password="yycg">
 		</jdbcConnection> -->
 
-		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
 			NUMERIC 类型解析为java.math.BigDecimal -->
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -92,14 +92,14 @@ MyBatis Generator (MBG) can be run in the following ways:
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
-		<sqlMapGenerator targetPackage="com.iot.ssm.mapper" 
+		<sqlMapGenerator targetPackage="com.iot.ssm.mapper"
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.iot.ssm.mapper" 
+			targetPackage="com.iot.ssm.mapper"
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
@@ -114,7 +114,7 @@ MyBatis Generator (MBG) can be run in the following ways:
 		<table schema="" tableName="sys_permission"></table>
 		<table schema="" tableName="sys_user_role"></table>
 		<table schema="" tableName="sys_role_permission"></table> -->
-		
+
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">
 			<columnOverride column="" javaType="" />
@@ -127,8 +127,8 @@ MyBatis Generator (MBG) can be run in the following ways:
 
 - `javaModelGenerator`,生成PO类的位置
 - `sqlMapGenerator`,mapper映射文件生成的位置
-- `javaClientGenerator`,mapper接口生成的位置 
-- `table`,指定数据库表 
+- `javaClientGenerator`,mapper接口生成的位置
+- `table`,指定数据库表
 
 
 ### 执行生成程序
@@ -139,7 +139,7 @@ public void generator() throws Exception{
 	List<String> warnings = new ArrayList<String>();
 	boolean overwrite = true;
 	//指定逆向工程配置文件
-	File configFile = new File("generatorConfig.xml"); 
+	File configFile = new File("generatorConfig.xml");
 	ConfigurationParser cp = new ConfigurationParser(warnings);
 	Configuration config = cp.parseConfiguration(configFile);
 	DefaultShellCallback callback = new DefaultShellCallback(overwrite);
@@ -147,7 +147,7 @@ public void generator() throws Exception{
 			callback, warnings);
 	myBatisGenerator.generate(null);
 
-} 
+}
 ```
 
 日志输出：
@@ -208,7 +208,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ItemsMapperTest {
 
 	private ApplicationContext applicationContext;
-	
+
 	private ItemsMapper itemsMapper;
 
 	//在setUp这个方法得到spring容器
@@ -218,10 +218,10 @@ public class ItemsMapperTest {
 		itemsMapper = (ItemsMapper) applicationContext.getBean("itemsMapper");
 	}
 
-	//根据主键删除 
+	//根据主键删除
 	@Test
 	public void testDeleteByPrimaryKey() {
-		
+
 	}
 
 	//插入
@@ -244,9 +244,9 @@ public class ItemsMapperTest {
 		criteria.andNameEqualTo("笔记本");
 		//可能返回多条记录
 		List<Items> list = itemsMapper.selectByExample(itemsExample);
-		
+
 		System.out.println(list);
-		
+
 	}
 
 	//根据主键查询
@@ -259,16 +259,16 @@ public class ItemsMapperTest {
 	//更新数据
 	@Test
 	public void testUpdateByPrimaryKey() {
-		
+
 		//对所有字段进行更新，需要先查询出来再更新
 		Items items = itemsMapper.selectByPrimaryKey(1);
-		
+
 		items.setName("手机");
-		
+
 		itemsMapper.updateByPrimaryKey(items);
 		//如果传入字段不空为才更新，在批量更新中使用此方法，不需要先查询再更新
 		//itemsMapper.updateByPrimaryKeySelective(record);
-		
+
 	}
 
 }

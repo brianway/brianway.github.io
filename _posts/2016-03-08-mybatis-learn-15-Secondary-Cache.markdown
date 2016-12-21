@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(15)-查询缓存之二级缓存
 date:   2016-03-08 10:39:15 +08:00
 category: web开发
-tags: mybatis 缓存
+tags: MyBatis 缓存
 comments: true
 ---
 
@@ -119,7 +119,7 @@ DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 103887628.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
@@ -138,7 +138,7 @@ DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 103887628.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
@@ -149,7 +149,7 @@ DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.5
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Checked out connection 103887628 from pool.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
-DEBUG [main] - ==>  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=? 
+DEBUG [main] - ==>  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=?
 DEBUG [main] - ==> Parameters: 张明明(String), null, 2(String), null, 1(Integer)
 DEBUG [main] - <==    Updates: 1
 DEBUG [main] - Committing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
@@ -160,7 +160,7 @@ DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.3333333333
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Checked out connection 103887628 from pool.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=张明明, sex=2, birthday=null, address=null]
@@ -185,7 +185,7 @@ DEBUG [main] - Returned connection 103887628 to pool.
 刷新缓存就是清空缓存。在mapper的同一个namespace中，如果有其它insert、update、delete操作数据后需要刷新缓存，如果不执行刷新缓存会出现脏读。
 
  设置statement配置中的`flushCache="true"`属性，默认情况下为true即刷新缓存，如果改成false则不会刷新。使用缓存时如果手动修改数据库表中的查询数据会出现脏读。如下：
- 
+
 `<insert id="insertUser" parameterType="cn.itcast.mybatis.po.User" flushCache="true">`
 
 总结：一般下执行完commit操作都需要刷新缓存，`flushCache=true`表示刷新缓存，这样可以避免数据库脏读。

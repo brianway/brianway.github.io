@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)
 date:   2016-03-30 14:28:06 +08:00
 category: web开发
-tags: springmvc mybatis maven IDEA
+tags: SpringMVC MyBatis Maven IntelliJ-IDEA
 comments: true
 ---
 
@@ -62,7 +62,7 @@ pom.xml文件
     <artifactId>learnssm-firstssm</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- jar 版本设置 -->
@@ -130,7 +130,7 @@ pom.xml文件
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -155,7 +155,7 @@ pom.xml文件
             <version>1.1.2</version>
         </dependency>
     </dependencies>
-    
+
 </project>
 ```
 
@@ -178,10 +178,10 @@ pom.xml文件
 - mapper
 - po
 - service
-  - impl 
+  - impl
 
 项目结构如图：
-  
+
 ![springmvc_整合工程-1](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-1.png)
 
 
@@ -191,8 +191,3 @@ pom.xml文件
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-
-
-

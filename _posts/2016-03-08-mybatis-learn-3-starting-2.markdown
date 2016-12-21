@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(3)-入门程序二
 date:   2016-03-08 10:38:04 +08:00
 category: web开发
-tags: mybatis examples
+tags: MyBatis examples
 comments: true
 ---
 
@@ -195,7 +195,7 @@ comments: true
 
 
 ```
-org.apache.ibatis.exceptions.PersistenceException: 
+org.apache.ibatis.exceptions.PersistenceException:
 ### Error updating database.  Cause: org.apache.ibatis.executor.ExecutorException: A query was run and no Result Maps were found for the Mapped Statement 'test.insertUser!selectKey'.  It's likely that neither a Result Type nor a Result Map was specified.
 ### The error may exist in sqlmap/User.xml
 ### The error may involve test.insertUser!selectKey-Inline

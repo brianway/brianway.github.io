@@ -3,7 +3,7 @@ layout: post
 title:  zookeeper单机伪集群配置
 date:   2016-06-29 20:36:11 +08:00
 category: 分布式系统
-tags: zookeeper 安装部署
+tags: ZooKeeper 安装部署
 comments: true
 ---
 
@@ -73,9 +73,9 @@ Zookeeper 分布式服务框架是曾Apache Hadoop的一个子项目，现在是
 然后在每个data目录下创建一个myid的文件(另外两个文件是运行后自动生成的，开始没有)，里面写入一个数字，这个数字和配置文件里的一致
 
 ```
-mi@mi-OptiPlex-9020:~/MyPrograms/zookeeper/server0/data$ cat 
+mi@mi-OptiPlex-9020:~/MyPrograms/zookeeper/server0/data$ cat
 myid                  version-2/            zookeeper_server.pid
-mi@mi-OptiPlex-9020:~/MyPrograms/zookeeper/server0/data$ cat myid 
+mi@mi-OptiPlex-9020:~/MyPrograms/zookeeper/server0/data$ cat myid
 0
 ```
 
@@ -85,14 +85,14 @@ mi@mi-OptiPlex-9020:~/MyPrograms/zookeeper/server0/data$ cat myid
 ```
 # The number of milliseconds of each tick
 tickTime=2000
-# The number of ticks that the initial 
+# The number of ticks that the initial
 # synchronization phase can take
 initLimit=10
-# The number of ticks that can pass between 
+# The number of ticks that can pass between
 # sending a request and getting an acknowledgement
 syncLimit=5
 # the directory where the snapshot is stored.
-# do not use /tmp for storage, /tmp here is just 
+# do not use /tmp for storage, /tmp here is just
 # example sakes.
 dataDir=/home/mi/MyPrograms/zookeeper/server0/data
 dataLogDir=/home/mi/MyPrograms/zookeeper/server0/logs

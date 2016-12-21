@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(4)-前端控制器
 date:   2016-03-30 14:28:04 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -24,7 +24,7 @@ protected void doDispatch(HttpServletRequest request, HttpServletResponse respon
 		HttpServletRequest processedRequest = request;
 		HandlerExecutionChain mappedHandler = null;
 		boolean multipartRequestParsed = false;
-    
+
          。。。。。
 }
 ```
@@ -78,7 +78,7 @@ mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 ```java
 // We need to resolve the view name.
 view = resolveViewName(mv.getViewName(), mv.getModelInternal(), locale, request);
-		
+
 ```
 
 调用view的渲染方法，将model数据填充到request域

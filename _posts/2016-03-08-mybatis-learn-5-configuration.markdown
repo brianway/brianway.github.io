@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(5)-配置文件
 date:   2016-03-08 10:39:05 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -74,8 +74,8 @@ jdbc.password=123
 
 注意： MyBatis 将按照下面的顺序(优先级)来加载属性：
 
-- 在`properties`元素体内定义的属性首先被读取。 
-- 然后会读取`properties`元素中resource或url加载的属性，它会覆盖已读取的同名属性。 
+- 在`properties`元素体内定义的属性首先被读取。
+- 然后会读取`properties`元素中resource或url加载的属性，它会覆盖已读取的同名属性。
 - 最后读取`parameterType`传递的属性，它会覆盖已读取的同名属性。
 
 建议：
@@ -106,17 +106,17 @@ mybatis框架在运行时可以调整一些运行参数,比如：开启二级缓
 
 |  别名  |  映射的类型  |
 |:---    |  :----     |
-|_byte   | 	byte | 
-|_long 	 |  long | 
-|_short  |	short| 
-|_int| 	int| 
-|_integer| 	int| 
+|_byte   | 	byte |
+|_long 	 |  long |
+|_short  |	short|
+|_int| 	int|
+|_integer| 	int|
 |_double| 	double|
 |_float| 	float |
 |_boolean| 	boolean|
 |string |	String |
 |byte |	Byte |
-|long |	Long| 
+|long |	Long|
 |short |	Short |
 |int |	Integer |
 |integer |	Integer |
@@ -125,11 +125,11 @@ mybatis框架在运行时可以调整一些运行参数,比如：开启二级缓
 |boolean| 	Boolean |
 |date |	Date |
 |decimal |	BigDecimal |
-|bigdecimal| BigDecimal| 
+|bigdecimal| BigDecimal|
 
 
 - 自定义别名
-  -	单个别名定义 
+  -	单个别名定义
   -	批量定义别名（常用）
 
 ```xml
@@ -208,7 +208,7 @@ mybatis支持类型处理器
         遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中
         上边规范的前提是：使用的是mapper代理方法
          -->
-<mapper class="com.iot.mybatis.mapper.UserMapper"/> 
+<mapper class="com.iot.mybatis.mapper.UserMapper"/>
 ```
 
 目录示例
@@ -217,7 +217,7 @@ mybatis支持类型处理器
 com.iot.mybatis.mapper------------------package包
            |----UserMapper.java
            |----UserMapper.xml
-              
+
 ```
 
 - 批量加载mapper(推荐使用)

@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(5)-入门程序小结
 date:   2016-03-30 14:28:05 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -36,7 +36,7 @@ comments: true
 注解处理器适配器和注解的处理器映射器是**配对使用**。理解为不能使用非注解映射器进行映射。
 
 ```xml
-<mvc:annotation-driven></mvc:annotation-driven> 
+<mvc:annotation-driven></mvc:annotation-driven>
 ```
 
 可以代替下边的配置：
@@ -138,5 +138,3 @@ comments: true
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

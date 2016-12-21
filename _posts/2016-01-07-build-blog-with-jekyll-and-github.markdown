@@ -3,7 +3,7 @@ layout: post
 title:  在github搭建个人网站
 date:   2016-01-07 22:35:11 +08:00
 category: 其他
-tags: github 安装部署
+tags: GitHub 安装部署
 comments: true
 ---
 
@@ -132,7 +132,7 @@ Configuration file: /Users/brian/mygit/brianway.github.io/_config.yml
 Source: /Users/brian/mygit/brianway.github.io
 Destination: /Users/brian/mygit/brianway.github.io/_site
 Incremental build: disabled. Enable with --incremental
-Generating... 
+Generating...
 ERROR: YOUR SITE COULD NOT BE BUILT:
 ------------------------------------
 Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>': Document 'vendor/bundle/ruby/2.0.0/gems/jekyll-3.1.6/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the YAML front matter.

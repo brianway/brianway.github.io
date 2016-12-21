@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(17)-spring和mybatis整合
 date:   2016-03-08 10:39:17 +08:00
 category: web开发
-tags: mybatis springmvc
+tags: MyBatis SpringMVC
 comments: true
 ---
 
@@ -184,7 +184,7 @@ public class UserDaoImplTest {
 
 		// 调用UserDao的方法
 		User user = userDao.findUserById(1);
-		
+
 		System.out.println(user);
 	}
 

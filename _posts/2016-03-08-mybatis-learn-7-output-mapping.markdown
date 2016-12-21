@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(7)-输出映射
 date:   2016-03-08 10:39:07 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -107,7 +107,7 @@ public List<User> findUserByName(String name) throws Exception;
 mybatis中使用resultMap完成高级输出结果映射。(一对多，多对多)
 
 
-###	resultMap使用方法 
+###	resultMap使用方法
 
 如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。
 
@@ -120,25 +120,25 @@ mybatis中使用resultMap完成高级输出结果映射。(一对多，多对多
 ```xml
 <!-- 定义resultMap
 	将SELECT id id_,username username_ FROM USER 和User类中的属性作一个映射关系
-	
+
 	type：resultMap最终映射的java对象类型,可以使用别名
 	id：对resultMap的唯一标识
 	 -->
 	 <resultMap type="user" id="userResultMap">
-	 	<!-- id表示查询结果集中唯一标识 
+	 	<!-- id表示查询结果集中唯一标识
 	 	column：查询出来的列名
 	 	property：type指定的pojo类型中的属性名
 	 	最终resultMap对column和property作一个映射关系 （对应关系）
 	 	-->
 	 	<id column="id_" property="id"/>
-	 	<!-- 
+	 	<!--
 	 	result：对普通名映射定义
 	 	column：查询出来的列名
 	 	property：type指定的pojo类型中的属性名
 	 	最终resultMap对column和property作一个映射关系 （对应关系）
 	 	 -->
 	 	<result column="username_" property="username"/>
-	 
+
 	 </resultMap>
 ```
 
@@ -183,7 +183,7 @@ public void testFindUserByIdResultMap() throws Exception {
 ```
 
 
-### 小结 
+### 小结
 
 使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。
 

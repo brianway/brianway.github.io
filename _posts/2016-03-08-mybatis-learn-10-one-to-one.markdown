@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(10)-一对一查询
 date:   2016-03-08 10:39:10 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -29,14 +29,14 @@ comments: true
 由于orders表中有一个外键（user_id），通过外键关联查询用户表只能查询出一条记录，可以使用内连接。
 
 ```sql
-SELECT 
+SELECT
   orders.*,
   USER.username,
   USER.sex,
-  USER.address 
+  USER.address
 FROM
   orders,
-  USER 
+  USER
 WHERE orders.user_id = user.id
 ```
 
@@ -54,18 +54,18 @@ WHERE orders.user_id = user.id
 package com.iot.mybatis.po;
 
 /**
- * 
+ *
  * <p>Title: OrdersCustom</p>
  * <p>Description: 订单的扩展类</p>
  */
 //通过此类映射订单和用户查询的结果，让此类继承包括 字段较多的pojo类
 public class OrdersCustom extends Orders{
-	
+
 	//添加用户属性
 	/*USER.username,
 	  USER.sex,
 	  USER.address */
-	
+
 	private String username;
 	private String sex;
 	private String address;

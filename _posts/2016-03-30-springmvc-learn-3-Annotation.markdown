@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(3)-注解的处理器映射器和适配器
 date:   2016-03-30 14:28:03 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -35,7 +35,7 @@ comments: true
 
 <!-- 注解的适配器 -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
-    
+
 ```
 
 或者
@@ -117,4 +117,3 @@ public class ItemsController3 {
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-

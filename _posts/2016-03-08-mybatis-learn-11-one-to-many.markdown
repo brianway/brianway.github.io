@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(11)-一对多查询
 date:   2016-03-08 10:39:11 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -24,7 +24,7 @@ comments: true
 在一对一查询基础上添加订单明细表关联即可。
 
 ```sql
-SELECT 
+SELECT
   orders.*,
   user.username,
   user.sex,

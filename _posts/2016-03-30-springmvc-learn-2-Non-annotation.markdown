@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(2)-非注解的处理器映射器和适配器
 date:   2016-03-30 14:28:02 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -114,4 +114,3 @@ response.getWriter().write("json串");
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-

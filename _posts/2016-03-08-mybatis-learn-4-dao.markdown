@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(4)-开发dao方法
 date:   2016-03-08 10:39:04 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -175,7 +175,7 @@ public class UserDaoImplTest {
 
 		// 调用UserDao的方法
 		User user = userDao.findUserById(1);
-		
+
 		System.out.println(user);
 	}
 
@@ -326,7 +326,7 @@ sqlSession.insert("test.insertUser", user);
         update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address}
         where id=#{id}
     </update>
-    
+
 </mapper>
 ```
 
@@ -364,33 +364,33 @@ public interface UserMapper {
 
 ```java
 public class UserMapperTest {  
-  
-  
+
+
     private SqlSessionFactory sqlSessionFactory;  
-      
+
     //注解Before是在执行本类所有测试方法之前先调用这个方法  
     @Before  
     public void setup() throws Exception{  
         //创建SqlSessionFactory  
         String resource="SqlMapConfig.xml";  
-          
+
         //将配置文件加载成流  
         InputStream inputStream = Resources.getResourceAsStream(resource);  
         //创建会话工厂，传入mybatis配置文件的信息  
         sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);  
     }  
-      
+
     @Test  
     public void testFindUserById() throws Exception{  
-          
+
         SqlSession sqlSession=sqlSessionFactory.openSession();  
-          
+
         //创建UserMapper代理对象  
         UserMapper userMapper=sqlSession.getMapper(UserMapper.class);  
-          
+
         //调用userMapper的方法  
         User user=userMapper.findUserById(1);  
-          
+
         System.out.println(user.getUsername());  
     }  
 }  

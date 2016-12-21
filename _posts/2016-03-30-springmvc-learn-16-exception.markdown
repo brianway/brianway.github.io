@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(16)-异常处理器
 date:   2016-03-30 14:28:16 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -209,5 +209,3 @@ public ItemsCustom findItemsById(Integer id) throws Exception {
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

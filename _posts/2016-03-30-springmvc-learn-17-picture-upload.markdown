@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(17)-上传图片
 date:   2016-03-30 14:28:17 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -132,6 +132,3 @@ if(items_pic!=null && originalFilename!=null && originalFilename.length()>0){
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-

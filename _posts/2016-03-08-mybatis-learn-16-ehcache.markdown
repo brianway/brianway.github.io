@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(16)-mybatis整合ehcache
 date:   2016-03-08 10:39:16 +08:00
 category: web开发
-tags: mybatis 缓存
+tags: MyBatis 缓存
 comments: true
 ---
 
@@ -40,13 +40,13 @@ import java.util.concurrent.locks.ReadWriteLock;
 
 /**
  * SPI for cache providers.
- * 
+ *
  * One instance of cache will be created for each namespace.
- * 
+ *
  * The cache implementation must have a constructor that receives the cache id as an String parameter.
- * 
+ *
  * MyBatis will pass the namespace as id to the constructor.
- * 
+ *
  * <pre>
  * public MyCache(final String id) {
  *  if (id == null) {
@@ -81,7 +81,7 @@ public interface Cache {
 
   /**
    * Optional. It is not called by the core.
-   * 
+   *
    * @param key The key
    * @return The object that was removed
    */
@@ -94,17 +94,17 @@ public interface Cache {
 
   /**
    * Optional. This method is not called by the core.
-   * 
+   *
    * @return The number of elements stored in the cache (not its capacity).
    */
   int getSize();
-  
-  /** 
+
+  /**
    * Optional. As of 3.2.6 this method is no longer called by the core.
    *  
    * Any locking needed by the cache must be provided internally by the cache provider.
-   * 
-   * @return A ReadWriteLock 
+   *
+   * @return A ReadWriteLock
    */
   ReadWriteLock getReadWriteLock();
 
@@ -187,7 +187,7 @@ public class PerpetualCache implements Cache {
 - 加入ehcache包
    - ehcache-core-2.6.5.jar
    - mybatis-ehcache-1.0.2.jar
-   
+
 配置mapper中`cache`中的`type`为ehcache对cache接口的实现类型
 
 ```xml
@@ -208,13 +208,13 @@ public class PerpetualCache implements Cache {
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
 	<diskStore path="F:\develop\ehcache" />
-	<defaultCache 
-		maxElementsInMemory="1000" 
+	<defaultCache
+		maxElementsInMemory="1000"
 		maxElementsOnDisk="10000000"
-		eternal="false" 
-		overflowToDisk="false" 
+		eternal="false"
+		overflowToDisk="false"
 		timeToIdleSeconds="120"
-		timeToLiveSeconds="120" 
+		timeToLiveSeconds="120"
 		diskExpiryThreadIntervalSeconds="120"
 		memoryStoreEvictionPolicy="LRU">
 	</defaultCache>

@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(9)-订单商品数据模型分析
 date:   2016-03-08 10:39:09 +08:00
 category: web开发
-tags: mybatis examples
+tags: MyBatis examples
 comments: true
 ---
 
@@ -18,19 +18,19 @@ comments: true
 ##	数据模型分析思路
 
 - 每张表记录的数据内容
-  
+
 分模块对每张表记录的内容进行熟悉，相当于你学习系统需求（功能）的过程。
 
 - 每张表重要的字段设置
-	
+
 非空字段、外键字段
 
 - 数据库级别表与表之间的关系
-	
+
 外键关系
 
 - 表与表之间的业务关系
-	
+
 在分析表与表之间的业务关系时一定要建立在某个业务意义基础上去分析。
 
 
@@ -48,7 +48,7 @@ comments: true
 表与表之间的业务关系：
 
 在分析表与表之间的业务关系时需要建立在某个业务意义基础上去分析。先分析数据级别之间有关系的表之间的业务关系：
-	
+
 - usre和orders：
 
 user--->orders：一个用户可以创建多个订单，一对多
@@ -79,7 +79,7 @@ orders和items之间可以通过orderdetail表建立关系。
 
 ```sql
 /*
-SQLyog v10.2 
+SQLyog v10.2
 MySQL - 5.1.72-community : Database - mybatis
 *********************************************************************
 */
@@ -154,7 +154,7 @@ CREATE TABLE `user` (
 
 ```sql
 /*
-SQLyog v10.2 
+SQLyog v10.2
 MySQL - 5.1.72-community : Database - mybatis
 *********************************************************************
 */

@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(8)-springmvc整合mybatis之service
 date:   2016-03-30 14:28:08 +08:00
 category: web开发
-tags: springmvc mybatis
+tags: SpringMVC MyBatis
 comments: true
 ---
 
@@ -103,6 +103,3 @@ public class ItemsServiceImpl implements ItemsService {
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-

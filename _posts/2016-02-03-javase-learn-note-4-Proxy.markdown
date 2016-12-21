@@ -3,7 +3,7 @@ layout: post
 title:  java基础巩固笔记(4)-代理
 date:   2016-02-03 22:43:13 +08:00
 category: 编程语言
-tags: java 代理
+tags: Java 代理
 comments: true
 ---
 
@@ -57,7 +57,7 @@ public class ProxyTest {
         System.out.println(clazzProxy1);
         printConstructors(clazzProxy1);
         printMethods(clazzProxy1);
-        
+
     }
 
     /**
@@ -241,7 +241,7 @@ com.sun.proxy.$Proxy0
 ### 面向切面编程
 
 把切面的代码以**对象**的形式传递给InvocationHandler的的invoke方法，invoke方法中执行该对象的方法就执行了切面的代码。
-    
+
 所以需要传递两个参数：
 
 1.目标(Object target)

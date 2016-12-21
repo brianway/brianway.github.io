@@ -3,7 +3,7 @@ layout: post
 title:  javaweb入门笔记(2)-http入门
 date:   2016-02-06 18:04:12 +08:00
 category: web开发
-tags: javaweb http
+tags: JavaWeb HTTP
 comments: true
 ---
 
@@ -72,4 +72,3 @@ comments: true
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-

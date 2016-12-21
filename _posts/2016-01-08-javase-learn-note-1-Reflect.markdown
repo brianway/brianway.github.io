@@ -3,7 +3,7 @@ layout: post
 title:  java基础巩固笔记(1)-反射
 date:   2016-01-08 12:39:11 +08:00
 category: 编程语言
-tags: java
+tags: Java
 comments: true
 ---
 
@@ -150,27 +150,11 @@ JavaBean读取属性x的值的流程：变大写、补前缀、获取方法。
     - 字符串和整数转换(对比(PropertyUtils)
     - 属性级联操作
     - 操作map
-    
-    
-    
+
+
+
 
 
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

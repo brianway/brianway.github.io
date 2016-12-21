@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(10)-springmvc注解开发之商品修改功能
 date:   2016-03-30 14:28:10 +08:00
 category: web开发
-tags: springmvc 注解
+tags: SpringMVC 注解
 comments: true
 ---
 
@@ -17,7 +17,7 @@ comments: true
 
 ## 需求
 
-操作流程： 
+操作流程：
 
 - 1.进入商品查询列表页面
 - 2.点击修改，进入商品修改页面，页面中显示了要修改的商品。要修改的商品从数据库查询，根据商品id(主键)查询商品信息
@@ -292,5 +292,3 @@ response.getWriter().write("json串");
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

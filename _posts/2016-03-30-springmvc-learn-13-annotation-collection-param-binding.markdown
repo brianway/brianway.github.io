@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定
 date:   2016-03-30 14:28:13 +08:00
 category: web开发
-tags: springmvc 注解
+tags: SpringMVC 注解
 comments: true
 ---
 
@@ -43,7 +43,7 @@ public String deleteItems(Integer[] items_id) throws Exception
 	<td>${item.price }</td>
 	<td><fmt:formatDate value="${item.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 	<td>${item.detail }</td>
-	
+
 	<td><a href="${pageContext.request.contextPath }/items/editItems.action?id=${item.id}">修改</a></td>
 
 </tr>
@@ -162,6 +162,3 @@ System.out.println(queryVo.getStudentinfo());
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-

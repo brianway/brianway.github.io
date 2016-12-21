@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(1)-框架原理和入门配置
 date:   2016-03-30 14:28:01 +08:00
 category: web开发
-tags: springmvc 安装部署
+tags: SpringMVC 安装部署
 comments: true
 ---
 
@@ -63,7 +63,7 @@ intellij IDEA 15.0.2
 
 - A方法(有待商榷)
 
-`new->project->maven->勾选create from archetype->选中webapp` 
+`new->project->maven->勾选create from archetype->选中webapp`
 
 在`src/main`下新建`java`文件夹，标记为`Sources Root`
 
@@ -236,5 +236,3 @@ modelAndView.setViewName("items/itemsList");
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

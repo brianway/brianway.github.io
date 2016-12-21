@@ -3,7 +3,7 @@ layout: post
 title:  java多线程核心技术梳理(附源码)
 date:   2016-04-18 16:18:01 +08:00
 category: 编程语言
-tags: java 多线程 总结
+tags: Java 多线程
 comments: true
 ---
 
@@ -42,7 +42,7 @@ comments: true
   - 线程的优先级具有规则性. CPU尽量倾向于把资源优先级高的线程
   - 线程的优先级具有随机性. 优先级不等同于执行顺序，二者关系不确定
 - java中的两种线程：用户线程和守护(Daemon)线程。
-  - 守护线程：进程中不存在非守护线程时，守护线程自动销毁。典型例子如：垃圾回收线程。 
+  - 守护线程：进程中不存在非守护线程时，守护线程自动销毁。典型例子如：垃圾回收线程。
 
 比较和辨析
 
@@ -56,15 +56,15 @@ comments: true
   - 在sleep()休眠时间期满后，该线程不一定会立即执行，这是因为其它线程可能正在运行而且没有被调度为放弃执行，除非此线程具有更高的优先级；wait()使用notify或者notifyAlll或者指定睡眠时间来唤醒当前等待池中的线程
   - wait()必须放在synchronized block中，否则会在runtime时扔出`java.lang.IllegalMonitorStateException`异常
 
- 
+
 
 | 方法|	是否释放锁|	备注|
 |:----:|:----:|:----:|
 |wait |	是	|wait和notify/notifyAll是成对出现的, 必须在synchronize块中被调用|
 |sleep|	否	|可使低优先级的线程获得执行机会|
 |yield|	否	|yield方法使当前线程让出CPU占有权, 但让出的时间是不可设定的|
-  
- 
+
+
 ## 对象及变量的并发访问
 
 - `synchronized`关键字
@@ -81,7 +81,7 @@ comments: true
   - 当其他线程执行x对象方法里的synchronized(this)代码块时呈同步效果
 - 静态同步synchronized方法与synchronized(class)代码块：对当前对应的class类进行持锁。
 
-	
+
 *线程的私有堆栈图*
 
 ![javaSE_多线程-线程的私有堆栈](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png)
@@ -136,7 +136,7 @@ comments: true
    - 阻塞队列：存储被阻塞的的线程
 - 生产者/消费者模式
    - “假死”：线程进入WAITING等待状态，呈假死状态的进程中所有线程都呈WAITING状态。
-     - 假死的主要原因：有可能连续唤醒同类。notify唤醒的不一定是异类，也许是同类，如“生产者”唤醒“生产者”。 
+     - 假死的主要原因：有可能连续唤醒同类。notify唤醒的不一定是异类，也许是同类，如“生产者”唤醒“生产者”。
      - 解决假死：将notify()改为notifyAll()
   - wait条件改变，可能出现异常，需要将if改成while
 - 通过管道进行线程间通信：一个线程发送数据到输出管道，另一个线程从输入管道读数据。
@@ -162,7 +162,7 @@ comments: true
 Object与Condition方法对比
 
 |Object| Condition|
-|:---: |:---:| 
+|:---: |:---:|
 |wait()|await()|
 |wait(long timeout)|await(long time,TimeUnit unit)|
 |notify()|signal()|
@@ -234,7 +234,7 @@ Object与Condition方法对比
 
 ![javaSE_多线程-方法与状态关系示意图.png](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
 
-- 线程的状态：`Thread.State`枚举类,参考官网API[Enum Thread.State](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Thread.State.html) 
+- 线程的状态：`Thread.State`枚举类,参考官网API[Enum Thread.State](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Thread.State.html)
 - 线程组：线程组中可以有线程对象，也可以有线程组，组中还可以有线程。可批量管理线程或线程组对象。
 - `SimpleDateFormat`非线程安全，解决办法有：
   - 创建多个SimpleDateFormat类的实例
@@ -260,4 +260,3 @@ Object与Condition方法对比
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-

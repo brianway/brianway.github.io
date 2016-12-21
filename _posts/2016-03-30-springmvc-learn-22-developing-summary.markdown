@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(22)-springmvc开发小结
 date:   2016-03-30 14:28:22 +08:00
 category: web开发
-tags: springmvc 总结
+tags: SpringMVC 总结
 comments: true
 ---
 
@@ -47,7 +47,7 @@ comments: true
 	- 1、对url和Handler的**方法**进行映射。
 	- 2、可以窄化请求映射，设置Handler的根路径，url就是根路径+子路径请求方式
 	- 3、可以限制http请求的方法
-	
+
 映射成功后，springmvc框架生成一个Handler对象，对象中只包括 一个映射成功的method。
 
 ### 注解开发中参数绑定
@@ -222,7 +222,7 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
    - 用于身份认证、身份授权。比如身份认证，如果认证通过表示当前用户没有登陆，需要此方法拦截不再向下执行
 - `public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception`
   - 多了一个modelAndView参数
-  - 进入Handler方法之后，返回modelAndView之前执行 
+  - 进入Handler方法之后，返回modelAndView之前执行
   - 应用场景从modelAndView出发：将公用的模型数据(比如菜单导航)在这里传到视图，也可以在这里统一指定视图
 - `public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception`
   - 多了一个Exception的类型的参数
@@ -232,9 +232,9 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
 ### 拦截器的配置
 
 - 针对HandlerMapping配置(一般不推荐)
-  - springmvc拦截器针对HandlerMapping进行拦截设置，如果在某个HandlerMapping中配置拦截，经过该HandlerMapping映射成功的handler最终使用该拦截器 
+  - springmvc拦截器针对HandlerMapping进行拦截设置，如果在某个HandlerMapping中配置拦截，经过该HandlerMapping映射成功的handler最终使用该拦截器
 - 类似全局的拦截器
-  - springmvc配置类似全局的拦截器，springmvc框架将配置的类似全局的拦截器注入到每个HandlerMapping中。 
+  - springmvc配置类似全局的拦截器，springmvc框架将配置的类似全局的拦截器注入到每个HandlerMapping中。
 
 
 ### 拦截器测试及其应用
@@ -247,7 +247,7 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
   - 拦截器1放行，拦截器2 preHandle才会执行。
   - 拦截器2 preHandle不放行，拦截器2 postHandle和afterCompletion不会执行。
   - 只要有一个拦截器不放行，postHandle不会执行。
-- 两个拦截器都不放 
+- 两个拦截器都不放
   - 拦截器1 preHandle不放行，postHandle和afterCompletion不会执行。
   - 拦截器1 preHandle不放行，拦截器2不执行。
 
@@ -255,7 +255,3 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
 
 - 统一日志处理拦截器，需要该拦截器preHandle一定要放行，且将它放在拦截器链接中第一个位置。
 - 登陆认证拦截器，放在拦截器链接中第一个位置。权限校验拦截器，放在登陆认证拦截器之后。（因为登陆通过后才校验权限，当然登录认证拦截器要放在统一日志处理拦截器后面）
-
-
-
-

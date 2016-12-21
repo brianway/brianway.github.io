@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(7)-springmvc整合mybatis之mapper
 date:   2016-03-30 14:28:07 +08:00
 category: web开发
-tags: springmvc mybatis
+tags: SpringMVC MyBatis
 comments: true
 ---
 
@@ -155,9 +155,9 @@ mybatis自己的配置文件
    				items.name LIKE '%${itemsCustom.name}%'
    			</if>
    		</if>
-	
+
    </sql>
-  	
+
   	<!-- 商品列表查询 -->
   	<!-- parameterType传入包装对象(包装了查询条件)
   		resultType建议使用扩展对象
@@ -169,7 +169,7 @@ mybatis自己的配置文件
   			<include refid="query_items_where"></include>
   		</where>
   	</select>
-  	
+
 </mapper>
 ```
 
@@ -239,5 +239,3 @@ public class ItemsQueryVo {
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

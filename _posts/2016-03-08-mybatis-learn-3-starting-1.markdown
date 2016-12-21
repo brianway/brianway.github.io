@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(3)-入门程序一
 date:   2016-03-08 10:38:03 +08:00
 category: web开发
-tags: mybatis examples
+tags: MyBatis examples
 comments: true
 ---
 
@@ -276,7 +276,7 @@ DEBUG [main] - PooledDataSource forcefully closed/removed all connections.
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 1857815974.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@6ebc05a6]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=王五, sex=2, birthday=null, address=null]
@@ -296,8 +296,8 @@ DEBUG [main] - PooledDataSource forcefully closed/removed all connections.
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 1596467899.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@5f282abb]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE username LIKE '%小明%' 
-DEBUG [main] - ==> Parameters: 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE username LIKE '%小明%'
+DEBUG [main] - ==> Parameters:
 DEBUG [main] - <==      Total: 3
 [User [id=16, username=张小明, sex=1, birthday=null, address=河南郑州], User [id=22, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=25, username=陈小明, sex=1, birthday=null, address=河南郑州]]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@5f282abb]

@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(20)-拦截器
 date:   2016-03-30 14:28:20 +08:00
 category: web开发
-tags: springmvc
+tags: SpringMVC
 comments: true
 ---
 
@@ -54,7 +54,7 @@ public class HandlerInterceptor1 implements HandlerInterceptor{
    - 用于身份认证、身份授权。比如身份认证，如果认证通过表示当前用户没有登陆，需要此方法拦截不再向下执行
 - `public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception`
   - 多了一个modelAndView参数
-  - 进入Handler方法之后，返回modelAndView之前执行 
+  - 进入Handler方法之后，返回modelAndView之前执行
   - 应用场景从modelAndView出发：将公用的模型数据(比如菜单导航)在这里传到视图，也可以在这里统一指定视图
 - `public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception`
   - 多了一个Exception的类型的参数
@@ -326,7 +326,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         <mvc:mapping path="/**"/>
         <bean class="com.iot.learnssm.firstssm.interceptor.LoginInterceptor"></bean>
     </mvc:interceptor>
-    
+
     ...省略
 ```
 
@@ -335,5 +335,3 @@ public class LoginInterceptor implements HandlerInterceptor {
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

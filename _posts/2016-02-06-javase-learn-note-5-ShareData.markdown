@@ -3,7 +3,7 @@ layout: post
 title:  java基础巩固笔记(5)-多线程之共享数据
 date:   2016-02-06 14:20:12 +08:00
 category: 编程语言
-tags: java 多线程
+tags: Java 多线程
 comments: true
 ---
 
@@ -218,7 +218,7 @@ public class MutiThreadShareData {
     private static MutiShareData mutiShareData = new MutiShareData();
 
     public static void main(String[] args) {
-        
+
         for(int i=0;i<3;i++){
             new Thread(
                     new Runnable() {
@@ -273,10 +273,3 @@ class MutiShareData{
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@ layout: post
 title:  java基础巩固笔记(4)-实现AOP功能的封装与配置的小框架
 date:   2016-02-03 22:46:12 +08:00
 category: 编程语言
-tags: java 代理 AOP
+tags: Java 代理 AOP
 comments: true
 ---
 

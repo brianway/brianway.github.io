@@ -3,7 +3,7 @@ layout: post
 title:  将nutch2.3的bin/crawl脚本改写为java类
 date:   2016-01-19 21:01:11 +08:00
 category: 其他
-tags: nutch shell 
+tags: Nutch shell 
 comments: true
 ---
 
@@ -367,5 +367,3 @@ public class Crawl extends NutchTool implements Tool{
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

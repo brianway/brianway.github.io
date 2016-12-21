@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(18)-json数据交互
 date:   2016-03-30 14:28:18 +08:00
 category: web开发
-tags: springmvc json
+tags: SpringMVC JSON
 comments: true
 ---
 
@@ -223,7 +223,3 @@ public @ResponseBody ItemsCustom responseJson(ItemsCustom itemsCustom){
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-
-

@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(14)-查询缓存之一级缓存
 date:   2016-03-08 10:39:14 +08:00
 category: web开发
-tags: mybatis 缓存
+tags: MyBatis 缓存
 comments: true
 ---
 
@@ -47,7 +47,7 @@ mybaits提供一级缓存，和二级缓存。
 
 
 ### 一级缓存测试
- 
+
 mybatis默认支持一级缓存，不需要在配置文件去配置。
 
 按照上边一级缓存原理步骤去测试。
@@ -91,7 +91,7 @@ public void testCache1() throws Exception {
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 110771485.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=王五, sex=2, birthday=null, address=null]
@@ -107,15 +107,15 @@ DEBUG [main] - Returned connection 110771485 to pool.
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 110771485.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=王五, sex=2, birthday=null, address=null]
-DEBUG [main] - ==>  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=? 
+DEBUG [main] - ==>  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=?
 DEBUG [main] - ==> Parameters: 测试用户22(String), null, 2(String), null, 1(Integer)
 DEBUG [main] - <==    Updates: 1
 DEBUG [main] - Committing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
 User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
@@ -136,7 +136,7 @@ DEBUG [main] - Returned connection 110771485 to pool.
 service{
 	//开始执行时，开启事务，创建SqlSession对象
 	//第一次调用mapper的方法findUserById(1)
-	
+
 	//第二次调用mapper的方法findUserById(1)，从一级缓存中取数据
 	//方法结束，sqlSession关闭
 }

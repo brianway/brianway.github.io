@@ -3,7 +3,7 @@ layout: post
 title:  java基础巩固笔记(5)-多线程之线程并发库
 date:   2016-02-06 14:23:12 +08:00
 category: 编程语言
-tags: java 多线程
+tags: Java 多线程
 comments: true
 ---
 
@@ -93,7 +93,7 @@ Lock功能类似传统多线程技术里的`synchronized`，实现线程互斥�
 ```java
 class A{
     private Lock lock = new ReentrantLock();
-    
+
     public void function(){
         lock.lock();
         try{
@@ -160,8 +160,8 @@ javaDoc文档例子，可阻塞队列
 ```java
 class BoundedBuffer {
    final Lock lock = new ReentrantLock();
-   final Condition notFull  = lock.newCondition(); 
-   final Condition notEmpty = lock.newCondition(); 
+   final Condition notFull  = lock.newCondition();
+   final Condition notEmpty = lock.newCondition();
 
    final Object[] items = new Object[100];
    int putptr, takeptr, count;
@@ -210,7 +210,7 @@ class BoundedBuffer {
 类似占坑
 
 - `CyclicBarrier`
- 
+
 阶段性使进度一致
 
 - `CountDownLatch`

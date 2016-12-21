@@ -3,7 +3,7 @@ layout: post
 title:  几种常见排序算法
 date:   2016-05-08 14:19:00 +08:00
 category: 算法和数据结构
-tags: 算法 总结
+tags: 算法
 comments: true
 ---
 

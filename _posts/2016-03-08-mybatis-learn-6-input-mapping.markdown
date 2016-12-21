@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(6)-输入映射
 date:   2016-03-08 10:39:06 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -77,7 +77,7 @@ public class UserCustom extends User{
 注意不要将`#{userCustom.sex}`中的`userCustom`写成`UserCustom`,前者指属性名(由于使用IDE提示自动补全，所以只是把类型名首字母小写了)，后者指类型名，这里是`UserQueryVo`类中的`userCustom`属性，是**属性名**。写错会报如下异常：
 
 ```
-org.apache.ibatis.exceptions.PersistenceException: 
+org.apache.ibatis.exceptions.PersistenceException:
 ### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'
 ### Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'
 ```

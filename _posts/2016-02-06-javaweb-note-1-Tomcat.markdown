@@ -3,7 +3,7 @@ layout: post
 title:  javaweb入门笔记(1)-Tomcat
 date:   2016-02-06 17:55:12 +08:00
 category: web开发
-tags: javaweb tomcat
+tags: JavaWeb Tomcat
 comments: true
 ---
 

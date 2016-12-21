@@ -3,7 +3,7 @@ layout: post
 title:  光盘和U盘安装win7和ubuntu14.04全步骤
 date:   2016-01-18 18:36:10 +08:00
 category: 操作系统
-tags: linux ubuntu 安装部署
+tags: Linux Ubuntu 安装部署
 comments: true
 ---
 
@@ -98,12 +98,12 @@ comments: true
 - 依次选择ubuntu版本，镜像文件，要写入的U盘。最后那个可选项可以不管，默认0MB
 
 
-第2步 
+第2步
 
 - 没什么特别的
 
 第3步
- 
+
 - 选择第二项，安装ubuntu
 - 选择语言，中文往下拉，在后面
 - 选择“安装这个第三方软件”，其他不管
@@ -159,8 +159,3 @@ sudo apt-get upgrade
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-
-
-

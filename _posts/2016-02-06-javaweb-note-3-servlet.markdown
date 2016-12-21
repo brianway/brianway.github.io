@@ -3,7 +3,7 @@ layout: post
 title:  javaweb入门笔记(3)-Servlet
 date:   2016-02-06 18:29:12 +08:00
 category: web开发
-tags: javaweb servlet
+tags: JavaWeb Servlet
 comments: true
 ---
 
@@ -138,5 +138,3 @@ properties.load(in);
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

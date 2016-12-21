@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(8)-动态sql
 date:   2016-03-08 10:39:08 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -82,7 +82,7 @@ DEBUG [main] - Checking to see if class com.iot.mybatis.mapper.UserMapperTest ma
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 352359770.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@1500955a]
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE user.sex=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE user.sex=?
 DEBUG [main] - ==> Parameters: 1(String)
 DEBUG [main] - <==      Total: 6
 [User [id=10, username=张三, sex=1, birthday=Thu Jul 10 00:00:00 CST 2014, address=北京市], User [id=16, username=张小明, sex=1, birthday=null, address=河南郑州], User [id=22, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=24, username=张三丰, sex=1, birthday=null, address=河南郑州], User [id=25, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=28, username=王小军, sex=1, birthday=Tue Feb 23 00:00:00 CST 2016, address=河南郑州]]
@@ -101,8 +101,8 @@ List<UserCustom> list = userMapper.findUserList(null);
 输出
 
 ```
-DEBUG [main] - ==>  Preparing: SELECT * FROM user 
-DEBUG [main] - ==> Parameters: 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user
+DEBUG [main] - ==> Parameters:
 DEBUG [main] - <==      Total: 9
 [User [id=1, username=王五, sex=2, birthday=null, address=null], User [id=10, username=张三, sex=1, birthday=Thu Jul 10 00:00:00 CST 2014, address=北京市], User [id=16, username=张小明, sex=1, birthday=null, address=河南郑州], User [id=22, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=24, username=张三丰, sex=1, birthday=null, address=河南郑州], User [id=25, username=陈小明, sex=1, birthday=null, address=河南郑州], User [id=26, username=王五, sex=null, birthday=null, address=null], User [id=27, username=王大军, sex=2, birthday=Tue Feb 23 00:00:00 CST 2016, address=河南郑州], User [id=28, username=王小军, sex=1, birthday=Tue Feb 23 00:00:00 CST 2016, address=河南郑州]]
 
@@ -175,7 +175,7 @@ public class UserQueryVo {
 
     //传入多个id
     private List<Integer> ids;
-    
+
     getter、setter方法
     。。。
 }
@@ -199,7 +199,7 @@ public class UserQueryVo {
         <!-- 每个遍历需要拼接的串 -->
         id=#{user_id}
     </foreach>
-    
+
     <!-- 实现  “ and id IN(1,10,16)”拼接 -->
     <!-- <foreach collection="ids" item="user_id" open="and id IN(" close=")" separator=",">
         每个遍历需要拼接的串

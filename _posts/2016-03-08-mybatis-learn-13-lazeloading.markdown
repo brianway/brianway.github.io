@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(13)-延迟加载
 date:   2016-03-08 10:39:13 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -218,8 +218,8 @@ public void testFindOrdersUserLazyLoading() throws Exception {
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 110771485.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]
-DEBUG [main] - ==>  Preparing: SELECT * FROM orders 
-DEBUG [main] - ==> Parameters: 
+DEBUG [main] - ==>  Preparing: SELECT * FROM orders
+DEBUG [main] - ==> Parameters:
 DEBUG [main] - <==      Total: 3
 ----test-print-----null   user==null: true
 ----test-print-----null   user==null: true
@@ -234,18 +234,18 @@ DEBUG [main] - <==      Total: 3
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 1219273867.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@48aca48b]
-DEBUG [main] - ==>  Preparing: SELECT * FROM orders 
-DEBUG [main] - ==> Parameters: 
+DEBUG [main] - ==>  Preparing: SELECT * FROM orders
+DEBUG [main] - ==> Parameters:
 DEBUG [main] - <==      Total: 3
 ```
 
 但是当你点开`list`属性时，控制台又输出了，而且可以看到list里的user是有内容的
 
 ```
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 10(Integer)
 DEBUG [main] - <==      Total: 1
 ```
@@ -256,13 +256,13 @@ DEBUG [main] - <==      Total: 1
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 1219273867.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@48aca48b]
-DEBUG [main] - ==>  Preparing: SELECT * FROM orders 
-DEBUG [main] - ==> Parameters: 
+DEBUG [main] - ==>  Preparing: SELECT * FROM orders
+DEBUG [main] - ==> Parameters:
 DEBUG [main] - <==      Total: 3
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 1(Integer)
 DEBUG [main] - <==      Total: 1
-DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=? 
+DEBUG [main] - ==>  Preparing: SELECT * FROM user WHERE id=?
 DEBUG [main] - ==> Parameters: 10(Integer)
 DEBUG [main] - <==      Total: 1
 ----test-print-----User [id=1, username=王五, sex=2, birthday=null, address=null]   user==null: false

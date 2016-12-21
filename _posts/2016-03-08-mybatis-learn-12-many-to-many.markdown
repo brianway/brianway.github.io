@@ -3,7 +3,7 @@ layout: post
 title:  mybatis学习笔记(12)-多对多查询
 date:   2016-03-08 10:39:12 +08:00
 category: web开发
-tags: mybatis
+tags: MyBatis
 comments: true
 ---
 
@@ -25,7 +25,7 @@ comments: true
 - sql
 
 ```sql
-SELECT 
+SELECT
   orders.*,
   user.username,
   user.sex,
@@ -173,7 +173,7 @@ public List<User>  findUserAndItemsResultMap()throws Exception;
    - 场合：常见一些明细记录的展示，比如用户购买商品明细，将关联查询信息全部展示在页面时，此时可直接使用resultType将每一条记录映射到pojo中，在前端页面遍历list（list中是pojo）即可。
 
 - resultMap
-	
+
 使用association和collection完成一对一和一对多高级映射（对结果有特殊的映射要求）。
 
 association：
@@ -182,7 +182,7 @@ association：
 - 场合：为了方便查询关联信息可以使用association将关联订单信息映射为用户对象的pojo属性中，比如：查询订单及关联用户信息。
 
 使用resultType无法将查询结果映射到pojo对象的pojo属性中，根据对结果集查询遍历的需要选择使用resultType还是resultMap。
-	
+
 collection：
 
 - 作用：将关联查询信息映射到一个list集合中。

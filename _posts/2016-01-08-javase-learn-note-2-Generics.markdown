@@ -3,7 +3,7 @@ layout: post
 title:  java基础巩固笔记(2)-泛型
 date:   2016-01-08 14:14:12 +08:00
 category: 编程语言
-tags: java
+tags: Java
 comments: true
 ---
 
@@ -81,7 +81,7 @@ template <class T> T add(T x, T y){
     return (T)(x+y);
 }
 ```
-    
+
 而java的泛型基本上完全在编译器中实现，用于编译器执行类型检查和类型判断，然后生成普通的**非泛型**的字节码，这种实现技术为“擦除”(erasure)。
 
 ### "擦除"实例
@@ -96,10 +96,10 @@ public class GenericTest {
     public void testType(){
         ArrayList<Integer> collection1 = new ArrayList<Integer>();
         ArrayList<String> collection2= new ArrayList<String>();
-        
+
         System.out.println(collection1.getClass()==collection2.getClass());
         //两者class类型一样,即字节码一致
-        
+
         System.out.println(collection2.getClass().getName());
         //class均为java.util.ArrayList,并无实际类型参数信息
     }
@@ -122,13 +122,13 @@ java.util.ArrayList
 public class GenericTest {
     public static void main(String[] args) {
         swap(new String[]{"111","222"},0,1);//编译通过
-        
+
         //swap(new int[]{1,2},0,1);
         //编译不通过,因为int不是引用类型
-        
+
         swap(new Integer[]{1,2},0,1);//编译通过
     }
-    
+
     /*交换数组a 的第i个和第j个元素*/
     public static <T> void swap(T[]a,int i,int j){
         T temp = a[i];
@@ -222,20 +222,20 @@ Error:(17, 29) java: 不兼容的类型: 推断类型不符合上限
 public class GenericDao<T>{
     public void add(T x){
     }
-    
+
     public T findById(int id){
         return null;
     }
-    
+
     public void delete(T obj){
     }
-    
+
     public void delete(int id){
     }
-    
+
     public void update(T obj){
     }
-    
+
     public T findByUserName(String name){
         return null;
     }
@@ -243,7 +243,7 @@ public class GenericDao<T>{
     public <T> Set<T> findByConditions(String where){
         return null;
     }
-    
+
 }
 ```
 
@@ -265,7 +265,7 @@ public class A<T>(){
     public static void main(String[] args) {
         //编译不通过
         //Integer i = A<String>().findByUserName("s");
-        
+
         //编译通过
         Set<Integer> set=  A<String>().findByConditions("s");
     }
@@ -291,7 +291,7 @@ public class GenericTest {
     public static void main(String[] args) throws Exception {
         getParamType();
     }
-    
+
      /*利用反射获取方法参数的实际参数类型*/
     public static void getParamType() throws NoSuchMethodException{
         Method method = GenericTest.class.getMethod("applyMap",Map.class);
@@ -327,6 +327,3 @@ class java.lang.String
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-    
-
-

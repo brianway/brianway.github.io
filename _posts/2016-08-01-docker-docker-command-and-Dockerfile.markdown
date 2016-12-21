@@ -3,7 +3,7 @@ layout: post
 title:  Docker commands和Dockerfile
 date:   2016-08-01 10:08:07 +08:00
 category: 分布式系统
-tags: docker
+tags: Docker
 comments: true
 ---
 

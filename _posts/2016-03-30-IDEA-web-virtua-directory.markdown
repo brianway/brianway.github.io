@@ -3,7 +3,7 @@ layout: post
 title:  在intellij IDEA中为web应用创建图片虚拟目录(详细截图)
 date:   2016-03-30 14:28:00 +08:00
 category: web开发
-tags: IDEA springmvc
+tags: IntelliJ-IDEA SpringMVC
 comments: true
 ---
 

@@ -21,12 +21,12 @@ community:
     link: http://segmentfault.com/blog/brianway
 
 follow:
-  - text: sinaweibo
+  - text: SinaWeibo
     pic: "/images/sinaweibo-icon.png"
     link: http://weibo.com/brianway
   - text: Linkedin
     pic: "/images/linkedin-icon.png"
     link: https://cn.linkedin.com/in/weichuyang
-  - text: renren
+  - text: Renren
     pic: "/images/renren-icon.png"
     link: http://www.renren.com/390148187

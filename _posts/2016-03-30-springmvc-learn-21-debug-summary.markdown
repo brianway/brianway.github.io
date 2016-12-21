@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结
 date:   2016-03-30 14:28:21 +08:00
 category: web开发
-tags: springmvc debug 总结
+tags: SpringMVC debug 总结
 comments: true
 ---
 
@@ -151,8 +151,8 @@ spring版本统一设置
 我一看自己的target目录,发现还真是少mapper.xml文件
 
 ![target少mapper的xml文件](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png)
-  
-  
+
+
 我想到了两种解决方案：
 
 - 方案一：自定义一个插件，绑定某个生命周期，比如compile，然后插件目标的功能是将源码包下的xml文件copy到相应的输出目录。(现有插件是否有已有这个功能，通过简单的配置就能完成？我还不清楚)
@@ -200,7 +200,7 @@ spring版本统一设置
 另外一种方法对参数进行重新编码：
 
 ```java
-String userName = new 
+String userName = new
 String(request.getParamter("userName").getBytes("ISO8859-1"),"utf-8")
 ```
 
@@ -218,9 +218,9 @@ ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
 
 `[WARNING] Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!`
 
-参考: 
+参考:
 
->* [CSDN博客](http://blog.csdn.net/jinguangliu/article/details/43373203) 
+>* [CSDN博客](http://blog.csdn.net/jinguangliu/article/details/43373203)
 >* [Maven官网在FAQ](http://maven.apache.org/general.html#encoding-warning)
 
 解决:
@@ -384,5 +384,3 @@ debug窗里报下面的错误：
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-

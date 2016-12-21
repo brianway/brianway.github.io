@@ -3,7 +3,7 @@ layout: post
 title:  springmvc学习笔记(9)-springmvc整合mybatis之controller
 date:   2016-03-30 14:28:09 +08:00
 category: web开发
-tags: springmvc mybatis
+tags: SpringMVC MyBatis
 comments: true
 ---
 
@@ -92,7 +92,7 @@ comments: true
             <param-value>classpath:spring/springmvc.xml</param-value>
         </init-param>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <!--
@@ -199,7 +199,7 @@ public class ItemsController {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查询商品列表</title>
 </head>
-<body> 
+<body>
 <form action="${pageContext.request.contextPath }/item/queryItem.action" method="post">
 查询条件：
 <table width="100%" border=1>
@@ -222,7 +222,7 @@ public class ItemsController {
 	<td>${item.price }</td>
 	<td><fmt:formatDate value="${item.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 	<td>${item.detail }</td>
-	
+
 	<td><a href="${pageContext.request.contextPath }/item/editItem.action?id=${item.id}">修改</a></td>
 
 </tr>
@@ -240,7 +240,3 @@ public class ItemsController {
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
-
-
-
-
