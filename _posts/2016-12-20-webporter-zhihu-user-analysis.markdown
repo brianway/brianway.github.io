@@ -120,10 +120,16 @@ comments: true
 
 从这 60 万用户数据可以看出，知乎的主要群体是程序员和学生，平均学历 985 不是黑，是真的！虽然知乎用户远不止 60 万，这些数据分析出来的结果可能有些偏差，但应该也能说明一些问题吧。
 
-最后按照国际惯例，附上源码，[GitHub - webporter](https://github.com/brianway/webporter)
-
+最后按照国际惯例，附上源码链接[GitHub - webporter]: [https://github.com/brianway/webporter](https://github.com/brianway/webporter)
 
 
 ----
 
 > 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+
+
+
+## 转载须知
+
+>* 转载须注明出处、作者以及原文链接，且禁止任何形式的增/删/改
+>* 非商业用途随意转载，无需通知；微信公众号/商业用途须获授权并付费转载
