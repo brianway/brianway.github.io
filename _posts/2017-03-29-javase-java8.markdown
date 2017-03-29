@@ -489,7 +489,7 @@ ZonedDateTime = LocalDateTime + ZoneId
 
 ## 结语
 
-本文主要对 Java 8 新特性中的 Lambda 表达式、Stream API、流(Stream API)、默认方法、Optional、组合式异步编程、新的时间 API，等方面进行了简单的介绍和罗列，至于更泛化的概念，譬如函数式编程、Java 语言意外的东西没有介绍。当然，很多细节和设计思想还需要进一步阅读官网文档/源码，在实战中去体会和运用。
+本文主要对 Java 8 新特性中的 Lambda 表达式、Stream API、流(Stream API)、默认方法、Optional、组合式异步编程、新的时间 API，等方面进行了简单的介绍和罗列，至于更泛化的概念，譬如函数式编程、Java 语言以外的东西没有介绍。当然，很多细节和设计思想还需要进一步阅读官方文档/源码，在实战中去体会和运用。
 
 
 ## 参考资料
