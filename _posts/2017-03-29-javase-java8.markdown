@@ -93,7 +93,7 @@ Lambda 的类型是从使用 Lambda 的上下文推断出来的。上下文中 L
     - 方法引用：`ClassName::staticMethod`
 - (2) 指向任意类型实例方法的方法引用
     - Lambda: `(arg0, rest) -> arg0.instanceMethod(rest)`
-    - 方法引用：`ClassName.instanceMethod`(arg0 是 ClassName 类型的)
+    - 方法引用：`ClassName::instanceMethod`(arg0 是 ClassName 类型的)
 - (3) 指向现有对象的实例方法的方法引用
     - Lambda: `(args) -> expr.instanceMethod(args)`
     - 方法引用：`expr::intanceMethod`
