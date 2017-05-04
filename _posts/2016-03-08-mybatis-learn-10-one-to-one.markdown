@@ -221,9 +221,3 @@ public void testFindOrdersUserResultMap() throws Exception {
 - resultMap：需要单独定义resultMap，实现有点麻烦，如果对查询结果有特殊的要求，使用resultMap可以完成将关联查询映射pojo的属性中。
 - resultMap可以实现延迟加载，resultType无法实现延迟加载。
 
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章: [个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

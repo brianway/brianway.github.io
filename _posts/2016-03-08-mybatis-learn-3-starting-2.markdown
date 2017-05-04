@@ -248,7 +248,3 @@ Caused by: org.apache.ibatis.executor.ExecutorException: A query was run and no 
 
 企业进行技术选型，以低成本高回报作为技术选型的原则，根据项目组的技术力量进行选择。
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章: [个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

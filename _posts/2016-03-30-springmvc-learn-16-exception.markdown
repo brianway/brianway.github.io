@@ -204,8 +204,3 @@ public ItemsCustom findItemsById(Integer id) throws Exception {
 
 上边的功能，建议在service中抛出异常。
 
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

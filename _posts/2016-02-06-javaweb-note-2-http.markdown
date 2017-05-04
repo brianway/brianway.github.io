@@ -67,8 +67,3 @@ comments: true
 - Date:当前时间
 - Accept-Ranges:用来说明web服务器是否支持range。支持返回bytes;不支持返回none
 - Content-Range:制定了返回web资源的字节范围，格式：`n1-n2/n_total`
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

@@ -269,7 +269,3 @@ public class C {
 >* [另类的package-info.java文件探讨](http://strong-life-126-com.iteye.com/blog/806246)
 >* [深入理解Java：注解（Annotation）自定义注解入门](http://www.cnblogs.com/peida/archive/2013/04/24/3036689.html)
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章: [个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

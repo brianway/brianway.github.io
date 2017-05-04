@@ -326,7 +326,3 @@ size cost total 0
 >* [Java动态代理的实现机制](http://developer.51cto.com/art/201509/492614.htm)
 >* [Java基础加强总结(三)——代理(Proxy)](http://www.cnblogs.com/xdp-gacl/p/3971367.html)
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

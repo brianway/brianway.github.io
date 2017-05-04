@@ -92,8 +92,3 @@ view.render(mv.getModelInternal(), request, response);
 
 程序我也没细读，感觉分析比较浅，很多还没弄懂，等我系统阅读源码后会整理一篇好点的。
 
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

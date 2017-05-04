@@ -27,11 +27,6 @@ comments: true
 
 下午加上超洁、张立琨，一起徒步环湖一周，一路走一路聊，从实验室近况聊到工作意向，从选课、实习聊到人生、八卦。然后各种自拍，也是拼了...可以感受下。
 
-![合影](http://7xsna4.com1.z0.glb.clouddn.com/2016-4_%E9%9B%81%E6%A0%96%E6%B9%96%E5%90%88%E5%BD%B1.jpg)
-
-![合影](http://7xsna4.com1.z0.glb.clouddn.com/2016-4_%E5%B1%95%E9%A6%86%E5%90%88%E5%BD%B1.jpg)
-
-![合影](http://7xsna4.com1.z0.glb.clouddn.com/2016-4_APEC%E5%90%88%E5%BD%B1.jpg)
 
 当天雾霾，简直拍不清楚，感受一下不同的雁栖湖吧,清晰版vs雾霾版。
 
@@ -77,9 +72,6 @@ comments: true
 
 第二天上午，二哥带我逛了下市区的南湖和月河。按照国际惯例，拍照留图。
 
-- 南湖门口
-
-![我在南湖](http://7xsna4.com1.z0.glb.clouddn.com/2016-4_%E6%88%91-%E5%8D%97%E6%B9%96.jpg)
 
 - 南湖小船
 

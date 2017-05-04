@@ -133,8 +133,3 @@ properties.load(in);
 > [servlet和Jsp生命周期解读](http://blog.csdn.net/evankaka/article/details/46673051)
 
 
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

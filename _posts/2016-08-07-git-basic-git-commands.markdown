@@ -141,11 +141,3 @@ Git还提供了一个stash功能，可以把当前工作现场“储藏”起来
 >* [使用git和github管理自己的项目---基础操作学习](http://segmentfault.com/a/1190000003728094)
 >* [使用git和github管理自己的项目---真实开发环境的策略](http://segmentfault.com/a/1190000003739324)
 
-
-
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

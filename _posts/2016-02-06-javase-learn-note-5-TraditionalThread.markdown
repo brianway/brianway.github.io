@@ -176,6 +176,3 @@ class Business{
 
 判断条件时，while与if的区别:while防止伪唤醒
 
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

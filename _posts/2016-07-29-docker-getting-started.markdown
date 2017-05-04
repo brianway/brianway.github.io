@@ -140,8 +140,3 @@ Docker使用[union file systems](https://en.wikipedia.org/wiki/UnionFS) 把不�
 >* [docker资源](http://www.docker.org.cn/page/resources.html)
 >* [docker-从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)(gitbook)
 
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

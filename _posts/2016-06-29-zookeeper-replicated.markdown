@@ -147,9 +147,3 @@ bin/zkCli.sh  -server 127.0.0.1:2180
 >* [zookeeper 单机伪集群配置](http://blog.csdn.net/xymyeah/article/details/6320668)
 >* [zookeeper入门（1）在单机上实现ZooKeeper伪机群/伪集群部署](http://blog.csdn.net/poechant/article/details/6633923)
 
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

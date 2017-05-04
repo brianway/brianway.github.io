@@ -549,9 +549,3 @@ Significance： In-place sorting algorithm with N log N worst-case.
 - 用下沉操作由N个元素构造堆只需少于2N次比较以及少于N次交换(pf见P206)
 - 将N个元素排序，堆排序只需少于（2NlgN+2N）次比较以及一半次数的交换(pf见P208)
 
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

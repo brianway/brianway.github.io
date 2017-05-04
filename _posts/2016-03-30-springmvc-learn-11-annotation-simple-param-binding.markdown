@@ -157,8 +157,3 @@ springmvc将url和controller方法映射。映射成功后springmvc生成一个H
 - 2.springmvc可以进行单例开发，并且建议使用单例开发，struts2通过类的成员变量接收参数，无法使用单例，只能使用多例。
 
 - 3.经过实际测试，struts2速度慢，在于使用struts标签，如果使用struts建议使用jstl。
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

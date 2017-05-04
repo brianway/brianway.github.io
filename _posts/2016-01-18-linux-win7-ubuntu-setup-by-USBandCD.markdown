@@ -154,8 +154,3 @@ sudo apt-get upgrade
 >5. [重装Win7 系统(用光盘重装Win7系统)_百度经验](http://jingyan.baidu.com/article/597035520848d98fc00740f1.html)
 
 
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

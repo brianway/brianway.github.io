@@ -190,10 +190,3 @@ insert  into `user`(`id`,`username`,`birthday`,`sex`,`address`) values (1,'王�
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 ```
 
-
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章: [个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

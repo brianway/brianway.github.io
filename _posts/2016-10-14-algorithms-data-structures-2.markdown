@@ -331,11 +331,3 @@ private Node put(Node h, Key key, Value val) {
 
 命题：A search or an insertion in a B-tree of order M with N keys requires between log M-1 N and log M/2 N probes
 
-
-
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

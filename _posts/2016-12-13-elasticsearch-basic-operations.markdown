@@ -137,7 +137,3 @@ POST /customer/external/_bulk?pretty
 - 批处理对每个操作(action)按顺序依次执行(sequentially and in order)，如果单个操作出错，也会继续执行剩下的操作
 - 批处理放回结果时，按照请求顺序为每个操作提供一个状态以便用户检查
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

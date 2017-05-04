@@ -56,18 +56,6 @@ github：
 
 -----
 
-# 联系作者
-
-- [Brian's Personal Website](http://brianway.github.io/)
-- [oschina](http://my.oschina.net/brianway)
-- [CSDN](http://blog.csdn.net/h3243212/)
-
-
------
-
 **all copyright reserved**
 
 
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

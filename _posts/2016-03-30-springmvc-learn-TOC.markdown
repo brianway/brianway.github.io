@@ -103,15 +103,6 @@ github:
 - [**learnssm-firstssm**](https://github.com/brianway/springmvc-mybatis-learning/tree/master/sourcecode/learnssm-firstssm):核心代码，springmvc和mybatis整合部分的笔记几乎所有的源码
 
 
------
-
-# 联系作者
-
-- [Brian's Personal Website](http://brianway.github.io/)
-- [oschina](http://my.oschina.net/brianway)
-- [CSDN](http://blog.csdn.net/h3243212/)
-
-
------
+-------
 
 **All Copyright Reserved**

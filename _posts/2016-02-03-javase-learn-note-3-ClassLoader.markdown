@@ -16,7 +16,8 @@ java类加载器就是在运行时在JVM中动态地加载所需的类，java类
 
 
 
-把 classpath 下的那些 `.class` 文件加载进内存，处理后形成可以被虚拟机直接使用的 Java类型，这些工作是类加载器做的。
+
+把 classpath 下的那些 `.class` 文件加载进内存，处理后形成可以被虚拟机直接使用的 Java 类型，这些工作是类加载器做的。
 
 - **委托机制**：指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。
 - **可见性机制**：指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。
@@ -156,7 +157,3 @@ class NetworkClassLoader extends ClassLoader {
 >* [java类加载机制工作原理](http://ju.outofmemory.cn/entry/142486)
 >* [Java类加载器总结 - 寂静大海 - 博客频道 - CSDN.NET](http://blog.csdn.net/gjanyanlig/article/details/6818655)
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

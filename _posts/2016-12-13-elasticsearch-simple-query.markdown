@@ -196,9 +196,3 @@ GET /bank/_search
 
 更多聚合例子参考 [Executing Aggregations](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/_executing_aggregations.html)
 
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

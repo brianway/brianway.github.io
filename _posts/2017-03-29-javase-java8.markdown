@@ -505,12 +505,3 @@ ZonedDateTime = LocalDateTime + ZoneId
 >* 深入理解 Java 8 Lambda（原理篇——Java 编译器如何处理 lambda）暂时还没
 
 
-## 转载须知
-
->* 转载须注明出处、作者以及原文链接，且禁止任何形式的增/删/改
->* 非商业用途随意转载，无需通知；微信公众号/商业用途须获授权并付费转载
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

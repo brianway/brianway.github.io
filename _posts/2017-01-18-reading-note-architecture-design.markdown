@@ -298,6 +298,3 @@ XSS 攻击和 SQL 注入攻击是构成网站应用攻击最主要的两种手�
     - 黑名单
 
 
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

@@ -110,7 +110,3 @@ bin/kibana
 后面的Elasticsearch的文章演示部分都会基于 `Console - Kibana` ，请安装好。
 
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

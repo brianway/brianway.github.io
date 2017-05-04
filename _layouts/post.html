@@ -33,6 +33,27 @@ layout: default
         <article itemscope itemtype="http://schema.org/BlogPosting">
         {{content}}
         </article>
+
+        <!-- 下面是一些固定项-->
+        <hr>
+        <h2 id="copyright">声明</h2>
+        <blockquote>
+            <ul>
+                <li>本站网址：<a href="http://brianway.github.io/" target="_blank">http://brianway.github.io</a> </li>
+                <li>作者 <a href="http://brianway.github.io/" target="_blank">@brianway</a> 
+                更多文章：<a href="http://brianway.github.io/" target="_blank">个人网站</a> | 
+                <a href="http://blog.csdn.net/h3243212/" target="_blank">CSDN</a> | 
+                <a href="http://my.oschina.net/brianway" target="_blank">oschina</a>
+                </li>
+                <li>如需转载，请先阅读 「<a href="/about/#版权声明"> ©️版权声明</a> 」</li>
+            </ul>
+        </blockquote>
+        <h2 id="reward">赞助</h2>
+        <p>如果您觉得本文对您有帮助，请扫描下方二维码对我进行鼓励，并注明文章标题，谢谢支持！</p>
+        <img src="/assets/images/alipay_small.png">
+        <img src="/assets/images/wechatpay_small.png">
+
+
         <hr>
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
@@ -61,10 +82,6 @@ layout: default
             </ul>
         {% endif %}
 
-        <h2 id="reward">赞助</h2>
-        <p>如果您觉得本文对您有帮助，请扫描下方二维码对我进行鼓励，并注明文章标题，谢谢支持！</p>
-        <img src="/assets/images/alipay_small.png">
-        <img src="/assets/images/wechatpay_small.png">
         <h2 id="comments">Comments</h2>
         {% include comments.html %}
 
@@ -80,6 +97,8 @@ layout: default
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    <li><a href="#copyright">声明</a></li>
+                    <li><a href="#reward">赞助</a></li>
                     <li><a href="#similar_posts">Similar Posts</a></li>
                     <li><a href="#comments">Comments</a></li>
                 </ul>

@@ -372,11 +372,3 @@ Use an array of M < N linked lists.
 - 插入：如果数组索引为 i 的位置为空，则把值放入，否则依次尝试 i+1,i+2等索引，直到有空的
 - 查找：先找索引 i，如果被占用且没匹配，则依次尝试i+1, i+2,等等
 
-
-
-
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

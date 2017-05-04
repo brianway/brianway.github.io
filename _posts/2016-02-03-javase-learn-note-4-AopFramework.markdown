@@ -248,6 +248,3 @@ java.util.ArrayList
 
 可以看出，只改变配置文件，就可改变代码的运行结果，从而达到灵活的效果
 
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

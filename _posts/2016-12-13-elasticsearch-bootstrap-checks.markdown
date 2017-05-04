@@ -74,7 +74,3 @@ Elasticsearch 的 HTTP 默认绑定到`localhost`，并且 transport 使用内�
 
 JVM 参数建议通过 `jvm.options` 配置文件进行配置，当然，也可以通过 `ES_JAVA_OPTS` 环境变量来配置。
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

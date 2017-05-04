@@ -79,8 +79,3 @@ Elasticsearch 默认为每个 index 创建 5 个主分片，且备份数为 1。
 另外，每个索引被分配到多个分片，但 `number_of_shards` 的值只适用于索引，而不是整个集群。这个值指定了每个索引的分片数，而非整个集群中的全部主分片数。（摘自[Optimizing Elasticsearch: How Many Shards per Index?](https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index)）
 
 
-
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

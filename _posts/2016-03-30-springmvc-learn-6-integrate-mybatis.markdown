@@ -188,6 +188,3 @@ pom.xml文件
 后面几篇笔记会依次记录mapper,service,controller各个部分的整合
 
 
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)

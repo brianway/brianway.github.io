@@ -380,7 +380,3 @@ debug窗里报下面的错误：
 
 总之，上面未解决的问题，我会留意，如果有大神指导原因，请不吝赐教。
 
-
-----
-
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
