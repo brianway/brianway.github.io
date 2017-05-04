@@ -26,9 +26,6 @@ follow:
   - text: SinaWeibo
     pic: "/images/sinaweibo-icon.png"
     link: http://weibo.com/brianway
-  - text: Linkedin
+  - text: LinkedIn
     pic: "/images/linkedin-icon.png"
     link: https://cn.linkedin.com/in/weichuyang
-  - text: Renren
-    pic: "/images/renren-icon.png"
-    link: http://www.renren.com/390148187
