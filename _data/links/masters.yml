@@ -1,16 +1,16 @@
 message: 牛人博客
 items:
-  - text: 陈皓(耗叔,15年软件开发相关工作经验,8年以上项目和团队管理经验)
+  - text: 陈皓 (耗叔,15 年软件开发相关工作经验,8年以上项目和团队管理经验)
     url: http://coolshell.cn/
-  - text: 黄亿华(webmagic作者)
+  - text: 黄亿华 (webmagic 作者)
     url: http://my.oschina.net/flashsword/blog
-  - text: 廖雪峰(git教程作者)
+  - text: 廖雪峰 (git 教程作者)
     url: http://www.liaoxuefeng.com/
-  - text: peng_gong(北航毕业,就职google)
+  - text: peng_gong (北航毕业,就职google)
     url: http://lucida.me/
-  - text: stamen (《Spring 3.x企业应用开发实战》作者)
+  - text: stamen (《Spring 3.x 企业应用开发实战》作者)
     url: http://stamen.iteye.com/
   - text: IT宅
     url: http://www.itzhai.com/
-  - text: 三劫散仙(lucene,hadoop)
+  - text: 三劫散仙 (lucene,hadoop)
     url: http://qindongliang.iteye.com/blog/2043136

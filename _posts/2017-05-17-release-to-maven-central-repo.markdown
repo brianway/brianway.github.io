@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 将项目发布到 maven 中央仓库踩过的坑
+title: 将项目发布到 Maven 中央仓库踩过的坑
 date:   2017-05-17 10:39:07 +08:00
 category: 其他
 tags: Maven IntelliJ-IDEA 安装部署
@@ -10,8 +10,7 @@ comments: true
 * content
 {:toc}
 
-记录第一次将项目发布到 maven 中央仓库踩过的坑和解决方案。
-
+记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。
 
 
 
@@ -30,14 +29,14 @@ comments: true
   - `gpg --list-keys` 查看公钥
   - `gpg --keyserver hkp://pool.sks-keyservers.net --send-keys 公钥ID` 将公钥发布到 PGP 密钥服务器
   - `gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 公钥ID` 查询公钥是否发布成功
-4. 配置 maven。需要修改的 Maven 配置文件包括：`setting.xml`（全局级别）与 `pom.xml`（项目级别）
+4. 配置 Maven。需要修改的 Maven 配置文件包括：`setting.xml`（全局级别）与 `pom.xml`（项目级别）
   - setting.xml：在其中加入 server 信息，包含 Sonatype 账号的用户名与密码
   - pom.xml：在其中配置 profile,包括插件和 `distributionManagement`，。**snapshotRepository 与 repository 中的 id 一定要与 setting.xml 中 server 的 id 保持一致。**
 5. 上传构件到 OSS 中。`mvn clean deploy -P release`
 6. 在 OSS 中发布构件。进入 [https://oss.sonatype.org/](https://oss.sonatype.org/)，点击"Staging Repositories" -> 在搜索栏输入你的 groupId -> 勾选你的构件并点击 close -> 点击 tab 栏的 release。
 7. 通知 Sonatype 的工作人员关闭 issue。
 
-等待审批通过后，就可以在中央仓库中搜索到自己发布的构件了！下面是我在 maven 中央仓库的构件：
+等待审批通过后，就可以在中央仓库中搜索到自己发布的构件了！下面是我在 Maven 中央仓库的构件：
 
 ![webporter 发布到 maven 中央仓库](http://7xph6d.com1.z0.glb.clouddn.com/webporter_maven-release-v1.0.png)
 
@@ -85,9 +84,10 @@ mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org
 
 步骤： IntelliJ IDEA -> Preferences -> Build,Execution,Deployment -> Build Tools -> Mavne -> Repositories -> Remote URL -> Update
 
+这个过程耗时视网速而定，大概 5～10 分钟。
+
 ![maven 依赖不识别解决方案](http://7xph6d.com1.z0.glb.clouddn.com/maven_%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png)
 
-这个过程耗时视网速而定，大概 5～10 分钟。
 
 方案一是参考下面第二个链接；方案二是我自己提出并验证是有效的。
 
@@ -97,10 +97,10 @@ mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org
 
 ### GPG 版本问题
 
-我用的是 mac,下载的是二进制发行包 GnuPG for OS X，然后发现是在 terminal 输入的指令是 `gpg2` 而不是 `gpg`。比如，公钥显示如下：
+我用的是 mac,下载的是二进制发行包 GnuPG for OS X，然后发现是在 terminal 输入的指令是 `gpg2` 而不是 `gpg`。比如，公钥显示如下：	
 
 ```shell
-$ gpg2 --list-keys
+$ gpg2 --list-keys 
 /Users/brian/.gnupg/pubring.kbx
 -------------------------------
 pub   rsa2048 2017-05-10 [SC] [expires: 2019-05-10]
@@ -110,7 +110,7 @@ uid                      brianway <weichuyang@163.com>
 sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]
 ```
 
-但 maven 里面的 maven-gpg-plugin 插件默认是使用 `gpg` 指令，不是 `gpg2`，所以需要配置 setting.xml 的 profile
+但 Maven 里面的 maven-gpg-plugin 插件默认是使用 `gpg` 指令，不是 `gpg2`，所以需要配置 setting.xml 的 profile
 
 ```xml
 <profiles>
@@ -137,7 +137,7 @@ sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]
 ```
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
-[INFO]
+[INFO] 
 [INFO] webporter-parent ................................... SUCCESS [ 11.690 s]
 [INFO] webporter-core ..................................... SUCCESS [  5.208 s]
 [INFO] webporter-data-elasticsearch ....................... SUCCESS [  2.769 s]
@@ -150,13 +150,13 @@ sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]
 [INFO] Final Memory: 45M/723M
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.sonatype.plugins:nexus-staging-maven-plugin:1.6.7:deploy (injected-nexus-deploy) on project webporter-collector-zhihu: Failed to deploy artifacts: Could not transfer artifact com.github.brianway:webporter-data-elasticsearch:jar:javadoc:1.0-20170511.101142-1 from/to sonatype-nexus-snapshots (https://oss.sonatype.org/content/repositories/snapshots/): Failed to transfer file: https://oss.sonatype.org/content/repositories/snapshots/com/github/brianway/webporter-data-elasticsearch/1.0-SNAPSHOT/webporter-data-elasticsearch-1.0-20170511.101142-1-javadoc.jar. Return code is: 401, ReasonPhrase: Unauthorized. -> [Help 1]
-[ERROR]
+[ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR]
+[ERROR] 
 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
-[ERROR]
+[ERROR] 
 [ERROR] After correcting the problems, you can resume the build with the command
 [ERROR]   mvn <goals> -rf :webporter-collector-zhihu
 
@@ -165,7 +165,7 @@ sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]
 搞了几个小时，最后发现是 pom.xml 的 `distributionManagement` 中 snapshotRepository 与 repository 中的 id 与 setting.xml 中 server 的 id **不一致** 导致的。因为我的 pom.xml 是模仿的 [webmagic](https://github.com/code4craft/webmagic) 的 pom.xml，而 settings.xml 的 server 配置却是复制的[《将 Smart 构件发布到 Maven 中央仓库》 by 黄勇 ](https://my.oschina.net/huangyong/blog/226738) 中的，结果导致不一样。
 
 
-我主要从下面这篇文章中找到的灵感
+我主要从下面这篇文章中找到的灵感 
 
 > [Maven2部署构件到Nexus时出现的Failed to transfer file错误
 ](http://www.cnblogs.com/chowmin/articles/3930277.html)
@@ -203,7 +203,7 @@ mvn release:perform
 
 > 参考： [maven scm 配置git](http://blog.csdn.net/u012076316/article/details/52174313)
 
-用上面的方法，不另外配置的话，commit message 是由 maven 插件自动生成的。也可以不使用插件发布，自己 commit 上去，然后在 github 上发布。
+用上面的方法，不另外配置的话，commit message 是由 Maven 插件自动生成的。也可以不使用插件发布，自己 commit 上去，然后在 github 上发布。
 
 >参考： [Creating Releases 创建发布包](https://github.com/waylau/github-help/blob/master/Creating%20Releases%20%E5%88%9B%E5%BB%BA%E5%8F%91%E5%B8%83%E5%8C%85.md)
 

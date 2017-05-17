@@ -4,6 +4,8 @@ items:
     url: https://www.coursera.org/
   - text: Udemy
     url: https://www.udemy.com/courses/
+  - text: Udacity
+    url: http://cn.udacity.com/
   - text: LeetCode
     url: https://leetcode.com/problemset/algorithms/
   - text: ITeye 
