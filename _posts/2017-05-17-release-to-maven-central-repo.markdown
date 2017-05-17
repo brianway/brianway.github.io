@@ -32,7 +32,7 @@ comments: true
   - `gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 公钥ID` 查询公钥是否发布成功
 4. 配置 maven。需要修改的 Maven 配置文件包括：`setting.xml`（全局级别）与 `pom.xml`（项目级别）
   - setting.xml：在其中加入 server 信息，包含 Sonatype 账号的用户名与密码
-  - pom.xml：在其中 配置 profile,包括插件和 `distributionManagement`，。**snapshotRepository 与 repository 中的 id 一定要与 setting.xml 中 server 的 id 保持一致。**
+  - pom.xml：在其中配置 profile,包括插件和 `distributionManagement`，。**snapshotRepository 与 repository 中的 id 一定要与 setting.xml 中 server 的 id 保持一致。**
 5. 上传构件到 OSS 中。`mvn clean deploy -P release`
 6. 在 OSS 中发布构件。进入 [https://oss.sonatype.org/](https://oss.sonatype.org/)，点击"Staging Repositories" -> 在搜索栏输入你的 groupId -> 勾选你的构件并点击 close -> 点击 tab 栏的 release。
 7. 通知 Sonatype 的工作人员关闭 issue。
@@ -87,6 +87,7 @@ mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org
 
 ![maven 依赖不识别解决方案](http://7xph6d.com1.z0.glb.clouddn.com/maven_%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png)
 
+这个过程耗时视网速而定，大概 5～10 分钟。
 
 方案一是参考下面第二个链接；方案二是我自己提出并验证是有效的。
 
@@ -96,9 +97,9 @@ mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org
 
 ### GPG 版本问题
 
-我用的是 mac,下载的是二进制发型包 GnuPG for OS X，然后发现是在 terminal 输入的指令是 `gpg2` 而不是 `gpg`。比如，公钥显示如下：
+我用的是 mac,下载的是二进制发行包 GnuPG for OS X，然后发现是在 terminal 输入的指令是 `gpg2` 而不是 `gpg`。比如，公钥显示如下：
 
-```
+```shell
 $ gpg2 --list-keys
 /Users/brian/.gnupg/pubring.kbx
 -------------------------------
@@ -109,9 +110,9 @@ uid                      brianway <weichuyang@163.com>
 sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]
 ```
 
-但 maven 里面的 maven-gpg-plugin 插件默认是使用 `gpg` 指令，不是 `gpp2`，所以需要配置 setting.xml 的 profile
+但 maven 里面的 maven-gpg-plugin 插件默认是使用 `gpg` 指令，不是 `gpg2`，所以需要配置 setting.xml 的 profile
 
-```
+```xml
 <profiles>
     <profile>
         <id>gpg</id>
@@ -173,7 +174,7 @@ sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]
 
 在项目的 pom.xml 中配置 release 的插件
 
-```
+```xml
  <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-release-plugin</artifactId>
