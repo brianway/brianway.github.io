@@ -2,11 +2,13 @@ message: 学习网站
 items:
   - text: Coursera 
     url: https://www.coursera.org/
+  - text: Udemy
+    url: https://www.udemy.com/courses/
+  - text: LeetCode
+    url: https://leetcode.com/problemset/algorithms/
   - text: ITeye 
     url: http://www.iteye.com
   - text: 并发编程网
     url: http://ifeve.com/
-  - text: LeetCode
-    url: https://leetcode.com/problemset/algorithms/
   - text: 知乎:计组/操作系统/数据结构/网络/码农基本功
     url: https://www.zhihu.com/collection/37506044

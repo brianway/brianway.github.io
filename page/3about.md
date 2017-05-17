@@ -53,7 +53,7 @@ icon: heart
 
 ## 赞助
 
-如果您觉得本站的文章对您有帮助，请扫描下方二维码对我进行鼓励，谢谢支持！
+如果您觉得本站的文章对您有帮助，请扫描下方二维码请我喝碗一品豆花，谢谢支持！
 
 ![支付宝](/assets/images/alipay_small.png)
 ![微信](/assets/images/wechatpay_small.png)
