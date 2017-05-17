@@ -108,7 +108,8 @@
             box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
             padding-bottom: 1px;
             -ms-word-break: break-all;
-            word-break: break-all;
+            //word-break: break-all;
+            word-wrap:break-word;
             /* Non standard for webkit */
             -webkit-hyphens: auto;
             -moz-hyphens: auto;
