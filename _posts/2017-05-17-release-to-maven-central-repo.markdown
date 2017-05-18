@@ -82,7 +82,7 @@ mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org
 
 - 方案二：在 IntelliJ IDEA 中更新 `Indexed Maven Repositories`
 
-步骤： IntelliJ IDEA -> Preferences -> Build,Execution,Deployment -> Build Tools -> Mavne -> Repositories -> Remote URL -> Update
+步骤： IntelliJ IDEA -> Preferences -> Build,Execution,Deployment -> Build Tools -> Maven -> Repositories -> Remote URL -> Update
 
 这个过程耗时视网速而定，大概 5～10 分钟。
 
