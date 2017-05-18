@@ -67,7 +67,7 @@ icon: heart
 
 这个博客主要用于记录一个菜鸟的成长之路
 
-2017.03.29 | 过年在家研究狼人杀；开学应付各种实习面试；把算法课的题目回顾了下，并大致看完了《剑指 offer》；把《Java 8 in Action》，《深入理解 Java 虚拟机》复习了遍，敲示例代码和整理笔记
+2017.05.20 | 过年在家研究狼人杀；把算法课的题目回顾了下，并大致看完了《剑指 offer》；把《Java 8 in Action》，《深入理解 Java 虚拟机》复习了遍，敲示例代码和整理笔记；应付各种实习面试，投了三家(阿里，腾讯，美团)，三投三中；学完了 Udemy 上的公开课 [JavaScript: Understanding the Weird Parts ](https://www.udemy.com/understand-javascript/)；跟了部分 [百度前端技术学院](http://ife.baidu.com/) 的作业，代码传到了 [baidu-ife](https://github.com/brianway/baidu-ife)
 2016.12.29 | 读完了《深入理解 Java 虚拟机》，《架构探险》，《大型网站技术架构》；刷完了牛客网[《算法精品课》](https://www.nowcoder.com/courses/1)；读了部分 Elasticsearch 官方文档；完成了个人爬虫项目 [webporter](https://github.com/brianway/webporter)，荣登 Github 单日 trending 总榜第七名和 Java 榜第一名；[知乎爬虫分析博文](http://brianway.github.io/2016/12/20/webporter-zhihu-user-analysis/)登上了几个网站的头条
 2016.10.30 | 读完了《图解http》，《敏捷软件开发》，《Head First 设计模式》，《Java 并发编程实战》；二刷 Coursera 上普林斯顿的“算法 Part I”，完成所有编程作业并获得 98.4%（[成绩单](http://7xph6d.com1.z0.glb.clouddn.com/%E9%9A%8F%E7%AC%94_part-I-total.png)）；阅读了部分[《Elasticsearch: The Definitive Guide》](https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html)；换了一个 HHKB Pro 2 Type-S 键盘
 2016.08.30 | 使用Spring Boot+MySQL+jQuery+Bootstrap 参与开发了一个 ZooKeeper 网页管理工具；学习了 docker 的基本使用；了解了 JUnit+Mockito，CAS 认证，nginx 等相关知识；大致刷完了《Spring 3.x 企业开发实战》，并整理相关代码至 github 仓库 [spring-learning](https://github.com/brianway/spring-learning)

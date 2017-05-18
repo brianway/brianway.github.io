@@ -19,7 +19,7 @@ comments: true
 
 ## 大致步骤
 
-1. 注册Sonatype的账户。地址：[https://issues.sonatype.org/secure/Signup!default.jspa](https://issues.sonatype.org/secure/Signup!default.jspa)
+1. 注册 Sonatype 的账户。地址：[https://issues.sonatype.org/secure/Signup!default.jspa](https://issues.sonatype.org/secure/Signup!default.jspa)
 2. 提交发布申请。创建 Issue 地址：[https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134)
   - 项目类型是 `Community Support - Open Source Project Repository Hosting`
   - groupId 对应的域名你需要有所有权

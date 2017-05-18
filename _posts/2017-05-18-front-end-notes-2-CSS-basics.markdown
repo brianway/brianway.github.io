@@ -337,7 +337,7 @@ RGB 配色表参考 [RGB颜色对照表 - 在线工具 - 开源中国](http://to
  1. `position: absolute`
  2. `float: left` 或 `float:right`
 
-更详细的居中布局技巧可以参考我另外一篇文章：[](http://brianway.github.io/2017/05/18/css-layout-classical-problems/)
+更详细的居中布局技巧可以参考我另外一篇文章：[CSS 布局经典问题初步整理](http://brianway.github.io/2017/05/18/css-layout-classical-problems/)
 
 
 ## 参考资料
