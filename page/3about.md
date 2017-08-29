@@ -67,6 +67,7 @@ icon: heart
 
 这个博客主要用于记录一个菜鸟的成长之路
 
+2017.08.30 | 在菜鸟网络实习了三个月，独立负责了一个项目的后端研发(Webx+MyBatis+OpenSearch+阿里中间件)，兼职部分前端迭代，完整参与了该项目第一期的全过程；见识了很多中间件，像 HSF，Diamond，Tair 等等；阿里百技获得了[团队第一](http://7xsna4.com1.z0.glb.clouddn.com/%E9%98%BF%E9%87%8C%E7%99%BE%E6%8A%80%E5%9B%A2%E9%98%9F%E7%AC%AC%E4%B8%80.jpg)、个人第二，并获得集团限量版(整个阿里共 100 多枚)镀金纪念徽章([图片](http://7xsna4.com1.z0.glb.clouddn.com/%E9%98%BF%E9%87%8C%E9%99%90%E9%87%8F%E7%89%88%E9%95%80%E9%87%91%E7%BA%AA%E5%BF%B5%E5%BE%BD%E7%AB%A0.jpg))
 2017.05.20 | 过年在家研究狼人杀；把算法课的题目回顾了下，并大致看完了《剑指 offer》；把《Java 8 in Action》，《深入理解 Java 虚拟机》复习了遍，敲示例代码和整理笔记；应付各种实习面试，投了三家(阿里，腾讯，美团)，三投三中；学完了 Udemy 上的公开课 [JavaScript: Understanding the Weird Parts ](https://www.udemy.com/understand-javascript/)；跟了部分 [百度前端技术学院](http://ife.baidu.com/) 的作业，代码传到了 [baidu-ife](https://github.com/brianway/baidu-ife)
 
 -----
