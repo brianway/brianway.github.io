@@ -86,7 +86,7 @@ Mac下有两种安装方式供选
 
 ## 演示
 
-先不多说，跑起来体验下。具体的步骤和指令在[Docker简明教程](http://blog.saymagic.cn/2015/06/01/learning-docker.html#bqlkp)这篇文章已经写得很清楚了，在此不再赘述
+先不多说，跑起来体验下。具体的步骤和指令在[Docker简明教程](https://blog.saymagic.tech/2015/06/01/learning-docker.html)这篇文章已经写得很清楚了，在此不再赘述
 
 
 ## 架构和原理
@@ -139,4 +139,3 @@ Docker使用[union file systems](https://en.wikipedia.org/wiki/UnionFS) 把不�
 >* [docker中文](http://www.docker.org.cn/book/docker/what-is-docker-16.html)（系列)
 >* [docker资源](http://www.docker.org.cn/page/resources.html)
 >* [docker-从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)(gitbook)
-
