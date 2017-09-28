@@ -61,9 +61,9 @@ comments: true
 
 - 下标从 1 开始较方便，子节点下标就对应为 `2*i` 和 `2*i+1`
 - 初始化时从一半位置依次递减下标使用下沉操作
-- 下沉操作挑子节点中较大值与父节点交换，**直至**满足父节点大于两个子节点
+- 下沉操作挑子节点中较大值与父节点交换，**直至** 满足父节点大于两个子节点
 
-```
+```java
 private static void sink(Comparable[] pq, int k, int N) {
     while (2 * k <= N) {
         int j = 2 * k;
@@ -229,7 +229,7 @@ private static void sink(Comparable[] pq, int k, int N) {
 - lo, hi, mid 的起始值要注意
 - 交换时的增减顺序要注意，参考示例：
 
-```
+```java
 int lo = -1;
 int hi = n;
 int mid = 0;

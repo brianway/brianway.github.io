@@ -37,9 +37,8 @@ comments: true
 
 - 快指针移动时需要判断 next 和 next.next 均不为空才行
 - 第二步的证明可以参考
-    - http://blog.csdn.net/wuzhekai1985/article/details/6725263
-    - http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html
-
+    - [http://blog.csdn.net/wuzhekai1985/article/details/6725263](http://blog.csdn.net/wuzhekai1985/article/details/6725263)
+    - [http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html](http://blog.csdn.net/wuzhekai1985/article/details/6725263)
 
 ## 判断两无环单链表是否相交
 
@@ -48,7 +47,7 @@ comments: true
 思路：
 
 1. 分别遍历两个链表，得到长度 l1 和 l2
-2. 将较长的链表先遍历 |l1-l2| 个节点，再对两个链表同步遍历
+2. 将较长的链表先遍历 `|l1-l2|` 个节点，再对两个链表同步遍历
 3. 若在遍历完前有相同节点，则相交，否则不相交
 
 注意：
@@ -176,7 +175,7 @@ comments: true
 2. 每次先用 pre 保存 newHead，用 next 保存 current.next；再更新 newhead 为 current，更新 newHead.next 指向 pre；最后移动 current 指向 next 即可
 3. 进一步优化，其实只需要 pre 和 current 两个指针就够了
 
-```
+```java
 //普通反转整个链表
 public ListNode reverse(ListNode head) {
     ListNode newHead = null;

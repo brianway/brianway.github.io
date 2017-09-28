@@ -20,7 +20,7 @@ comments: true
 - 相关题目和代码在 GitHub: [https://github.com/brianway/algorithms-learning](https://github.com/brianway/algorithms-learning)
 - 题目见 `com.brianway.learning.algorithms.lectures.stack`包
 
-##
+## 构造 MaxTree
 
 题目见 `MaxTree`
 
