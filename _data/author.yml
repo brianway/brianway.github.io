@@ -5,14 +5,14 @@ simpleIntro: 我是「魏楚阳」，一个处在学习期的小白。
 WebsiteIntro:
     <h2 id="welcome-to-my-website">Welcome to My Website</h2>
     <p>Give Chapter and Verse and Author for Transshipment, copy or other using. Thanks!</p>
-    <p>You can also visit me on <a href="http://blog.csdn.net/h3243212/">@CSDN</a> or <a href="http://my.oschina.net/brianway">@oschina</a>.
+    <p>You can also visit me on <a href="http://blog.csdn.net/h3243212/">@CSDN</a> or <a href="http://my.oschina.net/brianway">@OSChina</a>.
     「<a href="/about/#版权声明"> ©️版权声明</a>」</p>
     
 community:
   - text: GitHub 
     pic:  "/images/github-icon.png"
     link: https://github.com/brianway
-  - text: oschina 
+  - text: OSChina 
     pic:  "/images/oschina-icon.png"
     link: http://my.oschina.net/brianway	
   - text: CSDN
