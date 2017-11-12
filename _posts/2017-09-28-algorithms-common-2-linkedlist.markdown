@@ -38,7 +38,7 @@ comments: true
 - 快指针移动时需要判断 next 和 next.next 均不为空才行
 - 第二步的证明可以参考
     - [http://blog.csdn.net/wuzhekai1985/article/details/6725263](http://blog.csdn.net/wuzhekai1985/article/details/6725263)
-    - [http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html](http://blog.csdn.net/wuzhekai1985/article/details/6725263)
+    - [http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html](http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html)
 
 ## 判断两无环单链表是否相交
 

@@ -18,12 +18,12 @@ community:
   - text: CSDN
     pic:  "/images/csdn-icon.png"
     link: http://blog.csdn.net/h3243212/
-  - text: SegmentFault
-    pic: "/images/segmentfault-icon.png"
-    link: http://segmentfault.com/blog/brianway
+  # - text: SegmentFault
+  #   pic: "/images/segmentfault-icon.png"
+  #   link: http://segmentfault.com/blog/brianway
 
 follow:
-  - text: SinaWeibo
+  - text: 微博
     pic: "/images/sinaweibo-icon.png"
     link: http://weibo.com/brianway
   - text: LinkedIn
