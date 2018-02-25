@@ -22,6 +22,7 @@ icon: heart
 - 爱好
   - 炉石传说，天梯传说+竞技场12胜，[武汉高校星联赛季军](http://7xsna4.com2.z0.glb.clouddn.com/heartstone-prize.png)
   - 狼人杀，目前 2.5 阶水平([【狼人杀实力评分标准】](http://weibo.com/ttarticle/p/show?id=2309403968483011469741#_0) by 二龙)
+  - 王者荣耀，段位钻石，五个位置都能打
   - 偶尔打打羽毛球
 
 ---

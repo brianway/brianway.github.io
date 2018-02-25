@@ -1,10 +1,8 @@
 message: 友链
 items:
-  - text: 李辰洋
+  - text: 李辰洋(菜鸟网络)
     url: http://tinylcy.me/
-  - text: 管爷(google 实习)
-    url: http://jennica.space/
-  - text: 卢军球
+  - text: 卢军球(华科)
     url: http://lujunqiu.github.io
   - text: 猴哥(大疆创新)
     url: http://hyuhan.com/  
