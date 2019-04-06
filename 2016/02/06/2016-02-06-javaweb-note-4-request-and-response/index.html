@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javaweb入门笔记(4)-request和response | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaWeb">
+    <meta name="description" content="API:   Interface HttpServletResponse Interface HttpServletRequest">
+<meta name="keywords" content="JavaWeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaweb入门笔记(4)-request和response">
+<meta property="og:url" content="https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="API:   Interface HttpServletResponse Interface HttpServletRequest">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javaweb入门笔记(4)-request和response">
+<meta name="twitter:description" content="API:   Interface HttpServletResponse Interface HttpServletRequest">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javaweb入门笔记(4)-request和response</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javaweb入门笔记(4)-request和response</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-06T02:30:12.000Z" itemprop="datePublished" class="page-time">
+  2016-02-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#response"><span class="post-toc-number">1.</span> <span class="post-toc-text">response</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输出数据"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">输出数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件下载"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">文件下载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机图片"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">随机图片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#刷新和缓存"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">刷新和缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求重定向"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">请求重定向</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#request"><span class="post-toc-number">2.</span> <span class="post-toc-text">request</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中文乱码"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">中文乱码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求转发"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">请求转发</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#地址的写法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">地址的写法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#防盗链"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">防盗链</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-02-06-javaweb-note-4-request-and-response" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javaweb入门笔记(4)-request和response</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-06 10:30:12" datetime="2016-02-06T02:30:12.000Z" itemprop="datePublished">2016-02-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>API:</p>
+<blockquote>
+<ul>
+<li><a href="https://tomcat.apache.org/tomcat-8.0-doc/servletapi/index.html?javax/servlet/http/HttpServletResponse.html" target="_blank" rel="noopener">Interface HttpServletResponse</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-8.0-doc/servletapi/index.html?javax/servlet/http/HttpServletRequest.html" target="_blank" rel="noopener">Interface HttpServletRequest</a></li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h2 id="response"><a href="#response" class="headerlink" title="response"></a>response</h2><h3 id="输出数据"><a href="#输出数据" class="headerlink" title="输出数据"></a>输出数据</h3><p>程序以什么码表输出，就一定要控制浏览器以什么码表打开。可有如下两种写法：</p>
+<ul>
+<li><code>response.setHeader(&quot;Content-type&quot;,&quot;text/html;charset=UTF-8&quot;)</code></li>
+<li><code>response.setContentType(&quot;text/html;charset=UTF-8&quot;)</code>(默认调用<code>setHeader</code>和<code>setCharacterEncoding</code>)</li>
+</ul>
+<p>把分号<code>;</code>错写成逗号<code>,</code>，浏览器会提示下载</p>
+<p>用html技术的<code>&lt;meta&gt;</code>标签可以模拟一个http响应头，<code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;</code></p>
+<p>response可用<code>setCharacterEncoding</code>方法设置码表。字符流输出：<code>PrintWritet-&gt;response-&gt;浏览器</code>,<code>response-&gt;浏览器</code>默认使用<code>iso-8859</code>编码</p>
+<h3 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h3><p>使用<code>ServerContext</code>的<code>getRealPath</code>方法,再<code>InputStream</code>和<code>OutputStream</code></p>
+<p>如果下载文件是中文名为中文，则文件名需要经过url编码<code>URLEncoder.encode</code></p>
+<h3 id="随机图片"><a href="#随机图片" class="headerlink" title="随机图片"></a>随机图片</h3><p>使用<a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/awt/image/BufferedImage.html" target="_blank" rel="noopener"><code>BufferedImage</code></a>在内存生成图片，再使用<a href="https://docs.oracle.com/javase/8/docs/api/index.html?javax/imageio/ImageIO.html" target="_blank" rel="noopener"><code>ImageIO</code></a>输出。</p>
+<p>画图使用<a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/awt/Graphics.html" target="_blank" rel="noopener"><code>Graphics</code></a>,旋转使用<a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/awt/Graphics2D.html" target="_blank" rel="noopener"><code>Graphics2D</code></a></p>
+<p>汉字的区间：<code>\u4e00</code>-<code>\u9fa5</code></p>
+<h3 id="刷新和缓存"><a href="#刷新和缓存" class="headerlink" title="刷新和缓存"></a>刷新和缓存</h3><ul>
+<li>刷新：一般不在servlet里加<code>refresh</code>头，而是在jsp加入<code>&lt;meta&gt;</code>头模拟。</li>
+<li>缓存：加入<code>expires</code>头,当前时间+要缓存的时长</li>
+</ul>
+<h3 id="请求重定向"><a href="#请求重定向" class="headerlink" title="请求重定向"></a>请求重定向</h3><p><strong>重定向</strong>：设置状态码和<code>location</code>头即可，或者直接使用<code>response</code>的<code>sendRedirect</code>方法。向服务器两次请求。浏览器会改变地址栏，一般适用于登录、购物等场景。</p>
+<p><strong>转发</strong>:则是调用<code>ServletContex</code>对象的<code>getRequestDispatcher</code>方法，再调用<code>forward</code>方法。向服务器一次请求，浏览器地址栏不变。</p>
+<p>一些细节：</p>
+<ul>
+<li><code>getOutputStream</code>和<code>getWriter</code>方法跟别用于输出二进制数据、输出文本数据的<code>ServletOutputStream</code>、<code>Printwriter</code>对象，这两个方法相互排斥，只能调用其中一个，否则抛<code>IllegalStateException</code>异常。</li>
+<li>response的输出流会自己关闭。<code>Servlet</code>的<code>service</code>方法结束后，Servlet引擎会检查并调用<code>close</code>方法关闭该输出流对象。</li>
+</ul>
+<h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><ul>
+<li>URI:标识某个资源</li>
+<li>URL:标识互联网上某个资源</li>
+</ul>
+<p>一些方法</p>
+<ul>
+<li><code>getRequestURI</code>用于权限拦截，访问统计</li>
+<li><code>getRemoteAddr</code>用于得到客户机IP地址</li>
+<li><code>getMethod</code>得到客户机请求方式</li>
+</ul>
+<p>requst对象获取数据的四种方式</p>
+<ul>
+<li><code>getParameter</code></li>
+<li><code>getParameterNames</code></li>
+<li><code>getParameterValues</code></li>
+<li><code>getParameterMap</code>(可结合JavaBean使用)</li>
+</ul>
+<p>(<code>getInputStream</code>用于文件上传)</p>
+<h3 id="中文乱码"><a href="#中文乱码" class="headerlink" title="中文乱码"></a>中文乱码</h3><p>url后面如果有中文数据，需要编码后再提交</p>
+<p>表单提交的数据使用的码表和该页面的码表一致，而<code>getParameter</code>方法默认使用<code>ISO-8859</code>码表。</p>
+<p>解决：</p>
+<ul>
+<li>对于post提交的数据，在获取数据前要使用<code>request</code>对象的<code>setCharacterEncoding</code>设置码表。</li>
+<li>对于get提交的数据，只能手工解决。先对数据调用<code>getBytes(&quot;ISO-8859-1&quot;)</code>获取二进制字节，再用特定码表构建字符串。</li>
+<li>超链提交的中文，解决办法同get提交的数据。</li>
+</ul>
+<p><em>也可以通过改服务器配置来解决乱码问题，但一般<strong>不建议</strong>使用。</em></p>
+<ul>
+<li><code>URIEncoding</code>:改tomcat的配置文件<code>conf/server.xml</code>的连接器<code>&lt;Connector&gt;</code>中的<code>URIEncoding</code>属性</li>
+<li><code>useBodyEncodingForURI</code>:将<code>conf/server.xml</code>的连接器<code>&lt;Connector&gt;</code>中的<code>useBodyEncodingForURI</code>置为<code>true</code></li>
+</ul>
+<h3 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h3><p>应用场景：MVC设计模式</p>
+<ul>
+<li>model : javabean;</li>
+<li>view : jsp;</li>
+<li>controller : servlet</li>
+</ul>
+<p>使用request域对象把数据带给转发资源。调用<code>request</code>对象的<code>getRequestDispatcher</code>方法，再调用<code>forward</code>方法。一次请求，浏览器地址栏不变。</p>
+<p><code>forward</code>一些细节</p>
+<ul>
+<li>不能在关闭输出流后再调用转发，也不能调用两次，否则会抛出异常。</li>
+<li>跳转之前会清空response中的数据。即数据只是写入到缓冲区而没真正输出到客户端，则可调用<code>forward</code>方法，原来写入到缓冲区的内容被清空，但响应头字段信息保持。</li>
+</ul>
+<p><code>include</code>方法可以用于包含一些公共页面(一般不在servlet中包含)</p>
+<h3 id="地址的写法"><a href="#地址的写法" class="headerlink" title="地址的写法"></a>地址的写法</h3><p>以斜杠<code>/</code>开头。如果是给服务器用，则<code>/</code>代表当前web应用；如果给浏览器用，则<code>/</code>代表网站。</p>
+<p>例子:目录结构如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mail---------------------------Web应用所在目录</span><br><span class="line">           |----form1.html</span><br><span class="line">           |----WEB-INF目录</span><br><span class="line">                    |---------classes目录</span><br><span class="line">                    |---------lib目录</span><br><span class="line">                    |---------web.xml</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>request.getRequestDispatcher(&quot;/form1.html&quot;)</code></li>
+<li><code>response.sendRedirect(&quot;mail/form1.html&quot;)</code></li>
+<li><code>this.getServletContext().getRealPath(&quot;/form1.html&quot;)</code></li>
+<li><code>this.getServletContext().getResourceAsStream(&quot;/form1.html&quot;)</code></li>
+<li><code>&lt;a href=&quot;/mail/form1.html&quot;&gt;</code></li>
+<li><code>&lt;form action=&quot;/mail/form1.html&quot;&gt;</code></li>
+</ol>
+<p>其中，1,3,4是给服务器用;2,5,6是浏览器用</p>
+<h3 id="防盗链"><a href="#防盗链" class="headerlink" title="防盗链"></a>防盗链</h3><p>读取<code>referer</code>请求头，不合要求则重定向。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.066Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/" target="_blank" rel="external">https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/&title=《javaweb入门笔记(4)-request和response》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/&title=《javaweb入门笔记(4)-request和response》 — Brian's Homepage&source=API:
+
+
+Interface HttpServletResponse
+Interface HttpServletRequest
+
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(4)-request和response》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-5-cookie-and-session/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javaweb入门笔记(5)-cookie和session</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-3-servlet/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">javaweb入门笔记(3)-Servlet</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/&title=《javaweb入门笔记(4)-request和response》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/&title=《javaweb入门笔记(4)-request和response》 — Brian's Homepage&source=API:
+
+
+Interface HttpServletResponse
+Interface HttpServletRequest
+
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(4)-request和response》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADMElEQVR42u3aQXKjUAwE0Nz/0p5tUh5ALeEqW36sXJgA73vRkfR/fsrH49fx+8zz5+e/qtz56Prnb8/P3HxgY2Njfwj7cXrU2ZNrKoDKolcs2NjY2FvZabT0Auk8qFLMKEqxsbGxv5hdLwnq0Zi+z3yhsbGxsbHnjZ7z584LJGxsbOxvY6cxMw+z+jJVxgYv7KVhY2Njvz170ip6t88vmW9jY2NjvzH7ER6VzTT1MEvjalK6/LkDNjY29iJ2PQAmC5F+m0Zp+v7Y2NjYm9hpC77XoKkHUjoM6I0fsLGxsXez03/901HBXeDeeOAwwLCxsbE/nN0b99ajbj42TrfjXCw0NjY29iJ2eru7mvjnFUFvK0+94YWNjY29id0b1t5WEhT6POlwIo4ubGxs7EXsejilzaM0USeFSukNsbGxsZey0+FuGn6VUXGvLKnc7aIUwcbGxl7Brj/+3qHvz+CoDxKC3MbGxsb+KHY9xtJFmd+nPh5oXoONjY29lN0Lj/oj09HCfFvP4bfY2NjYi9hp8XDeQnpdy+m2IgQbGxt7HbvX7kmHxJNBcjrKLYmwsbGxF7HrjHr8pBtx0hHybSMHbGxs7BXsycaaXllSWdx6gdG7JzY2NvYOduV10zOVZUrb/b1NmYd3wMbGxl7HnrTg0wjplRBpCXSxQNjY2NiL2HcFTH3LzqQImQTYS3IVGxsb+w3Y8yhKxw+9V++NBA6DDRsbG3sROw2hScEwGev2lubiB8PGxsZewb4rNtJXv2s8XFnK/5zHxsbGXsSeNN9fB0vHt5UzQWsJGxsb+2PZlRioX9mLw95S1ouow0EvNjY29iJ2uv2lPk6oNPHTIidtUWFjY2N/A3vSrOmNAdIxcDoquGgqYWNjY384e948qrfje2OAXrlysUDY2NjYi9i9NtBkaeImfrmYSRcRGxsbexM7HdDOW0jzha40uYJBLzY2NvYKdj0Y7gq8etO/9z4X12NjY2N/PTvdNFMvLSYtpCD8sLGxsb+YnT44ZcwHz6UfABsbG3sdO233n79KWmD0lrIelqPxADY2Nvbbs+sBkG6mqQfevaVIumTY2NjYH8v+B0zmIUwaxZJpAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

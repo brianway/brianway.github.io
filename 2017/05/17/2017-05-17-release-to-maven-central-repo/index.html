@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>将项目发布到 Maven 中央仓库踩过的坑 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="安装部署,IntelliJ-IDEA,Maven">
+    <meta name="description" content="记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。">
+<meta name="keywords" content="安装部署,IntelliJ-IDEA,Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将项目发布到 Maven 中央仓库踩过的坑">
+<meta property="og:url" content="https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_maven-release-v1.0.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/maven_%E6%8F%92%E4%BB%B6%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB-2.jpeg">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/maven_%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将项目发布到 Maven 中央仓库踩过的坑">
+<meta name="twitter:description" content="记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_maven-release-v1.0.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">将项目发布到 Maven 中央仓库踩过的坑</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">将项目发布到 Maven 中央仓库踩过的坑</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-16T18:39:07.000Z" itemprop="datePublished" class="page-time">
+  2017-05-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#大致步骤"><span class="post-toc-number">1.</span> <span class="post-toc-text">大致步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图文教程参考"><span class="post-toc-number">2.</span> <span class="post-toc-text">图文教程参考</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">遇到的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#插件没找到"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">插件没找到</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GPG-版本问题"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">GPG 版本问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发布出问题"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">发布出问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#github-上-release"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">github 上 release</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#构件没有出现在-Staging-Repositories"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">构件没有出现在 Staging Repositories</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2017-05-17-release-to-maven-central-repo" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">将项目发布到 Maven 中央仓库踩过的坑</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-17 02:39:07" datetime="2017-05-16T18:39:07.000Z" itemprop="datePublished">2017-05-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。</p>
+<a id="more"></a>
+<h2 id="大致步骤"><a href="#大致步骤" class="headerlink" title="大致步骤"></a>大致步骤</h2><ol>
+<li>注册 Sonatype 的账户。地址：<a href="https://issues.sonatype.org/secure/Signup!default.jspa" target="_blank" rel="noopener">https://issues.sonatype.org/secure/Signup!default.jspa</a></li>
+<li>提交发布申请。创建 Issue 地址：<a href="https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&amp;pid=10134" target="_blank" rel="noopener">https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&amp;pid=10134</a><ul>
+<li>项目类型是 <code>Community Support - Open Source Project Repository Hosting</code></li>
+<li>groupId 对应的域名你需要有所有权</li>
+</ul>
+</li>
+<li>使用 GPG 生成密钥对。下载地址：<a href="https://www.gnupg.org/download/" target="_blank" rel="noopener">https://www.gnupg.org/download/</a>。用得到的指令有如下几条：<ul>
+<li><code>gpg --version</code> 检查安装成功没</li>
+<li><code>gpg --gen-key</code> 生成密钥对</li>
+<li><code>gpg --list-keys</code> 查看公钥</li>
+<li><code>gpg --keyserver hkp://pool.sks-keyservers.net --send-keys 公钥ID</code> 将公钥发布到 PGP 密钥服务器</li>
+<li><code>gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 公钥ID</code> 查询公钥是否发布成功</li>
+</ul>
+</li>
+<li>配置 Maven。需要修改的 Maven 配置文件包括：<code>setting.xml</code>（全局级别）与 <code>pom.xml</code>（项目级别）<ul>
+<li>setting.xml：在其中加入 server 信息，包含 Sonatype 账号的用户名与密码</li>
+<li>pom.xml：在其中配置 profile,包括插件和 <code>distributionManagement</code>，。<strong>snapshotRepository 与 repository 中的 id 一定要与 setting.xml 中 server 的 id 保持一致。</strong></li>
+</ul>
+</li>
+<li>上传构件到 OSS 中。<code>mvn clean deploy -P release</code></li>
+<li>在 OSS 中发布构件。进入 <a href="https://oss.sonatype.org/" target="_blank" rel="noopener">https://oss.sonatype.org/</a>，点击”Staging Repositories” -&gt; 在搜索栏输入你的 groupId -&gt; 勾选你的构件并点击 close -&gt; 点击 tab 栏的 release。</li>
+<li>通知 Sonatype 的工作人员关闭 issue。</li>
+</ol>
+<p>等待审批通过后，就可以在中央仓库中搜索到自己发布的构件了！下面是我在 Maven 中央仓库的构件：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_maven-release-v1.0.png" alt="webporter 发布到 maven 中央仓库" title>
+                </div>
+                <div class="image-caption">webporter 发布到 maven 中央仓库</div>
+            </figure>
+<ul>
+<li>搜索地址： <a href="https://search.maven.org/" target="_blank" rel="noopener">https://search.maven.org/</a></li>
+<li>中央仓库地址：<a href="http://mvnrepository.com/" target="_blank" rel="noopener">http://mvnrepository.com/</a></li>
+<li>我发布的构件地址：<a href="http://mvnrepository.com/artifact/com.github.brianway" target="_blank" rel="noopener">http://mvnrepository.com/artifact/com.github.brianway</a></li>
+</ul>
+<h2 id="图文教程参考"><a href="#图文教程参考" class="headerlink" title="图文教程参考"></a>图文教程参考</h2><p>主要参考如下三个链接：</p>
+<blockquote>
+<ul>
+<li><a href="https://my.oschina.net/huangyong/blog/226738" target="_blank" rel="noopener">将 Smart 构件发布到 Maven 中央仓库 </a> by 黄勇</li>
+<li><a href="https://my.oschina.net/songxinqiang/blog/313226" target="_blank" rel="noopener">发布Maven构件到中央仓库</a> by 阿信sxq  </li>
+<li><a href="https://my.oschina.net/looly/blog/270767" target="_blank" rel="noopener">将项目发布到Maven中央库</a> by 路小磊 (截图详细)</li>
+</ul>
+</blockquote>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>在这个过程中遇到许多奇奇怪怪的问题，下面依次说明</p>
+<h3 id="插件没找到"><a href="#插件没找到" class="headerlink" title="插件没找到"></a>插件没找到</h3><p>在 IntelliJ IDEA 中，pom.xml 里的插件找不到并报红，如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/maven_%E6%8F%92%E4%BB%B6%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB-2.jpeg" alt="maven 依赖不识别" title>
+                </div>
+                <div class="image-caption">maven 依赖不识别</div>
+            </figure>
+<p>自己使用 mvn 指令构建的话，会提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Plugin &apos;&apos;&apos;org.apache.maven.plugins:maven-gpg-plugin:1.6&apos;&apos;&apos; not found</span><br><span class="line">Inspects a Maven model for resolution problems.</span><br></pre></td></tr></table></figure>
+<p>两种解决方法：</p>
+<ul>
+<li>方案一：手动下载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org.apache.maven.plugins:maven-gpg-plugin:1.6</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方案二：在 IntelliJ IDEA 中更新 <code>Indexed Maven Repositories</code></li>
+</ul>
+<p>步骤： IntelliJ IDEA -&gt; Preferences -&gt; Build,Execution,Deployment -&gt; Build Tools -&gt; Maven -&gt; Repositories -&gt; Remote URL -&gt; Update</p>
+<p>这个过程耗时视网速而定，大概 5～10 分钟。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/maven_%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png" alt="maven 依赖不识别解决方案" title>
+                </div>
+                <div class="image-caption">maven 依赖不识别解决方案</div>
+            </figure>
+<p>方案一是参考下面第二个链接；方案二是我自己提出并验证是有效的。</p>
+<blockquote>
+<ul>
+<li><a href="http://stackoverflow.com/questions/24484776/intellij-idea-shows-plugin-not-found" target="_blank" rel="noopener">IntelliJ IDEA shows plugin not found</a></li>
+<li><a href="http://stackoverflow.com/questions/20496239/maven-plugins-can-not-be-found-in-intellij" target="_blank" rel="noopener">Maven plugins can not be found in IntelliJ</a></li>
+</ul>
+</blockquote>
+<h3 id="GPG-版本问题"><a href="#GPG-版本问题" class="headerlink" title="GPG 版本问题"></a>GPG 版本问题</h3><p>我用的是 mac,下载的是二进制发行包 GnuPG for OS X，然后发现是在 terminal 输入的指令是 <code>gpg2</code> 而不是 <code>gpg</code>。比如，公钥显示如下：    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gpg2 --list-keys </span><br><span class="line">/Users/brian/.gnupg/pubring.kbx</span><br><span class="line">-------------------------------</span><br><span class="line">pub   rsa2048 2017-05-10 [SC] [expires: 2019-05-10]</span><br><span class="line">      DBD686EC6F4E34C4096C427506755FE5978EC644</span><br><span class="line">      DBD686EC6F4E34C4096C427506755FE5978EC644</span><br><span class="line">uid                      brianway &lt;weichuyang@163.com&gt;</span><br><span class="line">sub   rsa2048 2017-05-10 [E] [expires: 2019-05-10]</span><br></pre></td></tr></table></figure>
+<p>但 Maven 里面的 maven-gpg-plugin 插件默认是使用 <code>gpg</code> 指令，不是 <code>gpg2</code>，所以需要配置 setting.xml 的 profile</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>gpg<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">gpg.executable</span>&gt;</span>gpg2<span class="tag">&lt;/<span class="name">gpg.executable</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">gpg.passphrase</span>&gt;</span>mypassphrase<span class="tag">&lt;/<span class="name">gpg.passphrase</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">activeProfiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activeProfile</span>&gt;</span>gpg<span class="tag">&lt;/<span class="name">activeProfile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activeProfiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考：<a href="http://stackoverflow.com/questions/14114528/avoid-gpg-signing-prompt-when-using-maven-release-plugin" target="_blank" rel="noopener">http://stackoverflow.com/questions/14114528/avoid-gpg-signing-prompt-when-using-maven-release-plugin</a></p>
+</blockquote>
+<h3 id="发布出问题"><a href="#发布出问题" class="headerlink" title="发布出问题"></a>发布出问题</h3><p>输入 <code>mvn clean deploy -P release</code> 后，报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Reactor Summary:</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] webporter-parent ................................... SUCCESS [ 11.690 s]</span><br><span class="line">[INFO] webporter-core ..................................... SUCCESS [  5.208 s]</span><br><span class="line">[INFO] webporter-data-elasticsearch ....................... SUCCESS [  2.769 s]</span><br><span class="line">[INFO] webporter-collector-zhihu .......................... FAILURE [  7.889 s]</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD FAILURE</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 28.069 s</span><br><span class="line">[INFO] Finished at: 2017-05-11T18:11:44+08:00</span><br><span class="line">[INFO] Final Memory: 45M/723M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[ERROR] Failed to execute goal org.sonatype.plugins:nexus-staging-maven-plugin:1.6.7:deploy (injected-nexus-deploy) on project webporter-collector-zhihu: Failed to deploy artifacts: Could not transfer artifact com.github.brianway:webporter-data-elasticsearch:jar:javadoc:1.0-20170511.101142-1 from/to sonatype-nexus-snapshots (https://oss.sonatype.org/content/repositories/snapshots/): Failed to transfer file: https://oss.sonatype.org/content/repositories/snapshots/com/github/brianway/webporter-data-elasticsearch/1.0-SNAPSHOT/webporter-data-elasticsearch-1.0-20170511.101142-1-javadoc.jar. Return code is: 401, ReasonPhrase: Unauthorized. -&gt; [Help 1]</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.</span><br><span class="line">[ERROR] Re-run Maven using the -X switch to enable full debug logging.</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] For more information about the errors and possible solutions, please read the following articles:</span><br><span class="line">[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] After correcting the problems, you can resume the build with the command</span><br><span class="line">[ERROR]   mvn &lt;goals&gt; -rf :webporter-collector-zhihu</span><br></pre></td></tr></table></figure>
+<p>搞了几个小时，最后发现是 pom.xml 的 <code>distributionManagement</code> 中 snapshotRepository 与 repository 中的 id 与 setting.xml 中 server 的 id <strong>不一致</strong> 导致的。因为我的 pom.xml 是模仿的 <a href="https://github.com/code4craft/webmagic" target="_blank" rel="noopener">webmagic</a> 的 pom.xml，而 settings.xml 的 server 配置却是复制的<a href="https://my.oschina.net/huangyong/blog/226738" target="_blank" rel="noopener">《将 Smart 构件发布到 Maven 中央仓库》 by 黄勇 </a> 中的，结果导致不一样。</p>
+<p>我主要从下面这篇文章中找到的灵感 </p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/chowmin/articles/3930277.html" target="_blank" rel="noopener">Maven2部署构件到Nexus时出现的Failed to transfer file错误
+</a></p>
+</blockquote>
+<h3 id="github-上-release"><a href="#github-上-release" class="headerlink" title="github 上 release"></a>github 上 release</h3><p>在项目的 pom.xml 中配置 release 的插件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-release-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;plugin.release.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tagNameFormat</span>&gt;</span>v@&#123;project.version&#125;<span class="tag">&lt;/<span class="name">tagNameFormat</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">autoVersionSubmodules</span>&gt;</span>true<span class="tag">&lt;/<span class="name">autoVersionSubmodules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用下面的指令即可直接在 github 远程仓库生成发行版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn clean</span><br><span class="line">mvn release:prepare</span><br><span class="line">mvn release:perform</span><br></pre></td></tr></table></figure>
+<p>我实验的结果是，执行 <code>mvn release:prepare</code> 并不会对远程仓库造成影响，再执行 <code>mvn release:perform</code> 才会在 git 远程仓库多出两个 commit 和一个 release 版本，查看提交日志 <code>git log --pretty=oneline</code>，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2619dfaafca7a82f70e938f5b6efd6d9f4110554 [maven-release-plugin] prepare for next development iteration</span><br><span class="line">01795a07b793930b74dc0cb5e6ce2b43ee3a5434 [maven-release-plugin] prepare release v1.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考： <a href="http://blog.csdn.net/u012076316/article/details/52174313" target="_blank" rel="noopener">maven scm 配置git</a></p>
+</blockquote>
+<p>用上面的方法，不另外配置的话，commit message 是由 Maven 插件自动生成的。也可以不使用插件发布，自己 commit 上去，然后在 github 上发布。</p>
+<blockquote>
+<p>参考： <a href="https://github.com/waylau/github-help/blob/master/Creating%20Releases%20%E5%88%9B%E5%BB%BA%E5%8F%91%E5%B8%83%E5%8C%85.md" target="_blank" rel="noopener">Creating Releases 创建发布包</a></p>
+</blockquote>
+<h3 id="构件没有出现在-Staging-Repositories"><a href="#构件没有出现在-Staging-Repositories" class="headerlink" title="构件没有出现在 Staging Repositories"></a>构件没有出现在 Staging Repositories</h3><p>按照教程里的步骤，上传构件到 OSS 中后，应该先在 <a href="https://oss.sonatype.org/" target="_blank" rel="noopener">https://oss.sonatype.org/</a> 中，点击”Staging Repositories” -&gt; 在搜索栏输入你的 groupId -&gt; 勾选你的构件并点击 close -&gt; 点击 tab 栏的 release。</p>
+<p>然而我却没有这个步骤，即我上传构件成功后，在 Staging Repositories 中并没有找到自己的构件，但在左边侧栏的 Artifact Search 框输入自己的 groupId 却能搜到我的构件，百思不得其解。最后还是求助 Sonatype 的工作人员才弄清楚，原来是我使用了插件 nexus-staging-maven-plugin 并且默认 autoReleaseAfterClose 是 true 导致的，直接越过了手工 close 的步骤。</p>
+<p>Sonatype 工作人员的答复：</p>
+<blockquote>
+<p>It sounds like you have the nexus-staging-maven-plugin in your build (assuming you’re using Maven, but what I’m going to say might also apply to other tools) configured to autoReleaseAfterClose.  If this is the case, oss.sonatype.org will automatically release your staging repository after it has been successfully closed.  oss.sonatype.org is also configured, by default, to drop released staging repositories.  Once your artifacts have been released, they will appear in the Releases repository on oss.sonatype.org, and from there they will sync to Maven Central.<br>You shouldn’t expect to see staging repositories if everything worked and if all your components passed the ruleset validations.  The fact that you can search for your artifacts on search.maven.org is a good sign.</p>
+</blockquote>
+<p>具体可以参看我提的 issue: <a href="https://issues.sonatype.org/browse/OSSRH-31186" target="_blank" rel="noopener">OSSRH-31186</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
+<ul>
+<li><a href="https://my.oschina.net/huangyong/blog/226738" target="_blank" rel="noopener">将 Smart 构件发布到 Maven 中央仓库 </a> by 黄勇</li>
+<li><a href="https://my.oschina.net/songxinqiang/blog/313226" target="_blank" rel="noopener">发布Maven构件到中央仓库</a> by 阿信sxq  </li>
+<li><a href="https://my.oschina.net/looly/blog/270767" target="_blank" rel="noopener">将项目发布到Maven中央库</a> by 路小磊 (截图详细)</li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/07/gpg.html" target="_blank" rel="noopener">GPG入门教程</a></li>
+<li><a href="http://www.cnblogs.com/buchiany/archive/2017/04/04/6665637.html" target="_blank" rel="noopener">GnuPG的使用入门</a>（gpg2）</li>
+<li><a href="http://central.sonatype.org/pages/working-with-pgp-signatures.html" target="_blank" rel="noopener">Working with PGP Signatures</a></li>
+<li><a href="https://github.com/waylau/github-help/blob/master/Creating%20Releases%20%E5%88%9B%E5%BB%BA%E5%8F%91%E5%B8%83%E5%8C%85.md" target="_blank" rel="noopener">Creating Releases 创建发布包</a></li>
+<li><a href="https://issues.sonatype.org/browse/OSSRH-31186" target="_blank" rel="noopener">Sonatype OSSRH-31186</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.131Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/05/17/2017-05-17-release-to-maven-central-repo/" target="_blank" rel="external">https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ-IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/&title=《将项目发布到 Maven 中央仓库踩过的坑》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/&title=《将项目发布到 Maven 中央仓库踩过的坑》 — Brian's Homepage&source=记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《将项目发布到 Maven 中央仓库踩过的坑》 — Brian's Homepage&url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/18/2017-05-18-the-structure-of-jQuery/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">The Structure of jQuery</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/04/2017-05-04-Learning-Notes-Understanding-the-Weird-Parts-of-JavaScript/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Learning Notes - Understanding the Weird Parts of JavaScript</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/&title=《将项目发布到 Maven 中央仓库踩过的坑》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/&title=《将项目发布到 Maven 中央仓库踩过的坑》 — Brian's Homepage&source=记录第一次将项目发布到 Maven 中央仓库踩过的坑和解决方案。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《将项目发布到 Maven 中央仓库踩过的坑》 — Brian's Homepage&url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/05/17/2017-05-17-release-to-maven-central-repo/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3awW7rMAwEwPz/T7fXBwSOd0XJzQPGp6CJbY0OFEvy9Yqvn3+u979f/fL9+vzM989X326+8PDw8AZLv1pQy/v85Pnb803Ew8PDO8e7iqifP0+i8ed78/Xc3IuHh4f3BbwrwN4tS44cPDw8vP+Ll5QP2oXmxQg8PDy8b+Al5YD2wJhsQb6V22oteHh4eOvVgFd+SPzV5yP9PTw8PLxxVz1pR02+bQcU6tXi4eHhHeDNG1ptYp2nv5O0Gw8PD+95Xj7wlIT7fCmT915uNx4eHt5W3mQgYLIpaxvUrhYPDw/vHC8JzXlQbocA8oS7bq3h4eHhHeAlJdSkENAWatvDYK0wgYeHh3eaN+m2t6XepJjbHjnRkAEeHh7emDcB5OlynhC3h1DU+sLDw8N7hJePQOVJc56st+ybcSs8PDy8rby1cN+OT+UljLUBrJvn4OHh4W3l5Q3+djRqUhrOE/2bggUeHh7eg7w8bc1LGJMCRHJvceLh4eHhbeLVYfdA8p23xKLV4uHh4R3gTYauEnw++7SrkFGcgXh4eHhLvMlw1VrgTp7Q1mAvn4+Hh4d3mNcG4nnBNz8q2sMmOuvw8PDwlnhJyJ4H63mJYRGGh4eHd5jXNsOS1+Tg/JntSBYeHh7eOV4bS/P0ty1ntJt1cwjh4eHhHebljfldyXdbPm5Tdjw8PLxzvLZZtTaYlRxCxShVUlLBw8PDO8ZrYXnim49eJXeNihF4eHh4Y96uBDe/a1K0bdeDh4eHd4LXBt+1sYC1Zlie6LeHGR4eHt6cl4T1pIA7L8UmS8/LH3h4eHineXlhtE1n24R7Xowo8nc8PDy8R3hriW/euEqKwkVyj4eHh/cFvGSUqh0ymKTsB889PDw8vLKFnwfoFr+2WfkW4OHh4Z3mtf/wrzXD6lQ4Tqk3XHh4eHgp7xdnl/k+7z1s8AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

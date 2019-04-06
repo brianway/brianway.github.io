@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javaweb入门笔记(2)-http入门 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaWeb,HTTP">
+    <meta name="description" content="对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下">
+<meta name="keywords" content="JavaWeb,HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaweb入门笔记(2)-http入门">
+<meta property="og:url" content="https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_HttpResponseStatus.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javaweb入门笔记(2)-http入门">
+<meta name="twitter:description" content="对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_HttpResponseStatus.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javaweb入门笔记(2)-http入门</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javaweb入门笔记(2)-http入门</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-06T02:04:12.000Z" itemprop="datePublished" class="page-time">
+  2016-02-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#请求-Request"><span class="post-toc-number">1.</span> <span class="post-toc-text">请求(Request)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求头字段"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">请求头字段</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#响应-Response"><span class="post-toc-number">2.</span> <span class="post-toc-text">响应(Response)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#响应状态行"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">响应状态行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#响应头字段"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">响应头字段</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-02-06-javaweb-note-2-http" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javaweb入门笔记(2)-http入门</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-06 10:04:12" datetime="2016-02-06T02:04:12.000Z" itemprop="datePublished">2016-02-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下</p>
+<a id="more"></a>
+<h2 id="请求-Request"><a href="#请求-Request" class="headerlink" title="请求(Request)"></a>请求(Request)</h2><p>一个完整的HTTP请求包括：一个请求行、若干请求头、以及实体内容</p>
+<h3 id="请求头字段"><a href="#请求头字段" class="headerlink" title="请求头字段"></a>请求头字段</h3><ul>
+<li>Accept:用于告诉服务器，客户机支持的数据类型</li>
+<li>Accept-Charset:用于告诉服务器，客户机采用的编码</li>
+<li>Accept-Encoding:用于告诉服务器，客户机支持数据压缩格式</li>
+<li>Accept-Language:客户机的语言环境</li>
+<li>Host:客户机通过这个头告诉服务器，想访问的主机名</li>
+<li>If-Modified-Since:客户机通过这个头告诉服务器，资源的缓存时间</li>
+<li>Refer:客户机通过这个头告诉服务器，它是从哪个资源访问服务器的(防盗链)</li>
+<li>User-Agent:客户机通过这个头告诉服务器，客户机的软件环境</li>
+<li>Cookie:客户机通过这个头向服务器带数据</li>
+<li>Connection:这个请求完了，是保持连接还是关闭</li>
+<li>Range:断点下载<ul>
+<li><code>bytes=n1-n2</code>,传输范围n1到n2字节</li>
+<li><code>bytes=n-</code>，传输web资源中第n个字节以后的所有内容</li>
+<li><code>bytes=n</code>,传输最后n个字节</li>
+</ul>
+</li>
+</ul>
+<h2 id="响应-Response"><a href="#响应-Response" class="headerlink" title="响应(Response)"></a>响应(Response)</h2><p>一个HTTP响应代表服务器向客户端回送的数据，包括：一个状态行、若干消息头、以及实体内容</p>
+<h3 id="响应状态行"><a href="#响应状态行" class="headerlink" title="响应状态行"></a>响应状态行</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_HttpResponseStatus.png" alt="HTTP响应状态码简表" title>
+                </div>
+                <div class="image-caption">HTTP响应状态码简表</div>
+            </figure>
+<p>详情可参考</p>
+<blockquote>
+<p><a href="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" target="_blank" rel="noopener">HTTP 状态消息</a></p>
+</blockquote>
+<h3 id="响应头字段"><a href="#响应头字段" class="headerlink" title="响应头字段"></a>响应头字段</h3><ul>
+<li>Location:这个头配合302状态码使用，用于告诉客户机找谁(location和302实现请求重定向)</li>
+<li>Server:服务器通过这个头，告诉浏览器服务器的类型</li>
+<li>Content-Encoding:服务器通过这个头，数据的压缩格式<br>(相关java知识:<code>GZIPOutputStream</code>,包装流/底层流)</li>
+<li>Content-Length:服务器通过这个头，告诉浏览器回送数据的长度</li>
+<li>Content-Type:服务器通过这个头，告诉浏览器回送数据的类型</li>
+<li>Last-Modified:服务器通过这个头，告诉浏览器当前资源的缓存时间</li>
+<li>Refresh:服务器通过这个头，告诉浏览器隔多长时间刷新一次</li>
+<li>Content-Disposition:服务器通过这个头，告诉浏览器以下载方式打开</li>
+<li>Transfer-Encoding:服务器通过这个头，告诉浏览器数据的传送格式</li>
+<li>Etag:缓存相关的头部，用于实时性要求高的系统</li>
+<li>Expires:服务器通过这个头，告诉浏览器把回送的资源缓存多长时间，-1或0则不缓存</li>
+<li>Cache-Control和Pragma:no-cache,服务器通过这两个头，也是控制浏览器不要缓存数据</li>
+<li>Connection:断开连接/保持连接</li>
+<li>Date:当前时间</li>
+<li>Accept-Ranges:用来说明web服务器是否支持range。支持返回bytes;不支持返回none</li>
+<li>Content-Range:制定了返回web资源的字节范围，格式：<code>n1-n2/n_total</code></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.019Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/06/2016-02-06-javaweb-note-2-http/" target="_blank" rel="external">https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/&title=《javaweb入门笔记(2)-http入门》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/&title=《javaweb入门笔记(2)-http入门》 — Brian's Homepage&source=对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(2)-http入门》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-3-servlet/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javaweb入门笔记(3)-Servlet</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">javaweb入门笔记(1)-Tomcat</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/&title=《javaweb入门笔记(2)-http入门》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/&title=《javaweb入门笔记(2)-http入门》 — Brian's Homepage&source=对HTTP协议早有了解，最近在看javaweb，视频中讲到了这部分，就把视频的内容整理归纳下" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(2)-http入门》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-2-http/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3aQY7jMAwEwPz/07PA3hYLK92UlMmhfDIc21HpINEkX6/4+Pl7PF3//3h69un86df1/ccOPDw8vNHQ1wNNhrV+dv1UcmV9/elf8PDw8O7x1ptBDk7w6+vrtT0fMx4eHt438NbsdYicv7+dUDw8PLxv5rXI2YYxmw48PDy8z/PahEIbZJ9KOlzMteDh4eHFvLYA9g3nF+t7eHh4eBtV9WTBzYtbbSC+f+Dh4eHd4CXNT20pKwmpT21C0baBh4eHd5SX3LSzxO+0diVX3pzj4eHhXeMlC3T+vZ+szLOSWw7Gw8PDu81LBpdMRI5Jkh3tPXh4eHif5w0X33go+4F4u2nh4eHh3eDN/r5NWLSbSjI1+UTg4eHhneXlBfjkvA3ET6Uzii8GPDw8vKO8WbEqn4g27t1JbbzaB/Dw8PBK3k7Stu7wigPun/h4DL7x8PDwrvFmgXVLbTeJWSp5a4bw8PDwYt76Fe2d+UDbN0QJCDw8PLzLvOFH/uipnbRC25I1zLjg4eHhBbz8I38fP2uxyreQunUADw8Pb8TLh9Iu93nxrF3u68IbHh4e3sd5eVPpqWTuzoTi4eHhfYa3k2BNUrd5QJy/rU0c4+Hh4Z3i5SmDdhuYpRLaZMebseHh4eFd5uXFqrbMn0xKHmoPE7h4eHh4R3kz0iw4njVmteW0fzYGPDw8vKO8dv08lYxoE8SzCcLDw8O7wctfurMN7LcRtMg3yQg8PDy8o7ykZSoJhXNknqLdarfCw8PDO8Q7lSzYKfnnw23P8fDw8O7xkiU7P88TDbN2gboRFg8PD+8ar13WZ0PJN4k2GfHmuwEPDw/vl3htSjdPVcwC8ajOhYeHh/cFvCSQzacjCcFnqV48PDy827y2wN8mcPMpy8tdeHh4eL/Fm33q7780b004AMDDw8M7w/sDKGPaT9CTXMYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

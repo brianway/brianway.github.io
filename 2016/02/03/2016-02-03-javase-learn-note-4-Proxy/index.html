@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>java基础巩固笔记(4)-代理 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java,代理">
+    <meta name="description" content="代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。">
+<meta name="keywords" content="Java,代理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础巩固笔记(4)-代理">
+<meta property="og:url" content="https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E4%BB%A3%E7%90%86%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.045Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java基础巩固笔记(4)-代理">
+<meta name="twitter:description" content="代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E4%BB%A3%E7%90%86%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java基础巩固笔记(4)-代理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">java基础巩固笔记(4)-代理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-03T06:43:13.000Z" itemprop="datePublished" class="page-time">
+  2016-02-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态代理"><span class="post-toc-number">2.</span> <span class="post-toc-text">动态代理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建动态类"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">创建动态类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态代理的工作原理"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动态代理的工作原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向切面编程"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">面向切面编程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-02-03-javase-learn-note-4-Proxy" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java基础巩固笔记(4)-代理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-03 14:43:13" datetime="2016-02-03T06:43:13.000Z" itemprop="datePublished">2016-02-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。</p>
+<a id="more"></a>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>代理是一种设计模式，其目的是为其他对象提供一个代理以控制对某个对象的访问，代理类负责为委托类预处理消息，过滤消息并转发消息以及进行消息被委托类执行后的后续处理。为了保持行为的一致性，代理类和委托类通常会实现相同的接口</p>
+<ul>
+<li>静态代理：由程序员创建代理类或特定工具自动生成源代码再对其编译，也就是说在程序运行前代理类的.class文件就已经存在。</li>
+<li>动态代理：在程序运行时运用反射机制动态创建生成。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E4%BB%A3%E7%90%86%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="代理架构图" title>
+                </div>
+                <div class="image-caption">代理架构图</div>
+            </figure>
+<p><em>紫色箭头代表类的继承关系，红色连线表示调用关系</em></p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><ul>
+<li>JVM可以在运行期动态生成类的字节码，该类往往被用作动态代理类。</li>
+<li>JVM生成的动态类必须实现一个或多个接口，所以这种只能用作具有相同接口的目标类的代理。</li>
+<li>CGLIB库可以动态生成一个类的子类，一个类的子类也可作为该类的代理，这个可用来为没有实现接口的类生成动态代理类。</li>
+<li>代理类可在<em>调用目标方法之前、之后、前后、以及处理目标方法异常的catch块中</em>添加系统功能代码。</li>
+</ul>
+<h3 id="创建动态类"><a href="#创建动态类" class="headerlink" title="创建动态类"></a>创建动态类</h3><p>API:</p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/reflect/Proxy.html" target="_blank" rel="noopener">java.lang.reflect:Class Proxy</a><br><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/reflect/InvocationHandler.html" target="_blank" rel="noopener">java.lang.reflect:Interface InvocationHandler</a></p>
+</blockquote>
+<ul>
+<li>查看代理类方法列表信息</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.iot.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by brian on 2015/12/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class clazzProxy1 = Proxy.getProxyClass(Collection.class.getClassLoader(), Collection.class);</span><br><span class="line">        System.out.println(clazzProxy1);</span><br><span class="line">        printConstructors(clazzProxy1);</span><br><span class="line">        printMethods(clazzProxy1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 打印构造方法列表</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clazz</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printConstructors</span><span class="params">(Class clazz)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-------------constructors list-------------"</span>);</span><br><span class="line">        Constructor[] constructors = clazz.getConstructors();</span><br><span class="line">        System.out.print(getExecutableList(constructors));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 打印成员方法列表</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clazz</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printMethods</span><span class="params">(Class clazz)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-------------methods list-------------"</span>);</span><br><span class="line">        Method[] methods = clazz.getMethods();</span><br><span class="line">        System.out.print(getExecutableList(methods));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取要打印的列表数据</span></span><br><span class="line"><span class="comment">     * 每行一个方法,按照func(arg1,arg2)的格式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> executables</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getExecutableList</span><span class="params">(Executable[] executables)</span></span>&#123;</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (Executable executable : executables) &#123;</span><br><span class="line">            String name = executable.getName();</span><br><span class="line">            stringBuilder.append(name);</span><br><span class="line">            stringBuilder.append(<span class="string">"("</span>);</span><br><span class="line">            Class[] clazzParams = executable.getParameterTypes();</span><br><span class="line">            <span class="keyword">for</span> (Class clazzParam : clazzParams) &#123;</span><br><span class="line">                stringBuilder.append(clazzParam.getName()).append(<span class="string">","</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (clazzParams != <span class="keyword">null</span> &amp;&amp; clazzParams.length != <span class="number">0</span>) &#123;</span><br><span class="line">                stringBuilder.deleteCharAt(stringBuilder.length() - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            stringBuilder.append(<span class="string">")\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class com.sun.proxy.$Proxy0</span><br><span class="line">-------------constructors list-------------</span><br><span class="line">com.sun.proxy.$Proxy0(java.lang.reflect.InvocationHandler)</span><br><span class="line">-------------methods list-------------</span><br><span class="line">add(java.lang.Object)</span><br><span class="line">remove(java.lang.Object)</span><br><span class="line">equals(java.lang.Object)</span><br><span class="line">toString()</span><br><span class="line">hashCode()</span><br><span class="line">clear()</span><br><span class="line">contains(java.lang.Object)</span><br><span class="line">isEmpty()</span><br><span class="line">iterator()</span><br><span class="line">size()</span><br><span class="line">toArray([Ljava.lang.Object;)</span><br><span class="line">toArray()</span><br><span class="line">spliterator()</span><br><span class="line">addAll(java.util.Collection)</span><br><span class="line">stream()</span><br><span class="line">forEach(java.util.function.Consumer)</span><br><span class="line">containsAll(java.util.Collection)</span><br><span class="line">removeAll(java.util.Collection)</span><br><span class="line">removeIf(java.util.function.Predicate)</span><br><span class="line">retainAll(java.util.Collection)</span><br><span class="line">parallelStream()</span><br><span class="line">isProxyClass(java.lang.Class)</span><br><span class="line">getInvocationHandler(java.lang.Object)</span><br><span class="line">getProxyClass(java.lang.ClassLoader,[Ljava.lang.Class;)</span><br><span class="line">newProxyInstance(java.lang.ClassLoader,[Ljava.lang.Class;,java.lang.reflect.InvocationHandler)</span><br><span class="line">wait()</span><br><span class="line">wait(long,int)</span><br><span class="line">wait(long)</span><br><span class="line">getClass()</span><br><span class="line">notify()</span><br><span class="line">notifyAll()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建实例对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试创建实例对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> NoSuchMethodException</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IllegalAccessException</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> InvocationTargetException</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> InstantiationException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createProxyInstance</span><span class="params">( )</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 方法1：先创建代理类，再使用反射创建实例对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Class clazzProxy1 = Proxy.getProxyClass(Collection.class.getClassLoader(), Collection.class);</span><br><span class="line">    Constructor constructor = clazzProxy1.getConstructor(InvocationHandler.class);</span><br><span class="line">    Collection proxy1 = (Collection) constructor.newInstance(<span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 方法2：直接使用newProxyInstance方法创建实例对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Collection proxy2 = (Collection)Proxy.newProxyInstance(</span><br><span class="line">            Collection.class.getClassLoader(),</span><br><span class="line">            <span class="keyword">new</span> Class[]&#123;Collection.class&#125;,</span><br><span class="line">            <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">                ArrayList target = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">            <span class="comment">//ArrayList targetTmp = new ArrayList();</span></span><br><span class="line">            System.out.println(<span class="string">"before invoke method: "</span>+method.getName());</span><br><span class="line">            <span class="keyword">return</span> method.invoke(target,args);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    proxy2.add(<span class="string">"aaa"</span>);</span><br><span class="line">    proxy2.add(<span class="string">"bbb"</span>);</span><br><span class="line">    System.out.println(proxy2.size());</span><br><span class="line">    System.out.println(proxy2);</span><br><span class="line">    System.out.println(proxy2.getClass().getName());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">before invoke method: add</span><br><span class="line">before invoke method: add</span><br><span class="line">before invoke method: size</span><br><span class="line">2</span><br><span class="line">before invoke method: toString</span><br><span class="line">[aaa, bbb]</span><br><span class="line">com.sun.proxy.$Proxy0</span><br></pre></td></tr></table></figure>
+<p>上述代码相关说明:</p>
+<ul>
+<li>若将<code>method.invoke(target,args);</code>改为<code>method.invoke(proxy,args);</code>会出现死循环</li>
+<li>从输出结果可知，每次调用代理类的方法，实际都是调用<code>invoke</code>方法</li>
+<li>若将<code>method.invoke(target,args);</code>改为<code>method.invoke(targetTmp,args);</code>，则<code>proxy2.size()</code>为0。因为每次调用<code>invoke</code>方法时，<code>targetTmp</code>为新的局部变量</li>
+<li><code>Object</code>类只有的<code>hashCode</code>, <code>equals</code>, or <code>toString</code>方法会被交到<code>InvocationHandler</code>，其他方法自己有实现，不交给handler,所以最后打印结果为<code>com.sun.proxy.$Proxy0</code>而不是<code>Collection</code></li>
+</ul>
+<ul>
+<li><code>InvocationHandler</code>对象的运行原理</li>
+</ul>
+<p><code>InvocationHandler</code>接口只有一个<code>invoke</code>方法，每次调用代理类的方法，即调用了<code>InvocationHandler</code>对象的<code>invoke</code>方法</p>
+<p><code>invoke</code>方法涉及三个要素：</p>
+<ul>
+<li>代理对象</li>
+<li>代理对象调用的方法</li>
+<li>方法接受的参数</li>
+</ul>
+<p>注：Object类的<code>hashCode</code>,<code>equals</code>,<code>toString</code>方法交给invoke,其他的Object类的方法，Proxy有自己的实现。</p>
+<blockquote>
+<p>If a proxy interface contains a method with the same name and parameter signature as the hashCode, equals, or toString methods of java.lang.Object, when such a method is invoked on a proxy instance, the Method object passed to the invocation handler will have java.lang.Object as its declaring class. In other words, the public, non-final methods of java.lang.Object logically precede all of the proxy interfaces for the determination of which Method object to pass to the invocation handler.</p>
+</blockquote>
+<h3 id="动态代理的工作原理"><a href="#动态代理的工作原理" class="headerlink" title="动态代理的工作原理"></a>动态代理的工作原理</h3><p>代理类创建时需要传入一个InvocationHandler对象，client调用代理类，代理类的相应方法调用InvocationHandler的的invoke方法，InvocationHandler的的invoke方法(可在其中加入日志记录、时间统计等附加功能)再找目标类的相应方法。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" alt="动态代理的工作原理图" title>
+                </div>
+                <div class="image-caption">动态代理的工作原理图</div>
+            </figure>
+<h3 id="面向切面编程"><a href="#面向切面编程" class="headerlink" title="面向切面编程"></a>面向切面编程</h3><p>把切面的代码以<strong>对象</strong>的形式传递给InvocationHandler的的invoke方法，invoke方法中执行该对象的方法就执行了切面的代码。</p>
+<p>所以需要传递两个参数：</p>
+<p>1.目标(Object target)<br>2.通知(自定义的adviser类)</p>
+<p>定义<code>Advice</code>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Advice</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">beforeMethod</span><span class="params">(Method method)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">aftereMethod</span><span class="params">(Method method)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个实现<code>Advice</code>接口的类<code>MyAdvice</code>,用于打印执行方法前和执行后的时间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdvice</span> <span class="keyword">implements</span> <span class="title">Advice</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> beginTime = <span class="number">0</span> ;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeMethod</span><span class="params">(Method method)</span> </span>&#123;</span><br><span class="line">        System.out.println(method.getName()+<span class="string">" before at "</span>+beginTime);</span><br><span class="line">        beginTime = System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">aftereMethod</span><span class="params">(Method method)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">        System.out.println(method.getName()+<span class="string">" cost total "</span>+ (endTime-beginTime));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义一个<code>getProxy</code>方法创建实例对象,接收两个参数:目标和通知</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title">getProxy</span><span class="params">(<span class="keyword">final</span> Object target,<span class="keyword">final</span> Advice advice)</span></span>&#123;</span><br><span class="line">    Object proxy = Proxy.newProxyInstance(</span><br><span class="line">            target.getClass().getClassLoader(),</span><br><span class="line">            target.getClass().getInterfaces(),</span><br><span class="line">            <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                    advice.beforeMethod(method);</span><br><span class="line">                    Object retVal = method.invoke(target,args);</span><br><span class="line">                    advice.aftereMethod(method);</span><br><span class="line">                    <span class="keyword">return</span> retVal;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> proxy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Collection proxy3 = (Collection) getProxy(<span class="keyword">new</span> ArrayList(),<span class="keyword">new</span> MyAdvice());</span><br><span class="line">proxy3.add(<span class="string">"111"</span>);</span><br><span class="line">proxy3.add(<span class="string">"222"</span>);</span><br><span class="line">System.out.println(proxy3.size());</span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add before at 0</span><br><span class="line">add cost total 0</span><br><span class="line">add before at 1454433980839</span><br><span class="line">add cost total 0</span><br><span class="line">size before at 1454433980839</span><br><span class="line">size cost total 0</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="http://developer.51cto.com/art/201509/492614.htm" target="_blank" rel="noopener">Java动态代理的实现机制</a></li>
+<li><a href="http://www.cnblogs.com/xdp-gacl/p/3971367.html" target="_blank" rel="noopener">Java基础加强总结(三)——代理(Proxy)</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.045Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/" target="_blank" rel="external">https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代理/">代理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/&title=《java基础巩固笔记(4)-代理》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/&title=《java基础巩固笔记(4)-代理》 — Brian's Homepage&source=代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java基础巩固笔记(4)-代理》 — Brian's Homepage&url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/03/2016-02-03-javase-learn-note-4-AopFramework/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">java基础巩固笔记(4)-实现AOP功能的封装与配置的小框架</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/03/2016-02-03-javase-learn-note-3-ClassLoader/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java基础巩固笔记(3)-类加载器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/&title=《java基础巩固笔记(4)-代理》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/&title=《java基础巩固笔记(4)-代理》 — Brian's Homepage&source=代理是实现AOP(Aspect oriented program，面向切面编程)的核心和关键技术。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java基础巩固笔记(4)-代理》 — Brian's Homepage&url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/03/2016-02-03-javase-learn-note-4-Proxy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3aQVLDMBAEwPz/03DhRhLPrCQTqtonFxG2OgetMqvHI76+Xlyvxrz/y+/7929Mxi9deHh4eJumnk909sb87Sv/hYeHh3eOl0wiGT/7Ii6mWM4BDw8P75N57xfrvDwkn+Lh4eH9X14eHOSb4yTywMPDw/s0Xv7oV6Q2etg1ZlvWgoeHhxfzZsHr394f6e/h4eHhLXfV82i1HZNsqVfm+fMEPDw8vAO8WYNqNpXk0/ztxUg8PDy8rbx8Enm7qy0Pu9pgT+7x8PDwbuTNoor3ZWO2mc6D3SiMwMPDwzvAy5fv9nBAfvhgfbOOh4eHdw8vP4a1q4XfRsBFScDDw8M7zJsFDe0ynTx/peS8DCPw8PDwtvKSqbSxRbvEJ3HtLBDBw8PDO8drF/31Zthsqz0rJHh4eHgneMminJSNpKjMysDsAAEeHh7eCd5KKNA+of377DjCk6wFDw8PbyuvDQvyeLddxPOG2exoAh4eHt4JXhI0tIHs3rxkVoTw8PDw7uTlIcX6cau8MXawBuLh4eHFvPWm/ixWWCkqxbYeDw8P7xZeG0nkB62SSbdBycUYPDw8vK28lQNV7aGB2VfWbtDrXwZ4eHh4I965+DXf+LYFI2q54eHh4R3gtYHpSktsdjhg9gXh4eHhnebtXdDbQpJvptvDXnh4eHh38vJlPV++25GP8rpogOHh4eEd4EU/6cvFvY1fd8Hw8PDwzvFmG9yVrXYbfMwiYzw8PLxzvHbxTYrHeotr1z0eHh7eOV5bDPIjVrPm2ayDd9EAw8PDwzvAK4LRssLkX9nsungOHh4e3gfw8sNV6wet2q388DQZHh4e3i28WUTbHqXKW26bCwMeHh5ewEvCiHwSeVOqjRuGhQEPDw9vK6/9wX8ipMjHLDHw8PDwVnnfEyY1yizjlCEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

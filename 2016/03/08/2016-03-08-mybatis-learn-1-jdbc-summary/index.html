@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>mybatis学习笔记(1)-对原生jdbc程序中的问题总结 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="MyBatis,JDBC">
+    <meta name="description" content="本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo">
+<meta name="keywords" content="MyBatis,JDBC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习笔记(1)-对原生jdbc程序中的问题总结">
+<meta property="og:url" content="https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习笔记(1)-对原生jdbc程序中的问题总结">
+<meta name="twitter:description" content="本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mybatis学习笔记(1)-对原生jdbc程序中的问题总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mybatis学习笔记(1)-对原生jdbc程序中的问题总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-07T18:38:01.000Z" itemprop="datePublished" class="page-time">
+  2016-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jdbc编程步骤"><span class="post-toc-number">1.</span> <span class="post-toc-text">jdbc编程步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">问题总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考代码</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-08-mybatis-learn-1-jdbc-summary" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mybatis学习笔记(1)-对原生jdbc程序中的问题总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-08 02:38:01" datetime="2016-03-07T18:38:01.000Z" itemprop="datePublished">2016-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo</p>
+<a id="more"></a>
+<h2 id="jdbc编程步骤"><a href="#jdbc编程步骤" class="headerlink" title="jdbc编程步骤"></a>jdbc编程步骤</h2><ol>
+<li>加载数据库驱动</li>
+<li>创建并获取数据库链接</li>
+<li>创建jdbc statement对象</li>
+<li>设置sql语句</li>
+<li>设置sql语句中的参数(使用preparedStatement)</li>
+<li>通过statement执行sql并获取结果</li>
+<li>对sql执行结果进行解析处理</li>
+<li>释放资源(resultSet、preparedstatement、connection)</li>
+</ol>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><p>1.数据库连接，使用时就创建，不使用立即释放，对数据库进行频繁连接开启和关闭，造成数据库资源浪费，影响数据库性能。</p>
+<p>设想：使用数据库连接池管理数据库连接。</p>
+<p>2.将sql语句硬编码到java代码中，如果sql语句修改，需要重新编译java代码，不利于系统维护。</p>
+<p>设想：将sql语句配置在xml配置文件中，即使sql变化，不需要对java代码进行重新编译。</p>
+<p>3.向preparedStatement中设置参数，对占位符号位置和设置参数值，硬编码在java代码中，不利于系统维护。</p>
+<p>设想：将sql语句及占位符号和参数全部配置在xml中。</p>
+<p>4.从resutSet中遍历结果集数据时，存在硬编码，将获取表的字段进行硬编码，不利于系统维护。</p>
+<p>设想：将查询的结果集，自动映射成java对象。</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.iot.mybatis.jdbc;</span><br><span class="line"></span><br><span class="line"><span class="comment">//import java.sql.*;</span></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Administrator on 2016/2/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//数据库连接</span></span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//预编译的Statement，使用预编译的Statement提高数据库性能</span></span><br><span class="line">        PreparedStatement preparedStatement = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//结果集</span></span><br><span class="line">        ResultSet resultSet = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//加载数据库驱动</span></span><br><span class="line">            Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//通过驱动管理类获取数据库链接</span></span><br><span class="line">            connection =  DriverManager.getConnection(<span class="string">"jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8"</span>, <span class="string">"root"</span>, <span class="string">"123"</span>);</span><br><span class="line">            <span class="comment">//定义sql语句 ?表示占位符</span></span><br><span class="line">            String sql = <span class="string">"select * from user where username = ?"</span>;</span><br><span class="line">            <span class="comment">//获取预处理statement</span></span><br><span class="line">            preparedStatement = connection.prepareStatement(sql);</span><br><span class="line">            <span class="comment">//设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值</span></span><br><span class="line">            preparedStatement.setString(<span class="number">1</span>, <span class="string">"王五"</span>);</span><br><span class="line">            <span class="comment">//向数据库发出sql执行查询，查询出结果集</span></span><br><span class="line">            resultSet =  preparedStatement.executeQuery();</span><br><span class="line">            <span class="comment">//遍历查询结果集</span></span><br><span class="line">            <span class="keyword">while</span>(resultSet.next())&#123;</span><br><span class="line">                System.out.println(resultSet.getString(<span class="string">"id"</span>)+<span class="string">"  "</span>+resultSet.getString(<span class="string">"username"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            <span class="comment">//释放资源</span></span><br><span class="line">            <span class="keyword">if</span>(resultSet!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    resultSet.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                    <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(preparedStatement!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    preparedStatement.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                    <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(connection!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    connection.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                    <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.052Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/" target="_blank" rel="external">https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDBC/">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/&title=《mybatis学习笔记(1)-对原生jdbc程序中的问题总结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/&title=《mybatis学习笔记(1)-对原生jdbc程序中的问题总结》 — Brian's Homepage&source=本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(1)-对原生jdbc程序中的问题总结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-2-mybatis-summary/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mybatis学习笔记(2)-mybatis概述</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/20/2016-02-20-javase-learn-note-6-Annotation/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java基础巩固笔记(6)-注解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/&title=《mybatis学习笔记(1)-对原生jdbc程序中的问题总结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/&title=《mybatis学习笔记(1)-对原生jdbc程序中的问题总结》 — Brian's Homepage&source=本文总结jdbc编程的一般步骤，总结这样编程存在的问题，并附上典型地jdbc示例demo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(1)-对原生jdbc程序中的问题总结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-1-jdbc-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwklEQVR42u3aQW7cMBAEQP//084lBwO2vN0zZLKH0skQtBRLBkSqZz4+4uPzy/H1zNOV33/1/frfx8zveODAw8PDW0z9aUJPU0xgCWlz5veHiIeHh3ePl0z36frfGckr/sUUgzk8nsfDw8N7A95sqz17ZPn1eHh4eO/MSyKGJB9IRsbDw8N7Z95m6FlIkW+4Z+Pg4eHh3ePlVaT3+ftKfQ8PDw9vXVXPX7h5jNu2C8zm+XcEPDw8vAu8Nj5IwtbZAjO7e3QlHh4e3lFeG6eeKvDnJa7kzOPfeHh4eJd57Yu4LYDNClr5xj36AR4eHt5RXt721Bb7Z9FG29L64lsBDw8P7xBv9qmfBKxtG8Gp5edAkoGHh4e3huXtVrO2rdkC8PuVP9T38PDw8A7xkpjgbJSQT65dDIotNR4eHt6Clxex2jPJK75diuq74OHh4V3gbYLUTcyxiTA2zQp4eHh4e167wd1sdttNdltg++GOeHh4eNd4s01z3iKQh7ntY3qxtODh4eFd4OVDtJNrA9/NslRs9/Hw8PDWvLwo1TZR5cWqojusjXrx8PDwrvHa2+fxxL6UtWrqwsPDw7vAy3fcSdCQv7JPPY7iiwEPDw/vKC8PYVvwrMlgtq2P/m94eHh4R3mzOHUWPeQPIjn/opUBDw8P7xpvU9xKttezoPbAlh0PDw/vH/LaCHU/oX1gET0nPDw8vAu8ZLg2/M1HmC0wxcKAh4eHd42Xtz3NttFtOS2fCR4eHt493md5nCpizR5N2wqGh4eHd4O3CVVnjVB5hJEEGUUkgYeHh3eU15b287h2tlRswuIXYQQeHh7eUV77Ut5EtG2pbBaL4OHh4b0nr91e3453H7fUeHh4eP+VlywD+SNo263yZQkPDw/vNm82uRY2m3reLrCKcfHw8PBiXvvBny8SyTizdoEhAw8PD2/L+wN/VVS5yDJ/SAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

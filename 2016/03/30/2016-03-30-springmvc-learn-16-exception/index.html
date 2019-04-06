@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(16)-异常处理器 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC">
+    <meta name="description" content="本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置">
+<meta name="keywords" content="SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(16)-异常处理器">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.027Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(16)-异常处理器">
+<meta name="twitter:description" content="本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(16)-异常处理器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(16)-异常处理器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:16.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常处理思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">异常处理思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义异常类"><span class="post-toc-number">2.</span> <span class="post-toc-text">自定义异常类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全局异常处理器"><span class="post-toc-number">3.</span> <span class="post-toc-text">全局异常处理器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误页面"><span class="post-toc-number">4.</span> <span class="post-toc-text">错误页面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在springmvc-xml配置全局异常处理器"><span class="post-toc-number">5.</span> <span class="post-toc-text">在springmvc.xml配置全局异常处理器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常测试"><span class="post-toc-number">6.</span> <span class="post-toc-text">异常测试</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-30-springmvc-learn-16-exception" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(16)-异常处理器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:16" datetime="2016-03-29T22:28:16.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置</p>
+<a id="more"></a>
+<h2 id="异常处理思路"><a href="#异常处理思路" class="headerlink" title="异常处理思路"></a>异常处理思路</h2><p>系统中异常包括两类：</p>
+<ul>
+<li>预期异常</li>
+<li>运行时异常RuntimeException</li>
+</ul>
+<p>前者通过捕获异常从而获取异常信息，后者主要通过规范代码开发、测试通过手段减少运行时异常的发生。</p>
+<p>系统的dao、service、controller出现都通过throws Exception向上抛出，最后由springmvc前端控制器交由异常处理器进行异常处理，如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png" alt="springmvc异常处理" title>
+                </div>
+                <div class="image-caption">springmvc异常处理</div>
+            </figure>
+<p>springmvc提供全局异常处理器（一个系统只有一个异常处理器）进行统一异常处理。</p>
+<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a>自定义异常类</h2><p>对不同的异常类型定义异常类，继承Exception。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.iot.learnssm.firstssm.exception;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by brian on 2016/3/7.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 系统 自定义异常类，针对预期的异常，需要在程序中抛出此类的异常</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomException</span>  <span class="keyword">extends</span>  <span class="title">Exception</span></span>&#123;</span><br><span class="line">    <span class="comment">//异常信息</span></span><br><span class="line">    <span class="keyword">public</span> String message;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CustomException</span><span class="params">(String message)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="全局异常处理器"><a href="#全局异常处理器" class="headerlink" title="全局异常处理器"></a>全局异常处理器</h2><p>思路：</p>
+<p>系统遇到异常，在程序中手动抛出，dao抛给service、service给controller、controller抛给前端控制器，前端控制器调用全局异常处理器。</p>
+<p>全局异常处理器处理思路：</p>
+<p>解析出异常类型</p>
+<ul>
+<li>如果该异常类型是系统自定义的异常，直接取出异常信息，在错误页面展示</li>
+<li>如果该异常类型不是系统自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）</li>
+</ul>
+<p>springmvc提供一个<code>HandlerExceptionResolver</code>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//handler就是处理器适配器要执行Handler对象（只有method）</span></span><br><span class="line">        <span class="comment">//解析出异常类型</span></span><br><span class="line">        <span class="comment">//如果该 异常类型是系统 自定义的异常，直接取出异常信息，在错误页面展示</span></span><br><span class="line">        <span class="comment">//String message = null;</span></span><br><span class="line">        <span class="comment">//if(ex instanceof CustomException)&#123;</span></span><br><span class="line">			<span class="comment">//message = ((CustomException)ex).getMessage();</span></span><br><span class="line">        <span class="comment">//&#125;else&#123;</span></span><br><span class="line">			<span class="comment">////如果该 异常类型不是系统 自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）</span></span><br><span class="line">			<span class="comment">//message="未知错误";</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//上边代码变为</span></span><br><span class="line">        CustomException customException;</span><br><span class="line">        <span class="keyword">if</span>(ex <span class="keyword">instanceof</span> CustomException)&#123;</span><br><span class="line">            customException = (CustomException)ex;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            customException = <span class="keyword">new</span> CustomException(<span class="string">"未知错误"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//错误信息</span></span><br><span class="line">        String message = customException.getMessage();</span><br><span class="line"></span><br><span class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将错误信息传到页面</span></span><br><span class="line">        modelAndView.addObject(<span class="string">"message"</span>, message);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//指向错误页面</span></span><br><span class="line">        modelAndView.setViewName(<span class="string">"error"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="错误页面"><a href="#错误页面" class="headerlink" title="错误页面"></a>错误页面</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: Brian</span><br><span class="line">  Date: <span class="number">2016</span>/<span class="number">3</span>/<span class="number">4</span></span><br><span class="line">  Time: <span class="number">10</span>:<span class="number">51</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;错误提示&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">$&#123;message&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="在springmvc-xml配置全局异常处理器"><a href="#在springmvc-xml配置全局异常处理器" class="headerlink" title="在springmvc.xml配置全局异常处理器"></a>在springmvc.xml配置全局异常处理器</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 全局异常处理器</span></span><br><span class="line"><span class="comment">只要实现HandlerExceptionResolver接口就是全局异常处理器</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.iot.learnssm.firstssm.exception.CustomExceptionResolver"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>全局异常处理器只有一个，配置多个也没用。</p>
+<h2 id="异常测试"><a href="#异常测试" class="headerlink" title="异常测试"></a>异常测试</h2><p>在controller、service、dao中任意一处需要手动抛出异常。如果是程序中手动抛出的异常，在错误页面中显示自定义的异常信息，如果不是手动抛出异常说明是一个运行时异常，在错误页面只显示“未知错误”。</p>
+<ul>
+<li>在商品修改的controller方法中抛出异常 .</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">editItems</span><span class="params">(Model model,@RequestParam(value=<span class="string">"id"</span>,required=<span class="keyword">true</span>)</span> Integer items_id)<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//调用service根据商品id查询商品信息</span></span><br><span class="line">    ItemsCustom itemsCustom = itemsService.findItemsById(items_id);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断商品是否为空，根据id没有查询到商品，抛出异常，提示用户商品信息不存在</span></span><br><span class="line">    <span class="keyword">if</span>(itemsCustom == <span class="keyword">null</span>)&#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">"修改的商品信息不存在!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//通过形参中的model将model数据传到页面</span></span><br><span class="line">    <span class="comment">//相当于modelAndView.addObject方法</span></span><br><span class="line">    model.addAttribute(<span class="string">"items"</span>, itemsCustom);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"items/editItems"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在service接口中抛出异常：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ItemsCustom <span class="title">findItemsById</span><span class="params">(Integer id)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Items items = itemsMapper.selectByPrimaryKey(id);</span><br><span class="line">    <span class="keyword">if</span>(items==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">"修改的商品信息不存在!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//中间对商品信息进行业务处理</span></span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">    <span class="comment">//返回ItemsCustom</span></span><br><span class="line">    ItemsCustom itemsCustom = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">//将items的属性值拷贝到itemsCustom</span></span><br><span class="line">    <span class="keyword">if</span>(items!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        itemsCustom = <span class="keyword">new</span> ItemsCustom();</span><br><span class="line">        BeanUtils.copyProperties(items, itemsCustom);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> itemsCustom;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果与业务功能相关的异常，建议在service中抛出异常。</li>
+<li>与业务功能没有关系的异常，建议在controller中抛出。</li>
+</ul>
+<p>上边的功能，建议在service中抛出异常。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.027Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/2016-03-30-springmvc-learn-16-exception/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/&title=《springmvc学习笔记(16)-异常处理器》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/&title=《springmvc学习笔记(16)-异常处理器》 — Brian's Homepage&source=本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(16)-异常处理器》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(17)-上传图片</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-15-data-echo/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(15)-数据回显</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/&title=《springmvc学习笔记(16)-异常处理器》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/&title=《springmvc学习笔记(16)-异常处理器》 — Brian's Homepage&source=本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(16)-异常处理器》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-16-exception/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACp0lEQVR42u3aQY7bQAwEwP3/pzfXAImdblJMHKB0WsiyPKWDhtvk11d8fP90/Hr+1TWvvtV++v7KBw48PDy8xdJf3S759BX7/fn8oSTr+c3v4uHh4Z3x3i8lwbw/n7zWk8faPj48PDy8T+DlZXGCybcWPDw8vP+d15bdyYaRRBt4eHh4n8PL44b2yqS8bpd+krXg4eHhxbxN+fuv/j7p7+Hh4eGtu+p5cXw9TPA9OvDw8PAuePkLd1ZA5/d5KizGw8PD+5u85CWebBh5EbzZJIqHi4eHh3fA22wAmyGDTak9jG7x8PDwjnntrdsQIW9u5Y23P1Dx8PDwHuLNGvzJ6362CbVhcd27w8PDw1vw7gKFZwPf2RaCh4eHd8HLa+28nJ01sXJwHQrj4eHhHfAeaCyNCvRZlJxEHnh4eHh3vLqBNHrF5wV3u5JiJgIPDw/vId4sVtiHsHkMkbfi/nBnPDw8vDNevhm0i5uVy+3j+Gq/jIeHh7fm7YefZpHE7JriAeHh4eEd8B5rNZXbxr4cH87k4uHh4Y147b/6syGDWbzbbkgvZ8rw8PDwDnh5WdwOFjxboNdDXXh4eHhnvE0YUTeiRhHDcJQBDw8P74zX/sP//kzb9No3t16uDQ8PD++At2nMt62v/UBAHnDg4eHhXfMuIoM8kmgL9FU3Dw8PD++A1zbp9wvKP21DDTw8PLxr3uZn2kXsMUUYgYeHh/co77s8ZvFr3hjLhwOisBgPDw/vgNe+fNsQYRa8to91v7Xg4eHhtbx2M8ijiuTOs8ij2Bjw8PDwznj7oas2bhjuUW0UgoeHh/fBvM1wVTsckA8u4OHh4X0mbzMglZTvm6IfDw8P7463GSHNYatXfPmY8PDw8O54s2GppFWWF9D5uMCKgYeHh7fl/QBEwxbbSz9jCwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

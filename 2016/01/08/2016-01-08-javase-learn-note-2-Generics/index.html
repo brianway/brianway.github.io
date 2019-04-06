@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>java基础巩固笔记(2)-泛型 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础巩固笔记(2)-泛型">
+<meta property="og:url" content="https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E6%B3%9B%E5%9E%8B%E8%B0%83%E8%AF%95%E6%88%AA%E5%9B%BE-1.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java基础巩固笔记(2)-泛型">
+<meta name="twitter:description" content="本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E6%B3%9B%E5%9E%8B%E8%B0%83%E8%AF%95%E6%88%AA%E5%9B%BE-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java基础巩固笔记(2)-泛型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">java基础巩固笔记(2)-泛型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-07T22:14:12.000Z" itemprop="datePublished" class="page-time">
+  2016-01-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#泛型"><span class="post-toc-number">1.</span> <span class="post-toc-text">泛型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#术语"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">术语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#“-”通配符"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">“?”通配符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通配符的扩展"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">通配符的扩展</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义泛型方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">自定义泛型方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#“擦除”实例"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">“擦除”实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类型参数的类型推断"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">类型参数的类型推断</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义泛型类"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">自定义泛型类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#泛型方法和泛型类的比较"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">泛型方法和泛型类的比较</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛型和反射"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">泛型和反射</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过反射获得泛型的实际类型参数"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">通过反射获得泛型的实际类型参数</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-01-08-javase-learn-note-2-Generics" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java基础巩固笔记(2)-泛型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-08 06:14:12" datetime="2016-01-07T22:14:12.000Z" itemprop="datePublished">2016-01-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。</p>
+<a id="more"></a>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>将集合中的元素限定为一个特定的类型。</p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
+<li><code>ArrayList&lt;E&gt;</code> – 泛型类型</li>
+<li><code>ArrayList</code> – 原始类型</li>
+<li><code>E</code> – 类型参数</li>
+<li><code>&lt;&gt;</code> – 读作”typeof”</li>
+<li><code>ArrayList&lt;Integer&gt;</code> – 参数化的类型</li>
+<li><code>Integer</code> – 实际类型参数</li>
+</ul>
+<p>几点注意：</p>
+<ul>
+<li>参数化类型和原始类型相互兼容</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList  collection1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();<span class="comment">//通过,无warning</span></span><br><span class="line">ArrayList&lt;Integer&gt; collection2 = <span class="keyword">new</span> ArrayList();<span class="comment">//通过,有warning</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>参数化类型不考虑类型参数的继承关系</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; collection3 = <span class="keyword">new</span> ArrayList&lt;Object&gt;();<span class="comment">//编译不通过</span></span><br><span class="line">ArrayList&lt;Object&gt; collection4 = <span class="keyword">new</span> ArrayList&lt;String&gt;();<span class="comment">//编译不通过</span></span><br></pre></td></tr></table></figure>
+<p>但是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList collection5 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">ArrayList&lt;String&gt; collection6 = collection5;<span class="comment">//编译通过</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="“-”通配符"><a href="#“-”通配符" class="headerlink" title="“?”通配符"></a>“?”通配符</h2><p>“?”表示任意类型，使用”?”通配符可以引用各种参数化的类型，可以调用与参数化无关的方法(如size()方法)，不能调用与参数化有关的方法(如add()方法)</p>
+<h3 id="通配符的扩展"><a href="#通配符的扩展" class="headerlink" title="通配符的扩展"></a>通配符的扩展</h3><ul>
+<li>限定通配符的上边界</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;? extends Number &gt; collection1= <span class="keyword">new</span> ArrayList&lt;Integer &gt;();<span class="comment">//编译通过</span></span><br><span class="line">ArrayList&lt;? extends Number &gt; collection2= <span class="keyword">new</span> ArrayList&lt;String&gt;();<span class="comment">//编译不通过</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>限定通配符的下边界</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;? <span class="keyword">super</span> Integer &gt; collection3= <span class="keyword">new</span> ArrayList&lt;Number &gt;();<span class="comment">//编译通过</span></span><br><span class="line">ArrayList&lt;? <span class="keyword">super</span> Integer &gt; collection4= <span class="keyword">new</span> ArrayList&lt;String&gt;();<span class="comment">//编译不通过</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="自定义泛型方法"><a href="#自定义泛型方法" class="headerlink" title="自定义泛型方法"></a>自定义泛型方法</h2><p>C++模板函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">T</span> <span class="title">add</span>(<span class="title">T</span> <span class="title">x</span>, <span class="title">T</span> <span class="title">y</span>)&#123;</span></span><br><span class="line">    <span class="keyword">return</span> (T)(x+y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而java的泛型基本上完全在编译器中实现，用于编译器执行类型检查和类型判断，然后生成普通的<strong>非泛型</strong>的字节码，这种实现技术为“擦除”(erasure)。</p>
+<h3 id="“擦除”实例"><a href="#“擦除”实例" class="headerlink" title="“擦除”实例"></a>“擦除”实例</h3><p>泛型是提供给javac编译器使用的，限定集合的输入类型，编译器编译带类型说明的集合时会去掉“类型”信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> GenericTest().testType();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testType</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; collection1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        ArrayList&lt;String&gt; collection2= <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        System.out.println(collection1.getClass()==collection2.getClass());</span><br><span class="line">        <span class="comment">//两者class类型一样,即字节码一致</span></span><br><span class="line"></span><br><span class="line">        System.out.println(collection2.getClass().getName());</span><br><span class="line">        <span class="comment">//class均为java.util.ArrayList,并无实际类型参数信息</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">java.util.ArrayList</span><br></pre></td></tr></table></figure>
+<p><em>使用反射可跳过编译器，往某个泛型集合加入其它类型数据。</em></p>
+<p>只有引用类型才能作为泛型方法的实际参数。<br>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        swap(<span class="keyword">new</span> String[]&#123;<span class="string">"111"</span>,<span class="string">"222"</span>&#125;,<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//编译通过</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//swap(new int[]&#123;1,2&#125;,0,1);</span></span><br><span class="line">        <span class="comment">//编译不通过,因为int不是引用类型</span></span><br><span class="line"></span><br><span class="line">        swap(<span class="keyword">new</span> Integer[]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//编译通过</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*交换数组a 的第i个和第j个元素*/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T[]a,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        T temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但注意基本类型<strong>有时</strong>可以作为实参，因为有<strong>自动装箱</strong>和<strong>拆箱</strong>。<br>例子(编译通过了)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> GenericTest().testType();</span><br><span class="line">        <span class="keyword">int</span> a = biggerOne(<span class="number">3</span>,<span class="number">5</span>);</span><br><span class="line">        <span class="comment">//int 和 double,取交为Number</span></span><br><span class="line">        Number b = biggerOne(<span class="number">3</span>,<span class="number">5.5</span>);</span><br><span class="line">        <span class="comment">//String和int 取交为Object</span></span><br><span class="line">        Object c = biggerOne(<span class="string">"1"</span>,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从x,y中返回y</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">biggerOne</span><span class="params">(T x,T y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时，该例还表明，<strong>当实参不一致时，T取交集，即第一个共同的父类。</strong><br>另外，如果用<code>Number b = biggerOne(3,5.5);</code>改为<code>String c = biggerOne(3,5.5);</code>则编译报错:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error:(17, 29) java: 不兼容的类型: 推断类型不符合上限</span><br><span class="line">    推断: java.lang.Number&amp;java.lang.Comparable&lt;? extends java.lang.Number&amp;java.lang.Comparable&lt;?&gt;&gt;</span><br><span class="line">    上限: java.lang.String,java.lang.Object</span><br></pre></td></tr></table></figure>
+<p>但是有一点没搞清楚，我在IDEA里面单步调试，发现结果如下图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E6%B3%9B%E5%9E%8B%E8%B0%83%E8%AF%95%E6%88%AA%E5%9B%BE-1.png" alt="泛型调试截图-1" title>
+                </div>
+                <div class="image-caption">泛型调试截图-1</div>
+            </figure><br>不知道b为什么是Double类型的（但直接<code>Double b</code>接收返回值会编译报错）。不知道跟IDE有没有关系，是不是IDE在debug时会显示这个对象最精确的类型？</p>
+<h3 id="类型参数的类型推断"><a href="#类型参数的类型推断" class="headerlink" title="类型参数的类型推断"></a>类型参数的类型推断</h3><p>编译器判断泛型方法的实际类型参数的过程称为类型推断。</p>
+<ul>
+<li>当某个类型变量只在整个参数列表的所有参数和返回值中的<strong>一处被应用</strong>了，那么根据调用方法时该处的实际应用类型来确定。即直接根据调用方法时传递的参数类型或返回值来决定泛型参数的类型。<br>例如：</li>
+</ul>
+<p><code>swap(new String[3],1,2)</code> -&gt; <code>static &lt;E&gt; void swap(E[]a,int i,int j)</code></p>
+<ul>
+<li>当某个类型变量在整个参数列表的所有参数和返回值中的<strong>多处被应用</strong>了，如果调用方法时这么多处的实际应用类型都 <em>对应同一种类型</em>，则泛型参数的类型就是该类型。<br>例如：</li>
+</ul>
+<p><code>add(3,5)</code> -&gt; <code>static &lt;T&gt; T add(T a,T b)</code></p>
+<ul>
+<li>当某个类型变量在整个参数列表的所有参数和返回值中的<strong>*多处被应用</strong>了，如果调用方法时这么多处的实际应用类型 <em>对应不同的类型,且没有返回值</em>，则取多个参数中的最大交集类型，即第一个公共父类。<br>例如：</li>
+</ul>
+<p><code>fill(new Integer[3],3.5)</code> -&gt; <code>static &lt;T&gt; void fill(T a[],T v)</code></p>
+<p>该例子实际对应的类型就是Number,编译通过，运行出问题。</p>
+<ul>
+<li>当某个类型变量在整个参数列表的所有参数和返回值中的<strong>多处被应用</strong>了，如果调用方法时这么多处的实际应用类型<em>对应不同的类型,且使用有返回值</em>，则<strong>优先考虑返回值的类型</strong></li>
+</ul>
+<p>例如：</p>
+<p><code>int x = add(3,3.5)</code> -&gt; <code>static &lt;T&gt; T add(T a,T b)</code></p>
+<p>上例编译报错,x类型改为float也报错，改为Number成功。</p>
+<ul>
+<li>参数类型的类型推断具有传递性</li>
+</ul>
+<p>例子：</p>
+<p><code>copy(new Integer[5],new String[5])</code> -&gt; <code>static &lt;T&gt; void copy(T []a,T []b)</code></p>
+<p>该例推断实际参数类型为Object,编译通过.</p>
+<p> <code>copy(new ArrayList&lt;String&gt;,new Integer[5])</code> -&gt; <code>static &lt;T&gt; void copy(Collection&lt;T&gt;a,T[]b)</code></p>
+<p>该例则根据参数化的ArrayList类实例将类型变量直接确定为String类型，编译报错。</p>
+<hr>
+<h2 id="自定义泛型类"><a href="#自定义泛型类" class="headerlink" title="自定义泛型类"></a>自定义泛型类</h2><p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericDao</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(T x)</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">findById</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(T obj)</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(T obj)</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">findByUserName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">Set&lt;T&gt; <span class="title">findByConditions</span><span class="params">(String where)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：当一个变量被声明为泛型时，只能被实例变量和方法调用(还有内嵌类型)，而不能被静态变量和静态方法调用。<em>因为静态成员是被所参数化的类所共享的，所以静态成员不应该有类级别的类型参数</em>。</p>
+<h3 id="泛型方法和泛型类的比较"><a href="#泛型方法和泛型类的比较" class="headerlink" title="泛型方法和泛型类的比较"></a>泛型方法和泛型类的比较</h3><p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span>&lt;<span class="title">T</span>&gt;()</span>&#123;</span><br><span class="line">    <span class="comment">//泛型类的成员方法，该T受A后面的T的限制</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">memberFunc</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//泛型方法，这里的T和和类A的T是不同的</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">genericFunc</span><span class="params">(T a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//编译不通过</span></span><br><span class="line">        <span class="comment">//Integer i = A&lt;String&gt;().findByUserName("s");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//编译通过</span></span><br><span class="line">        Set&lt;Integer&gt; set=  A&lt;String&gt;().findByConditions(<span class="string">"s"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里<code>Integer i = A&lt;String&gt;().findByUserName(&quot;s&quot;);</code>会编译报错：</p>
+<p><code>Error:(35, 61) java: 不兼容的类型: java.lang.String无法转换为java.lang.Integer</code></p>
+<p>由这个例子可知，泛型方法的T和和类A的T是不同的。</p>
+<hr>
+<h2 id="泛型和反射"><a href="#泛型和反射" class="headerlink" title="泛型和反射"></a>泛型和反射</h2><h3 id="通过反射获得泛型的实际类型参数"><a href="#通过反射获得泛型的实际类型参数" class="headerlink" title="通过反射获得泛型的实际类型参数"></a>通过反射获得泛型的实际类型参数</h3><p>把泛型变量当成方法的参数，利用Method类的getGenericParameterTypes方法来获取泛型的实际类型参数<br>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        getParamType();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">/*利用反射获取方法参数的实际参数类型*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getParamType</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException</span>&#123;</span><br><span class="line">        Method method = GenericTest.class.getMethod(<span class="string">"applyMap"</span>,Map.class);</span><br><span class="line">        <span class="comment">//获取方法的泛型参数的类型</span></span><br><span class="line">        Type[] types = method.getGenericParameterTypes();</span><br><span class="line">        System.out.println(types[<span class="number">0</span>]);</span><br><span class="line">        <span class="comment">//参数化的类型</span></span><br><span class="line">        ParameterizedType pType  = (ParameterizedType)types[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//原始类型</span></span><br><span class="line">        System.out.println(pType.getRawType());</span><br><span class="line">        <span class="comment">//实际类型参数</span></span><br><span class="line">        System.out.println(pType.getActualTypeArguments()[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(pType.getActualTypeArguments()[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*供测试参数类型的方法*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">applyMap</span><span class="params">(Map&lt;Integer,String&gt; map)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.util.Map&lt;java.lang.Integer, java.lang.String&gt;</span><br><span class="line">interface java.util.Map</span><br><span class="line">class java.lang.Integer</span><br><span class="line">class java.lang.String</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.043Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/01/08/2016-01-08-javase-learn-note-2-Generics/" target="_blank" rel="external">https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/&title=《java基础巩固笔记(2)-泛型》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/&title=《java基础巩固笔记(2)-泛型》 — Brian's Homepage&source=本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java基础巩固笔记(2)-泛型》 — Brian's Homepage&url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/11/2016-01-11-cpp-formal-param-copy/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">简单谈谈C++中的函数形参与浅拷贝</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/08/2016-01-08-javase-learn-note-1-Reflect/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java基础巩固笔记(1)-反射</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/&title=《java基础巩固笔记(2)-泛型》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/&title=《java基础巩固笔记(2)-泛型》 — Brian's Homepage&source=本文对泛型的基本知识进行较为全面的总结，并附上简短的代码实例，加深记忆。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java基础巩固笔记(2)-泛型》 — Brian's Homepage&url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/01/08/2016-01-08-javase-learn-note-2-Generics/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3aS25CMRAEQO5/abKNFHB6PhYsyiuEAs/lSB7T48cjHs9f4/c759fVz+ZPXx54eHh4g6n/HedJJLD8G87v//2285zx8PDwbvOSqW8VhmSK8+XGw8PD+05eMokz7/xtC2UGDw8P76O8pEhMppKUEDw8PLzv4c23+HyjTw7KH8ha8PDw8GJe3kX6ntdX+nt4eHh44656HqRWt+nzAX1tnnh4eHgXeNVNuXo4Ph+Le9e8kmfh4eHh3eZNkNXQoddCqzbkRr8J8PDw8I68Xqu+GuNulZaFMAIPDw9viVe9AlUNGqIG//hvXrzGw8PDu8CrTispDNUYN38neWJ5JfDw8PCKvOTYWi0Y1QN070hdaH3h4eHhrfKSSKK3oU9g5729uvPj4eHh3eM1f+QHpOSgPI88opsReHh4eGNetTFfLQC9RZmUhLf/Nzw8PLwLvGr0sLv1T3ijioeHh4fX4uWhajkIaF3Yml9fwMPDw7vN22r/9+LdrRGFEXh4eHjXeNVLTlsH7kk5eTE3PDw8vA/xevHEZCF6VxmilBoPDw9vzJtMqxq/5svRa8L9c9DHw8PDW+I947EVQOQxRN4we/sUPDw8vAu8aqs+CQt6S7aFf/tvwMPDw1vi5Y3/agDR+2zeiouKFh4eHt4F3lZTKifdW6DoTgEeHh7emJcHtckSVNv/UeMqvrYV1T08PDy8MS8vDNW/qbbBylcB8tni4eHhrfKexRGd0FtlpheLRHUPDw8Pb5WXj63p9iLa/PjeROLh4eEVeb0Gfw7YDY6bYQQeHh7eBd4koq2GFPnTe2EEHh4e3vfwqpHE5CiclKuIioeHh/dRXj6tPM7Ij87NWBkPDw/vGq8aRvRa/lvLVL4ZgYeHh7fK6x2Lk8ZVdYrVAlM9auPh4eGNeT/q+rGGmxRfFgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>mybatis学习笔记(14)-查询缓存之一级缓存 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="MyBatis,缓存">
+    <meta name="description" content="本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。">
+<meta name="keywords" content="MyBatis,缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习笔记(14)-查询缓存之一级缓存">
+<meta property="og:url" content="https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.139Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习笔记(14)-查询缓存之一级缓存">
+<meta name="twitter:description" content="本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mybatis学习笔记(14)-查询缓存之一级缓存</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mybatis学习笔记(14)-查询缓存之一级缓存</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-07T18:39:14.000Z" itemprop="datePublished" class="page-time">
+  2016-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查询缓存"><span class="post-toc-number">1.</span> <span class="post-toc-text">查询缓存</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一级缓存"><span class="post-toc-number">2.</span> <span class="post-toc-text">一级缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存工作原理"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一级缓存工作原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存测试"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">一级缓存测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存应用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">一级缓存应用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-08-mybatis-learn-14-Cache" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mybatis学习笔记(14)-查询缓存之一级缓存</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-08 02:39:14" datetime="2016-03-07T18:39:14.000Z" itemprop="datePublished">2016-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。</p>
+<a id="more"></a>
+<h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><p>mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。</p>
+<p>mybaits提供一级缓存，和二级缓存。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png" alt="查询缓存" title>
+                </div>
+                <div class="image-caption">查询缓存</div>
+            </figure>
+<p>一级缓存是SqlSession级别的缓存。在操作数据库时需要构造sqlSession对象，在对象中有一个数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）是互相不影响的。</p>
+<p>二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p>
+<p>为什么要用缓存？</p>
+<p>如果缓存中有数据就不用从数据库中获取，大大提高系统性能。</p>
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><h3 id="一级缓存工作原理"><a href="#一级缓存工作原理" class="headerlink" title="一级缓存工作原理"></a>一级缓存工作原理</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="一级缓存工作原理" title>
+                </div>
+                <div class="image-caption">一级缓存工作原理</div>
+            </figure>
+<p>第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。得到用户信息，将用户信息存储到一级缓存中。</p>
+<p>如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</p>
+<p>第二次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，缓存中有，直接从缓存中获取用户信息。</p>
+<h3 id="一级缓存测试"><a href="#一级缓存测试" class="headerlink" title="一级缓存测试"></a>一级缓存测试</h3><p>mybatis默认支持一级缓存，不需要在配置文件去配置。</p>
+<p>按照上边一级缓存原理步骤去测试。</p>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一级缓存测试</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCache1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	SqlSession sqlSession = sqlSessionFactory.openSession();<span class="comment">// 创建代理对象</span></span><br><span class="line">	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 下边查询使用一个SqlSession</span></span><br><span class="line">	<span class="comment">// 第一次发起请求，查询id为1的用户</span></span><br><span class="line">	User user1 = userMapper.findUserById(<span class="number">1</span>);</span><br><span class="line">	System.out.println(user1);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 更新user1的信息</span></span><br><span class="line">	<span class="comment">// user1.setUsername("测试用户22");</span></span><br><span class="line">	<span class="comment">// userMapper.updateUser(user1);</span></span><br><span class="line">	<span class="comment">// //执行commit操作去清空缓存</span></span><br><span class="line">	<span class="comment">// sqlSession.commit();</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第二次发起请求，查询id为1的用户</span></span><br><span class="line">	User user2 = userMapper.findUserById(<span class="number">1</span>);</span><br><span class="line">	System.out.println(user2);</span><br><span class="line"></span><br><span class="line">	sqlSession.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1.不执行更新操作，输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DEBUG [main] - Opening JDBC Connection</span><br><span class="line">DEBUG [main] - Created connection 110771485.</span><br><span class="line">DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=?</span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1(Integer)</span><br><span class="line">DEBUG [main] - &lt;==      Total: 1</span><br><span class="line">User [id=1, username=王五, sex=2, birthday=null, address=null]</span><br><span class="line">User [id=1, username=王五, sex=2, birthday=null, address=null]</span><br><span class="line">DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - Returned connection 110771485 to pool.</span><br></pre></td></tr></table></figure>
+<p>2.取消测试代码中更新的的注释，输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DEBUG [main] - Opening JDBC Connection</span><br><span class="line">DEBUG [main] - Created connection 110771485.</span><br><span class="line">DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=?</span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1(Integer)</span><br><span class="line">DEBUG [main] - &lt;==      Total: 1</span><br><span class="line">User [id=1, username=王五, sex=2, birthday=null, address=null]</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=?</span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 测试用户22(String), null, 2(String), null, 1(Integer)</span><br><span class="line">DEBUG [main] - &lt;==    Updates: 1</span><br><span class="line">DEBUG [main] - Committing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=?</span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1(Integer)</span><br><span class="line">DEBUG [main] - &lt;==      Total: 1</span><br><span class="line">User [id=1, username=测试用户22, sex=2, birthday=null, address=null]</span><br><span class="line">DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]</span><br><span class="line">DEBUG [main] - Returned connection 110771485 to pool.</span><br></pre></td></tr></table></figure>
+<h3 id="一级缓存应用"><a href="#一级缓存应用" class="headerlink" title="一级缓存应用"></a>一级缓存应用</h3><p>正式开发，是将mybatis和spring进行整合开发，事务控制在service中。</p>
+<p>一个service方法中包括 很多mapper方法调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">service&#123;</span><br><span class="line">	//开始执行时，开启事务，创建SqlSession对象</span><br><span class="line">	//第一次调用mapper的方法findUserById(1)</span><br><span class="line"></span><br><span class="line">	//第二次调用mapper的方法findUserById(1)，从一级缓存中取数据</span><br><span class="line">	//方法结束，sqlSession关闭</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是执行两次service调用查询相同的用户信息，不走一级缓存，因为session方法结束，sqlSession就关闭，一级缓存就清空。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.139Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/08/2016-03-08-mybatis-learn-14-Cache/" target="_blank" rel="external">https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&source=本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-15-Secondary-Cache/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mybatis学习笔记(15)-查询缓存之二级缓存</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-13-lazeloading/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mybatis学习笔记(13)-延迟加载</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&source=本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-14-Cache/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3aUW7jMAwFwNz/0tkDtFYeSbHIAuOvooktjQuQKsnXK77eD9fPT5O7zs95eubP51+78PDw8C5tPV8s+fn8m97q57vw8PDwtnlPETUJ2ZOtn9dN9vPhXjw8PLyv5OWLVVNI/n08PDy8/4V3vnf+ZDw8PLxv5uWPnoT1apnjvOLlWgseHh5epw7wSgoE3/DzSn8PDw8Pb9xV7x1tz2G6dxB/ty48PDy8DV4ecKtH2LvH3/z7eHh4eH/Dy4sFPViVnZQzyodvPDw8vEu83vBTr0xQ3Xo+iPB4Fx4eHt4aLw/NvVeQPycvZERUPDw8vAVeUjytjhfcLTEke2sug4eHh9fiVYei8mW2W2jJnvHw8PC2eb3m/aRsUU0w5RSCh4eHt8DLhwPyJfOkMnkd5ZIHHh4e3lVebxNJOJ4MGVxrxeHh4eEt8/KGfQ9ZTTa9wvFjlw8PDw9vzKsG7ltNsmpi6BV88fDw8DZ4CeNaO6pVUEgSyYc/FR4eHt4Cb5IGqsWF/GB9t9SLh4eHd4uXN+PzcHw3PVQLE78UI/Dw8PCWedUAfXfEqpzNzkdqPDw8vDVe3l7qfT8fPugdtQvjVnh4eHgLvHyj+QBB3hjLE1W0Nzw8PLwF3mQTvYGAKiAvFhemJPDw8PDGvLxcWz2p5sNSyWE6f63NajQeHh5ekZeXZfNs0yu/9orL0UwEHh4e3hovCeV5UqkWcHuwUZcPDw8PL+a9i1d+Xu1tejIE9suneHh4eAu8SRC/1aPvNbrKJQk8PDy8q7y89VUtH1RLtJPje6EBhoeHh3eJVw3KeZg+b3GewT58Ew8PD+8LeL0SQEKal3cL/T08PDy8P+flCeDc2q+OW+WvCQ8PD2+bl9xc3XQyelVtuSXpBA8PD2+bV/2HfxSmixuaPB8PDw9vgfcPwFCSl0QHj/0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

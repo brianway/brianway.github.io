@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>常见数据结构(一)-栈,队列,堆,哈希表 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法,数据结构">
+    <meta name="description" content="本文介绍几种常见的数据结构:栈、队列、堆、哈希表，等等。">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见数据结构(一)-栈,队列,堆,哈希表">
+<meta property="og:url" content="https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文介绍几种常见的数据结构:栈、队列、堆、哈希表，等等。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_binary-heap.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_SymbolTable-Compare.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_HashTable-seperate-chain.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见数据结构(一)-栈,队列,堆,哈希表">
+<meta name="twitter:description" content="本文介绍几种常见的数据结构:栈、队列、堆、哈希表，等等。">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_binary-heap.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常见数据结构(一)-栈,队列,堆,哈希表</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">常见数据结构(一)-栈,队列,堆,哈希表</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-13T08:45:07.000Z" itemprop="datePublished" class="page-time">
+  2016-10-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Stacks-栈"><span class="post-toc-number">2.</span> <span class="post-toc-text">Stacks(栈)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Queues-队列"><span class="post-toc-number">3.</span> <span class="post-toc-text">Queues(队列)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Priority-Queues"><span class="post-toc-number">4.</span> <span class="post-toc-text">Priority Queues</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Binary-Heaps-二叉堆"><span class="post-toc-number">5.</span> <span class="post-toc-text">Binary Heaps(二叉堆)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上浮和下沉"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">上浮和下沉</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#插入和删除"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">插入和删除</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Symbol-Tables"><span class="post-toc-number">6.</span> <span class="post-toc-text">Symbol Tables</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hash-Tables-哈希表"><span class="post-toc-number">7.</span> <span class="post-toc-text">Hash Tables(哈希表)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#separate-chaining"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">separate chaining</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#linear-probing"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">linear probing</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-10-14-algorithms-data-structures-1" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">常见数据结构(一)-栈,队列,堆,哈希表</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-13 16:45:07" datetime="2016-10-13T08:45:07.000Z" itemprop="datePublished">2016-10-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文介绍几种常见的数据结构:栈、队列、堆、哈希表，等等。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+<li>本文所有图片均截图自coursera上普林斯顿的课程<a href="https://class.coursera.org/algs4partI-010/" target="_blank" rel="noopener">《Algorithms, Part I》</a>中的Slides</li>
+<li>相关命题的证明可参考<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">《算法（第4版）》</a></li>
+<li>源码可在<a href="http://algs4.cs.princeton.edu/home/" target="_blank" rel="noopener">官网</a>下载,也可以在我的github仓库 <a href="https://github.com/brianway/algorithms-learning" target="_blank" rel="noopener">algorithms-learning</a>下载，已经使用maven构建</li>
+<li>仓库下载：<code>git clone git@github.com:brianway/algorithms-learning.git</code></li>
+</ul>
+<h2 id="Stacks-栈"><a href="#Stacks-栈" class="headerlink" title="Stacks(栈)"></a>Stacks(栈)</h2><p>LIFO(后进先出):last in first out.</p>
+<ul>
+<li>使用linked-list实现</li>
+</ul>
+<p>保存指向第一个节点的指针，每次从前面插入／删除节点。</p>
+<p>以字符串栈为例，示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedStackOfStrings</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node first = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        String item;</span><br><span class="line">        Node next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> first == <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(String item)</span> </span>&#123;</span><br><span class="line">        Node oldfirst = first;</span><br><span class="line">        first = <span class="keyword">new</span> Node();</span><br><span class="line">        first.item = item;</span><br><span class="line">        first.next = oldfirst;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String item = first.item;</span><br><span class="line">        first = first.next;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用数组实现</li>
+</ul>
+<p>使用数组来存储栈中的项</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FixedCapacityStackOfStrings</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String[] s;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FixedCapacityStackOfStrings</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        s = <span class="keyword">new</span> String[capacity];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> N == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(String item)</span> </span>&#123;</span><br><span class="line">        s[N++] = item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String item = s[--N];</span><br><span class="line">        s[N] = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的实现会有几个问题：</p>
+<ol>
+<li>从空栈pop会抛出异常</li>
+<li>插入元素过多会超出数组上界</li>
+</ol>
+<p>这里重点解决第二个问题，resizing arrays.一个可行的方案是: <strong>当数组满的时候，数组大小加倍；当数组是1/4满的时候，数组大小减半。</strong> 这里不是在数组半满时削减size,这样可以避免数组在将满未满的临界点多次push-pop-push-pop操作造成大量的数组拷贝操作。</p>
+<p>插入N个元素，<code>N + (2 + 4 + 8 + ... + N) ~ 3N</code>。</p>
+<ul>
+<li>N:1 array access per push</li>
+<li>(2 + 4 + 8 + … + N):k array accesses to double to size k  (ignoring cost to create new array)</li>
+</ul>
+<p>由于resize操作不是经常发生，所以均摊下来，平均每次push/pop操作的还是常量时间(constant amortized time).</p>
+<h2 id="Queues-队列"><a href="#Queues-队列" class="headerlink" title="Queues(队列)"></a>Queues(队列)</h2><p>FIFO(先进先出):first in first out.</p>
+<ul>
+<li>使用linked-list实现</li>
+</ul>
+<p>保存指向首尾节点的指针，每次从链表尾插入，从链表头删除。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedQueueOfStrings</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node first, last;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;  </span><br><span class="line">        <span class="comment">/* same as in StackOfStrings */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> first == <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(String item)</span> </span>&#123;</span><br><span class="line">        Node oldlast = last;</span><br><span class="line">        last = <span class="keyword">new</span> Node();</span><br><span class="line">        last.item = item;</span><br><span class="line">        last.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">            first = last;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            oldlast.next = last;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">dequeue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String item = first.item;</span><br><span class="line">        first = first.next;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty()) last = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用数组实现</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">・Use array q[] to store items in queue.</span><br><span class="line">・enqueue(): add new item at q[tail].</span><br><span class="line">・dequeue(): remove item from q[head].</span><br><span class="line">・Update head and tail modulo the capacity.</span><br><span class="line">・Add resizing array.</span><br></pre></td></tr></table></figure>
+<h2 id="Priority-Queues"><a href="#Priority-Queues" class="headerlink" title="Priority Queues"></a>Priority Queues</h2><p>Collections. Insert and delete items.</p>
+<ul>
+<li>Stack. Remove the item most recently added.</li>
+<li>Queue. Remove the item least recently added. Randomized queue. Remove a random item.</li>
+<li><strong>Priority queue</strong>. Remove the largest (or smallest) item.</li>
+</ul>
+<p>unordered array 实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnorderedMaxPQ</span>&lt;<span class="title">Key</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Key</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Key[] pq;   <span class="comment">// pq[i] = ith element on pq</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N;      <span class="comment">// number of elements on pq</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UnorderedMaxPQ</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        pq = (Key[]) <span class="keyword">new</span> Comparable[capacity];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> N == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Key x)</span> </span>&#123;</span><br><span class="line">        pq[N++] = x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Key <span class="title">delMax</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++)</span><br><span class="line">            <span class="keyword">if</span> (less(max, i)) max = i;</span><br><span class="line"></span><br><span class="line">        exch(max, N - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> pq[--N];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Binary-Heaps-二叉堆"><a href="#Binary-Heaps-二叉堆" class="headerlink" title="Binary Heaps(二叉堆)"></a>Binary Heaps(二叉堆)</h2><p>使用数组来表示一个二叉堆。根节点索引从1开始。索引对应在树中的位置，最大的键值是a[1],同时也是二叉树的根节点。</p>
+<ul>
+<li>Parent’s key no smaller than children’s keys</li>
+<li>Indices start at 1.</li>
+<li>Parent of node at k is at k/2.</li>
+<li>Children of node at k are at 2k and 2k+1.</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_binary-heap.png" alt="数组表示二叉堆" title>
+                </div>
+                <div class="image-caption">数组表示二叉堆</div>
+            </figure>
+<h3 id="上浮和下沉"><a href="#上浮和下沉" class="headerlink" title="上浮和下沉"></a>上浮和下沉</h3><p>有两种情况会触发节点移动：</p>
+<ol>
+<li>子节点的键值变为比父节点大</li>
+<li>父节点的键值变为比子节点（一个或两个）小</li>
+</ol>
+<p>而 <strong>要消除这种违反最大堆定义的结构，就需要进行节点移动和交换， 使之满足父节点键值不小于两个子节点</strong> 。对应的操作分别是 <strong>上浮</strong> 和 <strong>下沉</strong></p>
+<ul>
+<li>上浮：子节点key比父节点大<ul>
+<li>Exchange key in child with key in parent.</li>
+<li>Repeat until heap order restored.</li>
+</ul>
+</li>
+<li>下沉：父节点key比子节点（one or both）小<ul>
+<li>Exchange key in parent with key in <strong>larger</strong> child.</li>
+<li>Repeat until heap order restored</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 上浮 */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swim</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (k &gt; <span class="number">1</span> &amp;&amp; less(k / <span class="number">2</span>, k)) &#123;</span><br><span class="line">        exch(k, k / <span class="number">2</span>);</span><br><span class="line">        k = k / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 下沉 */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sink</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">while</span> (<span class="number">2</span> * k &lt;= N) &#123;</span><br><span class="line">       <span class="keyword">int</span> j = <span class="number">2</span> * k;</span><br><span class="line">       <span class="keyword">if</span> (j &lt; N &amp;&amp; less(j, j + <span class="number">1</span>)) j++;</span><br><span class="line">       <span class="keyword">if</span> (!less(k, j)) <span class="keyword">break</span>;</span><br><span class="line">       exch(k, j);</span><br><span class="line">       k = j;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入和删除"><a href="#插入和删除" class="headerlink" title="插入和删除"></a>插入和删除</h3><p>所有操作（插入和删除）都保证在log N 时间内。</p>
+<ul>
+<li>插入：二叉堆的插入操作比较简单，把节点加在数组尾部，然后上浮即可。</li>
+<li>删除最大：二叉堆的删除则是把根节点和末尾的节点交换，然后下沉该节点即可。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 插入 */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Key x)</span></span>&#123;</span><br><span class="line">  pq[++N] = x;</span><br><span class="line">  swim(N);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 删除 */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Key <span class="title">delMax</span><span class="params">()</span></span>&#123;</span><br><span class="line">  Key max = pq[<span class="number">1</span>];</span><br><span class="line">  exch(<span class="number">1</span>, N--);</span><br><span class="line">  sink(<span class="number">1</span>);</span><br><span class="line">  pq[N+<span class="number">1</span>]=<span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，堆中的键值是不能变的，即Immutable.不然就不能保证父节点不小于子节点。</p>
+<h2 id="Symbol-Tables"><a href="#Symbol-Tables" class="headerlink" title="Symbol Tables"></a>Symbol Tables</h2><p>键值对的抽象.其中键一般使用immutable的类型，值是任何普通类型。</p>
+<p>关于比较，所有的java类都继承了<code>equals()</code>方法，要求对于引用x,y,z</p>
+<ul>
+<li>Reflexive: x.equals(x) is true.</li>
+<li>Symmetric: x.equals(y) iff y.equals(x).</li>
+<li>Transitive: if x.equals(y) and y.equals(z), then x.equals(z).</li>
+<li>Non-null: x.equals(null) is false.</li>
+</ul>
+<p>对于用户自定义的类型，一般按如下流程实现<code>equals()</code>方法:</p>
+<ul>
+<li>Optimization for reference equality.</li>
+<li>Check against null.</li>
+<li>Check that two objects are of the same type and cast.</li>
+<li>Compare each significant field:<ul>
+<li>if field is a primitive type, use ==</li>
+<li>if field is an object, use equals().[apply rule recursively]</li>
+<li>if field is an array, apply to each entry.[alternatively, use Arrays.equals(a, b) or Arrays.deepEquals(a, b),but not a.equals(b)]</li>
+</ul>
+</li>
+</ul>
+<p>两种实现的数据结构：</p>
+<ol>
+<li>无序链表：Maintain an (unordered) linked list of key-value pairs.</li>
+<li>有序数组：Maintain an ordered array of key-value pairs.</li>
+</ol>
+<p>在有序数组进行查找时使用二分查找。两种方式的对比如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_SymbolTable-Compare.png" alt="elementary ST implementations summary" title>
+                </div>
+                <div class="image-caption">elementary ST implementations summary</div>
+            </figure>
+<h2 id="Hash-Tables-哈希表"><a href="#Hash-Tables-哈希表" class="headerlink" title="Hash Tables(哈希表)"></a>Hash Tables(哈希表)</h2><p>上面几种数据结构都是通过遍历或者二分查找去搜寻某个元素，而哈希表则是通过一个key-indexed table来存储其中的项，即“索引”是“键”的一个函数。换句话说，哈希是通过定义一种函数/计算方法，把键直接映射成一个哈希值（再通过取余操作换算成数组的下标索引），从而定位元素，而避免耗时的逐个比较和遍历的操作。</p>
+<ul>
+<li>Hash code:An int between -2^31 and 2^31 - 1.</li>
+<li>Hash function. An int between 0 and M - 1 (for use as array index).</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里hashCode可能为负，且-2^31取绝对值会溢出，所以要“位与”</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Key key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (key.hashCode() &amp; <span class="number">0x7fffffff</span>) % M;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所有的java类均继承了<code>hashCode()</code>方法来计算哈希值, 返回一个32-bit的int.默认实现是返回该对象的内存地址。对常用的类型有自己的实现，以java的<code>String</code>类为例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash;</span><br><span class="line">    <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">char</span> val[] = value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line">            h = <span class="number">31</span> * h + val[i];</span><br><span class="line">        &#125;</span><br><span class="line">        hash = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>hash code design.”Standard” recipe for user-defined types：</p>
+<ul>
+<li>Combine each significant field using the 31x + y rule.</li>
+<li>If field is a primitive type, use wrapper type hashCode().</li>
+<li>If field is null, return 0.</li>
+<li>If field is a reference type, use hashCode().[applies rule recursively]</li>
+<li>If field is an array, apply to each entry.[or use Arrays.deepHashCode()]</li>
+</ul>
+<p>当然，这种映射并不能保证是一对一的，所以一定会出现多个键映射到同一个哈希值的尴尬情况（尤其是对数组的size取余操作后,映射到同一数组下标），即哈希冲突，这是就需要一些方法来解决。这里介绍两种常用的方法：</p>
+<ul>
+<li>separate chaining</li>
+<li>linear probing</li>
+</ul>
+<h3 id="separate-chaining"><a href="#separate-chaining" class="headerlink" title="separate chaining"></a>separate chaining</h3><p>Use an array of M &lt; N linked lists.</p>
+<ul>
+<li>哈希：将key映射到0 ~ M-1 之间的一个整数i</li>
+<li>插入：将值插在第i个链的前端</li>
+<li>查找：只需遍历第i个链</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/algorithms_HashTable-seperate-chain.png" alt="separate chaining" title>
+                </div>
+                <div class="image-caption">separate chaining</div>
+            </figure>
+<h3 id="linear-probing"><a href="#linear-probing" class="headerlink" title="linear probing"></a>linear probing</h3><p>开放地址：如果发生冲突，将值放入下一个空的位置.(数组尺寸 M 必须比键值对的数目 N 要多.)</p>
+<ul>
+<li>哈希：将key映射到 0 ~ M-1 之间的一个整数i</li>
+<li>插入：如果数组索引为 i 的位置为空，则把值放入，否则依次尝试 i+1,i+2等索引，直到有空的</li>
+<li>查找：先找索引 i，如果被占用且没匹配，则依次尝试i+1, i+2,等等</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.064Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/10/13/2016-10-14-algorithms-data-structures-1/" target="_blank" rel="external">https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/&title=《常见数据结构(一)-栈,队列,堆,哈希表》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/&title=《常见数据结构(一)-栈,队列,堆,哈希表》 — Brian's Homepage&source=本文介绍几种常见的数据结构:栈、队列、堆、哈希表，等等。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见数据结构(一)-栈,队列,堆,哈希表》 — Brian's Homepage&url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/10/14/2016-10-14-algorithms-data-structures-2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">常见数据结构(二)-树(二叉树，红黑树，B树)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/07/2016-08-07-git-basic-git-commands/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">git常用指令整理及说明(详细)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/&title=《常见数据结构(一)-栈,队列,堆,哈希表》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/&title=《常见数据结构(一)-栈,队列,堆,哈希表》 — Brian's Homepage&source=本文介绍几种常见的数据结构:栈、队列、堆、哈希表，等等。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见数据结构(一)-栈,队列,堆,哈希表》 — Brian's Homepage&url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/10/13/2016-10-14-algorithms-data-structures-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACoElEQVR42u3aSY7cQAwEwP7/p+27e0tuQBsInQYeTYkhAyoiWY9HfP15up5/+3xn/i/P67xb+XFx4eHh4Y1L/1xQcuUl9vD50/Hw8PDueO++qMk9yevordOrBw8PD+/XeAkpaYJ7GwYeHh7e/8ubtLnVFfDw8PB+k5cv/fnzPXkd1Uh3OWvBw8PDi3n5FOl3fj6Z7+Hh4eGNp+rVaHUytU+2mXK1eHh4eAe8/IObD/h3D29Vn4WHh4d3zUtCh8lQfx5h5AO2Fz/j4eHhHfMuQtvqUYDq3355Lh4eHt4Br1dQ7/7qYax8VPalNjw8PLwD3vwTXw015kUvHxHAw8PDi3l5DJGv0wwOxoHF2zACDw8Pb5WXl3vd8s7PjhUGcnh4eHgDXnIcalJWskJvzULKgoeHh7fK2woOkheUr5+37KNNBQ8PD6/FyzeG3v2TAVu1nhdPxMPDwzvgVfeN3UMDk0MJhZYdDw8P74CXNNC9cnshb35P/oLw8PDwtnjV0qtXtcRJBvsCiYeHh3fAyxvl6qAr30ImA7lCmIuHh4e3xKuGCz12b2upxiXNLQEPDw+vyOt9mvPmOG+Xe9TyoSs8PDy8VV6v5c0PmOYvLh+5JRsSHh4e3h1vXtxoRyoeF+iN2fDw8PC2eNWP72SINY8kFv7H8PDw8A54nz/61cg1DzXKLXJybAsPDw/vjNcbX+XbzF0Q/OWv8PDw8FZ5vQZ33uz2xv95w42Hh4d3x+uFqr2woBp85GO2ZH08PDy8XV51M6h+oKvDs63n4uHh4V3zqgOwatywtkcV4w88PDy8X+BVY9beEGsSMePh4eH9Gi+PdPNCq2vmMQceHh7eHa8XGWwNw6rHCJLn4uHh4d3xJg1xzi63wkX8SZ6Bh4eH9+/1FzHJAyfbIGfiAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

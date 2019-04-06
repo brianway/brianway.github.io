@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>mybatis学习笔记(5)-配置文件 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="MyBatis">
+    <meta name="description" content="本文主要讲解SqlMapConfig配置文件">
+<meta name="keywords" content="MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习笔记(5)-配置文件">
+<meta property="og:url" content="https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要讲解SqlMapConfig配置文件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习笔记(5)-配置文件">
+<meta name="twitter:description" content="本文主要讲解SqlMapConfig配置文件">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mybatis学习笔记(5)-配置文件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mybatis学习笔记(5)-配置文件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-07T18:39:05.000Z" itemprop="datePublished" class="page-time">
+  2016-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#properties-属性"><span class="post-toc-number">1.</span> <span class="post-toc-text">properties(属性)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#settings-全局参数配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">settings(全局参数配置)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#typeAliases-类型别名"><span class="post-toc-number">3.</span> <span class="post-toc-text">typeAliases(类型别名)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#typeHandlers-类型处理器"><span class="post-toc-number">4.</span> <span class="post-toc-text">typeHandlers(类型处理器)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mappers-映射配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">mappers(映射配置)</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-08-mybatis-learn-5-configuration" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mybatis学习笔记(5)-配置文件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-08 02:39:05" datetime="2016-03-07T18:39:05.000Z" itemprop="datePublished">2016-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要讲解SqlMapConfig配置文件</p>
+<a id="more"></a>
+<blockquote>
+<p>参考<a href="http://www.mybatis.org/mybatis-3/configuration.html" target="_blank" rel="noopener">mybatis – MyBatis 3 <code>|</code> Configuration</a></p>
+</blockquote>
+<p>SqlMapConfig.xml中配置的内容和顺序如下</p>
+<ul>
+<li>properties（属性）</li>
+<li>settings（全局配置参数）</li>
+<li><strong>typeAliases（类型别名）</strong></li>
+<li>typeHandlers（类型处理器）</li>
+<li><em>objectFactory（对象工厂）</em></li>
+<li><em>plugins（插件）</em></li>
+<li>environments（环境集合属性对象）<ul>
+<li>environment（环境子属性对象）<ul>
+<li>transactionManager（事务管理）</li>
+<li>dataSource（数据源）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>mappers（映射器）</strong></li>
+</ul>
+<p>(注：粗体是重点，斜体不常用)</p>
+<h2 id="properties-属性"><a href="#properties-属性" class="headerlink" title="properties(属性)"></a>properties(属性)</h2><p>将数据库连接参数单独配置在db.properties中，只需要在SqlMapConfig.xml中加载db.properties的属性值。在SqlMapConfig.xml中就不需要对数据库连接参数硬编码。</p>
+<p>将数据库连接参数只配置在db.properties中。原因：方便对参数进行统一管理，其它xml可以引用该db.properties。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=123</span><br></pre></td></tr></table></figure>
+<p>在sqlMapConfig.xml加载属性文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"db.properties"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--properties中还可以配置一些属性名和属性值  --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- &lt;property name="jdbc.driver" value=""/&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 和spring整合后 environments配置将废除--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 使用jdbc事务管理，事务控制由mybatis--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 数据库连接池,由mybatis管理--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driver&#125;"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意： MyBatis 将按照下面的顺序(优先级)来加载属性：</p>
+<ul>
+<li>在<code>properties</code>元素体内定义的属性首先被读取。</li>
+<li>然后会读取<code>properties</code>元素中resource或url加载的属性，它会覆盖已读取的同名属性。</li>
+<li>最后读取<code>parameterType</code>传递的属性，它会覆盖已读取的同名属性。</li>
+</ul>
+<p>建议：</p>
+<ul>
+<li>不要在<code>properties</code>元素体内添加任何属性值，只将属性值定义在properties文件中。</li>
+<li>在properties文件中定义属性名要有一定的特殊性，如：XXXXX.XXXXX.XXXX</li>
+</ul>
+<h2 id="settings-全局参数配置"><a href="#settings-全局参数配置" class="headerlink" title="settings(全局参数配置)"></a>settings(全局参数配置)</h2><p>mybatis框架在运行时可以调整一些运行参数,比如：开启二级缓存、开启延迟加载…</p>
+<p>全局参数将会影响mybatis的运行行为。具体参考官网：</p>
+<blockquote>
+<p><a href="http://www.mybatis.org/mybatis-3/configuration.html#settings" target="_blank" rel="noopener">mybatis-settings</a></p>
+</blockquote>
+<h2 id="typeAliases-类型别名"><a href="#typeAliases-类型别名" class="headerlink" title="typeAliases(类型别名)"></a>typeAliases(类型别名)</h2><p>在mapper.xml中，定义很多的statement，statement需要<code>parameterType</code>指定输入参数的类型、需要<code>resultType</code>指定输出结果的映射类型。</p>
+<p>如果在指定类型时输入类型全路径，不方便进行开发，可以针对<code>parameterType</code>或<code>resultType</code>指定的类型定义一些别名，在mapper.xml中通过别名定义，方便开发。</p>
+<ul>
+<li>mybatis默认支持别名</li>
+</ul>
+<blockquote>
+<p>参考 <a href="http://www.mybatis.org/mybatis-3/configuration.html#typeAliases" target="_blank" rel="noopener">typeAliases</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">别名</th>
+<th style="text-align:left">映射的类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_byte</td>
+<td style="text-align:left">byte</td>
+</tr>
+<tr>
+<td style="text-align:left">_long</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">_short</td>
+<td style="text-align:left">short</td>
+</tr>
+<tr>
+<td style="text-align:left">_int</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:left">_integer</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:left">_double</td>
+<td style="text-align:left">double</td>
+</tr>
+<tr>
+<td style="text-align:left">_float</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">_boolean</td>
+<td style="text-align:left">boolean</td>
+</tr>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">String</td>
+</tr>
+<tr>
+<td style="text-align:left">byte</td>
+<td style="text-align:left">Byte</td>
+</tr>
+<tr>
+<td style="text-align:left">long</td>
+<td style="text-align:left">Long</td>
+</tr>
+<tr>
+<td style="text-align:left">short</td>
+<td style="text-align:left">Short</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">Integer</td>
+</tr>
+<tr>
+<td style="text-align:left">integer</td>
+<td style="text-align:left">Integer</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">Double</td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:left">Float</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align:left">date</td>
+<td style="text-align:left">Date</td>
+</tr>
+<tr>
+<td style="text-align:left">decimal</td>
+<td style="text-align:left">BigDecimal</td>
+</tr>
+<tr>
+<td style="text-align:left">bigdecimal</td>
+<td style="text-align:left">BigDecimal</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>自定义别名<ul>
+<li>单个别名定义</li>
+<li>批量定义别名（常用）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 别名定义 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 针对单个别名定义</span></span><br><span class="line"><span class="comment">    type：类型的路径</span></span><br><span class="line"><span class="comment">    alias：别名</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;typeAlias type="cn.itcast.mybatis.po.User" alias="user"/&gt; --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 批量别名定义</span></span><br><span class="line"><span class="comment">    指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.iot.mybatis.po"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="typeHandlers-类型处理器"><a href="#typeHandlers-类型处理器" class="headerlink" title="typeHandlers(类型处理器)"></a>typeHandlers(类型处理器)</h2><p>mybatis中通过typeHandlers完成jdbc类型和java类型的转换。例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">		select * from user where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>mybatis自带的类型处理器基本上满足日常需求，不需要单独定义。</p>
+<p>mybatis支持类型处理器</p>
+<blockquote>
+<p> 参考 <a href="http://www.mybatis.org/mybatis-3/configuration.html#typeHandlers" target="_blank" rel="noopener">typeHandlers</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型处理器</th>
+<th style="text-align:left">Java类型</th>
+<th style="text-align:left">JDBC类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">BooleanTypeHandler</td>
+<td style="text-align:left">Boolean，boolean</td>
+<td style="text-align:left">任何兼容的布尔值</td>
+</tr>
+<tr>
+<td style="text-align:left">ByteTypeHandler</td>
+<td style="text-align:left">Byte，byte</td>
+<td style="text-align:left">任何兼容的数字或字节类型</td>
+</tr>
+<tr>
+<td style="text-align:left">ShortTypeHandler</td>
+<td style="text-align:left">Short，short</td>
+<td style="text-align:left">任何兼容的数字或短整型</td>
+</tr>
+<tr>
+<td style="text-align:left">IntegerTypeHandler</td>
+<td style="text-align:left">Integer，int</td>
+<td style="text-align:left">任何兼容的数字和整型</td>
+</tr>
+<tr>
+<td style="text-align:left">LongTypeHandler</td>
+<td style="text-align:left">Long，long</td>
+<td style="text-align:left">任何兼容的数字或长整型</td>
+</tr>
+<tr>
+<td style="text-align:left">FloatTypeHandler</td>
+<td style="text-align:left">Float，float</td>
+<td style="text-align:left">任何兼容的数字或单精度浮点型</td>
+</tr>
+<tr>
+<td style="text-align:left">DoubleTypeHandler</td>
+<td style="text-align:left">Double，double</td>
+<td style="text-align:left">任何兼容的数字或双精度浮点型</td>
+</tr>
+<tr>
+<td style="text-align:left">BigDecimalTypeHandler</td>
+<td style="text-align:left">BigDecimal</td>
+<td style="text-align:left">任何兼容的数字或十进制小数类型</td>
+</tr>
+<tr>
+<td style="text-align:left">StringTypeHandler</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">CHAR和VARCHAR类型</td>
+</tr>
+<tr>
+<td style="text-align:left">ClobTypeHandler</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">CLOB和LONGVARCHAR类型</td>
+</tr>
+<tr>
+<td style="text-align:left">NStringTypeHandler</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">NVARCHAR和NCHAR类型</td>
+</tr>
+<tr>
+<td style="text-align:left">NClobTypeHandler</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">NCLOB类型</td>
+</tr>
+<tr>
+<td style="text-align:left">ByteArrayTypeHandler</td>
+<td style="text-align:left">byte[]</td>
+<td style="text-align:left">任何兼容的字节流类型</td>
+</tr>
+<tr>
+<td style="text-align:left">BlobTypeHandler</td>
+<td style="text-align:left">byte[]</td>
+<td style="text-align:left">BLOB和LONGVARBINARY类型</td>
+</tr>
+<tr>
+<td style="text-align:left">DateTypeHandler</td>
+<td style="text-align:left">Date（java.util）</td>
+<td style="text-align:left">TIMESTAMP类型</td>
+</tr>
+<tr>
+<td style="text-align:left">DateOnlyTypeHandler</td>
+<td style="text-align:left">Date（java.util）</td>
+<td style="text-align:left">DATE类型</td>
+</tr>
+<tr>
+<td style="text-align:left">TimeOnlyTypeHandler</td>
+<td style="text-align:left">Date（java.util）</td>
+<td style="text-align:left">TIME类型</td>
+</tr>
+<tr>
+<td style="text-align:left">SqlTimestampTypeHandler</td>
+<td style="text-align:left">Timestamp（java.sql）</td>
+<td style="text-align:left">TIMESTAMP类型</td>
+</tr>
+<tr>
+<td style="text-align:left">SqlDateTypeHandler</td>
+<td style="text-align:left">Date（java.sql）</td>
+<td style="text-align:left">DATE类型</td>
+</tr>
+<tr>
+<td style="text-align:left">SqlTimeTypeHandler</td>
+<td style="text-align:left">Time（java.sql）</td>
+<td style="text-align:left">TIME类型</td>
+</tr>
+<tr>
+<td style="text-align:left">ObjectTypeHandler</td>
+<td style="text-align:left">任意</td>
+<td style="text-align:left">其他或未指定类型</td>
+</tr>
+<tr>
+<td style="text-align:left">EnumTypeHandler</td>
+<td style="text-align:left">Enumeration类型</td>
+<td style="text-align:left">VARCHAR-任何兼容的字符串类型，作为代码存储（而不是索引）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mappers-映射配置"><a href="#mappers-映射配置" class="headerlink" title="mappers(映射配置)"></a>mappers(映射配置)</h2><ul>
+<li>通过resource加载单个映射文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--通过resource方法一次加载一个映射文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"mapper/UserMapper.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过mapper接口加载单个mapper</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!-- 通过mapper接口加载单个 映射文件</span></span><br><span class="line"><span class="comment">        遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中</span></span><br><span class="line"><span class="comment">        上边规范的前提是：使用的是mapper代理方法</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"com.iot.mybatis.mapper.UserMapper"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>目录示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">com.iot.mybatis.mapper------------------package包</span><br><span class="line">           |----UserMapper.java</span><br><span class="line">           |----UserMapper.xml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>批量加载mapper(推荐使用)</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 批量加载mapper</span></span><br><span class="line"><span class="comment">		指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载</span></span><br><span class="line"><span class="comment">		遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中</span></span><br><span class="line"><span class="comment">		上边规范的前提是：使用的是mapper代理方法</span></span><br><span class="line"><span class="comment">		 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.iot.mybatis.mapper"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.132Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/08/2016-03-08-mybatis-learn-5-configuration/" target="_blank" rel="external">https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/&title=《mybatis学习笔记(5)-配置文件》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/&title=《mybatis学习笔记(5)-配置文件》 — Brian's Homepage&source=本文主要讲解SqlMapConfig配置文件" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(5)-配置文件》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-6-input-mapping/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mybatis学习笔记(6)-输入映射</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-4-dao/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mybatis学习笔记(4)-开发dao方法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/&title=《mybatis学习笔记(5)-配置文件》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/&title=《mybatis学习笔记(5)-配置文件》 — Brian's Homepage&source=本文主要讲解SqlMapConfig配置文件" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(5)-配置文件》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-5-configuration/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqklEQVR42u3a0W7jMAwEwPz/T7evV7R2d0XJzQGTp+BqSxodIDKkXq/48xF//n3++/erMa/eSsbZ8MHDw8PbuvS1yb4/f/XWZPb7t/Dw8PBO866WeH9kJ4d+tIjbTWmDDR4eHt578uoDOllKmXDj4eHh/V+8hJGHjfvNwsPDw3tP3omhzy39SK0FDw8Pbz3XfU3S62e+H+nv4eHh4W29EHA/zX27qw0J7TiX4+Ph4eEd4OUH7mTiJKVemz16Eg8PD28rb1JIXZu+bXHlF79++I6Hh4d3mNdejcoLrPnGte20X97Cw8PDO8bLW/sJYHLVoE3fF38r4OHh4Y157YF7/9ak/b8212if8PDw8ErePNnNl5VfCEgCQB6i8PDw8PbyThQFdoHbYBCl1Hh4eHiP8NbaVPPNatl4eHh4T/LWLjZNLg3kxYv2r3h4eHhP8vIqaE5dS7LnFw6+FCPw8PDwtvKSpDb/l7UU+XQRBA8PD28vry2/JhOshYq1S65FGRcPDw/vGC9HRjGnvAE1L2R8GRMPDw/vQV5eYM0DyVp4aAsTP9Ra8PDw8Lby2ktRbXi4H2G+Hb+k1Hh4eHjHeGvHdHIc56nzJFmv/9/w8PDwxry8rZU0vdqrAG07Ld9WPDw8vHO8ebN/UpZtNzRfDx4eHt5p3iSdnZQe2tJGUbrFw8PDO8xrCwprSXYeYKJfAMmMeHh4eI/wJm2qtoiwF4aHh4d3mjdJcHeVfXNMnnDj4eHhneO1xda2q5Y0w9YaXXVJAg8PD28rLwkGe1PktjwxCgx4eHh4x3jzUmybCk/GLAoWeHh4eG/Jy9PuNn1vy7uXKTUeHh7en/LaZDdJptt0udhKPDw8vGO85OW1Iux86fl1gVEZFw8PDy/mbfjBv/RMztiVrOPh4eGNeZ/NPuQpQAYs0gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

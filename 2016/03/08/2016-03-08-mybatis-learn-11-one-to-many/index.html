@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>mybatis学习笔记(11)-一对多查询 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="MyBatis">
+    <meta name="description" content="本文实现一对多查询，查询订单及订单明细的信息">
+<meta name="keywords" content="MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习笔记(11)-一对多查询">
+<meta property="og:url" content="https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文实现一对多查询，查询订单及订单明细的信息">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习笔记(11)-一对多查询">
+<meta name="twitter:description" content="本文实现一对多查询，查询订单及订单明细的信息">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mybatis学习笔记(11)-一对多查询</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mybatis学习笔记(11)-一对多查询</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-07T18:39:11.000Z" itemprop="datePublished" class="page-time">
+  2016-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#示例"><span class="post-toc-number">1.</span> <span class="post-toc-text">示例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小结"><span class="post-toc-number">2.</span> <span class="post-toc-text">小结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-08-mybatis-learn-11-one-to-many" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mybatis学习笔记(11)-一对多查询</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-08 02:39:11" datetime="2016-03-07T18:39:11.000Z" itemprop="datePublished">2016-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文实现一对多查询，查询订单及订单明细的信息</p>
+<a id="more"></a>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ul>
+<li>sql</li>
+</ul>
+<p>确定主查询表：订单表<br>确定关联查询表：订单明细表<br>在一对一查询基础上添加订单明细表关联即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  orders.*,</span><br><span class="line">  user.username,</span><br><span class="line">  user.sex,</span><br><span class="line">  user.address,</span><br><span class="line">  orderdetail.id orderdetail_id,</span><br><span class="line">  orderdetail.items_id,</span><br><span class="line">  orderdetail.items_num,</span><br><span class="line">  orderdetail.orders_id</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  orders,</span><br><span class="line">  <span class="keyword">user</span>,</span><br><span class="line">  orderdetail</span><br><span class="line"><span class="keyword">WHERE</span> orders.user_id = user.id <span class="keyword">AND</span> orderdetail.orders_id=orders.id</span><br></pre></td></tr></table></figure>
+<p><strong>注意上面的<code>orderdetail.id (AS) orderdetail_id</code>,这里需要取别名，否则由于orders表也有id字段，在后面映射时会冲突</strong></p>
+<ul>
+<li>映射思路</li>
+</ul>
+<p>使用resultType将上边的查询结果映射到pojo中，订单信息的就是重复。</p>
+<p>对orders映射不能出现重复记录。</p>
+<p>在orders.java类中添加<code>List&lt;orderDetail&gt; orderDetails</code>属性。<br>最终会将订单信息映射到orders中，订单所对应的订单明细映射到orders中的orderDetails属性中。</p>
+<p>映射成的orders记录数为两条（orders信息不重复）,每个orders中的orderDetails属性存储了该订单所对应的订单明细。</p>
+<ul>
+<li>在orders中添加list订单明细属性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//订单明细</span></span><br><span class="line"><span class="keyword">private</span> List&lt;Orderdetail&gt; orderdetails;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mapper.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询订单关联查询用户及订单明细，使用resultmap --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findOrdersAndOrderDetailResultMap"</span> <span class="attr">resultMap</span>=<span class="string">"OrdersAndOrderDetailResultMap"</span>&gt;</span></span><br><span class="line">   SELECT</span><br><span class="line">      orders.*,</span><br><span class="line">      user.username,</span><br><span class="line">      user.sex,</span><br><span class="line">      user.address,</span><br><span class="line">      orderdetail.id orderdetail_id,</span><br><span class="line">      orderdetail.items_id,</span><br><span class="line">      orderdetail.items_num,</span><br><span class="line">      orderdetail.orders_id</span><br><span class="line">    FROM</span><br><span class="line">      orders,</span><br><span class="line">      user,</span><br><span class="line">      orderdetail</span><br><span class="line">    WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>resultMap定义</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 订单及订单明细的resultMap</span></span><br><span class="line"><span class="comment">使用extends继承，不用在中配置订单信息和用户信息的映射</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.iot.mybatis.po.Orders"</span> <span class="attr">id</span>=<span class="string">"OrdersAndOrderDetailResultMap"</span> <span class="attr">extends</span>=<span class="string">"OrdersUserResultMap"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 订单信息 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 用户信息 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 使用extends继承，不用在中配置订单信息和用户信息的映射 --&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 订单明细信息</span></span><br><span class="line"><span class="comment">    一个订单关联查询出了多条明细，要使用collection进行映射</span></span><br><span class="line"><span class="comment">    collection：对关联查询到多条记录映射到集合对象中</span></span><br><span class="line"><span class="comment">    property：将关联查询到多条记录映射到com.iot.mybatis.po.Orders哪个属性</span></span><br><span class="line"><span class="comment">    ofType：指定映射到list集合属性中pojo的类型</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"orderdetails"</span> <span class="attr">ofType</span>=<span class="string">"com.iot.mybatis.po.Orderdetail"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- id：订单明细唯 一标识</span></span><br><span class="line"><span class="comment">        property:要将订单明细的唯 一标识 映射到com.iot.mybatis.po.Orderdetail的哪个属性</span></span><br><span class="line"><span class="comment">          --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"orderdetail_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_id"</span> <span class="attr">property</span>=<span class="string">"itemsId"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_num"</span> <span class="attr">property</span>=<span class="string">"itemsNum"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"orders_id"</span> <span class="attr">property</span>=<span class="string">"ordersId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>mapper.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询订单(关联用户)及订单明细</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Orders&gt;  <span class="title">findOrdersAndOrderDetailResultMap</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>mybatis使用resultMap的collection对关联查询的多条记录映射到一个list集合属性中。</p>
+<p>使用resultType实现：将订单明细映射到orders中的orderdetails中，需要自己处理，使用双重循环遍历，去掉重复记录，将订单明细放在orderdetails中。</p>
+<p>另外，下面这篇文章对一对多的resultMap机制解释的很清楚：</p>
+<blockquote>
+<p><a href="http://blog.csdn.net/xzm_rainbow/article/details/15336933" target="_blank" rel="noopener">MyBatis：一对多表关系详解(从案例中解析)</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.125Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/" target="_blank" rel="external">https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/&title=《mybatis学习笔记(11)-一对多查询》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/&title=《mybatis学习笔记(11)-一对多查询》 — Brian's Homepage&source=本文实现一对多查询，查询订单及订单明细的信息" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(11)-一对多查询》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-12-many-to-many/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mybatis学习笔记(12)-多对多查询</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-10-one-to-one/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mybatis学习笔记(10)-一对一查询</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/&title=《mybatis学习笔记(11)-一对多查询》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/&title=《mybatis学习笔记(11)-一对多查询》 — Brian's Homepage&source=本文实现一对多查询，查询订单及订单明细的信息" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(11)-一对多查询》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/08/2016-03-08-mybatis-learn-11-one-to-many/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3awW4bMQwE0P7/T6eXHgok2cyQkusCb09BbK/1dFjRQ/76FV8ff13f/efz+5/f+d09k1cPX3h4eHiLpX++kiXmX/985/zbk0/h4eHh3eYlD/eWkRwhz/h2K/Hw8PDek5eXxfkWtHfGw8PD+x95SZGd5wPPhTIeHh7ee/LyW882IoG12304a8HDw8OLeW35+w5/X+nv4eHh4a276vkhkT+y23GB2Tr/3AEPDw/vAu9sy78NZ9vAd9hCw8PDwzvKyx/E+eJm1OSQyCMMPDw8vNu8pPk0C2Q3mKS59cOn8PDw8C7z2jJ6MwqQxw15OV7/VsDDw8Mb8WY/9TcRw+wweD6iDicZeHh4eOVYQLug9pBIAovDZT0eHh7eUd7sK88+4tsBgmFnDw8PD+8QL380zwYCNoMCLRsPDw/vlbz2rfmDexPabvIEPDw8vHu8WcuqfdxvtilfyRd3wMPDw/tHvPyEybdmE2fUvxXw8PDwjvI2gwV5Yyyp6BP2rNDHw8PDO8v7CK42cp3Fvu2uRwcMHh4e3jXeptmfBLWbVlYbTHwRRuDh4eFd482i27awPrsdUUmNh4eH9xLe7GB4XmIeeczK+m9Tajw8PLyjvOfGUjs+tW+MJSvJW3F4eHh4r+G1i8hfvdfT/6Fkx8PDw7vMy4ex8iK4HQvYBBb1rBYeHh7egpdHt8kGzQruvMQvGnJ4eHh4l3k5oI0PZqNXOeyHMAIPDw/vEG9WKG9aYnk4uxnzwsPDw7vH24Sqp8rlWaOrjiTw8PDwjvLaw2AWDbRNtTYcKbIWPDw8vEO8drApyTlmS5yFGvXLeHh4eC/kzVpl+TFzOM7Aw8PDewNejnzelBYzC5fx8PDw7vHOLi75bNs2m40y4OHh4d3gtT/4kwK3jXrbcYEhAw8PD2/L+w2t31S5TfoiUwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

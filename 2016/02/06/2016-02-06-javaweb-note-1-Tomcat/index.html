@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javaweb入门笔记(1)-Tomcat | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaWeb,Tomcat">
+    <meta name="description" content="下载链接   Apache Jakarta Project Tomcat官网">
+<meta name="keywords" content="JavaWeb,Tomcat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaweb入门笔记(1)-Tomcat">
+<meta property="og:url" content="https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="下载链接   Apache Jakarta Project Tomcat官网">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_tomcat%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javaweb入门笔记(1)-Tomcat">
+<meta name="twitter:description" content="下载链接   Apache Jakarta Project Tomcat官网">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_tomcat%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javaweb入门笔记(1)-Tomcat</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javaweb入门笔记(1)-Tomcat</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-06T01:55:12.000Z" itemprop="datePublished" class="page-time">
+  2016-02-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Tomcat目录层次结构"><span class="post-toc-number">1.</span> <span class="post-toc-text">Tomcat目录层次结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动Tomcat"><span class="post-toc-number">2.</span> <span class="post-toc-text">启动Tomcat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#官当配置文档"><span class="post-toc-number">3.</span> <span class="post-toc-text">官当配置文档</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#web应用"><span class="post-toc-number">4.</span> <span class="post-toc-text">web应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Tomcat体系结构"><span class="post-toc-number">5.</span> <span class="post-toc-text">Tomcat体系结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关小知识"><span class="post-toc-number">6.</span> <span class="post-toc-text">相关小知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">7.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-02-06-javaweb-note-1-Tomcat" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javaweb入门笔记(1)-Tomcat</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-06 09:55:12" datetime="2016-02-06T01:55:12.000Z" itemprop="datePublished">2016-02-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>下载链接</p>
+<blockquote>
+<ul>
+<li><a href="http://jakarta.apache.org" target="_blank" rel="noopener">Apache Jakarta Project</a></li>
+<li><a href="http://tomcat.apache.org/" target="_blank" rel="noopener">Tomcat官网</a></li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h2 id="Tomcat目录层次结构"><a href="#Tomcat目录层次结构" class="headerlink" title="Tomcat目录层次结构"></a>Tomcat目录层次结构</h2><ul>
+<li>bin:存放启动和关闭Tomcat的脚本文件</li>
+<li>conf:存放Tomcat服务器的配置文件</li>
+<li>lib:存放Tomcat服务器的支撑jar包</li>
+<li>logs:存放Tomcat的日志文件</li>
+<li>temp:存放Tomcat运行时产生的临时文件</li>
+<li>webapps:web应用所在的目录，即供外接访问的web资源的存放目录</li>
+<li>work:Tomcat的工作目录</li>
+</ul>
+<p>上面的内容直接可在<a href="http://tomcat.apache.org/tomcat-8.0-doc/introduction.html#Terminology" target="_blank" rel="noopener">Tomcat Doc-Directories and Files</a>找到答案</p>
+<h2 id="启动Tomcat"><a href="#启动Tomcat" class="headerlink" title="启动Tomcat"></a>启动Tomcat</h2><p><code>%CATALINA_HOME%/RUNNING.txt</code>有详细步骤，简单来说，已经配置好JDK环境的话，windows下直接双击<code>bin/startyp.bat</code>就行了</p>
+<p>默认端口是8080，改端口：tomcat的<code>conf/server.xml</code>的<code>Connector</code>标签</p>
+<p>常见启动问题</p>
+<ul>
+<li>JAVA_HOME环境变量</li>
+<li>端口占用问题</li>
+<li>Catalina_home环境变量的设置问题</li>
+</ul>
+<h2 id="官当配置文档"><a href="#官当配置文档" class="headerlink" title="官当配置文档"></a>官当配置文档</h2><p>多种配置方式</p>
+<ul>
+<li><code>/META-INF/context.xml</code></li>
+<li><code>$CATALINA_BASE/conf/[enginename]/[hostname]/</code></li>
+<li><code>conf/server.xml</code></li>
+</ul>
+<blockquote>
+<p>具体参考<a href="http://tomcat.apache.org/tomcat-8.0-doc/config/context.html#Defining_a_context" target="_blank" rel="noopener">Context配置</a></p>
+</blockquote>
+<h2 id="web应用"><a href="#web应用" class="headerlink" title="web应用"></a>web应用</h2><p>1.web应用与web应用所在的目录<br>一个<strong>web应用</strong>由多个静态web资源和动态web资源组成；组成web应用的这些文件会由一个目录组织起来，这个目录称为<strong>web应用所在目录</strong></p>
+<p>2.虚拟目录的映射<br>把主机上的资源映射到服务器对外提供的访问路径上</p>
+<p>3.例子</p>
+<p>tomcat的<code>conf/server.xml</code>:<code>&lt;Host&gt;</code>元素-&gt;<code>&lt;Context&gt;</code>,一个<code>&lt;Context&gt;</code>对应一个web应用。</p>
+<p><code>&lt;Context path=&quot;/virtual-path&quot; docBase=&quot;webapps-path&quot; /&gt;</code>,重启web服务器</p>
+<p>4.web应用的组成结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mail---------------------------Web应用所在目录</span><br><span class="line">           |----html、jsp、css、js等文件，根目录下的文件外界可以直接访问</span><br><span class="line">           |----WEB-INF目录</span><br><span class="line">                    |---------classes目录(java类)</span><br><span class="line">                    |---------lib目录(java类运行所需的jar包)</span><br><span class="line">                    |---------web.xml(web应用的配置文件)</span><br><span class="line">             WEB-INF 这个目录下的文件外界无法直接访问，由web服务器负责调用</span><br></pre></td></tr></table></figure>
+<h2 id="Tomcat体系结构"><a href="#Tomcat体系结构" class="headerlink" title="Tomcat体系结构"></a>Tomcat体系结构</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_tomcat%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="Tomcat体系结构" title>
+                </div>
+                <div class="image-caption">Tomcat体系结构</div>
+            </figure>
+<ul>
+<li>tomcat的https连接器</li>
+</ul>
+<p><code>keytool -genkey alias tomcat -keyalg RSA</code>得到<code>.keystore</code>文件</p>
+<ul>
+<li>Tomcat管理平台<br>主页-&gt;Tomcat Manager</li>
+</ul>
+<p>相关权限和用户配置在<code>conf/tomcat-users.xml</code></p>
+<h2 id="相关小知识"><a href="#相关小知识" class="headerlink" title="相关小知识"></a>相关小知识</h2><p>1.域名和主机名的区别</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">域名</th>
+<th style="text-align:center">sina.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">主机名</td>
+<td style="text-align:center"><a href="http://www.sina.com" target="_blank" rel="noopener">www.sina.com</a></td>
+</tr>
+</tbody>
+</table>
+<p>2.url中主机名的作用：</p>
+<ul>
+<li>用于访问DNS服务器获取IP</li>
+<li>用于告诉代理服务器要访问哪个主机名</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
+<p><a href="http://www.cnblogs.com/rocomp/p/4802396.html" target="_blank" rel="noopener">Tomcat安装、配置、优化及负载均衡详解
+</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.012Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/" target="_blank" rel="external">https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/&title=《javaweb入门笔记(1)-Tomcat》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/&title=《javaweb入门笔记(1)-Tomcat》 — Brian's Homepage&source=下载链接
+
+
+Apache Jakarta Project
+Tomcat官网
+
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(1)-Tomcat》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-2-http/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javaweb入门笔记(2)-http入门</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/06/2016-02-06-javase-learn-note-5-ThreadPool/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java基础巩固笔记(5)-多线程之线程并发库</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/&title=《javaweb入门笔记(1)-Tomcat》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/&title=《javaweb入门笔记(1)-Tomcat》 — Brian's Homepage&source=下载链接
+
+
+Apache Jakarta Project
+Tomcat官网
+
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(1)-Tomcat》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-1-Tomcat/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aQW4jMQwEwPz/07vAnnJYjZukGDtAzclw4smUAoh0U19f8fXn3/X99emd7++fPvt8n+Snly88PDy81qOfruTWJ9jzT/PlSBb0+Ax4eHh4a7y8GDxv5cnCJeXkeSGSZ8bDw8P7BF7S+Obt74SEh4eH91t4hZsGv5MXBjw8PLzP5PXa37yNrn7qDVkLHh4eXszrDcDe+3p9voeHh4fXmqpPYtb5Ms0vPDw8vA3ec4PbiwMmQUYe3RYON+Dh4eEt8HLqpIRMQopJc4+Hh4d3l1f98LzVrjbfPTAeHh7eNq/ayFY38d6hgWQpXywfHh4e3hovuV0yzr97kKtaHgqJCB4eHt4l3gQ5CXCrcUZhIfDw8PAWePlG//ybk6gib77zIdl//od4eHh4a7zqMakL4/zWIhZ2fjw8PLw1XnVA1Tu2NQ9Hys03Hh4e3lVedRBVjQaqhad5ROB0Hzw8PLwFXtLCVuPX3pGC3uGtqJjh4eHhLfCq0/bqpyaDsfmgDg8PD2+DVw1eewcLkuIxiYYLMS4eHh7egJe0xcnrPITtNevVex5jXDw8PLyrvGoxSErCfIuf/C08PDy8Pd781tVWu9rKV0NbPDw8vD1e/p198u0+39ar4UV05AsPDw/vKq8XquaPPt/i8+NZx3waDw8Pb4FXHYYVak589Zr7F2UDDw8Pb4GXNMqThrgXYcwXCA8PD2+Plw+rett3dYuPGuV4UIeHh4f3M7xepJs8UFJC8qIShSB4eHh4C7wL/XgxNZ0cKZgfQcDDw8O7xevFEL1ikJSE3lju+H/Dw8PDW+PlY/7qI+ZBwyTSffG9AQ8PD+9NvGoMMX8nufOL5cDDw8P7GN48Wp2Uh0KLj4eHh7fGywf8e3HtpInHw8PD+0le9av+rQlbEjqUQ9vehYeHh5fy/gJ+hGnO7OWnRAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
