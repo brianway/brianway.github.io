@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>在github搭建个人网站 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="GitHub,安装部署">
+    <meta name="description" content="先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。">
+<meta name="keywords" content="GitHub,安装部署">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在github搭建个人网站">
+<meta property="og:url" content="https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在github搭建个人网站">
+<meta name="twitter:description" content="先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在github搭建个人网站</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在github搭建个人网站</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-07T06:35:11.000Z" itemprop="datePublished" class="page-time">
+  2016-01-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考教程"><span class="post-toc-number">1.</span> <span class="post-toc-text">参考教程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#感想"><span class="post-toc-number">3.</span> <span class="post-toc-text">感想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">遇到的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主题"><span class="post-toc-number">5.</span> <span class="post-toc-text">主题</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-build-blog-with-jekyll-and-github" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在github搭建个人网站</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-07 14:35:11" datetime="2016-01-07T06:35:11.000Z" itemprop="datePublished">2016-01-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>先搜篇中文博客了解下流程，再根据下面的官方文档<strong>按顺序</strong>看一遍就差不多了。</p>
+<p>这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。</p>
+<a id="more"></a>
+<h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><blockquote>
+<ul>
+<li><a href="https://help.github.com/categories/github-pages-basics/" target="_blank" rel="noopener">GitHub Help</a></li>
+<li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></li>
+<li><a href="http://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a><em>（附上<a href="http://jekyllcn.com/" target="_blank" rel="noopener">中文版</a>)</em></li>
+<li><a href="http://jekyll-windows.juthilo.com/" target="_blank" rel="noopener">Run Jekyll on Windows</a></li>
+</ul>
+</blockquote>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>首先默认你已经拥有了自己github账号，并会基本的git操作。</p>
+<ol>
+<li>新建一个和github用户名(username)同名的仓库，<code>username.github.io</code></li>
+<li>在本地电脑安装</li>
+</ol>
+<ul>
+<li>Ruby和devkit</li>
+<li>jekyll</li>
+<li>python</li>
+</ul>
+<ol start="3">
+<li>找一个好的模板</li>
+<li>修改模板，导入自己的文章</li>
+</ol>
+<p>具体步骤懒得写了，不定期完善。</p>
+<ul>
+<li>Mac下安装</li>
+</ul>
+<p>1.安装ruby</p>
+<p>由于我之前安装过Xcode还有Xcode command line tools,所以直接就有ruby了，Terminal里输入<code>ge</code>+<code>Tab键</code>能看到有<code>gem</code>指令</p>
+<p>2.安装jekyll和bundle</p>
+<p>参考：<a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/" target="_blank" rel="noopener">Setting up your GitHub Pages site locally with Jekyll</a></p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>主要是我完全不懂ruby和python,前端也只有少的可怜的一点常识。搭建环境不复杂，基本安装好了后<code>jekyll new myblog</code>就有个基础模板了，不过很难看。所以我主要花了一整天时间去找主题、P图、了解jekyll的目录结构和用法、测试显示效果。总算搞定了，不过markdown的语法高亮我还是不满意，比较喜欢SegmentFault的高亮。有空再说这部分。</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>1.windows下安装ruby的devkit遇到问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Invalid configuration or no Rubies listed. Please fix &apos;config.yml&apos;</span><br><span class="line">and rerun &apos;ruby dk.rb install&apos;</span><br></pre></td></tr></table></figure>
+<p>解决：<a href="http://stackoverflow.com/questions/20810653/how-do-i-configure-config-yml-so-that-i-can-install-devkit" target="_blank" rel="noopener">How do I configure config.yml so that I can install devkit?</a></p>
+<p>2.kunka主题jekyll build问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deprecation: You appear to have pagination turned on, but you haven&apos;t included the `jekyll-paginate` gem. Ensure you have `gems: [jekyll-paginate]` in your configuration fil e.</span><br></pre></td></tr></table></figure>
+<p>解决：<a href="https://teamtreehouse.com/community/jekyllpaginate-gem" target="_blank" rel="noopener">jekyll-paginate gem</a></p>
+<p>3.markdown显示问题</p>
+<p>这里很蛋疼，我写markdown的习惯是代码都是前后各三个反单引号包起来的。使用kramdown解析markdown不能对含三个反单引号的代码块进行识别，默认按单行代码处理，缩进都没了；使用redcarpet能识别代码块，但没高亮，rouge又提示什么要下1.3版本，反正神烦。</p>
+<p>参考：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/8648390/syntax-highlighting-markdown-code-blocks-in-jekyll-without-using-liquid-tags" target="_blank" rel="noopener">Syntax highlighting markdown code blocks in Jekyll (without using liquid tags)</a></li>
+<li><a href="http://blog.javachen.com/2015/06/30/jekyll-kramdown-config.html" target="_blank" rel="noopener">Jekyll kramdown配置</a></li>
+</ul>
+<p>4.jekyll build失败报错(多版本冲突)</p>
+<p>解决：<a href="http://stackoverflow.com/questions/31417469/jekyll-ruby-kramdown-missing-dependency" target="_blank" rel="noopener">Jekyll/Ruby Kramdown Missing Dependency</a></p>
+<p>5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前<code>gem update --system</code>)</p>
+<p>查阅：<a href="http://stackoverflow.com/questions/10246023/bundle-install-fails-with-ssl-certificate-verification-error" target="_blank" rel="noopener">SSL Error When installing rubygems, Unable to pull data from ‘https://rubygems.org/</a></p>
+<p>6.jekyll升级到3.0</p>
+<blockquote>
+<ul>
+<li><a href="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0" target="_blank" rel="noopener">GitHub Pages now faster and simpler with Jekyll 3.0</a></li>
+<li><a href="http://jekyllrb.com/docs/upgrading/2-to-3/" target="_blank" rel="noopener">Upgrading from 2.x to 3.x</a></li>
+</ul>
+</blockquote>
+<p>7.gem install出现error，伟大的防火墙问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brian@brianway:~$ gem install jekyll</span><br><span class="line">ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)</span><br><span class="line">Errno::ECONNRESET: Connection reset by peer - SSL_connect (https://api.rubygems.org/quick/Marshal.4.8/jekyll-3.1.6.gemspec.rz)</span><br></pre></td></tr></table></figure>
+<p>解决：换成淘宝的镜像 <a href="https://ruby.taobao.org/" target="_blank" rel="noopener">https://ruby.taobao.org/</a></p>
+<p>8.MAC下<code>gem install jekyll</code>失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR:  While executing gem ... (Gem::FilePermissionError)</span><br><span class="line">You don&apos;t have write permissions for the /Library/Ruby/Gems/2.0.0 directory.</span><br></pre></td></tr></table></figure>
+<p>好像不建议使用<code>sudo</code>,需要另外弄一套包管理rbenv或者RVM，图省事的话，可以直接安装在本地用户目录,指令格式：<code>gem install *** --user-install</code>，<code>***</code>是要安装的包名，具体可以输入<code>gem help install</code>查看参数意义</p>
+<p>参考：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/14607193/installing-gem-or-updating-rubygems-fails-with-permissions-error" target="_blank" rel="noopener">Installing gem or updating RubyGems fails with permissions error</a></li>
+<li><a href="http://stackoverflow.com/questions/31972968/cant-install-gems-on-os-x-el-capitan" target="_blank" rel="noopener">Can’t install gems on OS X “El Capitan”</a></li>
+</ul>
+<p>9.mac下bundle执行失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">brian@brianway:~/mygit/brianway.github.io (master)$ bundle exec jekyll serve</span><br><span class="line">Configuration file: /Users/brian/mygit/brianway.github.io/_config.yml</span><br><span class="line">Source: /Users/brian/mygit/brianway.github.io</span><br><span class="line">Destination: /Users/brian/mygit/brianway.github.io/_site</span><br><span class="line">Incremental build: disabled. Enable with --incremental</span><br><span class="line">Generating...</span><br><span class="line">ERROR: YOUR SITE COULD NOT BE BUILT:</span><br><span class="line">------------------------------------</span><br><span class="line">Invalid date &apos;&lt;%= Time.now.strftime(&apos;%Y-%m-%d %H:%M:%S %z&apos;) %&gt;&apos;: Document &apos;vendor/bundle/ruby/2.0.0/gems/jekyll-3.1.6/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb&apos; does not have a valid date in the YAML front matter.</span><br></pre></td></tr></table></figure>
+<p>解决：在<code>_config.yml</code>文件添加<code>exclude: [&quot;vendor&quot;]</code></p>
+<p>参考：</p>
+<ul>
+<li><a href="http://www.markcampbell.me/jekyll/heroku/2013/05/18/how-to-set-up-jekyll-on-heroku.html" target="_blank" rel="noopener">How to set up a Jekyll blog on Heroku</a></li>
+<li><a href="https://github.com/benbalter/jekyll-auth/issues/23" target="_blank" rel="noopener">Error building site: Post 0000-00-00… does not have a valid date (hurtstotouchfire 的回答)</a></li>
+<li><a href="https://github.com/nparry/nparry.com/commit/2642e799a9b28ec866c405cccac379ae3770f0fe" target="_blank" rel="noopener">Fix Travis issue due to –deployment flag during bundle </a></li>
+</ul>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>好多主题太闪，我跑不通，或者怕不好改，挑了几个简单的，我跑通的主题(不要吐槽我的审美)</p>
+<blockquote>
+<ul>
+<li><a href="http://mmistakes.github.io/so-simple-theme/theme-setup/" target="_blank" rel="noopener">so-simple-theme</a></li>
+<li><a href="http://mmistakes.github.io/hpstr-jekyll-theme" target="_blank" rel="noopener">hpstr-jekyll-theme</a></li>
+<li><a href="http://chenjun.com/links.html" target="_blank" rel="noopener">陈俊的网：浮生志</a></li>
+<li><a href="https://github.com/pizn/kunka" target="_blank" rel="noopener">kunka</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.968Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/01/07/build-blog-with-jekyll-and-github/" target="_blank" rel="external">https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/&title=《在github搭建个人网站》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/&title=《在github搭建个人网站》 — Brian's Homepage&source=先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。
+这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，window..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在github搭建个人网站》 — Brian's Homepage&url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/08/javase-learn-note-1-Reflect/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">java基础巩固笔记(1)-反射</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/12/17/hadoop-Fully-distributed-setup/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">hadoop完全分布式模式的安装和配置步骤</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/&title=《在github搭建个人网站》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/&title=《在github搭建个人网站》 — Brian's Homepage&source=先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。
+这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，window..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在github搭建个人网站》 — Brian's Homepage&url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3aQW7kMAwEwPz/09kHDJzpJqVkFiifghixVT5ITJNfX/H1/XL9fDe/Xp/z+szXu4cvPDw8vPXSnx6dL+hpWe2nyd/19Fd4eHh493hPO2r+6BaQvKs9JPDw8PA+k5c89NQz8wMGDw8P75N5s+I7fzIeHh7e/8LLC+UkTk0K6/bAuJ614OHh4cW8vIv0OT9f6e/h4eHhrbvq+YY7i3TbFlq9Wjw8PLwLvLZE3kQP+/K3XSceHh7eDV6+TbfspDE2e3tRfOPh4eFd4CWvSQriZLtPYKcGFIoZBDw8PLwFb1ZA52MEs8I9b8696e/h4eHhXeDNwoLZEECOz4v14TfDw8PDWxTTm01/U0BvYMP+Hh4eHt6Cl0QPbXHcHhV5FDJsj+Hh4eFd5iWHQdusyo+QJArJjxA8PDy827y8kZ/EFrOW2I27eHh4eGfvzoai2mh181FmAwd4eHh4v8nLi9222T8ryvOmVzQTgYeHh7fmzRbdjgKcjS3y6AQPDw/vr3j5XFNeduefrD0GHkcH8PDw8I7y2i17tkHnrazZMVAfD3h4eHiHeO12vwlzT91dzUfg4eHhjXh5cLB5fV6aJ7Fv8XY8PDy8C7y8YE1iiNnowGbp0QfFw8PDO8pLgoOzLatZIDv7DR4eHt49XvLiYfP+x0/WLrpu1OHh4eFd47W5bxIZtIfHDFBkLXh4eHgXeKcC2Vl0mxfcxSGHh4eHd5T3XV55RnoqgFiNF+Dh4eFd4G3OkzZ0yA+hdoxgdoDh4eHhbXhta38WvLahbVvuvwkj8PDw8C7w2qC2bY+1DbNN/PFmMgIPDw/vj3g5uy2U23h31d/Dw8PD+xXeJkrYxL5txIyHh4d3mzeLDGbhxWYm6mLWgoeHhxfzNv/wt3Ftu6CkpD5w4eHh4aW8f+JT+T7nKIfDAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

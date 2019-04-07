@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(3)-注解的处理器映射器和适配器 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC">
+    <meta name="description" content="本文主要介绍注解的处理器映射器和适配器相关配置">
+<meta name="keywords" content="SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(3)-注解的处理器映射器和适配器">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要介绍注解的处理器映射器和适配器相关配置">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(3)-注解的处理器映射器和适配器">
+<meta name="twitter:description" content="本文主要介绍注解的处理器映射器和适配器相关配置">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(3)-注解的处理器映射器和适配器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(3)-注解的处理器映射器和适配器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:03.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#默认加载"><span class="post-toc-number">1.</span> <span class="post-toc-text">默认加载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注解的处理器映射器和适配器"><span class="post-toc-number">2.</span> <span class="post-toc-text">注解的处理器映射器和适配器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发注解Handler"><span class="post-toc-number">3.</span> <span class="post-toc-text">开发注解Handler</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在spring容器中加载Handler"><span class="post-toc-number">4.</span> <span class="post-toc-text">在spring容器中加载Handler</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-springmvc-learn-3-Annotation" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(3)-注解的处理器映射器和适配器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:03" datetime="2016-03-29T22:28:03.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要介绍注解的处理器映射器和适配器相关配置</p>
+<a id="more"></a>
+<h2 id="默认加载"><a href="#默认加载" class="headerlink" title="默认加载"></a>默认加载</h2><p>前端控制器从<code>\org\springframework\web\servlet\DispatcherServlet.properties</code>件中加载处理器映射器、适配器、视图解析器等组件，如果不在springmvc.xml中配置，则使用默认加载的</p>
+<p>注解的处理器映射器和适配器</p>
+<ul>
+<li>在spring3.1之前使用<code>org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping</code>注解映射器。</li>
+<li>在spring3.1之后使用<code>org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping</code>注解映射器。</li>
+<li>在spring3.1之前使用<code>org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter</code>注解适配器。</li>
+<li>在spring3.1之后使用<code>org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter</code>注解适配器</li>
+</ul>
+<h2 id="注解的处理器映射器和适配器"><a href="#注解的处理器映射器和适配器" class="headerlink" title="注解的处理器映射器和适配器"></a>注解的处理器映射器和适配器</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 注解的映射器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 注解的适配器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用mvc:annotation-driven代替上面两个注解映射器和注解适配的配置</span></span><br><span class="line"><span class="comment"> mvc:annotation-driven默认加载很多的参数绑定方法，</span></span><br><span class="line"><span class="comment"> 比如json转换解析器默认加载了，如果使用mvc:annotation-driven则不用配置上面的RequestMappingHandlerMapping和RequestMappingHandlerAdapter</span></span><br><span class="line"><span class="comment"> 实际开发时使用mvc:annotation-driven</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="开发注解Handler"><a href="#开发注解Handler" class="headerlink" title="开发注解Handler"></a>开发注解Handler</h2><p>使用注解的映射器和注解的适配器。(使用注解的映射器和注解的适配器必须配对使用)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用@Controller来标识它是一个控制器</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemsController3</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//商品查询列表</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/queryItems"</span>)</span><br><span class="line">    <span class="comment">//实现 对queryItems方法和url进行映射，一个方法对应一个url</span></span><br><span class="line">    <span class="comment">//一般建议将url和方法写成一样</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">queryItems</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//调用service查找数据库，查询商品列表，这里使用静态数据模拟</span></span><br><span class="line">        List&lt;Items&gt; itemsList = <span class="keyword">new</span> ArrayList&lt;Items&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//向list中填充静态数据</span></span><br><span class="line">        Items items_1 = <span class="keyword">new</span> Items();</span><br><span class="line">        items_1.setName(<span class="string">"联想笔记本"</span>);</span><br><span class="line">        items_1.setPrice(<span class="number">6000f</span>);</span><br><span class="line">        items_1.setDetail(<span class="string">"ThinkPad T430 c3 联想笔记本电脑！"</span>);</span><br><span class="line"></span><br><span class="line">        Items items_2 = <span class="keyword">new</span> Items();</span><br><span class="line">        items_2.setName(<span class="string">"苹果手机"</span>);</span><br><span class="line">        items_2.setPrice(<span class="number">5000f</span>);</span><br><span class="line">        items_2.setDetail(<span class="string">"iphone6苹果手机！"</span>);</span><br><span class="line"></span><br><span class="line">        itemsList.add(items_1);</span><br><span class="line">        itemsList.add(items_2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//返回ModelAndView</span></span><br><span class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        <span class="comment">//相当于request的setAttribute方法,在jsp页面中通过itemsList取数据</span></span><br><span class="line">        modelAndView.addObject(<span class="string">"itemsList"</span>,itemsList);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//指定视图</span></span><br><span class="line">        modelAndView.setViewName(<span class="string">"/WEB-INF/jsp/items/itemsList.jsp"</span>);</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="在spring容器中加载Handler"><a href="#在spring容器中加载Handler" class="headerlink" title="在spring容器中加载Handler"></a>在spring容器中加载Handler</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 对于注解的Handler 可以单个配置</span></span><br><span class="line"><span class="comment">    实际开发中加你使用组件扫描</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  &lt;bean  class="com.iot.ssm.controller.ItemsController3"/&gt; --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 可以扫描controller、service、...</span></span><br><span class="line"><span class="comment">	这里让扫描controller，指定controller的包</span></span><br><span class="line"><span class="comment">	 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.iot.ssm.controller"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="http://blog.csdn.net/acmman/article/details/46980427" target="_blank" rel="noopener">SpringMVC框架】注解的处理器映射器和适配器配置</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.810Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/springmvc-learn-3-Annotation/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/&title=《springmvc学习笔记(3)-注解的处理器映射器和适配器》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/&title=《springmvc学习笔记(3)-注解的处理器映射器和适配器》 — Brian's Homepage&source=本文主要介绍注解的处理器映射器和适配器相关配置" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(3)-注解的处理器映射器和适配器》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/springmvc-learn-4-Front-controller/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(4)-前端控制器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/springmvc-learn-2-Non-annotation/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(2)-非注解的处理器映射器和适配器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/&title=《springmvc学习笔记(3)-注解的处理器映射器和适配器》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/&title=《springmvc学习笔记(3)-注解的处理器映射器和适配器》 — Brian's Homepage&source=本文主要介绍注解的处理器映射器和适配器相关配置" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(3)-注解的处理器映射器和适配器》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-3-Annotation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3aQZLCMAwEQP7/afa6VSxhJFlsDp0TBYGofbDNWI9HfD1/Xdf3vN7/+v71Pe+eeP300YWHh4c3KP26rOt7Tg3E9dOr9eDh4eHt8ZIikgm6B04Wg6QGPDw8vHvy8rKqA9Gj4uHh4d2fNw8RqlEFHh4e3j15SRyQ3F8NEfKIdj1rwcPDw4t5+SnSfV6vnO/h4eHhjU/Vewdd1SUkXzbK1eLh4eEt8Krb2TyunWydey1fb+/Ew8PDO8rLp/78sOo6YM3jg+rC88c9eHh4eGu8vNC8FSCPdHsxbjSseHh4eAu8ZMM6aSy4XhJ6G/dqaIKHh4e3wauSelFsviHOl4TRwRgeHh5eizf6q1+MGKqb6QNPx8PDw1vgVRuezsYT8+Uh+hQPDw9vgZeEpL0JfdIoMBmgcmKNh4eHF9eZN1EVxqn4rbw1oRlG4OHh4X2dl2yjk0g3Kas3uKOFAQ8PD2/My6fj/J35gtR8Fh4eHt4Cb46stlvNKym3c+Hh4eEt8JKpdtQeOoh6e020hTYsPDw8vAVeL+TNF4xkEHuf4uHh4X2HN5nQq7C8uLxl4TG58PDw8AJevqnN21WrRSdXcznBw8PDW+ZVJ9/q0MzDhWoLAh4eHt4Gbz71J7v1ZLpPFpXku38o8PDw8NZ41deTsDXfUh84hMPDw8P7Oq8XFiS/mWy78wOtt5tsPDw8vGVe70gsP3XKYafqwcPDwzvLexavnJTEE0ns22tceJtS4+Hh4Y15vXar6oPzg//eodd8OcHDw8Or8npHTdWDrgRZDUeiPwZ4eHh4a7zewdjZ1oF5APGhdQAPDw/vn3jzkDffuE8WEjw8PLz78PL4YPJr+ab/Q3SLh4eHt8abNFRVv1UtvRf74uHh4e3xTm2Oq+0CeVnVZ+Hh4eGt8X4Ad9l9gkjTCVYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

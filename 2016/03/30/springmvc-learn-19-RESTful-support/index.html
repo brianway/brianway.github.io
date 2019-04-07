@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(19)-RESTful支持 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC,RESTful">
+    <meta name="description" content="本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析">
+<meta name="keywords" content="SpringMVC,RESTful">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(19)-RESTful支持">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_RESTful%E6%A0%BC%E5%BC%8F%E8%AE%BF%E9%97%AE.png">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(19)-RESTful支持">
+<meta name="twitter:description" content="本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_RESTful%E6%A0%BC%E5%BC%8F%E8%AE%BF%E9%97%AE.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(19)-RESTful支持</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(19)-RESTful支持</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:19.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#REST的例子"><span class="post-toc-number">2.</span> <span class="post-toc-text">REST的例子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#controller"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">controller</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#REST方法的前端控制器配置"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">REST方法的前端控制器配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对静态资源的解析"><span class="post-toc-number">3.</span> <span class="post-toc-text">对静态资源的解析</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-springmvc-learn-19-RESTful-support" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(19)-RESTful支持</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:19" datetime="2016-03-29T22:28:19.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析</p>
+<a id="more"></a>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>首先附上两篇博客链接</p>
+<blockquote>
+<ul>
+<li><a href="http://zqpythonic.qiniucdn.com/data/20110912210739/index.html" target="_blank" rel="noopener">理解RESTful架构 - 阮一峰的网络日志</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="noopener">RESTful API 设计指南- 阮一峰的网络日志</a></li>
+</ul>
+</blockquote>
+<p>RESTful架构，就是目前最流行的一种互联网软件架构。它结构清晰、符合标准、易于理解、扩展方便，所以正得到越来越多网站的采用。</p>
+<p>RESTful（即Representational State Transfer的缩写）其实是一个开发理念，是对http的很好的诠释。</p>
+<p>1.对url进行规范，写RESTful格式的url</p>
+<ul>
+<li>非REST的url：<code>http://...../queryItems.action?id=001&amp;type=T01</code></li>
+<li>REST的url风格：<code>http://..../items/001</code></li>
+</ul>
+<p>特点：url简洁，将参数通过url传到服务端</p>
+<p>2.http的方法规范</p>
+<p>不管是删除、添加、更新，等等。使用url是一致的，如果进行删除，需要设置http的方法为delete，其他同理。</p>
+<p>后台controller方法：判断http方法，如果是delete执行删除，如果是post执行添加。</p>
+<p>3.对http的contentType规范</p>
+<p>请求时指定contentType，要json数据，设置成json格式的type。</p>
+<h2 id="REST的例子"><a href="#REST的例子" class="headerlink" title="REST的例子"></a>REST的例子</h2><p>查询商品信息，返回json数据。</p>
+<h3 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h3><p>定义方法，进行url映射使用REST风格的url，将查询商品信息的id传入controller .</p>
+<p>输出json使用<code>@ResponseBody</code>将java对象输出json。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询商品信息，输出json</span></span><br><span class="line"><span class="comment">//itemsView/&#123;id&#125;里边的&#123;id&#125;表示占位符，通过@PathVariable获取占位符中的参数，</span></span><br><span class="line"><span class="comment">//@PathVariable中名称要和占位符一致，形参名无需和其一致</span></span><br><span class="line"><span class="comment">//如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/itemsView/&#123;id&#125;"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">ItemsCustom <span class="title">itemsView</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer items_id)<span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//调用service查询商品信息</span></span><br><span class="line">    ItemsCustom itemsCustom = itemsService.findItemsById(items_id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> itemsCustom;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@RequestMapping(value=&quot;/ itemsView/{id}&quot;)</code>：<code>{×××}</code>占位符，请求的URL可以是<code>/viewItems/1</code>或<code>/viewItems/2</code>，通过在方法中使用<code>@PathVariable</code>获取{×××}中的×××变量。<code>@PathVariable</code>用于将请求URL中的模板变量映射到功能处理方法的参数上。</p>
+<p>如果<code>@RequestMapping</code>中表示为<code>/itemsView/{id}</code>，id和形参名称一致，<code>@PathVariable</code>不用指定名称。</p>
+<h3 id="REST方法的前端控制器配置"><a href="#REST方法的前端控制器配置" class="headerlink" title="REST方法的前端控制器配置"></a>REST方法的前端控制器配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- springmvc前端控制器，rest配置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc_rest<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- contextConfigLocation配置springmvc加载的配置文件（配置处理器映射器、适配器等等） 如果不配置contextConfigLocation，默认加载的是/WEB-INF/servlet名称-serlvet.xml（springmvc-servlet.xml） --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:spring/springmvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc_rest<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>访问结果如图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_RESTful%E6%A0%BC%E5%BC%8F%E8%AE%BF%E9%97%AE.png" alt="RESTful格式访问" title>
+                </div>
+                <div class="image-caption">RESTful格式访问</div>
+            </figure>
+<h2 id="对静态资源的解析"><a href="#对静态资源的解析" class="headerlink" title="对静态资源的解析"></a>对静态资源的解析</h2><p>配置前端控制器的url-parttern中指定<code>/</code>，对静态资源的解析会出现问题，报404错误。</p>
+<p>在springmvc.xml中添加静态资源解析方法。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 静态资源解析</span></span><br><span class="line"><span class="comment">    包括 ：js、css、img、..</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">"/js/"</span> <span class="attr">mapping</span>=<span class="string">"/js/**"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时访问<code>http://localhost:8080/ssm1/js/jquery-1.4.4.min.js</code>，可以在浏览器中看到js的内容</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.945Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/springmvc-learn-19-RESTful-support/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTful/">RESTful</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/&title=《springmvc学习笔记(19)-RESTful支持》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/&title=《springmvc学习笔记(19)-RESTful支持》 — Brian's Homepage&source=本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(19)-RESTful支持》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/springmvc-learn-20-interceptor/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(20)-拦截器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/springmvc-learn-18-json-interaction/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(18)-json数据交互</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/&title=《springmvc学习笔记(19)-RESTful支持》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/&title=《springmvc学习笔记(19)-RESTful支持》 — Brian's Homepage&source=本文介绍RESTful的概念，并通过一个小例子展示如何编写RESTful风格的controller和配置前端控制器，最后展示静态资源的解析" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(19)-RESTful支持》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-19-RESTful-support/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3cQU7EMAwF0Ln/pWGLBNN+2/GoSK+rUTuUvCxi8xPxesXX148r/867O78/V58evvDw8PAGQ/99XfPefed6OpKfSqYp+o14eHh4a7xkED1Stahcvz8fMx4eHt7TeEn7m5DyBhoPDw/vv/N6zfGkzODh4eE9jZe/ejKUatQ7iTDw8PDw9nj5LtJzPq/s7+Hh4eGNd9V7EerkbUkQXHg/Hh4e3gIvX3B7G13VQCE/cFA4HIaHh4e3xsuX++v78wmqNvc378HDw8Nb4PUiiaQYVItEftSgN8V4eHh4c16+tV8tHvmBgKgtLkYSeHh4eJ/k5S1vbyN/MnHJSF69qoWHh4fX2nOfH2lKItpqmFudoJv2Gg8PD+8Qr9rm9oaeb5slE1TYHsPDw8Nb4F0/rhaD3sZYtXFP/jDAw8PD2+BVF+UJINkM6xWJcsXDw8PDG/B6r85rTu9pXmyu7+Ph4eFt85JgIpmIU6Wi2nyXt77w8PDwjvKqIUV14Z5MXDn+wMPDwzvKSxrWV3DlJaHHrt7/I8bFw8PDW+P1WudJxJCExc1gAg8PD2+B1wsLJgVjMqGTIw54eHh4p3h5aJu0xXmIkL9tVE7w8PDw1ninlvi8+c6Dj+vG/SZ6xsPDw1vgVYeeXL0SMikVN0UIDw8P7yO8ZCGehK15MFEFF3bn8PDw8Ma8/LRn7061AFQT6LffwcPDw/sIL2mR57tt1YloHv/Cw8PDO8qbBw1RkBrjq6HGzVM8PDy8Bd6ongwGlw+otwF2olzi4eHhfZX+V1J1az8vJ9U4I5+OmzACDw8Pb4FXXZTnQe2BehWMDQ8PD+/JvHyx7rXd1VYbDw8P75m8fHHvHdLKG/eVlhoPDw9vHEZUDz+dGvooDsbDw8Nb4B34g3/cLp89moCHh4e3xvsGm+SSl+Og3GUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

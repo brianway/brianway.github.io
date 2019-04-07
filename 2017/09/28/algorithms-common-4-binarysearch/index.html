@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>常见算法基础题思路简析(四)-二分搜索篇 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法,数据结构">
+    <meta name="description" content="本文对和 二分搜素 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见算法基础题思路简析(四)-二分搜索篇">
+<meta property="og:url" content="https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文对和 二分搜素 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.884Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见算法基础题思路简析(四)-二分搜索篇">
+<meta name="twitter:description" content="本文对和 二分搜素 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常见算法基础题思路简析(四)-二分搜索篇</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">常见算法基础题思路简析(四)-二分搜索篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-28T05:44:07.000Z" itemprop="datePublished" class="page-time">
+  2017-09-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#求完全二叉树的节点个数"><span class="post-toc-number">1.</span> <span class="post-toc-text">求完全二叉树的节点个数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最左原位"><span class="post-toc-number">2.</span> <span class="post-toc-text">最左原位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#元素最左出现"><span class="post-toc-number">3.</span> <span class="post-toc-text">元素最左出现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#局部最小值位置"><span class="post-toc-number">4.</span> <span class="post-toc-text">局部最小值位置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#循环有序数组最小值"><span class="post-toc-number">5.</span> <span class="post-toc-text">循环有序数组最小值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速N次方"><span class="post-toc-number">6.</span> <span class="post-toc-text">快速N次方</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-algorithms-common-4-binarysearch" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">常见算法基础题思路简析(四)-二分搜索篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-28 13:44:07" datetime="2017-09-28T05:44:07.000Z" itemprop="datePublished">2017-09-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文对和 <strong>二分搜素</strong> 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节</p>
+<a id="more"></a>
+<ul>
+<li>相关题目和代码在 GitHub: <a href="https://github.com/brianway/algorithms-learning" target="_blank" rel="noopener">https://github.com/brianway/algorithms-learning</a></li>
+<li>题目见 <code>com.brianway.learning.algorithms.lectures.binarysearch</code>包</li>
+</ul>
+<h2 id="求完全二叉树的节点个数"><a href="#求完全二叉树的节点个数" class="headerlink" title="求完全二叉树的节点个数"></a>求完全二叉树的节点个数</h2><p>题目见 <code>CountNodes</code></p>
+<p>思路：</p>
+<ol>
+<li>计算根节点到最左节点的高度 h</li>
+<li>同理，计算根节点到其右孩子的最左节点的高度 hr</li>
+<li>如果 h &gt; hr，则节点个数为：根节点右子树的节点数+1(根节点)+根节点左子树的节点数</li>
+<li>如果 h &lt;= hr，则节点个数为 根节点左子树的节点数+1(根节点)+根节点右子树的节点数</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>计算 hr 时，<code>current = root.right</code>, 初始值为 1（代表根节点）</li>
+<li>h &gt; hr，说明右子树为满二叉树，高度为 h-2，<code>根节点右子树的节点数+1</code> 可直接计算,为<code>2^(h-2)</code></li>
+<li>同理，h &lt;= hr，说明左子树为满二叉树，高度为 h-1</li>
+</ul>
+<h2 id="最左原位"><a href="#最左原位" class="headerlink" title="最左原位"></a>最左原位</h2><p>题目见 <code>Find</code></p>
+<p>思路：类似二分搜索，当 <code>a[i]=i</code>时终止，有序数组且元素各不相等，所有 a[i] 每次的增量是要大于下标 i 每次的增量 1 的。</p>
+<ol>
+<li>判断边界条件</li>
+<li>lo = 0, hi = n-1，开始二分搜索</li>
+<li>若 <code>a[i] &gt; i</code>，则 任意 j &gt; i，有 <code>a[j] &gt; j</code>，所以只可能出现在左半部分，故 hi = mid - 1</li>
+<li>若 <code>a[i] &lt; i</code>，则 任意 j &lt; i，有 <code>a[j] &lt; j</code>，所以只可能出现在右半部分，故 lo = mid + 1</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>边界条件：<code>arr[0] &gt; n - 1 || arr[n - 1] &lt; 0</code> 时无解，直接返回</li>
+<li>最后求得 <code>arr[mid] ＝ mid</code> -&gt; <code>res ＝ arr[mid]</code> 后，记得赋值 <code>hi = mid - 1</code> ，且不能跳出循环，因为要找 <strong>最左原位</strong>，所以需要继续循环下去。</li>
+</ul>
+<h2 id="元素最左出现"><a href="#元素最左出现" class="headerlink" title="元素最左出现"></a>元素最左出现</h2><p>题目见 <code>LeftMostAppearance</code></p>
+<p>思路：这里就是一个简单的二分查找，唯一不同的是，当 <code>arr[mid] ＝ num</code> 时，不是在 <code>res ＝ mid</code> 后直接退出循环，而是需要赋值 <code>hi = mid - 1</code> 继续循环</p>
+<h2 id="局部最小值位置"><a href="#局部最小值位置" class="headerlink" title="局部最小值位置"></a>局部最小值位置</h2><p>题目见 <code>LocalMin</code></p>
+<p>思路：</p>
+<ol>
+<li>判断两端边界情况，满足条件（<code>arr[0]&lt;arr[1]</code> 或者 <code>arr[n-2]&gt;arr[n-1]</code>）则直接返回结果</li>
+<li>判断 <code>arr[mid]</code> 和 <code>arr[mid - 1]</code> 的大小，若 <code>arr[mid]</code> 大，则一定有个局部最小出现在左边</li>
+<li>否则，判断 <code>arr[mid]</code> 和 <code>arr[mid + 1]</code> 的大小，若 <code>arr[mid]</code> 大，则一定有个局部最小出现在右边</li>
+<li>若都不满足，则局部最小为 <code>arr[mid]</code></li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>注意数组为空，长度为 1，以及其他边界情况</li>
+<li>思路中 2，3 步的依据就是，先有 1 中段边界判断，所以一定有两端元素大于其紧邻元素（<code>arr[0]&gt;arr[1]</code> 且 <code>arr[n-1]&gt;arr[n-2]</code>）。数组要么一直递减到边界的紧邻元素从而结束循环，要么在这个过程中遇到某个局部最小，所以一定是有解的。</li>
+</ul>
+<h2 id="循环有序数组最小值"><a href="#循环有序数组最小值" class="headerlink" title="循环有序数组最小值"></a>循环有序数组最小值</h2><p>题目见 <code>MinValue</code></p>
+<p>思路：循环有序数组截出一个连续的子数组还是循环有序的。在每次循环中进行一下判断：</p>
+<ol>
+<li>若 <code>arr[lo] &lt; arr[hi]</code>，说明子数组已经升序，直接返回 <code>arr[lo]</code>。 否则，说明数组不升序，进行下面的步骤</li>
+<li>若 <code>arr[lo] &gt; arr[mid]</code>，最小值出现在左半部分</li>
+<li>若 <code>arr[lo] &lt; arr[mid]</code>，最小值出现在右半部分（因为说明 <code>arr[lo] ~ arr[mid]</code> 是升序的）</li>
+<li>若 <code>arr[lo] ＝ arr[mid]</code>，最小值为第一个小于 <code>arr[lo]</code> 或者就是 <code>arr[lo]</code>本身</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>注意可能有重复元素的问题，所以在遇到 <code>arr[lo] = arr[mid]</code> 时，需要遍历 <code>lo ~ hi</code> 之间的元素来找到最小值</li>
+<li>这里的左右指针更新需要注意，<code>hi = mid</code> 和 <code>lo = mid</code>,而不是 <code>mid-1</code> 和 <code>mid+1</code>,因为不能漏掉元素</li>
+</ul>
+<h2 id="快速N次方"><a href="#快速N次方" class="headerlink" title="快速N次方"></a>快速N次方</h2><p>题目见 <code>QuickPower</code></p>
+<p>思路：求出 k 的 1，2，4，8….次方作为中间值 tmp，减少相乘的次数</p>
+<ol>
+<li>每次把 N 右移一位，若该位为 1，则将结果乘以中间值 tmp</li>
+<li>每次令中间值 tmp 等于自己的平方（对应于第一步中的位移操作）</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>注意越界问题，按题目要求，求 mod 某个数后的结果</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.884Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/09/28/algorithms-common-4-binarysearch/" target="_blank" rel="external">https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/&title=《常见算法基础题思路简析(四)-二分搜索篇》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/&title=《常见算法基础题思路简析(四)-二分搜索篇》 — Brian's Homepage&source=本文对和 二分搜素 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见算法基础题思路简析(四)-二分搜索篇》 — Brian's Homepage&url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/28/algorithms-common-5-stack-and-queue/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">常见算法基础题思路简析(五)-队列和栈篇</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/28/algorithms-common-3-binarytree/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常见算法基础题思路简析(三)-二叉树篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/&title=《常见算法基础题思路简析(四)-二分搜索篇》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/&title=《常见算法基础题思路简析(四)-二分搜索篇》 — Brian's Homepage&source=本文对和 二分搜素 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见算法基础题思路简析(四)-二分搜索篇》 — Brian's Homepage&url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/09/28/algorithms-common-4-binarysearch/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aQW4bMRAEQP3/0841gLFR9wxpK0DtSbCkJYsGyNX0vF7x9fVw/f3u908+3ef76+Q+T/c8cOHh4eEdmno+WI7Pv3vqW3h4eHj3ePkmHt30Yfn+/ZnZfN5Y8PDw8D6Al7+7ISVHER4eHt7/wmsx+dK0JQ88PDy83+XtC7Vniwi/UGvBw8PDi3l5ivQ5r6/ke3h4eHjrVD0Jw5KQbHbk5Pd5vD8eHh7eBV6+4c6CrllBYTb64yfx8PDwjvI2IX0COFXymB1ReHh4eD/Pm0X77QN3HqHljQivfKXx8PDwSt5+O25hSXg2C9je5Ht4eHh4R3ltWSHfxNv4P9/0V1kfHh4e3oLXFgU2w7fF3M0CPeZ7eHh4eGteMkDyehah5Y/seQHlNfsCHh4e3ojXDnaqLWATv0VLjIeHh/fjvLyBYHYkzJajOKjw8PDwLvCSn/o3GHmxOCo6bNoI8PDw8Ere5rF4trm3BYjV4YSHh4d3lJdv9HkQVZQJSkZ7bODh4eHd5m22+PYRvG3hmi0BHh4e3m1eMunZQdKGam2p4nF0PDw8vAu82WP0vuiQj5gfWtGs8PDw8Na8vHm0nXS+KEVxIf6XPP5iwMPDwzvEa2/XDpO0DrRHUVRGwcPDw7vAa+P8fw/Tlm6TieYFiDeHEB4eHt5R3qzMmiBnB0Neoq1Lt3h4eHhHeW1DVV6eaLfytonhzQGGh4eHd5m3Ss/iCG3zyF7PDQ8PD+8o76u8Tk1r1prQLhweHh7eDd4s3NofGG0Bdxh64eHh4V3j7SP/fIPetAIMx8XDw8O7xrtXpGgXbnZoPf4FDw8P7wN4bbS/yfHzR/k33WR4eHh4H8OL2p5Gi9UmWXU+hoeHh7fmtQ2jbTPWrNX1QHiGh4eHd4G3/8E/i6lyfPKQfSDfw8PDw3vP+wMlUe4D8/hamQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

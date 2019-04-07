@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>光盘和U盘安装win7和ubuntu14.04全步骤 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="安装部署,Linux,Ubuntu">
+    <meta name="description" content="说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。">
+<meta name="keywords" content="安装部署,Linux,Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="光盘和U盘安装win7和ubuntu14.04全步骤">
+<meta property="og:url" content="https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="光盘和U盘安装win7和ubuntu14.04全步骤">
+<meta name="twitter:description" content="说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">光盘和U盘安装win7和ubuntu14.04全步骤</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">光盘和U盘安装win7和ubuntu14.04全步骤</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-18T02:36:10.000Z" itemprop="datePublished" class="page-time">
+  2016-01-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/操作系统/">操作系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需要的工具"><span class="post-toc-number">2.</span> <span class="post-toc-text">需要的工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步骤概述"><span class="post-toc-number">3.</span> <span class="post-toc-text">步骤概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#详细说明"><span class="post-toc-number">4.</span> <span class="post-toc-text">详细说明</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#win7安装"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">win7安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ubuntu安装"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">ubuntu安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-linux-win7-ubuntu-setup-by-USBandCD" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">光盘和U盘安装win7和ubuntu14.04全步骤</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-18 10:36:10" datetime="2016-01-18T02:36:10.000Z" itemprop="datePublished">2016-01-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+<li>本文是先安装windows再安装linux，并通过windows引导linux的启动项。这样方便linux的反复重装、折腾等。</li>
+<li>光盘安装和U盘安装基本差不多，只是U盘安装多了把镜像文件写到U盘制成启动盘的过程，启动时对应选择<em>从USB启动</em>/<em>从CD-ROM启动</em>即可</li>
+<li>由于我有win7的光盘，就没研究怎么刻录win7到U盘</li>
+<li>关于每一步的截图，文末的【参考资料】里别人已经截的很完善了，我就没重复造轮子(<em>知乎那个李彬的答案关于EasyBCD使用有问题，那是硬盘启动，而非U盘，U盘没那么麻烦</em>)</li>
+<li>该文只是综合各个参考资料，按照安装顺序、更全面的把每一步需要注意的关键点用文字整理记录</li>
+<li>关于原理部分，可以看《鸟叔私房菜-基础学习篇》(第三版)第3、4章相关内容，里面对MBR、分区表、引导加载程序的工作执行等有深入浅出的讲解</li>
+</ul>
+<hr>
+<h2 id="需要的工具"><a href="#需要的工具" class="headerlink" title="需要的工具"></a>需要的工具</h2><blockquote>
+<ul>
+<li><a href="http://www.drivergenius.com/" target="_blank" rel="noopener">驱动精灵</a>–用于安装win7的各种驱动，建议下载<strong>万能网卡版</strong>，把网络解决了才方便后面在线下载其他驱动</li>
+<li><a href="http://www.xiazaizhijia.com/soft/6387.html" target="_blank" rel="noopener">WIN7 Activation(Win7激活工具) 1.8 绿色免费版</a>–用于激活win7</li>
+<li><a href="http://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml" target="_blank" rel="noopener">EasyBCD</a> （<a href="http://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml" target="_blank" rel="noopener">Community Edition</a> / <a href="http://www.onlinedown.net/soft/58174.htm" target="_blank" rel="noopener">中文版下载</a>）–用于设置由windows引导ubuntu的启动加载程序,</li>
+<li><a href="http://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/#button" target="_blank" rel="noopener">Universal-USB-Installer</a>–用于制作ubuntu的U盘启动盘</li>
+<li><a href="http://www.ubuntu.com/download/desktop" target="_blank" rel="noopener">Ubuntu Desktop</a> (附<a href="http://www.ubuntu.com/download/ubuntu-kylin" target="_blank" rel="noopener">kylin(优麒麟)版</a>)–Ubuntu的ISO镜像文件,用于制作U盘启动盘</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="步骤概述"><a href="#步骤概述" class="headerlink" title="步骤概述"></a>步骤概述</h2><ul>
+<li><strong>win7安装</strong></li>
+</ul>
+<ol>
+<li>插入光盘，重启电脑，狂按<code>F12</code></li>
+<li>选择从CD-ROM启动</li>
+<li>点安装，按提示进行就行了</li>
+<li>用驱动精灵安装各种驱动</li>
+<li>下载其他普通软件</li>
+</ol>
+<ul>
+<li><strong>ubuntu 14.04安装</strong></li>
+</ul>
+<ol>
+<li>刻录驱动盘,刻好后插入</li>
+<li>重启电脑，狂按<code>F12</code>，选择USB启动</li>
+<li>按照提示选择语言、分区、键盘布局等</li>
+<li>重启电脑，在win7下添加启动菜单</li>
+<li>重启电脑，选ubuntu，安装ubuntu的一些软件</li>
+</ol>
+<hr>
+<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><p>这里对上面<strong>【步骤概述】</strong>相应步骤中需要注意的地方进行说明</p>
+<h3 id="win7安装"><a href="#win7安装" class="headerlink" title="win7安装"></a>win7安装</h3><p>第1，2两步</p>
+<ul>
+<li>没什么好说的。我是戴尔的电脑，不同电脑进入启动界面的按键可能不同，戴尔的是<code>F12</code>,其他电脑的可能是<code>Delete</code>、<code>F2</code>、<code>F10</code>等</li>
+<li>在BIOS里面，硬盘有时候不是 Hard Deice，有时候是HDD等，光驱不一定是CDROM，有时候是DVD-;</li>
+</ul>
+<p>第3步</p>
+<ul>
+<li>提示”进行何种类型的安装”-&gt;选择“自定义(高级)”；</li>
+<li>分区时，如果不想影响其他盘的话，直接点系统盘(C盘)然后下一步即可，这时其他盘数据不会被影响；如果想重新分区，这里可以分区、格式化。点完就直接开始安装了。</li>
+<li>需要注意的是，我不知道为什么，点分区只能分主分区，不能分逻辑分区。所以如果要安装双系统的话，需要留一个分区给linux，分区时主分区最多3个。</li>
+<li>记得给linux留点硬盘空间，我这里留了100G</li>
+<li>期间系统会自动重启，等进入到设置用户名密码、产品密钥等就说明好了，设置完就OK了。这里密钥能填正确最好，填失败了的话，后面还可以通过激活工具激活。</li>
+<li>关于分区，其实可以在重装系统前进行，”开始-&gt;计算机-&gt;右键-&gt;管理-&gt;存储-&gt;磁盘管理”</li>
+</ul>
+<p>第4步</p>
+<ul>
+<li>把驱动精灵用U盘拷到电脑上，安装驱动精灵，然后先安装网卡驱动，能连网了再安装别的驱动。期间可能会多次询问重启，选择稍后重启，都安完了一次性重启</li>
+</ul>
+<p>第5步</p>
+<ul>
+<li>安装其他的软件，比如浏览器啊，上面提到的EasyBCD啊等</li>
+</ul>
+<h3 id="ubuntu安装"><a href="#ubuntu安装" class="headerlink" title="ubuntu安装"></a>ubuntu安装</h3><p>第1步</p>
+<ul>
+<li>下载ubuntu镜像，用上面提到的工具刻录U盘(格式化成FAT32的格式)，详情见文末的【参考链接4】</li>
+<li>依次选择ubuntu版本，镜像文件，要写入的U盘。最后那个可选项可以不管，默认0MB</li>
+</ul>
+<p>第2步</p>
+<ul>
+<li>没什么特别的</li>
+</ul>
+<p>第3步</p>
+<ul>
+<li>选择第二项，安装ubuntu</li>
+<li>选择语言，中文往下拉，在后面</li>
+<li>选择“安装这个第三方软件”，其他不管</li>
+<li>联网可选，有wifi这时可以先连</li>
+<li><strong>重要</strong>：选择最后一个”其他选项”</li>
+<li><strong>重要</strong>：分区。这里每个人不一样,我分配的大小都比较富裕，顺序是按表中由上到下分配的。关于分区，可以参考<a href="http://www.cnblogs.com/gylei/archive/2011/12/04/2275987.html" target="_blank" rel="noopener">Linux系统安装时分区的选择</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>挂载点</th>
+<th style="text-align:center">大小</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">新分区位置</th>
+<th style="text-align:center">用于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/boot</td>
+<td style="text-align:center">200M</td>
+<td style="text-align:center">逻辑分区</td>
+<td style="text-align:center">空间起始位置</td>
+<td style="text-align:center">EXT4日志文件系统</td>
+</tr>
+<tr>
+<td>/</td>
+<td style="text-align:center">20G</td>
+<td style="text-align:center">主分区</td>
+<td style="text-align:center">空间起始位置</td>
+<td style="text-align:center">EXT4日志文件系统</td>
+</tr>
+<tr>
+<td>不设置</td>
+<td style="text-align:center">2G</td>
+<td style="text-align:center">逻辑分区</td>
+<td style="text-align:center">空间起始位置</td>
+<td style="text-align:center">交换空间</td>
+</tr>
+<tr>
+<td>/home</td>
+<td style="text-align:center">60G</td>
+<td style="text-align:center">逻辑分区</td>
+<td style="text-align:center">空间起始位置</td>
+<td style="text-align:center">EXT4日志文件系统</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>重要</strong>：上一步中，要记住/boot的设备号，比如我的是<code>/dev/sda6</code>,下面的”安装启动引导器的设备”-&gt;选择/boot所在的分区。这里不要选错，不然就是linux引导windows</p>
+</li>
+<li><p>后面无非就是一些用户设置了，没什么难的，键盘布局就选英文(美国)就行</p>
+</li>
+</ul>
+<p>第4步</p>
+<ul>
+<li>安装好后ubuntu，重启电脑，进入win7设置启动菜单</li>
+<li>打开EasyBCD，”添加新条目-&gt;linux/BSD-&gt;类型:GRUN(Legacy),设备/驱动器:刚才/boot对应的分区-&gt;点添加”</li>
+<li>/boot的分区是以linux开头的，不记得就看大小，比如我的是200M</li>
+<li>可以在工具栏的”编辑引导菜单”查看启动菜单</li>
+</ul>
+<p>第5步</p>
+<ul>
+<li>首先需要更新一下依赖：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<ul>
+<li>校园网认证使用mentohust,可以在linux公社下载，<a href="http://linux.linuxidc.com/2013%E5%B9%B4%E8%B5%84%E6%96%99/1%E6%9C%88/20%E6%97%A5/Ubuntu%E4%B8%8B%E4%BD%BF%E7%94%A8MentoHUST%E4%BB%A3%E6%9B%BF%E9%94%90%E6%8D%B7%E8%AE%A4%E8%AF%81%E4%B8%8A%E7%BD%91/" target="_blank" rel="noopener">mentohust下载地址</a>,用户和密码都是<code>www.linuxidc.com</code></li>
+<li>下载地址位于<code>http://linux.linuxidc.com/</code>的”/2013年资料/1月/20日/Ubuntu下使用MentoHUST代替锐捷认证上网”，或者”pub/ubuntu/Ubuntu 11.04校园网锐捷认证上网”下</li>
+<li>可参考<a href="http://www.linuxidc.com/Linux/2013-10/91157.htm" target="_blank" rel="noopener">Ubuntu下使用MentoHUST搞定 锐捷校园网认证网络</a>和<a href="http://www.linuxidc.com/Linux/2013-10/91158.htm" target="_blank" rel="noopener">Ubuntu下Mentohust的配置</a>这两篇文章</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ol>
+<li><a href="https://www.zhihu.com/question/19867618" target="_blank" rel="noopener">知乎：怎样安装 Windows 7 与 Linux 的双系统？</a></li>
+<li><a href="http://www.linuxidc.com/Linux/2012-05/59663.htm" target="_blank" rel="noopener">linux公社：Ubuntu 12.04和Windows 7双系统安装图解</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_86e874d30101e3d8.html" target="_blank" rel="noopener">Win7下安装CentOS 6.5双系统</a></li>
+<li><a href="http://blog.csdn.net/liangcaiyun2013/article/details/10410797" target="_blank" rel="noopener">win7下制作ubuntu系统安装启动盘和U盘安装ubuntu全过程</a></li>
+<li><a href="http://jingyan.baidu.com/article/597035520848d98fc00740f1.html" target="_blank" rel="noopener">重装Win7 系统(用光盘重装Win7系统)_百度经验</a></li>
+</ol>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.956Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/" target="_blank" rel="external">https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/&title=《光盘和U盘安装win7和ubuntu14.04全步骤》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/&title=《光盘和U盘安装win7和ubuntu14.04全步骤》 — Brian's Homepage&source=说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《光盘和U盘安装win7和ubuntu14.04全步骤》 — Brian's Homepage&url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/19/nutch-translate-bin-crawl-shell-to-java/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">将nutch2.3的bin/crawl脚本改写为java类</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/11/cpp-memory-allocation-lifetime/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">一个例子记住C++对象的生存周期</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/&title=《光盘和U盘安装win7和ubuntu14.04全步骤》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/&title=《光盘和U盘安装win7和ubuntu14.04全步骤》 — Brian's Homepage&source=说来惭愧，作为一个学IT的，居然自己没重装过系统。一直想自己安装一次双系统，正好这个周日抽空研究了下，折腾了一天，总算如愿以偿。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《光盘和U盘安装win7和ubuntu14.04全步骤》 — Brian's Homepage&url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/01/18/linux-win7-ubuntu-setup-by-USBandCD/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqklEQVR42u3aQW4jMQwEwPz/07vXDQJPuknJSBY1JyO2x6o5iExTHx/x9eefq/17e329z9fXhy88PDy8xdJf/VjOeMa3D+KZmnwLDw8P7x7v1Y6aLKvdjZ+3+Nl6Xv4dDw8P78fwkq0/b5GfP4mHh4f3//Ha4OD5W89tPR4eHt7P4eW33kQJ+9+6mLXg4eHhTXKAj9lW/v7XV+Z7eHh4eOuper5xzwpJst1vDiLg4eHh3eDlG24eDZw6HJAP2775JB4eHt5R3j5ieP752cGpzR0+fQYPDw/vAi8hbQ4EJMvKt/5VSIGHh4d3gbcBtxv3PnE9MADDw8PDO5Rw5otuC0NCSkpCXevw8PDwjvKSBncT3bYRcMKuwwg8PDy8o7wWNmuvTx07aIscHh4e3g1eO5qaHQtoU5CWGt0fDw8P7xAvORCQ/MysLb73CF621Hh4eHhrXttYz1rezRArDzXw8PDw3sPLQ4R2g54FwWfLDx4eHt4N3mxIn4+m2qUnLX4eLuPh4eHd4LXtbLtNJwtti0FR0vDw8PAu8NphWDv0yu+Z7+T5u3h4eHg3eLOQ9GyYu+9+Xz4yPDw8vAu82bJmkcRmPNaWEzw8PLx7vPZYQNtq71vwNrB42VLj4eHhHeLlG24e7LZnvtqoN3/EeHh4eO/htYBNOcmb6VlcgoeHh3ebNwsU9gsaLjpfCR4eHt413ix+bQvGZuR2LIzAw8PDW/BmDW4e3bZzqH0R+vQaDw8P7wJv1rDm7+6D3fb18MLDw8MrefvRfhsT5I11UoS+QeLh4eFd47UD/nwRSWxxKozAw8PD+428tilvD7a2BQMPDw/v5/Dy8rAPLNrjWXh4eHjv4eWt8ObdvOS0zfc3hQEPDw/vKG/2D38b8iYPJT8ucGCmh4eHhzfh/QXDSg0BtJ7lwAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC,注解">
+    <meta name="description" content="本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定">
+<meta name="keywords" content="SpringMVC,注解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.910Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定">
+<meta name="twitter:description" content="本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:13.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组绑定"><span class="post-toc-number">1.</span> <span class="post-toc-text">数组绑定</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#需求"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">需求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表现层实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">表现层实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#list绑定"><span class="post-toc-number">2.</span> <span class="post-toc-text">list绑定</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#需求-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">需求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表现层实现-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">表现层实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#map绑定"><span class="post-toc-number">3.</span> <span class="post-toc-text">map绑定</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-springmvc-learn-13-annotation-collection-param-binding" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:13" datetime="2016-03-29T22:28:13.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定</p>
+<a id="more"></a>
+<h2 id="数组绑定"><a href="#数组绑定" class="headerlink" title="数组绑定"></a>数组绑定</h2><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>商品批量删除，用户在页面选择多个商品，批量删除。</p>
+<h3 id="表现层实现"><a href="#表现层实现" class="headerlink" title="表现层实现"></a>表现层实现</h3><p>关键：将页面选择(多选)的商品id，传到controller方法的形参，方法形参使用数组接收页面请求的多个商品id。</p>
+<ul>
+<li>controller方法定义：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 批量删除 商品信息</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/deleteItems"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">deleteItems</span><span class="params">(Integer[] items_id)</span> <span class="keyword">throws</span> Exception</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>页面定义：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:forEach items=<span class="string">"$&#123;itemsList &#125;"</span> <span class="keyword">var</span>=<span class="string">"item"</span>&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">    &lt;td&gt;&lt;input type="checkbox" name="items_id" value="$&#123;item.id&#125;"/&gt;&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;$&#123;item.name &#125;&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;$&#123;item.price &#125;&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;&lt;fmt:formatDate value="$&#123;item.createtime&#125;" pattern="yyyy-MM-dd HH:mm:ss"/&gt;&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;$&#123;item.detail &#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">	&lt;td&gt;&lt;a href="$&#123;pageContext.request.contextPath &#125;/items/editItems.action?id=$&#123;item.id&#125;"&gt;修改&lt;/a&gt;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="list绑定"><a href="#list绑定" class="headerlink" title="list绑定"></a>list绑定</h2><h3 id="需求-1"><a href="#需求-1" class="headerlink" title="需求"></a>需求</h3><p>通常在需要批量提交数据时，将提交的数据绑定到<code>list&lt;pojo&gt;</code>中，比如：成绩录入（录入多门课成绩，批量提交），</p>
+<p>本例子需求：批量商品修改，在页面输入多个商品信息，将多个商品信息提交到controller方法中。</p>
+<h3 id="表现层实现-1"><a href="#表现层实现-1" class="headerlink" title="表现层实现"></a>表现层实现</h3><ul>
+<li>controller方法定义：<ul>
+<li>1、进入批量商品修改页面(页面样式参考商品列表实现)</li>
+<li>2、批量修改商品提交</li>
+</ul>
+</li>
+</ul>
+<p>使用List接收页面提交的批量数据，通过包装pojo接收，在包装pojo中定义<code>list&lt;pojo&gt;</code>属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemsQueryVo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//商品信息</span></span><br><span class="line">    <span class="keyword">private</span> Items items;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//为了系统 可扩展性，对原始生成的po进行扩展</span></span><br><span class="line">    <span class="keyword">private</span> ItemsCustom itemsCustom;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//批量商品信息</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;ItemsCustom&gt; itemsList;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 批量修改商品提交</span></span><br><span class="line"><span class="comment">// 通过ItemsQueryVo接收批量提交的商品信息，将商品信息存储到itemsQueryVo中itemsList属性中。</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/editItemsAllSubmit"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">editItemsAllSubmit</span><span class="params">(ItemsQueryVo itemsQueryVo)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>页面定义：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:forEach items=<span class="string">"$&#123;itemsList &#125;"</span> <span class="keyword">var</span>=<span class="string">"item"</span> varStatus=<span class="string">"status"</span>&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&lt;input name="itemsList[$&#123;status.index &#125;].name" value="$&#123;item.name &#125;"/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input name="itemsList[$&#123;status.index &#125;].price" value="$&#123;item.price &#125;"/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input name="itemsList[$&#123;status.index &#125;].createtime" value="&lt;fmt:formatDate value="$&#123;item.createtime&#125;" pattern="yyyy-MM-dd HH:mm:ss"/&gt;"/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input name="itemsList[$&#123;status.index &#125;].detail" value="$&#123;item.detail &#125;"/&gt;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+<p>name的格式：</p>
+<p><strong><code>对应包装pojo中的list类型属性名</code>[<code>下标(从0开始)</code>].<code>包装pojo中List类型的属性中pojo的属性名</code></strong></p>
+<p>例子：</p>
+<p><code>&quot;name=&quot;itemsList[${status.index }].price&quot;</code></p>
+<p><em>可以和包装类型的参数绑定归纳对比一下，其实就是在包装类的pojo基础上多了个下标。只不过包装类参数绑定时，要和包装pojo中的pojo类性的属性名一致，而list参数绑定时，要和包装pojo中的list类型的属性名一致。</em></p>
+<h2 id="map绑定"><a href="#map绑定" class="headerlink" title="map绑定"></a>map绑定</h2><p>也通过在包装pojo中定义map类型属性。</p>
+<p>在包装类中定义Map对象，并添加get/set方法，action使用包装对象接收。</p>
+<ul>
+<li>包装类中定义Map对象如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Public <span class="class"><span class="keyword">class</span> <span class="title">QueryVo</span> </span>&#123;</span><br><span class="line"><span class="keyword">private</span> Map&lt;String, Object&gt; itemInfo = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">  <span class="comment">//get/set方法..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>页面定义如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td&gt;学生信息：&lt;/td&gt;</span><br><span class="line">&lt;td&gt;</span><br><span class="line">姓名：&lt;inputtype=<span class="string">"text"</span>name=<span class="string">"itemInfo['name']"</span>/&gt;</span><br><span class="line">年龄：&lt;inputtype=<span class="string">"text"</span>name=<span class="string">"itemInfo['price']"</span>/&gt;</span><br><span class="line">.. .. ..</span><br><span class="line">&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Contrller方法定义如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">useraddsubmit</span><span class="params">(Model model,QueryVo queryVo)</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">System.out.println(queryVo.getStudentinfo());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.910Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注解/">注解</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/&title=《springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/&title=《springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定》 — Brian's Homepage&source=本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/springmvc-learn-14-validation/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(14)-springmvc校验</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/springmvc-learn-12-annotation-pack-param-binding/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/&title=《springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/&title=《springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定》 — Brian's Homepage&source=本文主要介绍注解开发的集合类型参数绑定，包括数组绑定，list绑定以及map绑定" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-13-annotation-collection-param-binding/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJ0lEQVR42u3aS24bQQwFQN//0pNtAMea90gF8LSqV4Isj7uoBc3P11d8rr/O9/eTT75+8k+vv5/XT3jzwcbGxn4I+3p5EszmCUmYruDkN8HGxsY+lT1LLXmqaxPkT+/kr2+M2NjY2B/Pfp1gElIS0M3TsLGxsbHbdk/SAMobUvsQYGNjY38au/2T+9IiSX6vwe1Xgo2NjX0qez+O/T2v/8t8GxsbG/sXs6/ybJ6clAqzYXCtwMbGxj6InSeAtimfL9PsU+ns/tjY2NinsmcN+qRtlA8kZgugefmEjY2NfRJ79ugkOb3rk+14IAoiNjY29kHsPI3NOu0taZbA8oYUNjY29nnsPHW1TaK8zZQnoVnQ//HVYmNjYx/Kzq+bJ6F89JsEJU+oN7+FjY2N/QHsdtWmbf3nbf18FJGksZsEho2Njf1wdrt2k196X/C0g+RoKoKNjY19EHs/NG0HtG0ya1PpTWiwsbGxP4zdFg+zUNblxCiBYWNjY5/Njkaki0FsnupmA4m8EMLGxsY+iZ2vv2zCMTvvCsdN2YONjY39cHabYPKyoS0n8sbT7LvFxsbGPpudpJz9KHeziNOOom/KJGxsbOyD2Hlp0ZYrs3IiHwPPRr83dRg2Njb2w9mzVZhkVNCWFvuSpuioYWNjYz+cnVy0xbcNoDygs8FD1EvDxsbGPog9e2gesjZB5j8t+kXY2NjYH8DOy4z2k0mZ0Y54k+HBTSmCjY2N/Vh2/mubJZ73tqX2JRA2Njb2qex8KactMPZBSdLq5jnY2NjYJ7HzwiD5d78tGPIAtYOEKONhY2NjP5Y9a/rPktYmmc1CEI17sbGxsY9jJ1ecrdRs2kCzEUKRwLCxsbEfzs7bNPvR7HvXetqBATY2NvZJ7Ks8efJrYW362az+YGNjY5/EbhPAZhiQlzptBp4lQmxsbOyT2C2pXd+ZLfpshs1RQLGxsbGPY89aObMBbZv22pFzdH9sbGxs7HgwsCkqkrsNh83Y2NjY2MElknDMxsabdhg2Njb2qex2BTNp3LTvtKtCbaCxsbGxT2W3bf2kbTQLyuaZm8IGGxsb+7HsP3LIDDeqRkx8AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

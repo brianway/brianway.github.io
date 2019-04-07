@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(22)-springmvc开发小结 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC,总结">
+    <meta name="description" content="本文对springmvc系列博文进行小结">
+<meta name="keywords" content="SpringMVC,总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(22)-springmvc开发小结">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文对springmvc系列博文进行小结">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(22)-springmvc开发小结">
+<meta name="twitter:description" content="本文对springmvc系列博文进行小结">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(22)-springmvc开发小结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(22)-springmvc开发小结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:22.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#springmvc框架"><span class="post-toc-number">1.</span> <span class="post-toc-text">springmvc框架</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注解开发"><span class="post-toc-number">2.</span> <span class="post-toc-text">注解开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用注解方式的处理器映射器和适配器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">使用注解方式的处理器映射器和适配器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解开发中参数绑定"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">注解开发中参数绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#springmvc和struts2区别"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">springmvc和struts2区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#校验"><span class="post-toc-number">3.</span> <span class="post-toc-text">校验</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据回显"><span class="post-toc-number">4.</span> <span class="post-toc-text">数据回显</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常处理"><span class="post-toc-number">5.</span> <span class="post-toc-text">异常处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上传图片"><span class="post-toc-number">6.</span> <span class="post-toc-text">上传图片</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#json数据交互"><span class="post-toc-number">7.</span> <span class="post-toc-text">json数据交互</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RESTful支持"><span class="post-toc-number">8.</span> <span class="post-toc-text">RESTful支持</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拦截器"><span class="post-toc-number">9.</span> <span class="post-toc-text">拦截器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拦截器定义"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">拦截器定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拦截器的配置"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">拦截器的配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拦截器测试及其应用"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">拦截器测试及其应用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-springmvc-learn-22-developing-summary" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(22)-springmvc开发小结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:22" datetime="2016-03-29T22:28:22.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文对springmvc系列博文进行小结</p>
+<a id="more"></a>
+<h2 id="springmvc框架"><a href="#springmvc框架" class="headerlink" title="springmvc框架"></a>springmvc框架</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg" alt="springmvc_核心架构图" title>
+                </div>
+                <div class="image-caption">springmvc_核心架构图</div>
+            </figure>
+<ul>
+<li><code>DispatcherServlet</code>前端控制器：接收request，进行response</li>
+<li><strong><code>HandlerMapping</code>处理器映射器</strong>：根据url查找Handler。（可以通过xml配置方式，注解方式）</li>
+<li><strong><code>HandlerAdapter</code>处理器适配器</strong>：根据特定规则去执行Handler，编写Handler时需要按照HandlerAdapter的要求去编写。</li>
+<li><strong><code>Handler</code>处理器</strong>（后端控制器）：需要程序员去编写，<strong>常用注解开发方式</strong>。<ul>
+<li>Handler处理器执行后结果是<code>ModelAndView</code>，具体开发时<code>Handler</code>返回方法值类型包括：<code>ModelAndView</code>、<code>String</code>（逻辑视图名）、<code>void</code>（通过在Handler形参中添加request和response，类似原始 servlet开发方式，注意：可以通过指定response响应的结果类型实现json数据输出）</li>
+</ul>
+</li>
+<li><code>View Resolver</code>视图解析器：根据逻辑视图名生成真正的视图（在springmvc中使用View对象表示）</li>
+<li><code>View</code>视图：jsp页面，仅是数据展示，没有业务逻辑。</li>
+</ul>
+<h2 id="注解开发"><a href="#注解开发" class="headerlink" title="注解开发"></a>注解开发</h2><h3 id="使用注解方式的处理器映射器和适配器"><a href="#使用注解方式的处理器映射器和适配器" class="headerlink" title="使用注解方式的处理器映射器和适配器"></a>使用注解方式的处理器映射器和适配器</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--注解映射器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--注解适配器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在实际开发，使用<code>&lt;mvc:annotation-driven&gt;</code>代替上边处理器映射器和适配器配置。</p>
+<ul>
+<li><code>@controller</code>注解必须要加，作用标识类是一个Handler处理器。</li>
+<li><code>@requestMapping</code>注解必须要加，作用：<ul>
+<li>1、对url和Handler的<strong>方法</strong>进行映射。</li>
+<li>2、可以窄化请求映射，设置Handler的根路径，url就是根路径+子路径请求方式</li>
+<li>3、可以限制http请求的方法</li>
+</ul>
+</li>
+</ul>
+<p>映射成功后，springmvc框架生成一个Handler对象，对象中只包括 一个映射成功的method。</p>
+<h3 id="注解开发中参数绑定"><a href="#注解开发中参数绑定" class="headerlink" title="注解开发中参数绑定"></a>注解开发中参数绑定</h3><p>将request请求过来的key/value的数据（理解一个串），通过转换（参数绑定的一部分），将key/value串转成形参，将转换后的结果传给形参（整个参数绑定过程）。</p>
+<p>springmvc所支持参数绑定：</p>
+<ul>
+<li>1、默认支持很多类型：<code>HttpServletRequest</code>、<code>response</code>、<code>session</code>、<code>model/modelMap</code>(将模型数据填充到request域)</li>
+<li>2、支持简单数据类型，整型、字符串、日期..等<ul>
+<li>只要保证request请求的参数名和形参名称一致，自动绑定成功</li>
+<li>如果request请求的参数名和形参名称不一致，可以使用<code>@RequestParam</code>（指定request请求的参数名），<code>@RequestParam</code>加在形参的前边。</li>
+</ul>
+</li>
+<li>3、支持pojo类型<ul>
+<li>只要保证request请求的参数名称和pojo中的属性名一致，自动将request请求的参数设置到pojo的属性中。</li>
+</ul>
+</li>
+<li>4、包装类型pojo参数绑定<ul>
+<li>第一种方法：在形参中添加<code>HttpServletRequest request</code>参数，通过request接收查询条件参数。</li>
+<li>第二种方法：在形参中让包装类型的pojo接收查询条件参数。</li>
+</ul>
+</li>
+<li>5、集合类型参数绑定<ul>
+<li>数组绑定：方法形参使用数组接收页面请求的多个参数</li>
+<li>list绑定：使用List接收页面提交的批量数据，通过包装pojo接收，在包装pojo中定义list<pojo>属性</pojo></li>
+<li>map绑定：在包装类中定义Map对象，并添加<code>get/set</code>方法，action使用包装对象接收</li>
+</ul>
+</li>
+</ul>
+<p><em>注意：形参中即有pojo类型又有简单类型，参数绑定互不影响。</em></p>
+<p>自定义参数绑定</p>
+<ul>
+<li>日期类型绑定自定义：</li>
+</ul>
+<p>定义的<code>Converter&lt;源类型，目标类型&gt;</code>接口实现类，比如：<code>Converter&lt;String,Date&gt;</code>,表示：将请求的日期数据串转成java中的日期类型。</p>
+<p><em>注意：要转换的目标类型一定和接收的pojo中的属性类型一致。</em></p>
+<p>将定义的Converter实现类注入到处理器适配器中。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span> <span class="attr">conversion-service</span>=<span class="string">"conversionService"</span>&gt;</span><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- conversionService --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"conversionService"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">class</span>=<span class="string">"org.springframework.format.support.FormattingConversionServiceFactoryBean"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 转换器 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"converters"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.itcast.ssm.controller.converter.CustomDateConverter"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="springmvc和struts2区别"><a href="#springmvc和struts2区别" class="headerlink" title="springmvc和struts2区别"></a>springmvc和struts2区别</h3><p>springmvc面向方法开发的（更接近service接口的开发方式），struts2面向类开发。</p>
+<p>springmvc可以单例开发，struts2只能是多例开发。</p>
+<h2 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h2><p>服务端校验：</p>
+<ul>
+<li>控制层conroller：校验页面请求的参数的合法性。在服务端控制层conroller校验，不区分客户端类型（浏览器、手机客户端、远程调用）</li>
+<li>业务层service（使用较多）：主要校验关键业务参数，仅限于service接口中使用的参数。</li>
+<li>持久层dao：一般是不校验的。</li>
+</ul>
+<p>一般使用hibernate的校验框架，依赖<code>hibernate-validator.jar</code>,<code>jboss-logging.jar</code>,<code>validation-api.jar</code>这几个jar包</p>
+<p>开发步骤</p>
+<ul>
+<li>在springmvc.xml中添加校验器</li>
+<li>校验器注入到处理器适配器中</li>
+<li>在CustomValidationMessages.properties配置校验错误信息</li>
+<li>在pojo中添加校验规则</li>
+<li>在控制器中对参数注解<code>@Validated</code>来捕获和显示校验错误信息</li>
+</ul>
+<p>分组校验</p>
+<ul>
+<li>定义校验分组</li>
+<li>在校验规则中添加分组</li>
+<li>在controller方法使用指定分组的校验</li>
+</ul>
+<h2 id="数据回显"><a href="#数据回显" class="headerlink" title="数据回显"></a>数据回显</h2><p>数据回显有三种方法</p>
+<ul>
+<li>1.springmvc默认对pojo数据进行回显。<ul>
+<li>pojo数据传入controller方法后，springmvc自动将pojo数据放到request域，key等于pojo类型（首字母小写）</li>
+<li>使用<code>@ModelAttribute</code>指定pojo回显到页面在request中的key</li>
+</ul>
+</li>
+<li>2.<code>@ModelAttribute</code>还可以将方法的返回值传到页面</li>
+<li>3.使用最简单方法使用model，可以不用<code>@ModelAttribute</code></li>
+</ul>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>系统的dao、service、controller出现都通过throws Exception向上抛出，最后由springmvc前端控制器交由异常处理器进行异常处理。</p>
+<p>springmvc提供全局异常处理器（一个系统只有一个异常处理器）进行统一异常处理。</p>
+<p>全局异常处理器处理思路：</p>
+<p>解析出异常类型</p>
+<ul>
+<li>如果该异常类型是系统自定义的异常，直接取出异常信息，在错误页面展示</li>
+<li>如果该异常类型不是系统自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）</li>
+</ul>
+<p>抛出异常的位置</p>
+<ul>
+<li>如果与业务功能相关的异常，建议在service中抛出异常。</li>
+<li>与业务功能没有关系的异常，建议在controller中抛出。</li>
+</ul>
+<h2 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h2><p>开发步骤</p>
+<ul>
+<li>在页面form中提交enctype=”multipart/form-data”的数据时，需要springmvc对multipart类型的数据进行解析。</li>
+<li>在springmvc.xml中配置multipart类型解析器</li>
+<li>加入上传图片的jar：<code>commons-fileupload</code></li>
+<li>创建图片虚拟目录存储图片</li>
+</ul>
+<h2 id="json数据交互"><a href="#json数据交互" class="headerlink" title="json数据交互"></a>json数据交互</h2><p>两种json数据交互的形式：</p>
+<ul>
+<li>请求json、输出json，要求请求的是json串，所以在前端页面中需要将请求的内容转成json，不太方便。</li>
+<li>请求key/value、输出json。此方法比较常用。</li>
+</ul>
+<p>需要的依赖：</p>
+<ul>
+<li><code>jackson-databind</code></li>
+<li><code>jackson-mapper-asl</code></li>
+</ul>
+<p>在注解适配器中加入<code>messageConverters</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!--注解适配器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"messageConverters"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：如果使用<code>&lt;mvc:annotation-driven /&gt;</code>则不用定义上边的内容。</strong></p>
+<p>在controller的返回值上加注解<code>@ResponseBody</code>来将java对象输出json，返回json格式数据</p>
+<h2 id="RESTful支持"><a href="#RESTful支持" class="headerlink" title="RESTful支持"></a>RESTful支持</h2><p><code>@RequestMapping(value=&quot;/ itemsView/{id}&quot;)</code>：<code>{×××}</code>占位符，请求的URL可以是<code>/viewItems/1</code>或<code>/viewItems/2</code>，通过在方法中使用<code>@PathVariable</code>获取{×××}中的×××变量。<code>@PathVariable</code>用于将请求URL中的模板变量映射到功能处理方法的参数上。</p>
+<p>如果<code>@RequestMapping</code>中表示为<code>/itemsView/{id}</code>，id和形参名称一致，<code>@PathVariable</code>不用指定名称。</p>
+<p>同时需要配置前端控制器。若要访问静态资源，还需在springmvc.xml中添加静态资源解析方法,如<code>&lt;mvc:resources location=&quot;/js/&quot; mapping=&quot;/js/**&quot;/&gt;</code></p>
+<h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><h3 id="拦截器定义"><a href="#拦截器定义" class="headerlink" title="拦截器定义"></a>拦截器定义</h3><p>定义拦截器，实现<code>HandlerInterceptor</code>接口。接口中提供三个方法。可以从名称和参数看出各个接口的顺序和作用</p>
+<ul>
+<li><code>public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception</code><ul>
+<li>参数最少，只有三个</li>
+<li>进入 Handler方法之前执行</li>
+<li>用于身份认证、身份授权。比如身份认证，如果认证通过表示当前用户没有登陆，需要此方法拦截不再向下执行</li>
+</ul>
+</li>
+<li><code>public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception</code><ul>
+<li>多了一个modelAndView参数</li>
+<li>进入Handler方法之后，返回modelAndView之前执行</li>
+<li>应用场景从modelAndView出发：将公用的模型数据(比如菜单导航)在这里传到视图，也可以在这里统一指定视图</li>
+</ul>
+</li>
+<li><code>public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception</code><ul>
+<li>多了一个Exception的类型的参数</li>
+<li>执行Handler完成执行此方法</li>
+<li>应用场景：统一异常处理，统一日志处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="拦截器的配置"><a href="#拦截器的配置" class="headerlink" title="拦截器的配置"></a>拦截器的配置</h3><ul>
+<li>针对HandlerMapping配置(一般不推荐)<ul>
+<li>springmvc拦截器针对HandlerMapping进行拦截设置，如果在某个HandlerMapping中配置拦截，经过该HandlerMapping映射成功的handler最终使用该拦截器</li>
+</ul>
+</li>
+<li>类似全局的拦截器<ul>
+<li>springmvc配置类似全局的拦截器，springmvc框架将配置的类似全局的拦截器注入到每个HandlerMapping中。</li>
+</ul>
+</li>
+</ul>
+<h3 id="拦截器测试及其应用"><a href="#拦截器测试及其应用" class="headerlink" title="拦截器测试及其应用"></a>拦截器测试及其应用</h3><p>链式执行测试</p>
+<ul>
+<li>两个拦截器都放行<ul>
+<li>preHandle方法按顺序执行，postHandle和afterCompletion按拦截器配置的逆向顺序执行</li>
+</ul>
+</li>
+<li>拦截器1放行，拦截器2不放行<ul>
+<li>拦截器1放行，拦截器2 preHandle才会执行。</li>
+<li>拦截器2 preHandle不放行，拦截器2 postHandle和afterCompletion不会执行。</li>
+<li>只要有一个拦截器不放行，postHandle不会执行。</li>
+</ul>
+</li>
+<li>两个拦截器都不放<ul>
+<li>拦截器1 preHandle不放行，postHandle和afterCompletion不会执行。</li>
+<li>拦截器1 preHandle不放行，拦截器2不执行。</li>
+</ul>
+</li>
+</ul>
+<p>应用</p>
+<ul>
+<li>统一日志处理拦截器，需要该拦截器preHandle一定要放行，且将它放在拦截器链接中第一个位置。</li>
+<li>登陆认证拦截器，放在拦截器链接中第一个位置。权限校验拦截器，放在登陆认证拦截器之后。（因为登陆通过后才校验权限，当然登录认证拦截器要放在统一日志处理拦截器后面）</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.952Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/springmvc-learn-22-developing-summary/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/&title=《springmvc学习笔记(22)-springmvc开发小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/&title=《springmvc学习笔记(22)-springmvc开发小结》 — Brian's Homepage&source=本文对springmvc系列博文进行小结" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(22)-springmvc开发小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/springmvc-learn-TOC/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc+mybatis学习笔记(汇总)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/springmvc-learn-21-debug-summary/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/&title=《springmvc学习笔记(22)-springmvc开发小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/&title=《springmvc学习笔记(22)-springmvc开发小结》 — Brian's Homepage&source=本文对springmvc系列博文进行小结" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(22)-springmvc开发小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/springmvc-learn-22-developing-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwklEQVR42u3a0W6kMAwF0P7/T+++7moK3BsnFaoOT6MpAzlUcoztr6/4+HNxfP7132+uPl9d5+qOn9fZfODh4eFtWvr9snL855mTu+e/wsPDwzvNu19KS8rB95tBvp7L7/Hw8PBewGtD9j3m/vHh4eHh/Q5eEsTb+kC+2eDh4eG9h9deeq2Ye1/OaB/35loLHh4eXszLQ/l7Ph/p7+Hh4eGNu+rzdtRaobZtkl3eHQ8PD+8ALw+4p4cDJo2xhzPx8PDwDvDyF/487U7KCm3TK2m/PfzD8PDw8Dbx8ovmowAJqS00JFvO4lPHw8PDi3l7W1xtHTUfKWhLEnh4eHjneHlYz89fw7fn1I0xPDw8vK28pKGVbB6TYax2eyg2Hjw8PLwf5OXRdVKAmJSJi8o0Hh4e3iZeEsqToN/+qh1TSNLrb1aFh4eHd4CXlwbWSqj5eFYb9BdrLXh4eHhjXh7uk3JAO3Ywb3E9rB8PDw/vAG8SrNdKFW263D6gomuHh4eHt8Rrywrzcm2bIrcbw+JMGR4eHt6Yt9Z8Sq42Ke/mI1//vTHg4eHhHeOtjT3l6fgcXxcm8PDw8A7w5sF3khzPr7mt7oKHh4cX89bGrfKG2a5Bq7Y0/E1/Dw8PD28TL0l/23ZU2/RaS9Pz9B0PDw/vHK8NzUn7P2+e5feqU3Y8PDy8H+G16e8uwKSGUGfreHh4eGNePj6VF3/XNo92a3k4Ew8PD+8Y7/42u5aSJ+iTI0qp8fDw8JZ4a+2u+XbSjnMtDh/g4eHhHeC1oTYvE0xGpiafRzsJHh4eXsxrW00PGfpS4bUt7xabCh4eHt4x3lqwTq6wYYmDwjEeHh7eO3lJGTe/yyRNf+jv4eHh4b2Glyfl+W/bBP14So2Hh4e3aXFJkj0pQ+TjC8XQFR4eHt6Yt/bCnw9jtQME7ePbcODh4eGlvL+fw3OouQWtZQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

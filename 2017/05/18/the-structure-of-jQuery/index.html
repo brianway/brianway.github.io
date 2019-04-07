@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>The Structure of jQuery | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="前端,JavaScript,jQuery">
+    <meta name="description" content="We examine famous frameworks and libraries,such as jQuery,to experience the open source education.This article mainly analyses the structure of jQuery.  Course link: JavaScript: Understanding the Weir">
+<meta name="keywords" content="前端,JavaScript,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Structure of jQuery">
+<meta property="og:url" content="https://brianway.github.io/2017/05/18/the-structure-of-jQuery/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="We examine famous frameworks and libraries,such as jQuery,to experience the open source education.This article mainly analyses the structure of jQuery.  Course link: JavaScript: Understanding the Weir">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.912Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Structure of jQuery">
+<meta name="twitter:description" content="We examine famous frameworks and libraries,such as jQuery,to experience the open source education.This article mainly analyses the structure of jQuery.  Course link: JavaScript: Understanding the Weir">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">The Structure of jQuery</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">The Structure of jQuery</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-18T05:20:07.000Z" itemprop="datePublished" class="page-time">
+  2017-05-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jQuery-Introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text">jQuery Introduction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Sizzle"><span class="post-toc-number">2.</span> <span class="post-toc-text">Sizzle</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#init-and-jQuery-prototype"><span class="post-toc-number">3.</span> <span class="post-toc-text">init and jQuery prototype</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Method-Chaining"><span class="post-toc-number">4.</span> <span class="post-toc-text">Method Chaining</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Expose-Globally"><span class="post-toc-number">5.</span> <span class="post-toc-text">Expose Globally</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-the-structure-of-jQuery" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">The Structure of jQuery</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-18 13:20:07" datetime="2017-05-18T05:20:07.000Z" itemprop="datePublished">2017-05-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>We examine famous frameworks and libraries,such as jQuery,to experience the open source education.This article mainly analyses the structure of jQuery.</p>
+<blockquote>
+<p>Course link: <a href="https://www.udemy.com/understand-javascript/" target="_blank" rel="noopener">JavaScript: Understanding the Weird Parts</a></p>
+<p>(Section 8: Examining Famous Frameworks and Libraries)</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="jQuery-Introduction"><a href="#jQuery-Introduction" class="headerlink" title="jQuery Introduction"></a>jQuery Introduction</h2><p>jQuery is just a <strong>JavaScript library</strong>.What jQuery does essentially is let you <strong>manipulate the DOM</strong>.It handles the browser quirks but doesn’t add any features to the browser or to JavaScript itself.</p>
+<p>the <code>jQuery</code> function isn’t a function constructor.It’s just a function that returns an object,a function that returns a call to function constructor.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Define a local copy of jQuery</span></span><br><span class="line">jQuery = <span class="function"><span class="keyword">function</span>(<span class="params"> selector, context </span>) </span>&#123;</span><br><span class="line">	<span class="comment">// The jQuery object is actually just the init constructor 'enhanced'</span></span><br><span class="line">	<span class="comment">// Need init if jQuery is called (just allow error to be thrown if not included)</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init( selector, context );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>jQuery.fn</code> is just an alias of <code>jQuery.prototype</code> which is just hanging out(just an empty object at fisrt) and is overwritten with a new object.</p>
+<p><code>jQuery.extend</code> and <code>jQuery.fn.extend</code> are the some function.This function takes properties and methods of one object and adds them to another.</p>
+<p>jQuery extends itself with many useful functions,such as <code>map</code>,<code>each</code>,<code>type</code>,<code>isArray</code>,<code>makeArray</code>,and so on.</p>
+<h2 id="Sizzle"><a href="#Sizzle" class="headerlink" title="Sizzle"></a>Sizzle</h2><p><code>Sizzle</code>(<a href="http://sizzlejs.com/" target="_blank" rel="noopener">http://sizzlejs.com/</a>) is a whole other engine inside of jQuery.</p>
+<blockquote>
+<p>A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.</p>
+</blockquote>
+<p>The <code>jQuery.extend</code> invocation is inside an IIFE,and the property <code>Sizzle</code> is returned by another IIFE that returns a Sizzle object.That is to say,one IIFE can be inside another.</p>
+<p>jQuery is using that Sizzle library.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jQuery.find = Sizzle;</span><br><span class="line">jQuery.expr = Sizzle.selectors;</span><br><span class="line">jQuery.expr[<span class="string">":"</span>] = jQuery.expr.pseudos;</span><br><span class="line">jQuery.unique = Sizzle.uniqueSort;</span><br><span class="line">jQuery.text = Sizzle.getText;</span><br><span class="line">jQuery.isXMLDoc = Sizzle.isXML;</span><br><span class="line">jQuery.contains = Sizzle.contains;</span><br></pre></td></tr></table></figure>
+<h2 id="init-and-jQuery-prototype"><a href="#init-and-jQuery-prototype" class="headerlink" title="init and jQuery prototype"></a>init and jQuery prototype</h2><p><code>jQuery.fn.init</code> is the function constructor.At the end of the function constructor,it’s returning a value,still giving back the empty object that was created with the <code>new</code> operator,but doing some stuff to it first.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">init = jQuery.fn.init = <span class="function"><span class="keyword">function</span>(<span class="params"> selector, context </span>) </span>&#123;</span><br><span class="line">    <span class="comment">//elide some codes</span></span><br><span class="line">    <span class="keyword">return</span> jQuery.makeArray( selector, <span class="keyword">this</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As for any new object created with the <code>init</code> function constructor, its prototype is the same memory spot as <code>jQuery.prototype</code>–the prototype of the jQuery object itself.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reminder: jQuery.fn = jQuery.prototype</span></span><br><span class="line"><span class="comment">// Give the init function the jQuery prototype for later instantiation</span></span><br><span class="line">init.prototype = jQuery.fn;</span><br></pre></td></tr></table></figure>
+<p>The neat trick:</p>
+<ul>
+<li>you don’t hava to call the <code>new</code> operator when you use jQuery.Instead this calls a function that then calls a function constructor,creating a new object.But that new object has access to all the properties and methods in <code>jQuery.fn</code>.</li>
+<li>And instead of always in this jQuery code typing in jQuery.fn.init.something,it’s just the prototype of the jQuery object itself.</li>
+</ul>
+<h2 id="Method-Chaining"><a href="#Method-Chaining" class="headerlink" title="Method Chaining"></a>Method Chaining</h2><p>method chaining: calling one method after another,and each method affects the parent object.</p>
+<p>When you execute a method or call a method,and it’s found down the prototype chain,the <code>this</code> variable points at the originating object,the object that actually made the call.</p>
+<p>e.g. Just see the return value of  <code>addClass</code> function:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addClass: <span class="function"><span class="keyword">function</span>(<span class="params"> value </span>) </span>&#123;</span><br><span class="line">    <span class="comment">//elide some codes here</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Expose-Globally"><a href="#Expose-Globally" class="headerlink" title="Expose Globally"></a>Expose Globally</h2><p>Expose jQuery or <code>$</code> globally:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Expose jQuery and $ identifiers, even in</span></span><br><span class="line"><span class="comment">// AMD (#7102#comment:10, https://github.com/jquery/jquery/pull/557)</span></span><br><span class="line"><span class="comment">// and CommonJS for browser emulators (#13566)</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="keyword">typeof</span> noGlobal === strundefined ) &#123;</span><br><span class="line">	<span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Both of <code>window.jQuery</code> and <code>window.$</code> are pointing at the same spot in memory as the jQuery object created inside this function that had all these properties and methods attached to it.</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.912Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/05/18/the-structure-of-jQuery/" target="_blank" rel="external">https://brianway.github.io/2017/05/18/the-structure-of-jQuery/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/&title=《The Structure of jQuery》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/&title=《The Structure of jQuery》 — Brian's Homepage&source=We examine famous frameworks and libraries,such as jQuery,to experience the o..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《The Structure of jQuery》 — Brian's Homepage&url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/18/front-end-notes-1-HTML/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">前端学习笔记(1)-HTML</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/17/release-to-maven-central-repo/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">将项目发布到 Maven 中央仓库踩过的坑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/&title=《The Structure of jQuery》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/&title=《The Structure of jQuery》 — Brian's Homepage&source=We examine famous frameworks and libraries,such as jQuery,to experience the o..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《The Structure of jQuery》 — Brian's Homepage&url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/05/18/the-structure-of-jQuery/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACGUlEQVR42u3aQY7DMAgF0N7/0pltpZlJP5BGiv28qqo29ssCYeD1itfxtt6/+f05+X2+y8ULAwPjsYzjdOUbJNR8r/xsGBgY+zD+O9YkpE4OnZ8NAwMDIydVnzZJKDEwMDB6R09C6uSqjIGBgXHVxbLHu/UujoGB8UBGHgrv//yV/gYGBsajGEdxnSdwk0B5DBYGBsbajKvGIObltgvGMjAwMDZgzIPmeQDNk87z0l55SwwMjIczeqnbPMjmzctoLAMDA2NpRhLOkoCYH3oOxsDA2JMxv6ZWE8FeCS/aCwMDYzlGNV3rDUMkT6hiCjdmDAyMhzOSbfJ/VYc28lcZPQ0DA2NRRj6kVQ3K1QZn9b9/pIYYGBiLMqql/yQpnBxrEpoxMDB2Y+Ql/vz7PLw2Z0YwMDCWZlxbps8DZXXsLBq2wMDAWJpRHa2oNgbyslovWGNgYKzKyFOx+dhWHr7P08HCnAgGBsYSjGrpv8futTPL4RgDA2MDxnwkoppEVpPLD0EZAwNjA8YkTewF1mp78sO+GBgYGzB6l9jexXXe5hy9LQwMjEcxjuJKkrxqcX/yfAwMjB0Yk4GtcuG+lUrOXxMGBsYajHnBK/mm1x5ojlxgYGAsyugFvvtTvUJ/AwMDY2NGNYnslfCqgRsDAwPjG7+5Kn3EwMDYh5E3A+Zty+TKWm48YGBgLM0YXR1bpfwk7ZuHaQwMjCUYP4zxS6ktTk7nAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

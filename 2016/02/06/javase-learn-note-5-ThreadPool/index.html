@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>java基础巩固笔记(5)-多线程之线程并发库 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java,多线程">
+    <meta name="description" content="本文主要概述java.util.concurrent包下的相关类和使用方法  Package java.util.concurrent">
+<meta name="keywords" content="Java,多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础巩固笔记(5)-多线程之线程并发库">
+<meta property="og:url" content="https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要概述java.util.concurrent包下的相关类和使用方法  Package java.util.concurrent">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.951Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java基础巩固笔记(5)-多线程之线程并发库">
+<meta name="twitter:description" content="本文主要概述java.util.concurrent包下的相关类和使用方法  Package java.util.concurrent">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java基础巩固笔记(5)-多线程之线程并发库</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">java基础巩固笔记(5)-多线程之线程并发库</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-05T22:23:12.000Z" itemprop="datePublished" class="page-time">
+  2016-02-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子性操作类"><span class="post-toc-number">1.</span> <span class="post-toc-text">原子性操作类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程池"><span class="post-toc-number">2.</span> <span class="post-toc-text">线程池</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用线程池"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">常用线程池</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Callable-amp-Future"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Callable&amp;Future</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lock-amp-Condition"><span class="post-toc-number">3.</span> <span class="post-toc-text">Lock&amp;Condition</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Lock"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Lock</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Condition"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Condition</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#同步工具"><span class="post-toc-number">4.</span> <span class="post-toc-text">同步工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-javase-learn-note-5-ThreadPool" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java基础巩固笔记(5)-多线程之线程并发库</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-06 06:23:12" datetime="2016-02-05T22:23:12.000Z" itemprop="datePublished">2016-02-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要概述<code>java.util.concurrent</code>包下的相关类和使用方法</p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/package-summary.html" target="_blank" rel="noopener">Package java.util.concurrent</a></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="原子性操作类"><a href="#原子性操作类" class="headerlink" title="原子性操作类"></a>原子性操作类</h2><p><code>java.util.concurrent.atomic</code>包下的类:</p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/atomic/package-summary.html" target="_blank" rel="noopener">Package java.util.concurrent.atomic</a></p>
+</blockquote>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/Executors.html" target="_blank" rel="noopener">java.util.concurrent:Class Executors</a></p>
+</blockquote>
+<h3 id="常用线程池"><a href="#常用线程池" class="headerlink" title="常用线程池"></a>常用线程池</h3><p>几种常用的的生成线程池的方法：</p>
+<ul>
+<li><code>newCachedThreadPool</code></li>
+<li><code>newFixedThreadPool</code></li>
+<li><code>newScheduledThreadPool</code></li>
+<li><code>newSingleThreadExecutor</code></li>
+<li><code>newSingleThreadScheduledExecutor</code></li>
+</ul>
+<p>例子：<code>newFixedThreadPool</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService threadPool = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    threadPool.execute(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>单线程<code>newSingleThreadExecutor</code>可用于重启</p>
+<p>用线程池启动定时器</p>
+<p>例子：类似Timer的定时执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Executors.newScheduledThreadPool(<span class="number">3</span>).scheduleAtFixedRate(</span><br><span class="line">            <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    System.out.println(<span class="string">"ScheduledThreadPool "</span>+Thread.currentThread().getName());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,<span class="number">3</span>,<span class="number">1</span>, TimeUnit.SECONDS</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<h3 id="Callable-amp-Future"><a href="#Callable-amp-Future" class="headerlink" title="Callable&amp;Future"></a>Callable&amp;Future</h3><p><code>ExecutorService</code>在<code>Executor</code>的基础上增加了一些方法，其中有两个核心的方法：</p>
+<ul>
+<li><code>Future&lt;?&gt; submit(Runnable task)</code></li>
+<li><code>&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task)</code></li>
+</ul>
+<p>这两个方法都是向线程池中提交任务，它们的区别在于<code>Runnable</code>在执行完毕后没有结果，<code>Callable</code>执行完毕后有一个结果。这在多个线程中传递状态和结果是非常有用的。另外他们的相同点在于都返回一个Future对象。<code>Future</code>对象可以阻塞线程直到运行完毕（获取结果，如果有的话），也可以取消任务执行，当然也能够检测任务是否被取消或者是否执行完毕。</p>
+<h2 id="Lock-amp-Condition"><a href="#Lock-amp-Condition" class="headerlink" title="Lock&amp;Condition"></a>Lock&amp;Condition</h2><h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>Lock功能类似传统多线程技术里的<code>synchronized</code>，实现线程互斥，但更加面向对象。将需要互斥的代码片段放到<code>lock.lock();</code>和<code>lock.unlock();</code>之间。</p>
+<p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">//功能代码</span></span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>读写锁</li>
+</ul>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/ReentrantReadWriteLock.html" target="_blank" rel="noopener">java.util.concurrent.locks:Class ReentrantReadWriteLock</a></p>
+</blockquote>
+<p>javaDoc文档读写锁例子,缓存:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CachedData</span> </span>&#123;</span><br><span class="line">   Object data;</span><br><span class="line">   <span class="keyword">volatile</span> <span class="keyword">boolean</span> cacheValid;</span><br><span class="line">   <span class="keyword">final</span> ReentrantReadWriteLock rwl = <span class="keyword">new</span> ReentrantReadWriteLock();</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">processCachedData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     rwl.readLock().lock();</span><br><span class="line">     <span class="keyword">if</span> (!cacheValid) &#123;</span><br><span class="line">       <span class="comment">// Must release read lock before acquiring write lock</span></span><br><span class="line">       rwl.readLock().unlock();</span><br><span class="line">       rwl.writeLock().lock();</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="comment">// Recheck state because another thread might have</span></span><br><span class="line">         <span class="comment">// acquired write lock and changed state before we did.</span></span><br><span class="line">         <span class="keyword">if</span> (!cacheValid) &#123;</span><br><span class="line">           data = ...</span><br><span class="line">           cacheValid = <span class="keyword">true</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">// Downgrade by acquiring read lock before releasing write lock</span></span><br><span class="line">         rwl.readLock().lock();</span><br><span class="line">       &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">         rwl.writeLock().unlock(); <span class="comment">// Unlock write, still hold read</span></span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">       use(data);</span><br><span class="line">     &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">       rwl.readLock().unlock();</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>重点注意在释放写锁前加读锁那部分代码，注释为<code>// Downgrade by acquiring read lock before releasing write lock</code>。自己挂了写锁，再挂读锁是可以的，这面涉及的技巧以后再研究。</p>
+<h3 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h3><p>Condition类似于传统多线程技术中的<code>Object.wait</code>和<code>Object.notify</code>,实现线程间同步。</p>
+<p>javaDoc文档例子，可阻塞队列</p>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/locks/Condition.html" target="_blank" rel="noopener">class BoundedBuffer例子</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BoundedBuffer</span> </span>&#123;</span><br><span class="line">   <span class="keyword">final</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">   <span class="keyword">final</span> Condition notFull  = lock.newCondition();</span><br><span class="line">   <span class="keyword">final</span> Condition notEmpty = lock.newCondition();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">final</span> Object[] items = <span class="keyword">new</span> Object[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span> putptr, takeptr, count;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Object x)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">     lock.lock();</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">while</span> (count == items.length)</span><br><span class="line">         notFull.await();</span><br><span class="line">       items[putptr] = x;</span><br><span class="line">       <span class="keyword">if</span> (++putptr == items.length) putptr = <span class="number">0</span>;</span><br><span class="line">       ++count;</span><br><span class="line">       notEmpty.signal();</span><br><span class="line">     &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">       lock.unlock();</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">     lock.lock();</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">while</span> (count == <span class="number">0</span>)</span><br><span class="line">         notEmpty.await();</span><br><span class="line">       Object x = items[takeptr];</span><br><span class="line">       <span class="keyword">if</span> (++takeptr == items.length) takeptr = <span class="number">0</span>;</span><br><span class="line">       --count;</span><br><span class="line">       notFull.signal();</span><br><span class="line">       <span class="keyword">return</span> x;</span><br><span class="line">     &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">       lock.unlock();</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>使用了两个<code>condition</code></p>
+<h2 id="同步工具"><a href="#同步工具" class="headerlink" title="同步工具"></a>同步工具</h2><ul>
+<li><code>Semaphore</code></li>
+</ul>
+<p>类似占坑</p>
+<ul>
+<li><code>CyclicBarrier</code></li>
+</ul>
+<p>阶段性使进度一致</p>
+<ul>
+<li><code>CountDownLatch</code></li>
+</ul>
+<p>一人通知多人/多人通知一人</p>
+<ul>
+<li><code>Exchanger</code></li>
+</ul>
+<p>线程间数据交换，都到达则自然交换</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="http://www.blogjava.net/xylz/archive/2010/12/21/341281.html" target="_blank" rel="noopener">深入浅出 Java Concurrency (29): 线程池 part 2 Executor 以及Executors</a></li>
+<li><a href="http://www.blogjava.net/xylz/archive/2010/07/08/325587.html" target="_blank" rel="noopener">《深入浅出 Java Concurrency》目录</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.951Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/06/javase-learn-note-5-ThreadPool/" target="_blank" rel="external">https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/&title=《java基础巩固笔记(5)-多线程之线程并发库》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/&title=《java基础巩固笔记(5)-多线程之线程并发库》 — Brian's Homepage&source=本文主要概述java.util.concurrent包下的相关类和使用方法
+
+Package java.util.concurrent
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java基础巩固笔记(5)-多线程之线程并发库》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/06/javaweb-note-1-Tomcat/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javaweb入门笔记(1)-Tomcat</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/06/javase-learn-note-5-ShareData/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java基础巩固笔记(5)-多线程之共享数据</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/&title=《java基础巩固笔记(5)-多线程之线程并发库》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/&title=《java基础巩固笔记(5)-多线程之线程并发库》 — Brian's Homepage&source=本文主要概述java.util.concurrent包下的相关类和使用方法
+
+Package java.util.concurrent
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java基础巩固笔记(5)-多线程之线程并发库》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/javase-learn-note-5-ThreadPool/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aS27jQAwFwNz/0hkg20mUx8dux4vSyvBH6pKBJkXy4yM+Pr+On975/O9IzvZ8hp8+/bhx4OHh4VVLTy7wfLHnMyQ3Jfl+vmY8PDy827znYPDMS8B5gMkDSRLA8PDw8P6Wl2/03Y2bpuB4eHh478+bFg6el96l8nh4eHjvw9sUUqcb96ZgcbHWgoeHhxfzpg2wd3h9sb+Hh4eHt+iq59tuHga6Im+5Tjw8PLwLvG6k6TkJnuLz96fpOx4eHt4NXj4QsN+g88Ju9zd8A8bDw8O7wJs+/OdbeZegd6WHqEqNh4eH90LedHPPW1mbAHOsAo2Hh4e3boPlw0956jwt4CZhI/8VHh4e3it5XQkgH8zaFIWTJB4PDw/vBi+/ZL6hT9tm08LEYIgBDw8P7wJvX5DdDAdMQ8XhugseHh5exXsuMSTIPFvfv59c8ZehATw8PLw1L/lqt/SzoaJbLR4eHt4NXjcWkLe7upbVJmWP4h4eHh7emtcVWPN2V5cKTwPVLxEPDw8P7ygv//F+CCA/fxeuopQaDw8Pb8HrkuazJYZpkt3dejw8PLyzvOmj/mY2IS9VdOHkxwYYHh4e3iHeNAnuirn5jdiMJnyzEjw8PLyX8I498FfhIU+do/Xg4eHhXeB1xdZpGJiWGE6dDQ8PD+8eL0mg81DRtcdyUpes4+Hh4Z3l7QcIks26S6aP/WN4eHh4F3in2lHJDZqOXnVlDjw8PLwbvM/h0Y0CTMsQefD4pVSBh4eHd4G3aVl1bapujGCajh/oyOHh4eEFAwTdoqehoivj5ql8WWnGw8PDq3jdaNT0qX/KPjAKhoeHh/cGvHyzzoPQtJQwuC4eHh7en/JyQD7ItS/UHgsMeHh4eBfqnN2nXTljk5Tj4eHh3eZ1s1p5V60bR9icGQ8PD+8a7x8GLivwqDQ0UwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

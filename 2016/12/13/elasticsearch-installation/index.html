@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Elasticsearch 5.0-安装使用 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="安装部署,Elasticsearch">
+    <meta name="description" content="本文是 Elasticsearch 5.0  系列博文的安装使用篇,主要介绍如何安装并运行 Elasticsearch，顺带介绍 Kibana 的安装">
+<meta name="keywords" content="安装部署,Elasticsearch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch 5.0-安装使用">
+<meta property="og:url" content="https://brianway.github.io/2016/12/13/elasticsearch-installation/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文是 Elasticsearch 5.0  系列博文的安装使用篇,主要介绍如何安装并运行 Elasticsearch，顺带介绍 Kibana 的安装">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/Kibana_Console%E7%95%8C%E9%9D%A2.png">
+<meta property="og:updated_time" content="2019-04-07T16:16:59.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elasticsearch 5.0-安装使用">
+<meta name="twitter:description" content="本文是 Elasticsearch 5.0  系列博文的安装使用篇,主要介绍如何安装并运行 Elasticsearch，顺带介绍 Kibana 的安装">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/Kibana_Console%E7%95%8C%E9%9D%A2.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Elasticsearch 5.0-安装使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Elasticsearch 5.0-安装使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-13T05:35:07.000Z" itemprop="datePublished" class="page-time">
+  2016-12-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/分布式系统/">分布式系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#下载安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">下载安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件夹结构"><span class="post-toc-number">3.</span> <span class="post-toc-text">文件夹结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重要配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">重要配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Kibana-安装"><span class="post-toc-number">5.</span> <span class="post-toc-text">Kibana 安装</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-elasticsearch-installation" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Elasticsearch 5.0-安装使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-13 13:35:07" datetime="2016-12-13T05:35:07.000Z" itemprop="datePublished">2016-12-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/分布式系统/">分布式系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文是 Elasticsearch 5.0  系列博文的安装使用篇,主要介绍如何安装并运行 Elasticsearch，顺带介绍 Kibana 的安装</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+<li>本文以 Elasticsearch 5.0.1 版本为例进行讲解,不定期更新</li>
+<li>该系列主要参考的 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/index.html" target="_blank" rel="noopener">Elasticsearch Reference: 5.0</a>，尽量避免照搬翻译，只摘录精要部分辅以简单说明</li>
+<li>写这个系列博客的初衷是强迫自己梳理，同时方便一些较忙/没空耐心看英文文档的朋友快速上手，建议读者有空多读官方文档，毕竟别人写的都是二手资料</li>
+<li>如需查看 ES 系列更多博文，请关注我的个人网站<a href="http://brianway.github.io/">@brianway</a> 或者  <a href="http://blog.csdn.net/h3243212/" target="_blank" rel="noopener">@CSDN</a></li>
+</ul>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>参考<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/zip-targz.html" target="_blank" rel="noopener">install Elasticsearch</a>即可，这里简单展示一下</p>
+<ul>
+<li>前台运行</li>
+</ul>
+<p>ES 默认运行在前台，日志打印到标准输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.1.tar.gz</span><br><span class="line">sha1sum elasticsearch-5.0.1.tar.gz</span><br><span class="line">tar -xzf elasticsearch-5.0.1.tar.gz</span><br><span class="line">cd elasticsearch-5.0.1/</span><br><span class="line">./bin/elasticsearch</span><br></pre></td></tr></table></figure>
+<p>在终端输入<code>curl -XGET &#39;localhost:9200/?pretty&#39;</code></p>
+<p>得到响应：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"Dp0oq_v"</span>,</span><br><span class="line">  <span class="attr">"cluster_name"</span>: <span class="string">"elasticsearch"</span>,</span><br><span class="line">  <span class="attr">"cluster_uuid"</span>: <span class="string">"6rLSu0JMTlq_YJqyhWS_xQ"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: &#123;</span><br><span class="line">    <span class="attr">"number"</span>: <span class="string">"5.0.1"</span>,</span><br><span class="line">    <span class="attr">"build_hash"</span>: <span class="string">"080bb47"</span>,</span><br><span class="line">    <span class="attr">"build_date"</span>: <span class="string">"2016-11-11T22:08:49.812Z"</span>,</span><br><span class="line">    <span class="attr">"build_snapshot"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"lucene_version"</span>: <span class="string">"6.2.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"tagline"</span>: <span class="string">"You Know, for Search"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>后台运行</li>
+</ul>
+<p>参考 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/zip-targz.html#setup-installation-daemon" target="_blank" rel="noopener">Running as a daemon</a></p>
+<p>日志信息在<code>$ES_HOME/logs/</code>文件夹</p>
+<h2 id="文件夹结构"><a href="#文件夹结构" class="headerlink" title="文件夹结构"></a>文件夹结构</h2><p>这里我使用的是<code>.zip</code>和<code>.tar.gz</code>的包直接解压得到的，文件夹的目录结构：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/zip-targz.html#zip-targz-layout" target="_blank" rel="noopener">Directory layout of .zip and .tar.gz archives</a></p>
+<h2 id="重要配置"><a href="#重要配置" class="headerlink" title="重要配置"></a>重要配置</h2><ul>
+<li><code>path.data</code>和<code>path.logs</code>:使用<code>.zip</code>和<code>.tar.gz</code>的 Elasticsearch 的话，这两个路径是<code>$ES_HOME</code>的子文件夹，升级 Elasticsearch 时有被删除的风险，所以需要另外指定路径，<code>path.data</code>可指定多路径</li>
+<li><code>cluster.name</code>:节点只能加进<code>cluster.name</code>相同的集群中，默认名是<code>elasticsearch</code></li>
+<li><code>node.name</code>:Elasticsearch 默认采用随机 UUID 的前 7 位字符作为节点id，且节点id一直保存，节点重启并不会改变节点名。</li>
+<li><code>bootstrap.memory_lock</code>:JVM 不被交换到硬盘对于节点健康很重要，一种实现方式是将<code>bootstrap.memory_lock</code>设置成<code>true</code></li>
+<li><code>network.host</code>:Elasticsearch 默认只绑定 loopback 地址(<code>127.0.0.1</code>和<code>[::1]</code>),多节点在一个 server 上启动也是可行的，生产环境下不建议罢了。</li>
+<li><code>discovery.zen.ping.unicast.hosts</code>:同一个 server 上的节点将扫描端口号 9300 到 9305 来尝试连接其他该 server 上的节点。和其他 server 节点组成集群时，需要配置该项。端口默认 9300,域名对应多IP的话会尝试所有解析出来的 IP</li>
+<li><code>discovery.zen.minimum_master_nodes</code>:不设置的话可能出现<code>split brain</code>问题，造成数据丢失。为了避免这样，该项设置为<code>(master_eligible_nodes / 2) + 1</code></li>
+</ul>
+<h2 id="Kibana-安装"><a href="#Kibana-安装" class="headerlink" title="Kibana 安装"></a>Kibana 安装</h2><p>由于老在终端里使用 curl 命令很不方便，所以顺带安装了一下 <a href="https://www.elastic.co/guide/en/kibana/5.0/introduction.html" target="_blank" rel="noopener">Kibana</a>。简单介绍下 Kinaba，它是一个配合 Elasticsearch 工作的分析和可视化平台，一些和 Elasticsearch 通过 REST API 交互的请求可以在这里面比较方便的输入和回显。</p>
+<p>我是在 Mac 下安装的，下载好安装好解压就行了。其他系统参考 <a href="https://www.elastic.co/guide/en/kibana/5.0/install.html" target="_blank" rel="noopener">Installing Kibana</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://artifacts.elastic.co/downloads/kibana/kibana-5.0.1-darwin-x86_64.tar.gz</span><br><span class="line">tar -xzf kibana-5.0.1-darwin-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>先启动 Elasticsearch，再启动 Kibana</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd kibana-5.0.1-darwin-x86_64.tar.gz</span><br><span class="line">bin/kibana</span><br></pre></td></tr></table></figure>
+<p>默认的访问网址是<code>localhost:5601</code>，在浏览器访问即可。然后点击侧栏的 <code>Dev Tools</code>就行了。顺带提一句，在之前的版本中，这个窗口是一个叫做 <code>Sense</code> 的插件的功能，在 5.0 版本中默认和 Kibana 集成了，并改名为 <code>Console</code>。</p>
+<p>在左边输入 <code>GET /</code>，点绿色的播放按钮发送请求，就可以看到和刚才在终端里输入<code>curl -XGET &#39;localhost:9200/?pretty&#39;</code>同样的的响应了。如图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/Kibana_Console%E7%95%8C%E9%9D%A2.png" alt="Kibana - Console界面" title>
+                </div>
+                <div class="image-caption">Kibana - Console界面</div>
+            </figure>
+<p>后面的Elasticsearch的文章演示部分都会基于 <code>Console - Kibana</code> ，请安装好。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T16:16:59.970Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/12/13/elasticsearch-installation/" target="_blank" rel="external">https://brianway.github.io/2016/12/13/elasticsearch-installation/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/12/13/elasticsearch-installation/&title=《Elasticsearch 5.0-安装使用》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/12/13/elasticsearch-installation/&title=《Elasticsearch 5.0-安装使用》 — Brian's Homepage&source=本文是 Elasticsearch 5.0  系列博文的安装使用篇,主要介绍如何安装并运行 Elasticsearch，顺带介绍 Kibana 的安装" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/12/13/elasticsearch-installation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Elasticsearch 5.0-安装使用》 — Brian's Homepage&url=https://brianway.github.io/2016/12/13/elasticsearch-installation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/12/13/elasticsearch-installation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/13/elasticsearch-basic-concepts/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Elasticsearch 5.0-基础概念</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/10/14/algorithms-data-structures-2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常见数据结构(二)-树(二叉树，红黑树，B树)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/12/13/elasticsearch-installation/&title=《Elasticsearch 5.0-安装使用》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/12/13/elasticsearch-installation/&title=《Elasticsearch 5.0-安装使用》 — Brian's Homepage&source=本文是 Elasticsearch 5.0  系列博文的安装使用篇,主要介绍如何安装并运行 Elasticsearch，顺带介绍 Kibana 的安装" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/12/13/elasticsearch-installation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Elasticsearch 5.0-安装使用》 — Brian's Homepage&url=https://brianway.github.io/2016/12/13/elasticsearch-installation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/12/13/elasticsearch-installation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACo0lEQVR42u3awU4rMQwFUP7/p2HDAgk6c23HbZFOV9Wjk+TMIvG78cdH/Pn88Un+OvmejHn4g4eHhzdY+u9Pj3e9oEcj57MnT+Hh4eFt85JFPBo6H+d69+6t52YuPDw8vDfgJUvMa91eSY2Hh4f3v3jXS0kOjOSXeHh4eO/Pqy4xWe6pSLcXYeDh4eHt8Sbl76u+r9zv4eHh4Y1v1ZPrqORImIzcW+f3s3h4eHgLvGpE2wtq52dXPjseHh7ea3mTeGJS316/mjwCxsPDw9vj5Rtx/i/5cieBSDO6xcPDwxvzehvuPErIL9J6EQYeHh7eHi8PEfJBq9f/+ZFw+GIMDw8Pr8hLHks28WTK6i/zFq6b+z08PDy8o7wJrLpNJ+0FvdkL0S0eHh7eAi+Zvhe8TuLaA40FeHh4eMu8XpQwKb6vF1ct0KOsGg8PD6/Fq15KnQp/J98LT+Hh4eEt855TIk8CiHIMgYeHh7fAqy6lGlVU26Gqo+XtXHh4eHhneUnLVDJctfVqIyD+Y0w8PDy8BV4vcq3GBEkBXW3oL7f74+Hh4a3x5ktMnsoXV72cK3cl4OHh4Y3bVathRC9iOJCd9I4EPDw8vAGvt93Py+Lqy80PsHIvAx4eHl6R19ume2FuD1wt0G+uwfDw8PAO8eaxQq8Ez0Ph3u/x8PDwtnnVrXkS0W5fleHh4eE9k1edOD9IemMeaMbCw8PDO8rrxQ3VVzMPbXvFOh4eHt4Gr7rhVqOH6ghJaX4Ag4eHhzfm9a61qq1X1VI7j31vwHh4eHhrvEm5nEzce3HVAOIma8HDw8N7Ka8aVfTihuQYuGkgwMPDw3sbXn7pNX9Zk6AZDw8Pb493qqGqGvJOqNEseHh4eAu8yX/4e4FscpCcipjx8PDwjvK+ADQlpku1yUO5AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
