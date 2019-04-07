@@ -90,10 +90,28 @@
         return regExp.test(raw);
     }
 
+    // 匹配文章内容返回结果，返回值代表权重。按照标题，摘要，标签，正文的顺序递减
     function matcher(post, regExp) {
-        return regtest(post.title, regExp) || post.tags.some(function (tag) {
+        if (regtest(post.title, regExp)) {
+            return 10;
+        }
+        if (regtest(post.excerpt, regExp)) {
+            return 5;
+        }
+        if (post.tags.some(function (tag) {
             return regtest(tag.name, regExp);
-        })|| regtest(post.excerpt, regExp) || regtest(post.text, regExp);
+        })) {
+            return 3;
+        }
+        if(regtest(post.text, regExp)){
+            return 1;
+        }
+        return 0;
+    }
+
+    function escapeRegExp(string) {
+        return string.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$&');
+        //$&表示整个被匹配的字符串
     }
 
     function search(e) {
@@ -102,13 +120,18 @@
             return;
         }
 
-        var regExp = new RegExp(key.replace(/[ ]/g, '|'), 'gmi');
+        // var regExp = new RegExp(key.replace(/[ ]/g, '|'), 'gmi');
+        var regExp = new RegExp(escapeRegExp(key), 'gmi');
 
+        // 匹配文章内容返回结果
         loadData(function (data) {
-
-            var result = data.filter(function (post) {
-                return matcher(post, regExp);
+            // 结果按照匹配程度过滤并排序
+            var result = data.map(post => {
+                post.search_order = matcher(post, regExp);
+                return post;
             });
+            result = result.filter(post => post.search_order && post.search_order > 0);
+            result = result.sort((a, b) => b.search_order - a.search_order);
 
             render(result);
             Control.show();
