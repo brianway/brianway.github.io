@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javaweb入门笔记(3)-Servlet | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaWeb,Servlet">
+    <meta name="description" content="servlet入门开发步骤：  编写一个java类，实现servlet接口 把开发好的java类部署到web服务器">
+<meta name="keywords" content="JavaWeb,Servlet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaweb入门笔记(3)-Servlet">
+<meta property="og:url" content="https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="servlet入门开发步骤：  编写一个java类，实现servlet接口 把开发好的java类部署到web服务器">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_servlet-lifecycle.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_servlet-url%E5%8C%B9%E9%85%8D.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javaweb入门笔记(3)-Servlet">
+<meta name="twitter:description" content="servlet入门开发步骤：  编写一个java类，实现servlet接口 把开发好的java类部署到web服务器">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_servlet-lifecycle.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javaweb入门笔记(3)-Servlet</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javaweb入门笔记(3)-Servlet</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-06T02:29:12.000Z" itemprop="datePublished" class="page-time">
+  2016-02-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#servlet入门"><span class="post-toc-number">1.</span> <span class="post-toc-text">servlet入门</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#手动编写第一个servlet"><span class="post-toc-number">2.</span> <span class="post-toc-text">手动编写第一个servlet</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#servlet的调用过程和生命周期"><span class="post-toc-number">3.</span> <span class="post-toc-text">servlet的调用过程和生命周期</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#servlet开发的一些细节"><span class="post-toc-number">4.</span> <span class="post-toc-text">servlet开发的一些细节</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ServletContext"><span class="post-toc-number">5.</span> <span class="post-toc-text">ServletContext</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-02-06-javaweb-note-3-servlet" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javaweb入门笔记(3)-Servlet</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-02-06 10:29:12" datetime="2016-02-06T02:29:12.000Z" itemprop="datePublished">2016-02-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="servlet入门"><a href="#servlet入门" class="headerlink" title="servlet入门"></a>servlet入门</h2><p>开发步骤：</p>
+<ul>
+<li>编写一个java类，实现servlet接口</li>
+<li>把开发好的java类部署到web服务器</li>
+</ul>
+<a id="more"></a>
+<p>API文档</p>
+<blockquote>
+<p><a href="https://tomcat.apache.org/tomcat-8.0-doc/servletapi/index.html" target="_blank" rel="noopener">Servlet API Documentation</a></p>
+</blockquote>
+<p>生命周期相关方法(life-cycle methods)</p>
+<p>Servlet的生命周期通过<code>java.servlet.Servlet</code>接口中的<code>init()</code>、<code>service()</code>、和<code>destroy()</code>方法表示。Servlet的生命周期有四个阶段：加载并实例化、初始化、请求处理、销毁。（见文末【参考链接】）</p>
+<h2 id="手动编写第一个servlet"><a href="#手动编写第一个servlet" class="headerlink" title="手动编写第一个servlet"></a>手动编写第一个servlet</h2><p>1.在tomcat中新建一个web应用<code>hello</code>，在web应用中新建一个<code>WEB-INF/classes</code>目录</p>
+<p>2.在<code>classes</code>目录新建一个<code>FirstServlet</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.iot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstServlet</span> <span class="keyword">extends</span> <span class="title">GenericServlet</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest req,ServletResponse res)</span><span class="keyword">throws</span> ServletException,java.io.IOException</span>&#123;</span><br><span class="line">		OutputStream out = res.getOutputStream();</span><br><span class="line">		out.write(<span class="string">"hello servlet!!!"</span>.getBytes());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.编译，<code>javac -cp %CATALINA_HOME%/lib/servlet-api.jar  -d . FirstServlet.java</code>,命令行手动编译参考<a href="http://www.iitshare.com/under-the-cmd-compile-the-java.html" target="_blank" rel="noopener">这里</a></p>
+<p>4.在<code>WEB-INF</code>目录中新建一个<code>web.xml</code>文件，配置servlet的对外访问路径</p>
+<p>5.启动tomcat访问</p>
+<h2 id="servlet的调用过程和生命周期"><a href="#servlet的调用过程和生命周期" class="headerlink" title="servlet的调用过程和生命周期"></a>servlet的调用过程和生命周期</h2><p>时序图</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_servlet-lifecycle.png" alt="servlet的调用过程和生命周期" title>
+                </div>
+                <div class="image-caption">servlet的调用过程和生命周期</div>
+            </figure>
+<h2 id="servlet开发的一些细节"><a href="#servlet开发的一些细节" class="headerlink" title="servlet开发的一些细节"></a>servlet开发的一些细节</h2><ul>
+<li><strong>标签</strong>:<code>&lt;servlet&gt;</code>包含<code>&lt;servlet-name&gt;</code>和<code>&lt;servlet-class&gt;</code>；<code>&lt;servlet-mapping&gt;</code>包含<code>&lt;servlet-name&gt;</code>和<code>&lt;url-pattern&gt;</code></li>
+<li><strong>映射</strong>:<code>web.xml</code>中一个<code>&lt;servlet&gt;</code>可对应多个<code>&lt;servlet-mapping&gt;</code></li>
+<li><strong>通配符</strong>:<code>&lt;servlet-mapping&gt;</code>的<code>&lt;url-pattern&gt;</code>可以使用通配符，两种固定格式：<code>*.扩展名</code>；以<code>/</code>开头，以<code>/*</code>结尾</li>
+</ul>
+<p><img src="http://7xph6d.com1.z0.glb.clouddn.com/javaweb_servlet-url%E5%8C%B9%E9%85%8D.png" alt="javaweb_servlet-url匹配.png"></p>
+<ul>
+<li><strong>对象</strong>:servlet由servlet引擎调用，不能独立运行。客户端多次请求，服务器只创建一个servlet实例，之后驻留内存中继续服务直至web容器退出才销毁它。</li>
+<li><strong>请求</strong>:服务器针对客户端的每一次请求都会创建新的<code>request</code>和<code>response</code>对象(它们的生命周期很短)，传给<code>service</code>方法。</li>
+<li><strong>加载</strong>:servlet实例的创建和<code>init</code>方法的调用是在第一次请求时，而非服务器启动时，除非在<code>&lt;servlet&gt;</code>标签配置<code>&lt;load-on-start-up&gt;</code>,数字越小优先级越高</li>
+<li><strong>缺省</strong>:映射路径为正斜杠<code>/</code>，则为当前web应用的缺省servlet,不匹配的都交给缺省</li>
+<li><strong>线程安全</strong>:访问同一资源会引发线程安全问题; <code>SingleThreadModel</code>标记接口(已弃用)</li>
+<li><strong>ServletConfig</strong>:在<code>&lt;servlet&gt;</code>标签配置<code>&lt;init-param&gt;</code>，通过<code>getServletConfig</code>方法获得配置。可配置输出字符集，读哪个配置文件等等。</li>
+<li><strong>ServletContext</strong>:代表当前web应用，含有一些web应用全局性方法，实现web资源共享、servlet转发等。通过<code>ServletConfig.getServletContext</code>方法获得，在<code>&lt;context-param&gt;</code>标签配置。</li>
+</ul>
+<h2 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h2><p>API:<a href="https://tomcat.apache.org/tomcat-8.0-doc/servletapi/index.html?javax/servlet/ServletContext.html" target="_blank" rel="noopener">Interface ServletContext</a></p>
+<p>概念</p>
+<p>一个web应用所有servlet共享同一个ServletContext对象，可实现数据共享。ServletContext被称为context<strong>域</strong>对象。</p>
+<p>域：作用范围；context域：整个应用程序范围。</p>
+<p>ServletContext域：</p>
+<ol>
+<li>这是一个容器</li>
+<li>说明了这个容器的作用范围，也就是应用程序范围</li>
+</ol>
+<p>转发:客户机一次请求；重定向：客户机两次请求</p>
+<p>作用</p>
+<ul>
+<li>获取web应用的初始化参数</li>
+<li>实现servlet转发</li>
+<li>利用ServletContext对象读取资源文件<ul>
+<li>获得文件路径</li>
+<li>读取资源文件的三种方式</li>
+<li>.properties文件（属性文件）</li>
+</ul>
+</li>
+</ul>
+<p>配置文件：properties文件和xml文件；数据有关系使用xml文件，没有关系则使用properties文件。</p>
+<p>1.通过<code>ServletContext</code>的<code>getResourceAsStream</code>方法，读取properties文件</p>
+<p>模板代码(注意文件位置不同写路径会不同)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InputStream in = <span class="keyword">this</span>.getServletContext().getResourceAsStream(<span class="string">"/WEB-INF/classes/org/iot/servlet/db.properties"</span>);</span><br><span class="line">Properties properties = <span class="keyword">new</span> Properties();<span class="comment">//map</span></span><br><span class="line">properties.load(in);</span><br></pre></td></tr></table></figure>
+<p>2.通过<code>servletContext</code>的<code>getRealPath</code>方法得到资源的绝对路径，再通过传统方式(<code>FileInputStream</code>)读取</p>
+<p>3.通过类装载器去读，<code>ClassLoader</code>的<code>getResourceAsStream</code>(如果读取资源文件的程序不是servlet)，文件不能太大。<strong>只装载一次</strong>，所以如要读到更新后的数据，通过类装载的方式得到资源文件的位置，再通过传统方式读取资源文件的数据（用<code>getResource</code>得到path，再用<code>FileInputStream</code>）</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
+<p><a href="http://blog.csdn.net/evankaka/article/details/46673051" target="_blank" rel="noopener">servlet和Jsp生命周期解读</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.068Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/02/06/2016-02-06-javaweb-note-3-servlet/" target="_blank" rel="external">https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/&title=《javaweb入门笔记(3)-Servlet》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/&title=《javaweb入门笔记(3)-Servlet》 — Brian's Homepage&source=servlet入门开发步骤：
+
+编写一个java类，实现servlet接口
+把开发好的java类部署到web服务器
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(3)-Servlet》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-4-request-and-response/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javaweb入门笔记(4)-request和response</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/06/2016-02-06-javaweb-note-2-http/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">javaweb入门笔记(2)-http入门</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/&title=《javaweb入门笔记(3)-Servlet》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/&title=《javaweb入门笔记(3)-Servlet》 — Brian's Homepage&source=servlet入门开发步骤：
+
+编写一个java类，实现servlet接口
+把开发好的java类部署到web服务器
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(3)-Servlet》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/02/06/2016-02-06-javaweb-note-3-servlet/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3a0YrjMAwF0P7/T8++Lizp3ivZpQMnT2VIEx8XLI2k1yu+fv66Zn95uv59y/unvW5ceHh4eIulP72+XeLTUpL79xuHh4eH9xne+6W8P6CTTUnw+Xvz7cPDw8P7Bl6etZ7aMjw8PLzfztsXCPIn4+Hh4X0zLylG5Ad6GzySbbpea8HDw8OLeWeP8s98vtLfw8PDw1t31ds2/6kSQ1ImjlaLh4eHd4HXprOz0YHZluXjCP+5Ew8PD+8ob9bWyg/lJJy0pY0iIOHh4eFd47Wl2yT9zYuw+dGfv6uuHOPh4eGteadaYnlrqk3Wow3Cw8PDu8abFVj3nbcE34afOhbh4eHhjXht+SBPdpNDPPluPnr1WIzAw8PDO8RrD+K29TXboH2YqW/Cw8PDGw0N5M3+vNiaJ81JYKgDCR4eHt4F3qxlNUuON8FgNkCAh4eHd4+XvzhPrNsOftuQWxV58fDw8Ba8WQMsL/62Awd5Gyz6Lh4eHt4F3gy2T3k35Yw6fcfDw8O7wJuNQG0aXW1peJb04+Hh4d3gnS3O5ml3ix8+Hw8PD+8Crz30922qWfs/f/swpcbDw8MreUkxd5YE54lyXiAe/m54eHh4l3ltcXZfgJil9dFK8PDw8C7w2sO93YL8oC8GqkaNOjw8PLxTvH26fHYgIC9JRBuHh4eH9xFeHhhWZYLF5tZlXDw8PLxrvDydrf/tDxa0gT2uHA8PD+8o76e88pZVG2zyUkWxHjw8PLwLvH3Cmjexctipz3h4eHj3eHlrv2VshgbaDl7dAMPDw8Nb8zaH9WaUapZeF3fi4eHhfQFvlpsnIScfSiimyfDw8PC+mNcGibbsOxwywMPDw7vGyxfXtrja1Dkf1Yq+hYeHh3eBNxtsaltl7ShAOxC2uvDw8PDS5/8Be6RzqFNeiD0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

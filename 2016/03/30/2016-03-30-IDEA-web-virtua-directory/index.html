@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>在intellij IDEA中为web应用创建图片虚拟目录(详细截图) | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="IntelliJ-IDEA,SpringMVC">
+    <meta name="description" content="本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图">
+<meta name="keywords" content="IntelliJ-IDEA,SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在intellij IDEA中为web应用创建图片虚拟目录(详细截图)">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9501.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9502.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9503.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9504.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9505.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.122Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在intellij IDEA中为web应用创建图片虚拟目录(详细截图)">
+<meta name="twitter:description" content="本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9501.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在intellij IDEA中为web应用创建图片虚拟目录(详细截图)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在intellij IDEA中为web应用创建图片虚拟目录(详细截图)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:00.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工程配置和环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">工程配置和环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作步骤"><span class="post-toc-number">2.</span> <span class="post-toc-text">操作步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在非IDE环境下配置虚拟目录"><span class="post-toc-number">3.</span> <span class="post-toc-text">在非IDE环境下配置虚拟目录</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-30-IDEA-web-virtua-directory" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在intellij IDEA中为web应用创建图片虚拟目录(详细截图)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:00" datetime="2016-03-29T22:28:00.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图</p>
+<a id="more"></a>
+<h2 id="工程配置和环境"><a href="#工程配置和环境" class="headerlink" title="工程配置和环境"></a>工程配置和环境</h2><p>我使用的版本为</p>
+<ul>
+<li>tomcat 8.0.30</li>
+<li>intellij 15.0.2</li>
+<li>jdk 1.8.0_25</li>
+</ul>
+<p>已经部署好了一个web应用，并且已经在IDEA中添加好了tomcat容器，现在想为这个web应用添加一个图片虚拟目录</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ul>
+<li>1.点击工具栏的运行配置<code>Edit Configurations</code></li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9501.png" alt="Edit Configurations" title>
+                </div>
+                <div class="image-caption">Edit Configurations</div>
+            </figure>
+<ul>
+<li>2.在弹出的<code>Run/debug Configurations</code>中选中tomcat容器，选择<code>deployment</code>这个tab</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9502.png" alt="deployment" title>
+                </div>
+                <div class="image-caption">deployment</div>
+            </figure>
+<ul>
+<li>3.添加物理目录和并设置虚拟目录路径</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9503.png" alt="添加物理目录和并设置虚拟目录路径" title>
+                </div>
+                <div class="image-caption">添加物理目录和并设置虚拟目录路径</div>
+            </figure>
+<p>这里我选择了D盘下面的tmp文件夹作为物理目录，虚拟目录设为了<code>/pic</code>,我试了下，虽然斜杠少了也没什么影响，一样能访问，不过还是建议加上吧。</p>
+<ul>
+<li>4.运行web应用，访问图片资源</li>
+</ul>
+<p>附上博主帅照一张</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9504.png" alt="访问图片资源" title>
+                </div>
+                <div class="image-caption">访问图片资源</div>
+            </figure>
+<p>这里需要接上具体访问资源的文件名，不然后访问不到的，如下图</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9505.png" alt="访问不到" title>
+                </div>
+                <div class="image-caption">访问不到</div>
+            </figure>
+<h2 id="在非IDE环境下配置虚拟目录"><a href="#在非IDE环境下配置虚拟目录" class="headerlink" title="在非IDE环境下配置虚拟目录"></a>在非IDE环境下配置虚拟目录</h2><p>怎么为tomcat配置虚拟目录映射可以参考下面的博客：</p>
+<blockquote>
+<p><a href="http://blog.csdn.net/xiazdong/article/details/7215052" target="_blank" rel="noopener">tomcat配置虚拟目录映射</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.122Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/2016-03-30-IDEA-web-virtua-directory/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ-IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/&title=《在intellij IDEA中为web应用创建图片虚拟目录(详细截图)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/&title=《在intellij IDEA中为web应用创建图片虚拟目录(详细截图)》 — Brian's Homepage&source=本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在intellij IDEA中为web应用创建图片虚拟目录(详细截图)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-1-Frame-start/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(1)-框架原理和入门配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/08/2016-03-08-mybatis-learn-18-Reverse-Engineering/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mybatis学习笔记(18)-mybatis逆向工程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/&title=《在intellij IDEA中为web应用创建图片虚拟目录(详细截图)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/&title=《在intellij IDEA中为web应用创建图片虚拟目录(详细截图)》 — Brian's Homepage&source=本文主要展示如何在intellij IDEA中为web应用添加虚拟目录映射,并附上步骤截图" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在intellij IDEA中为web应用创建图片虚拟目录(详细截图)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-IDEA-web-virtua-directory/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3cy2rDQAwF0Pz/T7fQVaHYuXpM6sXxKrTGM2cCliqJvl7x9fVz/f58f/298+o5V6sk969deHh4eK2tJxu9v/+edLX1nJQfMR4eHt5neNVgUA0h1WO6XzfZMx4eHt4TePnCSfqbHFOejuPh4eE9k3d/Z/KK33rp4+Hh4T2Bl5cYeoWJeZg5XmvBw8PDi3m9Btj/fj7e38PDw8NrddV75Ybkt3nY+BpceHh4eCd4+fBTUlqdF2S37nzlk1x4eHh4A15eGO2lvLujXYWd4OHh4a3yqs2nZIHqT3oJd7RPPDw8vGO8pCmVv46rKXJ11KCAx8PDwzvMyxtg1SXzJDtfPdo5Hh4e3gFer8+eby7/bQ+Zr4WHh4e3y0uKqknanZcMEl7+5Dfr4uHh4R3gVZtP1aT5VbwmownRfAQeHh7egJeXUHsp+BzWe/5lfw8PDw9vzLv/Y35SkK2OT02OMvpK8PDw8FZ51aGBSTuqXERolULw8PDwPsNbS17jg8gbY71QhIeHh3eCl7e7qm37rVGDPHW+LOPi4eHhHeDlaW61nV8tHEyKGpeBAQ8PD2+VN2nVT8B5ISP/AvDw8PA+w5u83JOybF66rT65MBmBh4eHd6CXVF1yEgyiJDgo6eZHg4eHh7fLSxLcwnjTOFGurvImVODh4eEd5iWtqcKjiwe0FYQKfzHg4eHh9bPZwr+r6w1U9Z7fCw94eHh4p3nJaz0/p8lAQC/kdHNtPDw8vB1eclXLvvla8zGFy4iHh4eHt8qbBIP85V4tdmx9xsPDwzvHqwaDPPGdjxpUxwiaEQkPDw+vxZu81nPSVsgZVanx8PDwPsjLX9b55ubNtjdfAB4eHt4DeNWR1vtSbHXcqvxMPDw8vGO8vHBQbUT1yq95Yv0mkODh4eEd4G01wHrDW3nptpqs4+Hh4R3gfQNweeQpsFVp3QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

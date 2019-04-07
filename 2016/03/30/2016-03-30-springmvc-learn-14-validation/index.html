@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(14)-springmvc校验 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC">
+    <meta name="description" content="本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。">
+<meta name="keywords" content="SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(14)-springmvc校验">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(14)-springmvc校验">
+<meta name="twitter:description" content="本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(14)-springmvc校验</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(14)-springmvc校验</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:14.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#校验理解"><span class="post-toc-number">1.</span> <span class="post-toc-text">校验理解</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#springmvc校验需求"><span class="post-toc-number">2.</span> <span class="post-toc-text">springmvc校验需求</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境准备"><span class="post-toc-number">3.</span> <span class="post-toc-text">环境准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置校验器"><span class="post-toc-number">4.</span> <span class="post-toc-text">配置校验器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在pojo中添加校验规则"><span class="post-toc-number">5.</span> <span class="post-toc-text">在pojo中添加校验规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#捕获和显示校验错误信息"><span class="post-toc-number">6.</span> <span class="post-toc-text">捕获和显示校验错误信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分组校验"><span class="post-toc-number">7.</span> <span class="post-toc-text">分组校验</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-30-springmvc-learn-14-validation" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(14)-springmvc校验</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:14" datetime="2016-03-29T22:28:14.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。</p>
+<a id="more"></a>
+<h2 id="校验理解"><a href="#校验理解" class="headerlink" title="校验理解"></a>校验理解</h2><p>项目中，通常使用较多是前端的校验，比如页面中js校验。对于安全要求较高点建议在服务端进行校验。</p>
+<p>服务端校验：</p>
+<ul>
+<li>控制层conroller：校验页面请求的参数的合法性。在服务端控制层conroller校验，不区分客户端类型（浏览器、手机客户端、远程调用）</li>
+<li>业务层service（使用较多）：主要校验关键业务参数，仅限于service接口中使用的参数。</li>
+<li>持久层dao：一般是不校验的。</li>
+</ul>
+<h2 id="springmvc校验需求"><a href="#springmvc校验需求" class="headerlink" title="springmvc校验需求"></a>springmvc校验需求</h2><p>springmvc使用hibernate的校验框架validation(和hibernate没有任何关系)。</p>
+<p>校验思路：</p>
+<p>页面提交请求的参数，请求到controller方法中，使用validation进行校验。如果校验出错，将错误信息展示到页面。</p>
+<p>具体需求：</p>
+<p>商品修改，添加校验（校验商品名称长度，生产日期的非空校验），如果校验出错，在商品修改页面显示错误信息。</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>我们需要三个jar包：</p>
+<ul>
+<li>hibernate-validator.jar</li>
+<li>jboss-logging.jar</li>
+<li>validation-api.jar</li>
+</ul>
+<p>这里我们添加maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- hibernate 校验 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.4.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>查看maven依赖树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[INFO] \- org.hibernate:hibernate-validator:jar:5.2.4.Final:compile</span><br><span class="line">[INFO]    +- javax.validation:validation-api:jar:1.1.0.Final:compile</span><br><span class="line">[INFO]    +- org.jboss.logging:jboss-logging:jar:3.2.1.Final:compile</span><br><span class="line">[INFO]    \- com.fasterxml:classmate:jar:1.1.0:compile</span><br></pre></td></tr></table></figure>
+<p>可以看到，另外两个jar包被<code>hibernate-validator</code>依赖，所以不用再额外添加了。</p>
+<h2 id="配置校验器"><a href="#配置校验器" class="headerlink" title="配置校验器"></a>配置校验器</h2><ul>
+<li>在springmvc.xml中添加</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 校验器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"validator"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- hibernate校验器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"providerClass"</span> <span class="attr">value</span>=<span class="string">"org.hibernate.validator.HibernateValidator"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定校验使用的资源文件，在文件中配置校验错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"validationMessageSource"</span> <span class="attr">ref</span>=<span class="string">"messageSource"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 校验错误信息配置文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"messageSource"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"org.springframework.context.support.ReloadableResourceBundleMessageSource"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 资源文件名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"basenames"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>classpath:CustomValidationMessages<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 资源文件编码格式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"fileEncodings"</span> <span class="attr">value</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 对资源文件内容缓存时间，单位秒 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cacheSeconds"</span> <span class="attr">value</span>=<span class="string">"120"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>校验器注入到处理器适配器中</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span> <span class="attr">conversion-service</span>=<span class="string">"conversionService"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">validator</span>=<span class="string">"validator"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在CustomValidationMessages.properties配置校验错误信息：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#添加校验的错误提示信息</span><br><span class="line">items.name.length.error=请输入1到30个字符的商品名称</span><br><span class="line">items.createtime.isNUll=请输入商品的生产日期</span><br></pre></td></tr></table></figure>
+<h2 id="在pojo中添加校验规则"><a href="#在pojo中添加校验规则" class="headerlink" title="在pojo中添加校验规则"></a>在pojo中添加校验规则</h2><p>在ItemsCustom.java中添加校验规则：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Items</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="comment">//校验名称在1到30字符中间</span></span><br><span class="line">    <span class="comment">//message是提示校验出错显示的信息</span></span><br><span class="line">    <span class="comment">//groups：此校验属于哪个分组，groups可以定义多个分组</span></span><br><span class="line">    <span class="meta">@Size</span>(min=<span class="number">1</span>,max=<span class="number">30</span>,message=<span class="string">"&#123;items.name.length.error&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Float price;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String pic;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//非空校验</span></span><br><span class="line">    <span class="meta">@NotNull</span>(message=<span class="string">"&#123;items.createtime.isNUll&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> Date createtime;</span><br></pre></td></tr></table></figure>
+<h2 id="捕获和显示校验错误信息"><a href="#捕获和显示校验错误信息" class="headerlink" title="捕获和显示校验错误信息"></a>捕获和显示校验错误信息</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/editItemsSubmit"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">editItemsSubmit</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        Model model,</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">        Integer id,</span></span></span><br><span class="line"><span class="function"><span class="params">        @Validated ItemsCustom itemsCustom,</span></span></span><br><span class="line"><span class="function"><span class="params">        BindingResult bindingResult)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在controller中将错误信息传到页面即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//获取校验错误信息</span><br><span class="line">if(bindingResult.hasErrors())&#123;</span><br><span class="line">    // 输出错误信息</span><br><span class="line">    List&lt;ObjectError&gt; allErrors = bindingResult.getAllErrors();</span><br><span class="line"></span><br><span class="line">    for (ObjectError objectError :allErrors)&#123;</span><br><span class="line">        // 输出错误信息</span><br><span class="line">        System.out.println(objectError.getDefaultMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    // 将错误信息传到页面</span><br><span class="line">    model.addAttribute(&quot;allErrors&quot;, allErrors);</span><br><span class="line"></span><br><span class="line">    //可以直接使用model将提交pojo回显到页面</span><br><span class="line">    model.addAttribute(&quot;items&quot;, itemsCustom);</span><br><span class="line"></span><br><span class="line">    // 出错重新到商品修改页面</span><br><span class="line">    return &quot;items/editItems&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>页面显示错误信息：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 显示错误信息 --&gt;</span><br><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">"$&#123;allErrors!=null &#125;"</span>&gt;</span><br><span class="line">	&lt;c:forEach items=<span class="string">"$&#123;allErrors &#125;"</span> <span class="keyword">var</span>=<span class="string">"error"</span>&gt;</span><br><span class="line">		$&#123; error.defaultMessage&#125;&lt;br/&gt;</span><br><span class="line">	&lt;/c:forEach&gt;</span><br><span class="line">&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="分组校验"><a href="#分组校验" class="headerlink" title="分组校验"></a>分组校验</h2><ul>
+<li>需求：<ul>
+<li>在pojo中定义校验规则，而pojo是被多个controller所共用，当不同的controller方法对同一个pojo进行校验，但是每个controller方法需要不同的校验</li>
+</ul>
+</li>
+<li>解决方法：<ul>
+<li>定义多个校验分组（其实是一个java接口），分组中定义有哪些规则</li>
+<li>每个controller方法使用不同的校验分组</li>
+</ul>
+</li>
+</ul>
+<p>1.校验分组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ValidGroup1</span> </span>&#123;</span><br><span class="line">	<span class="comment">//接口中不需要定义任何方法，仅是对不同的校验规则进行分组</span></span><br><span class="line">	<span class="comment">//此分组只校验商品名称长度</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.在校验规则中添加分组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//校验名称在1到30字符中间</span></span><br><span class="line"><span class="comment">//message是提示校验出错显示的信息</span></span><br><span class="line"><span class="comment">//groups：此校验属于哪个分组，groups可以定义多个分组</span></span><br><span class="line"><span class="meta">@Size</span>(min=<span class="number">1</span>,max=<span class="number">30</span>,message=<span class="string">"&#123;items.name.length.error&#125;"</span>,groups = &#123;ValidGroup1.class&#125;)</span><br><span class="line"><span class="keyword">private</span> String name;</span><br></pre></td></tr></table></figure>
+<p>3.在controller方法使用指定分组的校验</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// value=&#123;ValidGroup1.class&#125;指定使用ValidGroup1分组的校验</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/editItemsSubmit"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">editItemsSubmit</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        Model model,</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">        Integer id,</span></span></span><br><span class="line"><span class="function"><span class="params">        @Validated(value = ValidGroup1.class)</span>ItemsCustom itemsCustom,</span></span><br><span class="line"><span class="function">        BindingResult bindingResult)<span class="keyword">throws</span> Exception </span>&#123;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.127Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/2016-03-30-springmvc-learn-14-validation/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/&title=《springmvc学习笔记(14)-springmvc校验》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/&title=《springmvc学习笔记(14)-springmvc校验》 — Brian's Homepage&source=本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(14)-springmvc校验》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-15-data-echo/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(15)-数据回显</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-13-annotation-collection-param-binding/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/&title=《springmvc学习笔记(14)-springmvc校验》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/&title=《springmvc学习笔记(14)-springmvc校验》 — Brian's Homepage&source=本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(14)-springmvc校验》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-14-validation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQVIjMRAEQP7/afa6BIup6pYGNiJ9coAtTeogtav19ha/3j+9/v578t3XYyYzJnMNX3h4eHjrR/+K8dU0+fTJd1/Pkj8zHh4e3m3e60dJqJstvl3W5Jnx8PDwfhtvdjAk4yd/wcPDw/u/eK9L4SSkSLb72fh4eHh4T/KSMCI5DPLCerPpX8la8PDw8GLepvz9qfdX+nt4eHh46656suEmgWw72mbMDyPg4eHhXeDlG+4en7fBcnb0STw8PLzLvOTyU/64eZneHhJF8Y2Hh4d3jZfEuLMrVslytKV2sax4eHh4F3izcCEpmvNHmY2TLxAeHh7eKd6sLJ7FuzkjX/RhAwwPDw/vMm9WaidHyCy6LebCw8PDu8ZrN9zXS5DHsjPwqrOHh4eHd4jXxg37JlYbfyRHBR4eHt6TvP2lgTomKGdsx8HDw8O7x0s+NIsbZhcC2oOhWGI8PDy8Q7y22D0VScwOhnaZ8PDw8O7xkg16xk7CjvY6wurSFR4eHt6al2z0+3gif8T2MCieEw8PD+8oL4Elm/7sosBs6y/Gx8PDwzvKi1pH60I5D2dPFdxNZwwPDw/vPG/T4N+U2vlFhOhXAh4eHt4h3myIPFDYXDvYNMa++cWAh4eHd4iXHAybz+8vBCQBxDddPjw8PLwLvLYx3062n6su8fHw8PCu8fblbPs+CTva4KP4xYCHh4e35u3D1jye2GOGYQQeHh7emvdevk41vfKiOR/5H//Fw8PDu8BrN9/ZVYM2/E2aZHnJjoeHh3eDl0er+ba+iWLrFtepBhgeHh5eySuC0fKiwL5Mb8OIogGGh4eH9wgvPzASQDJCu4h4eHh4v5PXbvFtkb3JE/Dw8PCe4bVXSE8V05s2WHEw4OHh4Z3vy69+8D9zyeBGkIGHh4dXzvIHbjJekyLYhN0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

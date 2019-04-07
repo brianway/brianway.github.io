@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>爬取知乎60万用户信息之后的简单分析 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Elasticsearch,Kibana,webporter">
+    <meta name="description" content="使用 Java+Elasticsearch+Kibana 爬取了知乎 60 万用户数据，做了简单的可视化分析。">
+<meta name="keywords" content="Elasticsearch,Kibana,webporter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取知乎60万用户信息之后的简单分析">
+<meta property="og:url" content="https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="使用 Java+Elasticsearch+Kibana 爬取了知乎 60 万用户数据，做了简单的可视化分析。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%9F%A5%E4%B9%8E%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E9%87%8F.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%9C%A8ES%E7%B4%A2%E5%BC%95%E7%8A%B6%E6%80%81.jpg">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E6%90%9C%E7%B4%A2%E8%BD%AE%E5%AD%90%E5%93%A5.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-kibana%E6%90%9C%E7%B4%A2%E8%BD%AE%E5%AD%90%E5%93%A5.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E6%80%A7%E5%88%AB%E5%88%86%E5%B8%83.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E7%B2%89%E4%B8%9D%E6%9C%80%E5%A4%9A%E7%9A%84%E7%94%A8%E6%88%B7top10.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E5%91%98%E5%B7%A5%E6%9C%80%E5%A4%9A%E7%9A%84%E5%85%AC%E5%8F%B8top10.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E6%A0%A1%E5%8F%8B%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AD%A6%E6%A0%A1top10.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E4%BA%BA%E6%95%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E5%9C%B0%E6%96%B9top10.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-top10%E8%A1%8C%E4%B8%9A%E5%88%86%E5%B8%83.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-top10%E8%81%8C%E4%B8%9A%E5%88%86%E5%B8%83.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.089Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬取知乎60万用户信息之后的简单分析">
+<meta name="twitter:description" content="使用 Java+Elasticsearch+Kibana 爬取了知乎 60 万用户数据，做了简单的可视化分析。">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%9F%A5%E4%B9%8E%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E9%87%8F.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">爬取知乎60万用户信息之后的简单分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">爬取知乎60万用户信息之后的简单分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-20T05:03:07.000Z" itemprop="datePublished" class="page-time">
+  2016-12-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/project/">project</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动机"><span class="post-toc-number">1.</span> <span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据验证"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据验证</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关心的数据"><span class="post-toc-number">4.</span> <span class="post-toc-text">关心的数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性别分布"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">性别分布</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#粉丝最多的用户top10"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">粉丝最多的用户top10</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#员工最多的公司top10"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">员工最多的公司top10</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#校友最多的学校top10"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">校友最多的学校top10</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#人数最多的地方top10"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">人数最多的地方top10</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#top10行业分布"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">top10行业分布</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#top10职业分布"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">top10职业分布</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结语"><span class="post-toc-number">5.</span> <span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-12-20-webporter-zhihu-user-analysis" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">爬取知乎60万用户信息之后的简单分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-20 13:03:07" datetime="2016-12-20T05:03:07.000Z" itemprop="datePublished">2016-12-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/project/">project</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>使用 Java+Elasticsearch+Kibana 爬取了知乎 60 万用户数据，做了简单的可视化分析。</p>
+<a id="more"></a>
+<hr>
+<p>项目源码 <a href="https://github.com/brianway/webporter" target="_blank" rel="noopener">GitHub - webporter</a></p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在知乎上看到有个叫 @路人甲 的大神每隔一段时间就爬爬豆瓣/B站等等网站，做了很多有意思的分析，加上之前因为实验室项目接触过 Nutch，浅尝辄止了，所以一直想好好玩玩爬虫。</p>
+<p>网上 Python 的爬虫教程很多，而自己的主语言是 Java，本着宣传 Java，以练促学的目的，我使用 Java 爬取了知乎 60 万用户信息，主要想看看知乎上妹子多不多啊/是不是都是基佬啊，标配常青藤/年薪百万是不是真的啊，等等。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>为了保证数据的质量，避免爬到一些僵尸号什么的，我选择爬取关注列表而非粉丝列表。我随机挑选了一位粉丝过千的优秀回答者作为起始，爬取他的关注列表，再对列表中的每个人爬取其关注列表，以此类推……</p>
+<p>下载了大概 7 个小时，爬了 40 多万用户的关注列表，拿到了 10G 的数据，如图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%9F%A5%E4%B9%8E%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E9%87%8F.png" alt="爬取10G数据" title>
+                </div>
+                <div class="image-caption">爬取10G数据</div>
+            </figure>
+<p>理论上有 800 多万用户，可惜有很多重复的，去重后将数据导入 Elasticsearch，得到 60+ 万用户数据:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%9C%A8ES%E7%B4%A2%E5%BC%95%E7%8A%B6%E6%80%81.jpg" alt="ES索引" title>
+                </div>
+                <div class="image-caption">ES索引</div>
+            </figure>
+<h2 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h2><p>接下来简单看看下载下来的数据靠不靠谱，随手在知乎和我的 Kibana 分别搜了下轮子哥 @vczh</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E6%90%9C%E7%B4%A2%E8%BD%AE%E5%AD%90%E5%93%A5.png" alt="搜索轮子哥" title>
+                </div>
+                <div class="image-caption">搜索轮子哥</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-kibana%E6%90%9C%E7%B4%A2%E8%BD%AE%E5%AD%90%E5%93%A5.png" alt="搜索轮子哥" title>
+                </div>
+                <div class="image-caption">搜索轮子哥</div>
+            </figure>
+<p>可以看到，连同名的都搜出来是一样的，数据没啥问题。</p>
+<h2 id="关心的数据"><a href="#关心的数据" class="headerlink" title="关心的数据"></a>关心的数据</h2><p>然后使用 Elastichearch 的聚合查询配合 Kibana 对数据进行可视化展示，我主要分析了下面几个问题：</p>
+<ul>
+<li>性别分布</li>
+<li>粉丝最多的用户top10</li>
+<li>员工最多的公司top10</li>
+<li>校友最多的学校top10</li>
+<li>人数最多的地方top10</li>
+<li>top10行业分布</li>
+<li>top10职业分布</li>
+</ul>
+<p><strong>图中涉及性别的， 1 表示男，0 表示女，-1 表示不男不女</strong></p>
+<h3 id="性别分布"><a href="#性别分布" class="headerlink" title="性别分布"></a>性别分布</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E6%80%A7%E5%88%AB%E5%88%86%E5%B8%83.png" alt="性别分布" title>
+                </div>
+                <div class="image-caption">性别分布</div>
+            </figure>
+<p>可以看到知乎男性人数过半了，比女性和未知性别加起来都多。</p>
+<h3 id="粉丝最多的用户top10"><a href="#粉丝最多的用户top10" class="headerlink" title="粉丝最多的用户top10"></a>粉丝最多的用户top10</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E7%B2%89%E4%B8%9D%E6%9C%80%E5%A4%9A%E7%9A%84%E7%94%A8%E6%88%B7top10.png" alt="粉丝最多的用户top10" title>
+                </div>
+                <div class="image-caption">粉丝最多的用户top10</div>
+            </figure>
+<p>粉丝数前 10 的依次是 @张佳玮，@李开复，@黄继新，@周源，@yolfilm，@张亮，@张小北，@李淼，@葛巾，@采铜。最多的 120 万粉丝，第十也过 60 万了。不过前十里好几个都是知乎员工，有黑幕的嫌疑吧？</p>
+<h3 id="员工最多的公司top10"><a href="#员工最多的公司top10" class="headerlink" title="员工最多的公司top10"></a>员工最多的公司top10</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E5%91%98%E5%B7%A5%E6%9C%80%E5%A4%9A%E7%9A%84%E5%85%AC%E5%8F%B8top10.png" alt="员工最多的公司top10" title>
+                </div>
+                <div class="image-caption">员工最多的公司top10</div>
+            </figure>
+<p>可以看到 BAT 全部上榜了（乱入了一个学生什么鬼？），仅接着是网易,华为,谷歌,微软,美团。都是牛逼哄哄的互联网相关企业，看来国企和实体企业比较低调，不在知乎填公司信息啊。</p>
+<p>另外华为的男女比简直不能看啊，妹子那么少，想去华为的单身狗们需要好好考虑一下了。</p>
+<h3 id="校友最多的学校top10"><a href="#校友最多的学校top10" class="headerlink" title="校友最多的学校top10"></a>校友最多的学校top10</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E6%A0%A1%E5%8F%8B%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AD%A6%E6%A0%A1top10.png" alt="校友最多的学校top10" title>
+                </div>
+                <div class="image-caption">校友最多的学校top10</div>
+            </figure>
+<p>差强人意，校友人数排名前十的全特么是 985 啊，清北复交浙全部上榜，俨然中国大学排行榜。看来知乎标配不是常青藤，而是 985 嘛。另外可以看到，我科(倒数第三个)的男女比在这几个里面确实感人，难怪我现在还单身…</p>
+<h3 id="人数最多的地方top10"><a href="#人数最多的地方top10" class="headerlink" title="人数最多的地方top10"></a>人数最多的地方top10</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E4%BA%BA%E6%95%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E5%9C%B0%E6%96%B9top10.png" alt="人数最多的地方top10" title>
+                </div>
+                <div class="image-caption">人数最多的地方top10</div>
+            </figure>
+<p>北京独领风骚，上海紧随其后。另外知乎居然把深圳和广州根据有没有“市”标记为了两个城市，简直坑爹，我也懒得二次处理了。综合来看，北上广深杭，主要集中在这五个城市，基本也是我国互联网企业分布最多的几个城市。</p>
+<h3 id="top10行业分布"><a href="#top10行业分布" class="headerlink" title="top10行业分布"></a>top10行业分布</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-top10%E8%A1%8C%E4%B8%9A%E5%88%86%E5%B8%83.png" alt="top10行业分布" title>
+                </div>
+                <div class="image-caption">top10行业分布</div>
+            </figure>
+<p>可以看到，互联网和计算机软件两个加起来就占了半数以上，要是算上电子商务和电子游戏等基本是程序员的天下了，所以知乎上程序员偏多，IT 从业者占主流啊。</p>
+<p>另外互联网的男女比大概 2:1 的样子吧，法律，信息传媒和创意艺术的男女比比较均衡，大概五五开。</p>
+<h3 id="top10职业分布"><a href="#top10职业分布" class="headerlink" title="top10职业分布"></a>top10职业分布</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-top10%E8%81%8C%E4%B8%9A%E5%88%86%E5%B8%83.png" alt="top10职业分布" title>
+                </div>
+                <div class="image-caption">top10职业分布</div>
+            </figure>
+<p>将近四分之一是产品经理，创始人和 CEO 也不少，比工程师还多，学生也占一定比例。另外除了运营和编辑的男女比差不多，其它都是男多女少啊。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>从这 60 万用户数据可以看出，知乎的主要群体是程序员和学生，平均学历 985 不是黑，是真的！虽然知乎用户远不止 60 万，这些数据分析出来的结果可能有些偏差，但应该也能说明一些问题吧。</p>
+<p>最后按照国际惯例，附上源码链接[GitHub - webporter]: <a href="https://github.com/brianway/webporter" target="_blank" rel="noopener">https://github.com/brianway/webporter</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.089Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/" target="_blank" rel="external">https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kibana/">Kibana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webporter/">webporter</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/&title=《爬取知乎60万用户信息之后的简单分析》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/&title=《爬取知乎60万用户信息之后的简单分析》 — Brian's Homepage&source=使用 Java+Elasticsearch+Kibana 爬取了知乎 60 万用户数据，做了简单的可视化分析。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《爬取知乎60万用户信息之后的简单分析》 — Brian's Homepage&url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/18/2017-01-18-reading-note-architecture-design/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">大型网站技术架构-入门梳理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/12/13/2016-12-13-elasticsearch-bootstrap-checks/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Elasticsearch 5.0-配置检查</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/&title=《爬取知乎60万用户信息之后的简单分析》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/&title=《爬取知乎60万用户信息之后的简单分析》 — Brian's Homepage&source=使用 Java+Elasticsearch+Kibana 爬取了知乎 60 万用户数据，做了简单的可视化分析。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《爬取知乎60万用户信息之后的简单分析》 — Brian's Homepage&url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/12/20/2016-12-20-webporter-zhihu-user-analysis/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3ay27CMBAFUP7/p+mmi0qUcOfhiMXJCpUAPq5kT+748Yiv55/r+t3XO5NPvd55/Z3LFx4eHt5g6NdDzN+9/q3Jr+efwsPDwzvNux5KdUu4/mw+Bb3NBg8PD+/bePniPv/O3nTj4eHhfRsviSeSfCB5nU8HHh4e3v28vCzOy+vesPJ7lrMWPDw8vJi3u5Tf8/pIfw8PDw9v3FXPF/p8yc6PIEzG+fsNeHh4eAd4+YLbK1jzcKHaGCuMEw8PD2+VVz3qlPw9H1yv6VUovvHw8PBu4eVfNDnSmgy9N0GFXBkPDw+vxcsPEFTj1Jzdu6c8QXh4eHhLvMnhgOrg8m1pbUvAw8PDO8arNrEmra+tqUzGj4eHh3eCVy1YJ9tAPrhJe+zDEwMeHh7emFdoJgUTkZTaebk8b8jh4eHhneDtHofqbRKTKYgKdDw8PLxVXq+AnrSs8g2mGkb8cw8eHh7eMV4hDA2W5nlPqpqjfHhiwMPDw1vl5R/OG05Jk6xXlDfPlOHh4eGt8ibbQC+AmIQXeRjx4YkBDw8Pb8zL44Y8iu3tUb1DXW/BeHh4eAd4yRCry3o1Ds6H3jxThoeHh3eYN2lQ9Q5d5VO8HOPi4eHhtXjVMKIKyMv0JEROgonoZAQeHh7egNeLXPOGWTUgzqemWrLj4eHh7fKiMDQATMLcXqAc/Zfw8PDwjvESTHWZ3mprVQvrtw0wPDw8vFt4veZWPlnNSj8v4vHw8PBWec/i1SuvqwFEHot8eBcPDw/vAK+6+FYnIimOe9FDNUDBw8PD2+VtHXhKtpPrv1cL92hjwMPDwzvGKwSj42I3QU7CiHL9joeHh3cLb7KdVIPdZCLexhB4eHh4X8DrLev54YDlqcTDw8M7xusdfqoO6/rXqwV6YWPAw8PDW+VVH/jnZXQ+oHyiRxceHh5eyvsBBbK7YFzo+UoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

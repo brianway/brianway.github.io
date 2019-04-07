@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>常见算法基础题思路简析(六)-字符串篇 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法,数据结构">
+    <meta name="description" content="本文对和 字符串 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见算法基础题思路简析(六)-字符串篇">
+<meta property="og:url" content="https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文对和 字符串 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见算法基础题思路简析(六)-字符串篇">
+<meta name="twitter:description" content="本文对和 字符串 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常见算法基础题思路简析(六)-字符串篇</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">常见算法基础题思路简析(六)-字符串篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-28T05:46:07.000Z" itemprop="datePublished" class="page-time">
+  2017-09-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最长无重复字符子串"><span class="post-toc-number">1.</span> <span class="post-toc-text">最长无重复字符子串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓扑结构相同子树"><span class="post-toc-number">2.</span> <span class="post-toc-text">拓扑结构相同子树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#合法括号序列"><span class="post-toc-number">3.</span> <span class="post-toc-text">合法括号序列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拼接最小字典序"><span class="post-toc-number">4.</span> <span class="post-toc-text">拼接最小字典序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空格替换"><span class="post-toc-number">5.</span> <span class="post-toc-text">空格替换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#句子逆序"><span class="post-toc-number">6.</span> <span class="post-toc-text">句子逆序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#两串旋转"><span class="post-toc-number">7.</span> <span class="post-toc-text">两串旋转</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#词语变形"><span class="post-toc-number">8.</span> <span class="post-toc-text">词语变形</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串移位问题"><span class="post-toc-number">9.</span> <span class="post-toc-text">字符串移位问题</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2017-09-28-algorithms-common-6-string" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">常见算法基础题思路简析(六)-字符串篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-28 13:46:07" datetime="2017-09-28T05:46:07.000Z" itemprop="datePublished">2017-09-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文对和 <strong>字符串</strong> 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节</p>
+<a id="more"></a>
+<ul>
+<li>相关题目和代码在 GitHub: <a href="https://github.com/brianway/algorithms-learning" target="_blank" rel="noopener">https://github.com/brianway/algorithms-learning</a></li>
+<li>题目见 <code>com.brianway.learning.algorithms.lectures.string</code>包</li>
+</ul>
+<h2 id="最长无重复字符子串"><a href="#最长无重复字符子串" class="headerlink" title="最长无重复字符子串"></a>最长无重复字符子串</h2><p>题目见 <code>DistinctSubstring</code></p>
+<p>思路：对于每个字符，向左延伸找无重复子串，要知道该字符(记为 <code>s[i]</code>)上次在哪个位置出现过，还要知道之前其他字符中出现过重复且最近一次出现重复的那个位置 pre，则以 <code>s[i]</code> 结尾的向左最长无重复的长度为: <code>s[i]</code> 上次出现位置和 pre 中较大者到现在 <code>s[i]</code> 的距离。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//例子1</span><br><span class="line">i:0 1 2 3 4 5</span><br><span class="line">s:b a c b a d</span><br><span class="line"></span><br><span class="line">i=4 =&gt; s[4] = a, pre = 0(b 重复了),map[a] = 1(a 上次出现在 i=1)</span><br><span class="line">    =&gt; cur = 4-1 = 3, 即 cba</span><br><span class="line">i=5 =&gt; s[5] = d, pre = 1(a 重复了), map[d] = -1</span><br><span class="line">    =&gt; cur = 5-1 =4, 即 cbad</span><br><span class="line"></span><br><span class="line">//例子2</span><br><span class="line">i:0 1 2 3 4 5</span><br><span class="line">s:a b c b a d</span><br><span class="line"></span><br><span class="line">i=4 =&gt; s[4] = a, pre = 1(b 重复了), map[a] = 0(a 上次出现在 i=0)</span><br><span class="line">    =&gt; cur = 4-1 = 3, 即 cba</span><br><span class="line">i=5 =&gt; s[5] = d, pre = 1(b 重复了), map[d] = -1</span><br><span class="line">    =&gt; cur = 5-1 =4, 即 cbad</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用一个哈希表 <code>map[256]</code> 来记录每种字符之前最新出现过的位置。</li>
+<li>使用一个整型变量 pre 来记录以 <code>s[i-1]</code> 结尾的字符串向左延伸且无重复字符时的最左下标(不包括该下标)。</li>
+</ul>
+<p>对字符串中每个字符 <code>s[i]</code> 进行如下操作：</p>
+<ol>
+<li>对字符串中每个字符，找出 <code>pre</code> 和 <code>map[s[i]]</code> 中的较大值并更新为 <code>pre</code></li>
+<li>以当前字符 <code>s[i]</code> 结尾向左无重复的长度则为 <code>cur = i - pre</code></li>
+<li>根据这个 cur 和历史最大长度比较，更新最大长度</li>
+<li>更新 <code>map[s[i]]</code> 为 i</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>map 中每个元素和 pre 均初始值为 -1</li>
+<li>有个现象：当未出现过某字符且字符均未出现过重复时，<code>pre</code> 和 <code>map[s[i]]</code> 均为 -1, <code>cur = i+1</code>，cur 随 i 递增</li>
+</ul>
+<h2 id="拓扑结构相同子树"><a href="#拓扑结构相同子树" class="headerlink" title="拓扑结构相同子树"></a>拓扑结构相同子树</h2><p>题目见 <code>IdenticalTree</code></p>
+<p>思路：</p>
+<ol>
+<li>使用特殊格式打印的二叉树中序遍历结果时唯一的，打印两个树的中序遍历字符串</li>
+<li>使用 KMP 算法进行子串匹配，能匹配则</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>中序遍历时，空节点也要打印，所有值要以特殊字符结尾以免歧义</li>
+<li>KMP 的原理、实现以及小优化<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="noopener">字符串匹配的KMP算法</a></li>
+<li><a href="http://blog.csdn.net/v_july_v/article/details/7041827" target="_blank" rel="noopener"> 从头到尾彻底理解KMP</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="合法括号序列"><a href="#合法括号序列" class="headerlink" title="合法括号序列"></a>合法括号序列</h2><p>题目见 <code>Parenthesis</code></p>
+<p>思路：每个右括号出现时必已有一个左括号与之对应，计数即可，正负抵消。对每个元素进行如下操作：</p>
+<ol>
+<li>遇到非括号字符返回 false</li>
+<li>遇到左括号则计数器加一</li>
+<li>遇到右括号则计数器减一，计数器为负值则返回  false</li>
+<li>循环结束计数器值为零则 true，否则 false</li>
+</ol>
+<h2 id="拼接最小字典序"><a href="#拼接最小字典序" class="headerlink" title="拼接最小字典序"></a>拼接最小字典序</h2><p>题目见 <code>Prior</code></p>
+<p>思路：排序不是以单个字符串来比较，而是把待比较的两个字符串(记为 sa 和 sb)拼接起来进行比较，即比较 sa+sb 和 sb+sa 的字典序</p>
+<p>注意：</p>
+<ul>
+<li>由于两个串无论什么顺序拼接，拼接后字符串长度相同，所以无论谁在前，拼接后的串对其他字符串影响是一致的</li>
+</ul>
+<h2 id="空格替换"><a href="#空格替换" class="headerlink" title="空格替换"></a>空格替换</h2><p>题目见 <code>Replacement</code></p>
+<p>思路：</p>
+<ol>
+<li>先统计下空格数量，分配空间</li>
+<li>直接逐个字符复制，遇到空格就替换即可</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>新的字符串长度为 <code>length + 2 * count</code>，length 为原字符串长度， count 为空格个数，<code>%20</code>比空格多了两个字符</li>
+</ul>
+<h2 id="句子逆序"><a href="#句子逆序" class="headerlink" title="句子逆序"></a>句子逆序</h2><p>题目见 <code>Reverse</code></p>
+<p>思路：</p>
+<ol>
+<li>先对整个字符串反转</li>
+<li>再对以空格分隔的每个单词反转</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>能做到 in place 反转，无需额外空间，有点像“负负得正”</li>
+<li>每个单词反转是以其末尾的空格触发的，所以对最后一个单词，需要单独判断处理</li>
+</ul>
+<h2 id="两串旋转"><a href="#两串旋转" class="headerlink" title="两串旋转"></a>两串旋转</h2><p>题目见 <code>Rotation</code></p>
+<p>思路：</p>
+<ol>
+<li>判断两串是否长度相等</li>
+<li>将原串与自身拼接，看另一字符串是否是拼接串的子串即可</li>
+</ol>
+<h2 id="词语变形"><a href="#词语变形" class="headerlink" title="词语变形"></a>词语变形</h2><p>题目见 <code>Transform</code></p>
+<p>思路：</p>
+<ol>
+<li>判断两串长度是否相等</li>
+<li>遍历 A 串，统计 A 串中每种字符出现的次数（计数累加）</li>
+<li>遍历 B 串，做 2 中的统计结果做减法，若 B 中出现了 A 中未出现的字符或者 B 中某种字符出现次数比 A 多（表现形式为：减 1 前 <code>counts[b[i]] == 0</code>），返回 false，否则 true</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>遍历 B 串不是计数累加而是利用 A 的结果</li>
+</ul>
+<h2 id="字符串移位问题"><a href="#字符串移位问题" class="headerlink" title="字符串移位问题"></a>字符串移位问题</h2><p>题目见 <code>Translation</code></p>
+<p>思路：以移位长度为分界点，分别将各部分对其中轴线做镜像反转，再对整个字符串以其中轴线做镜像反转。</p>
+<ol>
+<li>将下标 <code>0 ~ len-1</code> 的字符反转</li>
+<li>将下标 <code>len ~ n-1</code> 的字符反转</li>
+<li>将整个字符串 <code>0 ~ n-1</code> 反转</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>无需申请额外空间</li>
+<li>各部分做了两次镜像反转，所以内部保持相对顺序不变</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.051Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/09/28/2017-09-28-algorithms-common-6-string/" target="_blank" rel="external">https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/&title=《常见算法基础题思路简析(六)-字符串篇》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/&title=《常见算法基础题思路简析(六)-字符串篇》 — Brian's Homepage&source=本文对和 字符串 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见算法基础题思路简析(六)-字符串篇》 — Brian's Homepage&url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/29/2017-09-29-how-to-prepare-a-technical-interview/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">如何准备校招技术面试</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/28/2017-09-28-algorithms-common-5-stack-and-queue/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常见算法基础题思路简析(五)-队列和栈篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/&title=《常见算法基础题思路简析(六)-字符串篇》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/&title=《常见算法基础题思路简析(六)-字符串篇》 — Brian's Homepage&source=本文对和 字符串 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见算法基础题思路简析(六)-字符串篇》 — Brian's Homepage&url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-6-string/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpUlEQVR42u3aUW7bMBAE0Nz/0ukBUjkzS67rAk9fRixTfAxAUrP8+oqv74fr6Z68neS5Pz9fvvDw8PAudf1n0wnp6S9PXUye/tRO8is8PDy8PV4+KSdT/8aCkfQBDw8P7zN5J4zkubMFBg8PD+9/4bXhQrLkvN7W4+Hh4X0Or206WSry4cgXnsWsBQ8PDy/mnU/l7/+8Ut/Dw8PDO66q58Ww9ijAbMmpe4uHh4e3wMsn3FukfBN8a/jw8PDw3s9rF4Y8bE14+XGuxyADDw8P7ypvdqj0bnfPhzg6qIqHh4d3lZeUmvIhaNnJ/bPhw8PDw9vgnYStM0YbMcyOKeDh4eHt8dqjVLOg4e5EX4QgeHh4eGu8fLObPyD5bXvPsPSFh4eHd5U3nHBHG+K80yuRBx4eHt5umhoVwE4OS+WtJch6UcHDw8M74LUv/O1C0kaxeYQRtYyHh4e3wKuL7qOgtj0c0Ea60bsCHh4e3lXeLJI4j27bgZ4NKB4eHt57ePmhq9ljZvFuW5DDw8PD2+DNSlxtrNAeIMgXpF/ax8PDw1vgnQS1ecyaLCHtUlRsx/Hw8PDWePkWuf12Fg2fLEJ4eHh4/5Y3C1tnBbOktWQQ/7KlxsPDw7vKm3XiZPvblt/aABcPDw9vm5dP0+2U3Xbo9X9g1k88PDy8Pd7J+3tbBsvD3Ha4f4lx8fDw8BZ4eVH//PjULLRtZ348PDy8u7zv8sq7OJvo8/g4CYvx8PDwNnizSTzv+l6h61ZwjIeHhzfjnZe+2uMCs2Nb7bDi4eHhbfNOJuW2ZDXc+JalODw8PLxP47UdbYtY1+IMPDw8vA/g3S2Vtcetkk0/Hh4e3nt4J5FBDsiXmSJueBmL4OHh4W3w2hf+NoDIy2Mnm+xreQYeHh7eq+sPimbPFHUkRU8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

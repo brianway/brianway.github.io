@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>前端学习笔记(2)-CSS 基础 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="前端,CSS">
+    <meta name="description" content="本文主要对 CSS 相关基础知识进行介绍">
+<meta name="keywords" content="前端,CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端学习笔记(2)-CSS 基础">
+<meta property="og:url" content="https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要对 CSS 相关基础知识进行介绍">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端学习笔记(2)-CSS 基础">
+<meta name="twitter:description" content="本文主要对 CSS 相关基础知识进行介绍">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">前端学习笔记(2)-CSS 基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">前端学习笔记(2)-CSS 基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-18T05:55:07.000Z" itemprop="datePublished" class="page-time">
+  2017-05-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基础知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">基础知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-选择器"><span class="post-toc-number">2.</span> <span class="post-toc-text">CSS 选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-的继承、层叠和特殊性"><span class="post-toc-number">3.</span> <span class="post-toc-text">CSS 的继承、层叠和特殊性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-格式化排版"><span class="post-toc-number">4.</span> <span class="post-toc-text">CSS 格式化排版</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-盒模型"><span class="post-toc-number">5.</span> <span class="post-toc-text">CSS 盒模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#元素分类"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">元素分类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#盒模型"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">盒模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-布局模型"><span class="post-toc-number">6.</span> <span class="post-toc-text">CSS 布局模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流动模型"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">流动模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浮动模型"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">浮动模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#层模型"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">层模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#颜色和长度"><span class="post-toc-number">7.</span> <span class="post-toc-text">颜色和长度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置小技巧"><span class="post-toc-number">8.</span> <span class="post-toc-text">设置小技巧</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#水平居中设置"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">水平居中设置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#垂直居中设置"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">垂直居中设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">9.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2017-05-18-front-end-notes-2-CSS-basics" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">前端学习笔记(2)-CSS 基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-18 13:55:07" datetime="2017-05-18T05:55:07.000Z" itemprop="datePublished">2017-05-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要对 CSS 相关基础知识进行介绍</p>
+<a id="more"></a>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>CSS 样式由选择符和声明组成，而声明又由属性和值组成。</p>
+<ul>
+<li>选择符：又称选择器，指明网页中要应用样式规则的元素。</li>
+<li>声明：在英文大括号<code>{}</code>中的的就是声明，属性和值之间用英文冒号<code>{}</code>分隔。当有多条声明时，中间可以英文分号<code>;</code>分隔。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器&#123;</span><br><span class="line">    样式;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从CSS 样式代码插入的形式来看基本可以分为以下3种：内联式、嵌入式和外部式三种。优先级遵循就近原则，一般来说，<code>内联式 &gt; 嵌入式 &gt; 外部式</code>。</p>
+<ul>
+<li>内联式</li>
+</ul>
+<p>例子 <code>&lt;p style=&quot;color:red;font-size:12px&quot;&gt;这里文字是红色。&lt;/p&gt;</code></p>
+<ul>
+<li>嵌入式</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    span&#123;</span></span><br><span class="line"><span class="undefined">        color:red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>外部式</li>
+</ul>
+<p>例子：<code>&lt;link href=&quot;base.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</code></p>
+<h2 id="CSS-选择器"><a href="#CSS-选择器" class="headerlink" title="CSS 选择器"></a>CSS 选择器</h2><p>常见的类选择器类型有如下几种：</p>
+<ul>
+<li>标签选择器，<code>.标签选择器名称{css样式代码;}</code></li>
+<li>类选择器，<code>.类选器名称{css样式代码;}</code></li>
+<li>ID 选择器，<code>＃类选器名称{css样式代码;}</code></li>
+<li>子选择器，即大于符号(<code>&gt;</code>),用于选择指定标签元素的第一代子元素</li>
+<li>包含选择器，即加入空格<code></code>,用于选择指定标签元素下的后辈元素</li>
+<li>通用选择器，匹配html中所有标签元素，<code>* {css样式代码;}</code></li>
+</ul>
+<p>类选择器和ID选择器都可以应用于任何元素，但 <strong>ID 选择器只能在文档中使用一次</strong>，可以使用类选择器词列表方法为一个元素同时设置多个样式，ID 选择器是不可以的。</p>
+<p>子选择器和包含选择器区别：<code>&gt;</code>作用于元素的第一代后代，空格作用于元素的所有后代。</p>
+<p>另外还有两种选择符：</p>
+<ul>
+<li>伪类选择符，允许给 HTML 不存在的标签（标签的某种状态）设置样式。常用的有 <code>a:hover{color:red;}</code></li>
+<li>分组选择符，为 HTML 中多个标签元素设置同一个样式时，可以使用分组选择符<code>,</code>。例如 <code>h1,span{color:red;}</code></li>
+</ul>
+<h2 id="CSS-的继承、层叠和特殊性"><a href="#CSS-的继承、层叠和特殊性" class="headerlink" title="CSS 的继承、层叠和特殊性"></a>CSS 的继承、层叠和特殊性</h2><ul>
+<li>CSS 的某些样式是具有继承性的，继承是一种规则，它允许样式不仅应用于某个特定 HTML 标签元素，而且应用于其后代。</li>
+<li>特殊性：不同选择器具有不同权值，标签的权值为 1，类选择符的权值为 10，ID选择符的权值最高为 100。</li>
+<li><strong>层叠</strong> 就是在 HTML 文件中对于同一个元素可以有多个 CSS 样式存在，当有相同权重的样式存在时，会根据这些 CSS 样式的前后顺序来决定，处于最后面的 CSS 样式会被应用。</li>
+</ul>
+<h2 id="CSS-格式化排版"><a href="#CSS-格式化排版" class="headerlink" title="CSS 格式化排版"></a>CSS 格式化排版</h2><p>文字排版</p>
+<ul>
+<li>字体，<code>body{font-family:&quot;Microsoft Yahei&quot;;}</code></li>
+<li>字号、颜色，<code>body{font-size:12px;color:#666}</code></li>
+<li>粗体，<code>body{font-weight:bold;}</code></li>
+<li>斜体，<code>body{font-style:italic;}</code></li>
+<li>下划线，<code>body{font-style:italic;}</code></li>
+<li>删除线，<code>body{text-decoration:line-through;}</code></li>
+</ul>
+<p>段落排版</p>
+<ul>
+<li>缩进，<code>p{text-indent:2em;}</code></li>
+<li>行间距（行高），<code>p{line-height:1.5em;}</code></li>
+<li>中文字间距、字母间距，<code>letter-spacing:50px;</code>和<code>word-spacing:50px;</code></li>
+<li>对齐，<code>div{text-align:center;}</code></li>
+</ul>
+<h2 id="CSS-盒模型"><a href="#CSS-盒模型" class="headerlink" title="CSS 盒模型"></a>CSS 盒模型</h2><h3 id="元素分类"><a href="#元素分类" class="headerlink" title="元素分类"></a>元素分类</h3><p>在 CSS 中，HTML 中的标签元素大体被分为三种不同的类型：块状元素、内联元素(又叫行内元素)和内联块状元素。</p>
+<ul>
+<li>常用的块状元素有：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;...&lt;h6&gt;、&lt;ol&gt;、&lt;ul&gt;、&lt;dl&gt;、&lt;table&gt;、&lt;address&gt;、&lt;blockquote&gt; 、&lt;form&gt;</span><br></pre></td></tr></table></figure>
+<p>块级元素特点：</p>
+<ol>
+<li>每个块级元素都从新的一行开始，并且其后的元素也另起一行。</li>
+<li>元素的高度、宽度、行高以及顶和底边距都可设置。</li>
+<li>元素宽度在不设置的情况下，是它本身父容器的 100%（和父元素的宽度一致），除非设定一个宽度。</li>
+</ol>
+<p>设置 <code>display:block</code> 就是将元素显示为块级元素，从而使元素具有块状元素特点。</p>
+<p><em>注：img 标签与 div 层之间会有空隙的解决方法是：使用 <code>display:block</code> 就可以消除间隙。</em></p>
+<ul>
+<li>常用的内联元素有：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a&gt;、&lt;span&gt;、&lt;br&gt;、&lt;i&gt;、&lt;em&gt;、&lt;strong&gt;、&lt;label&gt;、&lt;q&gt;、&lt;var&gt;、&lt;cite&gt;、&lt;code&gt;</span><br></pre></td></tr></table></figure>
+<p>内联元素特点：</p>
+<ol>
+<li>和其他元素都在一行上；</li>
+<li>元素的<strong>高度、宽度</strong>及顶部和底部边距<strong>不可</strong>设置；</li>
+<li>元素的宽度就是它包含的文字或图片的宽度，不可改变。</li>
+</ol>
+<p>块状元素也可以通过代码 <code>display:inline</code> 将元素设置为内联元素。</p>
+<ul>
+<li>常用的内联块状元素有：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img&gt;、&lt;input&gt;</span><br></pre></td></tr></table></figure>
+<p>inline-block 元素特点：</p>
+<ol>
+<li>和其他元素都在一行上；</li>
+<li>元素的高度、宽度、行高以及顶和底边距都可设置。</li>
+</ol>
+<p>内联块状元素（inline-block）就是同时具备内联元素、块状元素的特点，代码 <code>display:inline-block</code> 就是将元素设置为内联块状元素。</p>
+<h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><ul>
+<li>边框</li>
+</ul>
+<p>盒子模型的<strong>边框</strong>就是围绕着<strong>内容</strong>及<strong>补白</strong>的线，这条线你可以设置它的<strong>粗细</strong>、<strong>样式</strong>和<strong>颜色</strong>(边框三个属性)。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">2px</span>  solid  red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">border-width</span>:<span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">border-style</span>:solid;</span><br><span class="line">    <span class="attribute">border-color</span>:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>单独设置下边框的例子 <code>div{border-bottom:1px solid red;}</code></p>
+<ul>
+<li>宽度和高度</li>
+</ul>
+<p>CSS 内定义的宽（width）和高（height），指的是 <strong>填充以里的内容范围</strong>。一个元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界。</p>
+<p>W3C 的标准 Box Model:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*外盒尺寸计算（元素空间尺寸）*/</span><br><span class="line">Element空间高度 = content height + padding + border + margin</span><br><span class="line">Element 空间宽度 = content width + padding + border + margin</span><br><span class="line">/*内盒尺寸计算（元素大小）*/</span><br><span class="line">Element Height = content height + padding + border （Height为内容高度）</span><br><span class="line">Element Width = content width + padding + border （Width为内容宽度）</span><br></pre></td></tr></table></figure>
+<p>所以有时会设置 <code>box-sizing: border-box;</code> 来避免计算内部元素大小</p>
+<blockquote>
+<p>参考 <a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank" rel="noopener">CSS3 Box-sizing</a></p>
+</blockquote>
+<ul>
+<li>填充(padding)</li>
+</ul>
+<p>元素内容与边框之间是可以设置距离的，称之为“填充”。填充也可分为上、右、下、左(顺时针)。</p>
+<p>例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*上、右、下、左(顺时针)，顺序不要搞混*/</span></span><br><span class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">padding</span>:<span class="number">20px</span> <span class="number">10px</span> <span class="number">15px</span> <span class="number">30px</span>;&#125;</span><br><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">   <span class="attribute">padding-top</span>:<span class="number">20px</span>;</span><br><span class="line">   <span class="attribute">padding-right</span>:<span class="number">10px</span>;</span><br><span class="line">   <span class="attribute">padding-bottom</span>:<span class="number">15px</span>;</span><br><span class="line">   <span class="attribute">padding-left</span>:<span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*上、右、下、左的填充都为10px;*/</span></span><br><span class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">padding</span>:<span class="number">10px</span>;&#125;</span><br><span class="line"><span class="comment">/*上下填充一样为10px，左右一样为20px*/</span></span><br><span class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">padding</span>:<span class="number">10px</span> <span class="number">20px</span>;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>边界(margin)</li>
+</ul>
+<p>元素与其它元素之间的距离可以使用边界（margin）来设置，顺序和填充一样是上，右，下，左。padding 在边框里，margin 在边框外。</p>
+<h2 id="CSS-布局模型"><a href="#CSS-布局模型" class="headerlink" title="CSS 布局模型"></a>CSS 布局模型</h2><p>CSS 包含 3 种基本的布局模型，用英文概括为：Flow、Layer 和 Float。<br>在网页中，元素有三种布局模型：</p>
+<ol>
+<li>流动模型（Flow）</li>
+<li>浮动模型 (Float)</li>
+<li>层模型（Layer）</li>
+</ol>
+<h3 id="流动模型"><a href="#流动模型" class="headerlink" title="流动模型"></a>流动模型</h3><p>流动模型，流动（Flow）是默认的网页布局模式。</p>
+<p>流动布局模型具有2个比较典型的特征：</p>
+<ol>
+<li><strong>块状元素</strong> 都会在所处的包含元素内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为 100%。实际上，块状元素都会以行的形式占据位置。</li>
+<li>在流动模型下，<strong>内联元素</strong> 都会在所处的包含元素内从左到右水平分布显示。</li>
+</ol>
+<h3 id="浮动模型"><a href="#浮动模型" class="headerlink" title="浮动模型"></a>浮动模型</h3><p>任何元素在默认情况下是不能浮动的，但可以用 CSS 定义为浮动。例子：<code>#div1{float:left;}</code></p>
+<h3 id="层模型"><a href="#层模型" class="headerlink" title="层模型"></a>层模型</h3><p>CSS 定义了一组定位（positioning）属性来支持层布局模型。</p>
+<p>层模型有三种形式：</p>
+<ol>
+<li>绝对定位(<code>position: absolute</code>)</li>
+<li>相对定位(<code>position: relative</code>)</li>
+<li>固定定位(<code>position: fixed</code>)</li>
+</ol>
+<p>可参考这篇文章辅助理解 <a href="http://www.cnblogs.com/tim-li/archive/2012/07/09/2582618.html" target="_blank" rel="noopener">《css绝对定位、相对定位和文档流的那些事》</a></p>
+<blockquote>
+<p>官方文档: <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/position" target="_blank" rel="noopener">MDN - position</a></p>
+</blockquote>
+<ul>
+<li>绝对定位(<code>position: absolute</code>)</li>
+</ul>
+<p>如果想为元素设置层模型中的绝对定位，需要设置 <code>position:absolute</code>(表示绝对定位)，这条语句的作用将元素从文档流中拖出来，然后使用 left、right、top、bottom 属性相对于其<strong>最接近的一个具有定位属性的父包含块</strong>进行绝对定位。如果不存在这样的包含块，则相对于 body 元素，即相对于<strong>浏览器窗口</strong>。</p>
+<ul>
+<li>相对定位(<code>position: relative</code>)</li>
+</ul>
+<p>如果想为元素设置层模型中的相对定位，需要设置 <code>position:relative</code>（表示相对定位），它通过 left、right、top、bottom 属性确定元素在<strong>正常文档流中</strong>的偏移位置。相对定位完成的过程是首先按 static(float) 方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于<strong>以前的位置移动</strong>，移动的方向和幅度由left、right、top、bottom属性确定，<strong>偏移前的位置保留不动</strong>。</p>
+<p>简单来说，就是相对元素原来的位置进行移动，元素本身所占的位置会保留。</p>
+<ul>
+<li>固定定位(<code>position: fixed</code>)</li>
+</ul>
+<p>设置 <code>position:fixed;</code>。fixed：表示固定定位，与 absolute 定位类型类似，但它的相对移动的坐标是视图（<strong>屏幕内的网页窗口</strong>）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响，这与 <code>background-attachment:fixed;</code> 属性功能相同。</p>
+<p>Relative 与 Absolute 组合使用,必须遵守下面规范：</p>
+<ol>
+<li>参照定位的元素必须是相对定位元素的前辈元素</li>
+<li>参照定位的元素必须加入 <code>position:relative;</code></li>
+<li>定位元素加入 <code>position:absolute</code>，便可以使用 top、bottom、left、right 来进行偏移定位了</li>
+</ol>
+<p>例子(HTML 和 CSS 代码分别为)：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span>&gt;</span><span class="comment">&lt;!--参照定位的元素--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span>&gt;</span>相对参照元素进行定位<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="comment">&lt;!--相对定位元素--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">position</span>:relative; <span class="comment">/*参照定位的元素必须加入position:relative;*/</span>      </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#box2</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">30px</span>;<span class="comment">/*定位元素加入position:absolute*/</span>         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="颜色和长度"><a href="#颜色和长度" class="headerlink" title="颜色和长度"></a>颜色和长度</h2><p>设置颜色的方法也有很多种：</p>
+<ul>
+<li>英文命令颜色，<code>p{color:red;}</code></li>
+<li>RGB颜色，<code>p{color:rgb(133,45,200);}</code> 和 <code>p{color:rgb(20%,33%,25%);}</code></li>
+<li>十六进制颜色，<br>这种颜色设置方法是现在比较普遍使用的方法，其原理其实也是 RGB 设置，但是其每一项的值由 0-255 变成了十六进制 00-ff。<code>p{color:#00ffff;}</code>(当你设置的颜色是 16 进制的色彩值时，如果每两位的值相同，可以缩写一半，<code>#0ff</code>)</li>
+</ul>
+<p>RGB 配色表参考 <a href="http://tool.oschina.net/commons?type=3" target="_blank" rel="noopener">RGB颜色对照表 - 在线工具 - 开源中国</a> 或者 <a href="http://www.wahart.com.hk/rgb.htm" target="_blank" rel="noopener">RGB 配色表</a></p>
+<p>长度单位总结一下，目前比较常用到px（像素）、em、% 百分比，要注意其实这三种单位都是相对单位。</p>
+<ul>
+<li>像素</li>
+<li>em，就是本元素给定字体的 font-size 值</li>
+<li>% 百分比</li>
+</ul>
+<h2 id="设置小技巧"><a href="#设置小技巧" class="headerlink" title="设置小技巧"></a>设置小技巧</h2><h3 id="水平居中设置"><a href="#水平居中设置" class="headerlink" title="水平居中设置"></a>水平居中设置</h3><ul>
+<li>行内元素。如果被设置元素为文本、图片等行内元素时，水平居中是通过给<strong>父元素</strong>设置 <code>text-align:center</code> 来实现的。</li>
+<li>定宽块状元素(块状元素的宽度 width 为固定值)。满足<strong>定宽</strong>和<strong>块状</strong>两个条件的元素是可以通过设置“左右 margin”值为 auto 来实现居中的。</li>
+<li>不定宽块状元素。<ul>
+<li>加入 table 标签(包括 <code>&lt;tbody&gt;、&lt;tr&gt;、&lt;td&gt;</code>)，为这个 table 设置“左右 margin 居中”</li>
+<li>设置 <code>display: inline</code> 方法：与第一种类似，显示类型设为 行内元素，然后使用 <code>text-align:center</code> 来实现居中效果，进行不定宽元素的属性设置。</li>
+<li>给父元素设置 float 和 <code>position:relative; left:50%</code>，子元素设置 <code>position:relative</code> 和 <code>left: -50%</code> 来实现水平居中。</li>
+</ul>
+</li>
+</ul>
+<h3 id="垂直居中设置"><a href="#垂直居中设置" class="headerlink" title="垂直居中设置"></a>垂直居中设置</h3><ul>
+<li>父元素高度确定的单行文本。通过设置父元素的 height 和 line-height 高度一致来实现的。(height: 该元素的高度；line-height: 顾名思义，行高（行间距），指在文本中，行与行之间的 基线间的距离 )。</li>
+<li>父元素高度确定的多行文本。使用插入 table  (包括 tbody、tr、td)标签，同时设置 <code>vertical-align：middle</code>。</li>
+</ul>
+<p>另外，<strong>为元素设置以下两个属性之一会隐形改变 display 类型</strong>，元素的display显示类型就会自动变为以 <code>display:inline-block</code>（块状元素）的方式显示，当然就可以设置元素的 width 和 height 了，且默认宽度不占满父元素。</p>
+<ol>
+<li><code>position: absolute</code></li>
+<li><code>float: left</code> 或 <code>float:right</code></li>
+</ol>
+<p>更详细的居中布局技巧可以参考我另外一篇文章：<a href="http://brianway.github.io/2017/05/18/css-layout-classical-problems/">CSS 布局经典问题初步整理</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Getting_started" target="_blank" rel="noopener">MDN CSS入门教程</a></li>
+<li><a href="http://www.imooc.com/learn/9" target="_blank" rel="noopener">慕课HTML+CSS基础教程视频</a></li>
+<li><a href="http://www.cnblogs.com/tim-li/archive/2012/07/09/2582618.html" target="_blank" rel="noopener">css绝对定位、相对定位和文档流的那些事</a></li>
+<li><a href="http://www.w3school.com.cn/cssref/index.asp" target="_blank" rel="noopener">W3School - CSS 参考手册</a></li>
+<li><a href="http://zh.learnlayout.com/toc.html" target="_blank" rel="noopener">学习CSS布局</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.018Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/" target="_blank" rel="external">https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/&title=《前端学习笔记(2)-CSS 基础》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/&title=《前端学习笔记(2)-CSS 基础》 — Brian's Homepage&source=本文主要对 CSS 相关基础知识进行介绍" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端学习笔记(2)-CSS 基础》 — Brian's Homepage&url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/18/2017-05-18-front-end-notes-3-DOM-basics/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">前端学习笔记(3)-DOM 基础</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/18/2017-05-18-front-end-notes-1-HTML/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">前端学习笔记(1)-HTML</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/&title=《前端学习笔记(2)-CSS 基础》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/&title=《前端学习笔记(2)-CSS 基础》 — Brian's Homepage&source=本文主要对 CSS 相关基础知识进行介绍" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端学习笔记(2)-CSS 基础》 — Brian's Homepage&url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/05/18/2017-05-18-front-end-notes-2-CSS-basics/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwUlEQVR42u3awU7DMBAE0P7/T4PECYk2nfHaAaSXU4Ug8TNSvJ3dxyO+Pr6un5+//+TVdf07r+6TPHfbhYeHh7e09GRxp6nJ3do74OHh4Z3j5YfB5HWfLPT63Z6vGQ8PD+8v8NrDoy2ak3oYDw8P73/xTmQeyaGSrwEPDw/vTl5e+K7Fu9f3yQ+kg1kLHh4eXsybNMB+6/NN/T08PDy8sqs+aYnl8e5a/BGtEw8PD+8ALy9z29GopKGVICfNMDw8PLxzvDZuaAekWl4b9dZhLh4eHt6Al7+gJ4HpWuSaB8Rvimk8PDy8rbw2wJ2UuW3M0YYdG/JpPDw8vIDXRq55sJuMDlxHFfn9X34lwMPDwzvAy1tZ14dE2xjL449JHouHh4d3gpe8mhNMzms3pTgArv9veHh4eJt4+Qt3Pp7VNtLmG4GHh4d3jpc38vMXdDEOtZQb5GvAw8PD28ubfO1PmlKT5llbpj95Lh4eHt4B3iSAmAwcJMV3Hh9Ha8PDw8M7xmsDiHxr8lGqNsIoBrDw8PDwNvHWmvf5IyeH0Nox86bLh4eHhzfgtQNVuyLatiBOjqUnz8LDw8M7wGsD3Hmxmy+0DSmK7cbDw8Mb8CaPX2tftX87GW7Aw8PDO81bGw7IQ4S9sW80soCHh4d3gDcJEdqgod2mSUGPh4eHdw+v/aq/qw2WP310DODh4eFt5SWv73mYm8cKOSDaUDw8PLzDvLYUbhv5bQMsOdPw8PDw7uR9lNfikFO8oLawjmbK8PDw8LbyJgtqS/B2FKAtzWsSHh4e3oC3dhhM4ol2lKoNi598Y8DDw8M7wJscBmvDB23DLN/WR1Jf4+Hh4d3IS6hrEW27ZcW4FR4eHt4v8fJXef74teGDYmvw8PDwjvGSMCIZgcqPll0DCm8OEjw8PLwDvHkDLI9ck9J52zQZHh4e3n7eJzOvkpdbcN7oAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

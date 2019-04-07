@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(17)-上传图片 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SpringMVC">
+    <meta name="description" content="本文展示如何在springmvc中上传图片">
+<meta name="keywords" content="SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(17)-上传图片">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文展示如何在springmvc中上传图片">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(17)-上传图片">
+<meta name="twitter:description" content="本文展示如何在springmvc中上传图片">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(17)-上传图片</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(17)-上传图片</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:17.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#springmvc中对多部件类型解析"><span class="post-toc-number">1.</span> <span class="post-toc-text">springmvc中对多部件类型解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加入上传图片的jar"><span class="post-toc-number">2.</span> <span class="post-toc-text">加入上传图片的jar</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建图片虚拟目录存储图片"><span class="post-toc-number">3.</span> <span class="post-toc-text">创建图片虚拟目录存储图片</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上传图片代码"><span class="post-toc-number">4.</span> <span class="post-toc-text">上传图片代码</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-30-springmvc-learn-17-picture-upload" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(17)-上传图片</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:17" datetime="2016-03-29T22:28:17.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文展示如何在springmvc中上传图片</p>
+<a id="more"></a>
+<h2 id="springmvc中对多部件类型解析"><a href="#springmvc中对多部件类型解析" class="headerlink" title="springmvc中对多部件类型解析"></a>springmvc中对多部件类型解析</h2><p>在修改商品页面，添加上传商品图片功能。</p>
+<p>在页面form中提交<code>enctype=&quot;multipart/form-data&quot;</code>的数据时，需要springmvc对multipart类型的数据进行解析。</p>
+<p>在springmvc.xml中配置multipart类型解析器。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 文件上传 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"multipartResolver"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 设置上传文件的最大尺寸为5MB --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxUploadSize"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>5242880<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="加入上传图片的jar"><a href="#加入上传图片的jar" class="headerlink" title="加入上传图片的jar"></a>加入上传图片的jar</h2><p>添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 文件上传 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>依赖树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[INFO] \- commons-fileupload:commons-fileupload:jar:1.3.1:compile</span><br><span class="line">[INFO]    \- commons-io:commons-io:jar:2.2:compile</span><br></pre></td></tr></table></figure>
+<p>可以看到，其实还间接依赖了<code>commons-io:commons-io:jar</code></p>
+<h2 id="创建图片虚拟目录存储图片"><a href="#创建图片虚拟目录存储图片" class="headerlink" title="创建图片虚拟目录存储图片"></a>创建图片虚拟目录存储图片</h2><p>参考我之前的博文</p>
+<blockquote>
+<p><a href="http://blog.csdn.net/h3243212/article/details/50819218" target="_blank" rel="noopener">在intellij IDEA中为web应用创建图片虚拟目录(详细截图)</a></p>
+</blockquote>
+<p>也可以直接修改tomcat的配置,在conf/server.xml文件，添加虚拟目录.</p>
+<p>注意：在图片虚拟目录中，一定将图片目录分级创建（提高i/o性能），一般我们采用按日期(年、月、日)进行分级创建。</p>
+<h2 id="上传图片代码"><a href="#上传图片代码" class="headerlink" title="上传图片代码"></a>上传图片代码</h2><ul>
+<li>页面</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;商品图片&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;</span><br><span class="line">		&lt;c:<span class="keyword">if</span> test=<span class="string">"$&#123;items.pic !=null&#125;"</span>&gt;</span><br><span class="line">			&lt;img src=<span class="string">"/pic/$&#123;items.pic&#125;"</span> width=<span class="number">100</span> height=<span class="number">100</span>/&gt;</span><br><span class="line">			&lt;br/&gt;</span><br><span class="line">		&lt;/c:if&gt;</span><br><span class="line">		&lt;input type=<span class="string">"file"</span>  name=<span class="string">"items_pic"</span>/&gt;</span><br><span class="line">	&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>controller方法</li>
+</ul>
+<p>修改：商品修改controller方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/editItemsSubmit"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">editItemsSubmit</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            Model model,</span></span></span><br><span class="line"><span class="function"><span class="params">            HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">            Integer id,</span></span></span><br><span class="line"><span class="function"><span class="params">            @ModelAttribute(<span class="string">"items"</span>)</span></span></span><br><span class="line"><span class="function">            @<span class="title">Validated</span><span class="params">(value = ValidGroup1.class)</span>ItemsCustom itemsCustom,</span></span><br><span class="line"><span class="function">            BindingResult bindingResult,</span></span><br><span class="line"><span class="function">            MultipartFile items_pic</span></span><br><span class="line"><span class="function">    )<span class="keyword">throws</span> Exception </span>&#123;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//原始名称</span></span><br><span class="line">String originalFilename = items_pic.getOriginalFilename();</span><br><span class="line"><span class="comment">//上传图片</span></span><br><span class="line"><span class="keyword">if</span>(items_pic!=<span class="keyword">null</span> &amp;&amp; originalFilename!=<span class="keyword">null</span> &amp;&amp; originalFilename.length()&gt;<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//存储图片的物理路径</span></span><br><span class="line">    String pic_path = <span class="string">"D:\\tmp\\"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//新的图片名称</span></span><br><span class="line">    String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf(<span class="string">"."</span>));</span><br><span class="line">    <span class="comment">//新图片</span></span><br><span class="line">    File newFile = <span class="keyword">new</span> File(pic_path+newFileName);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将内存中的数据写入磁盘</span></span><br><span class="line">    items_pic.transferTo(newFile);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将新图片名称写到itemsCustom中</span></span><br><span class="line">    itemsCustom.setPic(newFileName);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.056Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/&title=《springmvc学习笔记(17)-上传图片》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/&title=《springmvc学习笔记(17)-上传图片》 — Brian's Homepage&source=本文展示如何在springmvc中上传图片" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(17)-上传图片》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-18-json-interaction/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(18)-json数据交互</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-16-exception/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(16)-异常处理器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/&title=《springmvc学习笔记(17)-上传图片》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/&title=《springmvc学习笔记(17)-上传图片》 — Brian's Homepage&source=本文展示如何在springmvc中上传图片" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(17)-上传图片》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-17-picture-upload/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3aQW7jMBAEQP//09lrFoHk7hkx8aF0MhzZYjEAh+7h6xVfXz+u7+//vOfqs8n7V0+8uvOBCw8PD2899CvG1Tv5IO6R998zfDoeHh7eMd79UBJqPpRkDc8L0hsLHh4e3gfwkjvbInE/Qfl48PDw8D6Tlwwr2Ry30QYeHh7ep/GSMCLPS/dBQ1t+Hsha8PDw8CYp66vd/v7V6yP9PTw8PLx1V32/4Lbflm/Bo9Hi4eHhHeDtt8tJJNGGFDk7uhMPDw/vMC//wZ8PLolo2yJRbL7x8PDwDvPy5n0+HXlpyQtDsd3Hw8PDO8bbl4EENmtuzaYPDw8P7xwvLxV5s3/DmJWoYTcPDw8Pb8FrF9x8mW4j4DaMiI6I4eHh4f0iLwkO2gA3b621MfHlPXh4eHjHeG1IkYet7XZ5U6Lw8PDwzvE2EUA79KS0zBKU+tAAHh4e3oI3a4DNGvxt3JAfPngT8uLh4eH9Cm9WGPK22VOb71XKgoeHh7fg5dFA2wDLJyI/mLU6dIWHh4e35uUDSh7QLuL7YvBm5Hh4eHgHeG2UsAka/vggFx4eHt6jvPYQwOx41mzQsw13/SsBDw8PL+bNmkz7FtcmSq7/b3h4eHjHeO2WN9mnt9M0m6DL5+Lh4eEd4CXx6GzJfiqonZUoPDw8vNO8TdCQT1A+oLYsRach8PDw8A7z2iZ9vvRvtt1JJHHZAMPDw8M7xtv84J9RZ5iiXOHh4eE9yvsqr81mehZAtHvj//6Kh4eHd4DXLr55bJGXgfb9/DUeHh7eOV5bDNpwdhMQ5/HHqgGGh4eHN+LVGUZ5lOqp6CHfoOPh4eF9Di+PdDcb9+QYQfREPDw8vA/gtUPJo4fkWW24jIeHh3eOl3w4Dx3u79kcQcgPs+Lh4eGd460ONpVt+zyWzSfxgQsPDw8v5f0D/U0r8CqDqFwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

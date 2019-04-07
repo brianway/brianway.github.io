@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>狼人杀新手进阶指南 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="随笔">
+    <meta name="description" content="大家好，我是未昊，之前答应过找完工作做一次狼人杀经验分享，录视频比较麻烦，所以就写一篇文章来向你展示一个 2.5 阶选手的狼人杀世界观。主要会从基本规则，基本/多重逻辑，心态视角等几个方面进行阐述。">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="狼人杀新手进阶指南">
+<meta property="og:url" content="https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="大家好，我是未昊，之前答应过找完工作做一次狼人杀经验分享，录视频比较麻烦，所以就写一篇文章来向你展示一个 2.5 阶选手的狼人杀世界观。主要会从基本规则，基本/多重逻辑，心态视角等几个方面进行阐述。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="狼人杀新手进阶指南">
+<meta name="twitter:description" content="大家好，我是未昊，之前答应过找完工作做一次狼人杀经验分享，录视频比较麻烦，所以就写一篇文章来向你展示一个 2.5 阶选手的狼人杀世界观。主要会从基本规则，基本/多重逻辑，心态视角等几个方面进行阐述。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">狼人杀新手进阶指南</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">狼人杀新手进阶指南</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-05T04:16:07.000Z" itemprop="datePublished" class="page-time">
+  2017-10-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/随笔/">随笔</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本规则"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本规则</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#阵营介绍"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">阵营介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#术语介绍"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">术语介绍</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逻辑"><span class="post-toc-number">3.</span> <span class="post-toc-text">逻辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本逻辑"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">基本逻辑</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#正反逻辑"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">正反逻辑</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#心态视角"><span class="post-toc-number">4.</span> <span class="post-toc-text">心态视角</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#轮次"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">轮次</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视角"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">视角</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结语"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">结语</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2017-10-05-advanced-guide-to-werewolf-kill" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">狼人杀新手进阶指南</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-05 12:16:07" datetime="2017-10-05T04:16:07.000Z" itemprop="datePublished">2017-10-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/随笔/">随笔</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>大家好，我是未昊，之前答应过找完工作做一次狼人杀经验分享，录视频比较麻烦，所以就写一篇文章来向你展示一个 2.5 阶选手的狼人杀世界观。主要会从基本规则，基本/多重逻辑，心态视角等几个方面进行阐述。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+<li>本文主要面向新手(打过几局，大致清楚规则)</li>
+<li>本文主要偏介绍，旨在启发，没有过多探讨技巧性的东西</li>
+</ul>
+<h2 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h2><p>狼人杀是一个发言+逻辑游戏，常见的是 9 人局或者 12 人局，下面我主要以 12 人局为例进行介绍。</p>
+<p>所有玩家分为狼人阵营和好人阵营。一般是 4+4+4 的板子，即 4 张狼人、4 张神牌和 4 张村民牌。狼人晚上可以杀死一名玩家，所有玩家白天发言交流，所有玩家发言完毕后一起投票，得票最多的人出局。最终狼人杀光所有神牌或者所有村民牌，则狼人胜利；好人投票处决/杀死所有狼人，则好人胜利。</p>
+<p>所以这个游戏从结果上是一个 <strong>抢轮次</strong> 的游戏，即无论好人还是狼人，都是以最快干掉敌对阵营的人为目的。能够分清楚每一轮的出人顺序和形势优劣，是区分一个玩家是否入门的依据。</p>
+<h3 id="阵营介绍"><a href="#阵营介绍" class="headerlink" title="阵营介绍"></a>阵营介绍</h3><p>我一般玩两方阵营的，三方有点复杂，我玩的少。</p>
+<ul>
+<li>狼人：四张狼人牌晚上是可以睁眼相互认识队友的，所以狼队可以晚上交流信息、安排战术</li>
+<li>神牌：一般比较平衡，出镜率最高的四张神牌是：预言家，女巫，猎人，白痴<ul>
+<li>预言家：每晚可以知道一个玩家是好人还是狼人</li>
+<li>女巫：有两瓶药(每瓶药整局游戏只能用一次，且同一晚不能同时用俩)，解药可以救一个人，毒药可以杀死一个人。（高端局为了游戏平衡，女巫只有第一天晚上可以救自己，甚至永远不能自救，游戏前需要沟通好）</li>
+<li>猎人：被狼人杀死或者被投票死可以开枪打死一人，被毒死不能开枪</li>
+<li>白痴：被投票出局不会死，可以继续发言，但不能投票了。</li>
+</ul>
+</li>
+<li>村民：晚上全程闭眼，白天可以发言投票，没有特殊功能。</li>
+</ul>
+<p>以上就是常见的“预女猎白”的板子，根据偏好不同，白痴可换成守卫，即“预女猎守”，有守卫的话，一只普通狼人可以换成白狼王。</p>
+<p>很多人拿狼人就很虚，仿佛自己是罪人一样，其实这是不对的，这个游戏叫“狼人杀”，不是“好人杀”，狼人赢是不可耻的，心态一定要摆正。</p>
+<h3 id="术语介绍"><a href="#术语介绍" class="headerlink" title="术语介绍"></a>术语介绍</h3><p>一般玩多了，为了使发言简练（装逼），会有一些术语和行话，这里简单介绍一些。</p>
+<ul>
+<li>焊跳：狼人冒充预言家，称为“焊跳”</li>
+<li>金水：预言家验出的好人。焊跳狼发的金水是“假金水”</li>
+<li>查杀：预言家验出的狼人叫做“查杀”</li>
+<li>银水：女巫夜里使用解药救起来的人</li>
+<li>轮次：出人的顺序，本轮该出谁。例如“今天是 2 号的轮次，不是 3 号的轮次”</li>
+<li>自刀：狼人杀人称之为“刀”，自刀就是狼人自杀</li>
+<li>穿衣服：冒充别的角色。例如“穿女巫衣服”、“不要穿我衣服”</li>
+<li>冲锋：狼人站队自己狼队友</li>
+<li>倒钩：狼人冒充好人，混到好人队伍里帮好人玩</li>
+<li>抗推：好人在白天被票出局</li>
+<li>警徽：投票时多 1 票或者 0.5 票，拥有警徽的人即为警长</li>
+<li>警长：好人玩家投票选举出来的领导者，可以指定发言顺序，警长 <strong>夜里</strong> 死后可以把警徽移交其他玩家</li>
+<li>撕警徽：投票处决警长，白天被票死不可移交警徽，故称“撕警徽”</li>
+<li>警徽流：一般都是预言家拿警徽，警徽流表示预言家打算验人的顺序，警徽流可以让好人多一轮验人信息。</li>
+</ul>
+<p>这里主要想说一下警徽流。假如没有警徽，狼人杀死预言家，预言家是没有遗言的（第二天开始，夜里死的人没有遗言），那预言家昨晚的验人就报不出来。所以有警徽流的话，验出好人，把警徽给他；验出狼人，把警徽给你之前验的好人或者撕掉。而为了防止狼人两连爆（比如，自曝刀预言家，被女巫救起来，再自曝一个继续刀，这样就会有两轮验人），一般会留两轮警徽流，示例发言：“警徽流先 3 后 5”或者“先验 3，再验 5”。验出一个好人一个狼人，警徽给那个好人；验出两个狼人，警徽外置位随便给（因为已经有两个狼人了，外置位好人多，狼人少，给到好人概率大）；如果验出两个好人，警徽撕掉（因为已经两个好人被验出，外置位狼多好人少）。所以预言家一定要尊重自己的警徽流，不要擅自修改。</p>
+<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><p>狼人杀是一个有一定逻辑分析的游戏，里面有各式各样的逻辑，正逻辑、反逻辑、一重逻辑、多重逻辑，等等。有些是铁逻辑，有些则是“伪逻辑”。</p>
+<h3 id="基本逻辑"><a href="#基本逻辑" class="headerlink" title="基本逻辑"></a>基本逻辑</h3><p>这个游戏只有一个逻辑是铁逻辑：<strong>真预言家</strong> 验出的金水，一定是好人，查杀一定是狼人。其他的东西都是可以正反解读的。所以游戏的关键，在于找准真的预言家，并以此为你的逻辑基点进行分析，一旦预言家找错了，后面的分析都是错的。</p>
+<p>身份的高低：A 发 B 金水，那 B 的身份一定比 A 高，要出 B 之前一定要先出 A，理由很简单，觉得 B 是狼人的话，那 A 发的是假金水，则 A 一定焊跳狼而非预言家，得死在 B 前面。但 A 发 B 查杀，就不一定了，因为狼和预言家都可以发查杀。</p>
+<h3 id="正反逻辑"><a href="#正反逻辑" class="headerlink" title="正反逻辑"></a>正反逻辑</h3><p>新手常犯的错误就是把“伪逻辑”当作“铁逻辑”，比如 A 查杀了 B，B 自曝，那 A 一定是好人？不一定，因为 A 是预言家可以查杀 B，A 是狼人也可以查杀自己狼队友 B，做好自己身份。但相反，A <strong>跳预言家且从未脱衣服</strong>，发 B 金水，结果 B 自爆，那 A 一定是狼人。</p>
+<p>再比如：你是女巫，A、B 都跳了预言家 ，狼人 C 跳了一个女巫站队 A，你就觉得 B 是真预言家，A 是假的。一定吗？不一定，这只是正逻辑，还有反逻辑。因为 C 是不是狼、站队谁，和 A、B 谁是预言家一点关系都没有，C 完全可以故意站队真预言家 A，使你这个真女巫站到狼人 B 的队伍，这样他的目的就达到了。这招通常叫做“阴阳倒钩”。</p>
+<p>类似的例子还有很多，新手往往只盘一层逻辑/正逻辑，而不盘反逻辑，比如 A 把 B 聊爆了，A 就是好人；另一种新手是只盘反逻辑，不盘正逻辑，比如总喜欢盘狼自刀（正逻辑就是夜里被刀的是好人）。这两种都是不对的，<strong>一个高手，应该正反逻辑都盘，综合判断后做出决策</strong> 。</p>
+<p>下面聊聊 <strong>多重逻辑</strong>。其实狼人杀只有两层逻辑，正和反。反逻辑再进一层，就是所谓的三重逻辑，其实就是正逻辑了。比如，上文的“阴阳倒钩”，打多了的话，再有狼人 C 站队 A，你就会觉得 A 是预言家，狼人C 故意站队 A 来让你站错队（盘的反逻辑），那狼人可以反其道而行之，就明目张胆站队自己狼队友 A，打冲锋，在思维层级上属于第三层了，但从结果上看，就回到了新人都知道的最简单的正逻辑：C 是坏人，站队 A，那么 A 是坏人。当然这个推理并不是铁逻辑，因为 A、C 的身份是独立事件。</p>
+<p>所以狼人杀的逻辑，无论往上怎么叠加，化简之后，就是两层：正逻辑和反逻辑，看你信哪个罢了。高手的厉害之处就在于，能够洞悉在场每位玩家的思维层级，然后用高你一级的思维层级来发言，让你站错队、投错票。</p>
+<h2 id="心态视角"><a href="#心态视角" class="headerlink" title="心态视角"></a>心态视角</h2><p>既然逻辑有正有反，那怎么才能去伪存真呢？主要就是看心态和视角。</p>
+<h3 id="轮次"><a href="#轮次" class="headerlink" title="轮次"></a>轮次</h3><p>首先，简单说一说“轮次”的问题，由于游戏结束条件极端情况下最快是“死 4 个人”，比如第一夜狼人杀了真预言家，白天把猎人投票出局，开枪带走女巫，第二天夜里再杀死白痴，游戏就结束了，这就是好人雪崩的对局。所以一般正常的进度都是狼人晚上杀“神牌”，好人白天投出去“狼人牌”。如果没有神牌没有毒药或者开枪等技能的话，就会杀一个神牌(或者村民)，投一个狼人…如此循环四次，总是先死好人，再死狼人，直至狼人杀死最后一个神牌(或者村民)，狼人一定赢。为了提高好人胜率，所以才有了毒药/开枪 等帮助好人抢轮次的功能。特别是女巫，可以追两个轮次（救一个人，毒一个人，各是一个轮次）。</p>
+<p>狼人的游戏目的就是找出所有的神牌，杀死他们就赢了；好人的目的是找出所有狼人，投票/开枪打死/毒死，好人就赢了。一般优先杀 4 个神而不是 4 个村民，因为通常预言家必死，所以至少有一刀要用在预言家身上，如果刀民，就需要 5 刀，刀神只用 4 刀，不过特殊情况下也会刀民，比如女巫和猎人都弄死的是村民，或者刀神轮次不够，需要狼人混在民坑里，这时狼人可选择找民刀。</p>
+<p>所以，很多新人打到最后都不清楚还剩几只狼人，觉得谁发言不好就投谁，处于懵逼状态，很容易被狼人蒙混过关。一旦算清楚轮次的话，把铁狼和疑似狼人出局的 X 身份算清楚，看看场上最好和最差情况分别是几只活狼，有助于对局势的把握；同理，狼人一旦发现狼人比好人多，或者最后的神牌已经确定的话，也没必要装了，直接绑票或者爆刀就行了。</p>
+<p>一般的轮次顺序是：有查杀优先走查杀，对跳的神牌下轮再说，优先票明狼，再票冲票狼，最后是倒钩狼。如果搞不清轮次，可能会被狼人绑票投出好人。比如 A、B 跳预言家分别发 C、D 查杀，E、F 都跳白痴，且明显 E 像假白痴。这时肯定是 C、D 的轮次，要么信 A 出 C,要么信 B 出 D，F 是真白痴也不要投 E 分票。同理，如果 A、B 跳预言家分别发 C、D 金水，那么就是 A、B 的轮次，因为金水身份高于发他金水的预言家，这时就不要什么“两个预言家分不清，我们都留一轮，外置位投”了，就是拉开阵型站边搏杀了。</p>
+<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>最简单的是看预言家发言的状态，一般真预言家发言更轻松，焊跳狼则会紧张，这属于比较明显的心态对比。<br>再比如一个人拿了神牌往往底气比较足，一副老子很牛逼的态度，想 carry 好人，各种指点江山，这个角度仅供参考。还有，一个神牌被别人穿了自己的衣服，往往是很抵触的，会去关注和质疑那个人。</p>
+<p>可能有些人比较看状态，但状态这个东西可以演，更有所谓的“情绪式发言”，所以我不太看，我更看一个人发言的逻辑和视角。</p>
+<h3 id="视角"><a href="#视角" class="headerlink" title="视角"></a>视角</h3><p>视角这个东西，模仿起来难度比较高，需要你换位思考，身临其境地模拟别人，看看你在他那个位置，会发出什么样的言，如果他的发言和你出入过大，那可能有问题。这就需要你首先对各种角色都玩过，能够再现自己拿那个牌时在那个情景下的心态和心路历程。</p>
+<p>比如一个预言家第一轮就在站边自己的人里盘倒钩狼，不敢打和自己作对的人，大概率是狼人焊跳，怕打到好人让好人产生逆反心理导致树敌太多，于是打站边自己的狼队友。比如狼人会默认吃刀的人是好人，不敢打（女巫可以知道，当然，狼人也故意猛打银水来装自己不知道夜里刀形，就涉及正反逻辑的判断了）。比如一个被查杀的人跳女巫，是拿毒威胁，疯狂踩全场，连银水都不报；还是万念俱灰，全程劝好人回头，讲清楚自己救人的心路历程。</p>
+<p>狼人由于夜里吃信息，所以发言时会不自觉的透露一些闭眼村民不知道的信息。比如不小心透露出刀形，像一夜双死，不知道谁被刀谁被毒，他却知道；或者明显的谁被刀谁被毒，可以分析出来的，却闭口不谈，担心暴露自己，等等。</p>
+<p>还有就是整个游戏的连贯性和故事性。不是逮着谁发言最差就投谁出去，而是要结合整个游戏的进程，弄清楚各个玩家之间的关系，因为好人可以发言很差，狼人可以发言很好，每次都需要联系前几轮 <strong>每个人的发言的关联</strong> 以及 <strong>每个人每一轮发言的差别</strong> 综合判断。例如明显场上还剩最后两狼一神了，这时有个前几轮发言很低调划水的人突然说自己是最后一神，要带票投 xx，你觉得他是挡刀概率大，还是找神刀的概率大？再比如一个人发言巨烂，被全场踩，他是一个要被抗推的好人，还是连狼队友都不要他的弃狼？</p>
+<p>这个东西更多靠实战领悟，简单举例也不太好讲清楚，所以只是抛出这个角度供大家思考。</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>狼人杀是一个老少咸宜的游戏，虽然本文通篇都是介绍狼人杀的“规矩”和“套路”，但我觉得游戏不按固定章法去玩也是别样的体验。希望高阶玩家可以对新人可以友好一点，大家玩的开心就好，不要因为新人没有“遵循规矩”而嫌弃或者喷人。当然，竞技向的话，狼人杀其实还涉及很多技巧，比如位置学、心理学、微表情、洗脑传销式发言等等，我还没有特别深入的钻研，以后有机会会慢慢学习，不断进步。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.050Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/" target="_blank" rel="external">https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/&title=《狼人杀新手进阶指南》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/&title=《狼人杀新手进阶指南》 — Brian's Homepage&source=大家好，我是未昊，之前答应过找完工作做一次狼人杀经验分享，录视频比较麻烦，所以就写一篇文章来向你展示一个 2.5 阶选手的狼人杀世界观。主要会从基本规则，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《狼人杀新手进阶指南》 — Brian's Homepage&url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/29/2017-09-29-how-to-prepare-a-technical-interview/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">如何准备校招技术面试</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/&title=《狼人杀新手进阶指南》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/&title=《狼人杀新手进阶指南》 — Brian's Homepage&source=大家好，我是未昊，之前答应过找完工作做一次狼人杀经验分享，录视频比较麻烦，所以就写一篇文章来向你展示一个 2.5 阶选手的狼人杀世界观。主要会从基本规则，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《狼人杀新手进阶指南》 — Brian's Homepage&url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/10/05/2017-10-05-advanced-guide-to-werewolf-kill/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACx0lEQVR42u3awYobMRAE0P3/n95AToEwdlW3tA7hzWmwmR09GaTeLn19xdf37+vvT/68nr59/dTTlbzl2IWHh4c3Gnr+mhw8G/rrz/Mx4+Hh4d3mvd4M8qU//7a9fz2ex8/x8PDwPsprC+vkLe2E4uHh4f0fvLYUzjeS5G/i4eHhfYqXNA5y0qzIzjeDK70WPDw8vJjXBmD/wv3FfA8PDw9vkapvgrHNUYB8A3gzQjw8PLwLvLZEzpsC+0ZD/vY348HDw8O7wMuX+KRebeOrYXO2bIXg4eHh/SRvFurvF/pZZ6XeGPDw8PAWvE15neM3y32+Ob35DfHw8PAWvPYw02zRb5sayTGC6Ck8PDy8C7xNudxGWe1k5Q3i6H8FPDw8vKO8PLJqG7j54YC8uE9GiIeHh3ePl5etLWa2bcy2mceR4OHh4V3gzRbituTdH67Kp76OvvDw8PBKXr7ctxHXbDo2bdxodvHw8PCu8TathLy1OovHklIeDw8P7x4vj7iS17dR2f4+CuTw8PDwjvLyOciL47wcTwK2fAt57FLj4eHhXeBtlvKcmgddm+NfdTGNh4eHt+a1Ef6pDSNqy5YThIeHh3eb18bzecNiWBCPNpsDZ8rw8PDwgmQqWdzz1++DrpxddKnx8PDwDvE2sGTDaHn7evjY74aHh4cXdAxmRXDeVtg0I2aNEjw8PLwbvE3EFTVS4xgsKZ2T7eHxZAQeHh7eIV7ysry12hbc9VGAfRiGh4eHt+Z9l1d7gODU0YRhFIeHh4d3gdeGWEVvoxx0vtm0k4WHh4d3g5dsBnmonzw1K6nzyA0PDw/vZ3h57NQ2dmdt3Fkz4rElgYeHh/dRXl4057FW29QoQjI8PDy8j/Latml+OKBtUhRP4eHh4V3j5c2C/PDTvqSelftFyoeHh4c34s3iq7zwzSeiPf51LOXDw8PDS3m/AOkrac690nrpAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

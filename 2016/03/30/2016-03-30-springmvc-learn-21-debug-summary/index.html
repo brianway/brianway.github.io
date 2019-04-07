@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="总结,SpringMVC,debug">
+    <meta name="description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
+<meta name="keywords" content="总结,SpringMVC,debug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结">
+<meta property="og:url" content="https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结">
+<meta name="twitter:description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-29T22:28:21.000Z" itemprop="datePublished" class="page-time">
+  2016-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">遇到的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在web-xml中-lt-listener-class-gt-标签报红"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">在web.xml中&lt;listener-class&gt;标签报红</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BeanCreationException"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">BeanCreationException</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis绑定错误"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">mybatis绑定错误</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求参数乱码问题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">请求参数乱码问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求参数类型转换问题"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">请求参数类型转换问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#maven平台编码问题"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">maven平台编码问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#json格式数据问题"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">json格式数据问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#还没弄懂但不影响运行的问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">还没弄懂但不影响运行的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载spring容器报红"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">加载spring容器报红</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参数绑定配置问题"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">参数绑定配置问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#maven依赖分析问题"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">maven依赖分析问题</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-03-30-springmvc-learn-21-debug-summary" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-30 06:28:21" datetime="2016-03-29T22:28:21.000Z" itemprop="datePublished">2016-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法</p>
+<a id="more"></a>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="在web-xml中-lt-listener-class-gt-标签报红"><a href="#在web-xml中-lt-listener-class-gt-标签报红" class="headerlink" title="在web.xml中&lt;listener-class&gt;标签报红"></a>在web.xml中<code>&lt;listener-class&gt;</code>标签报红</h3><p>参考：</p>
+<blockquote>
+<p><a href="http://q.cnblogs.com/q/74982/" target="_blank" rel="noopener">web.xml listener-class is not allowed here</a></p>
+</blockquote>
+<p>解决：改用2.5的版本</p>
+<p>答案节选：</p>
+<blockquote>
+<p>Servlet3.0是J2EE6.0规范的一部分，跟随J2EE6.0一起发布，并且Tomcat7.0已经完全支持Servlet3.0 ；<br>平时，我们一般使用tomcat6.0，是不能够使用servelt3.0的，tomcat6.0还不能支持那些规范；<br>至于说，为毛线不能使用lintener-class，是因为在web-app_3_0.xsd结构定义文件中，根本就不提倡这些配置，因为Servlet3.0已经支持注解形式；</p>
+</blockquote>
+<p>当时解决了报红的问题。但后来我其他部分调试好了后，改回3.0也没报错。</p>
+<h3 id="BeanCreationException"><a href="#BeanCreationException" class="headerlink" title="BeanCreationException"></a>BeanCreationException</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;dataSource&apos; defined in file [D:\intellij\workspace\learnssm-firstssm\target\learnssm-firstssm-1.0-SNAPSHOT\WEB-INF\classes\spring\applicationContext-dao.xml]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0&apos;: Initialization of bean failed; nested exception is java.lang.NoClassDefFoundError: org/aspectj/weaver/reflect/ReflectionWorld$ReflectionWorldException</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:478)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)</span><br><span class="line">    ....省略</span><br><span class="line">Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0&apos;: Initialization of bean failed; nested exception is java.lang.NoClassDefFoundError: org/aspectj/weaver/reflect/ReflectionWorld$ReflectionWorldException</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)</span><br><span class="line">	  ....省略</span><br></pre></td></tr></table></figure>
+<p>是少依赖的问题，输入<code>mvn dependency:tree</code>打依赖树：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">D:\intellij\workspace\learnssm-firstssm&gt;mvn dependency:tree</span><br><span class="line">[INFO] Scanning for projects...</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Building learnssm-firstssm 1.0-SNAPSHOT</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ learnssm-firstssm ---</span><br><span class="line">[INFO] com.iot.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT</span><br><span class="line">[INFO] +- org.springframework:spring-core:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  \- commons-logging:commons-logging:jar:1.2:compile</span><br><span class="line">[INFO] +- org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-beans:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-context:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  |  \- org.springframework:spring-aop:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  |     \- aopalliance:aopalliance:jar:1.0:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-expression:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  \- org.springframework:spring-web:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] +- org.springframework:spring-jdbc:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  \- org.springframework:spring-tx:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] +- mysql:mysql-connector-java:jar:5.1.38:compile</span><br><span class="line">[INFO] +- org.mybatis:mybatis:jar:3.3.1:compile</span><br><span class="line">[INFO] +- org.mybatis:mybatis-spring:jar:1.2.4:compile</span><br><span class="line">[INFO] +- log4j:log4j:jar:1.2.17:compile</span><br><span class="line">[INFO] +- org.slf4j:slf4j-api:jar:1.7.18:compile</span><br><span class="line">[INFO] +- commons-dbcp:commons-dbcp:jar:1.4:compile</span><br><span class="line">[INFO] |  \- commons-pool:commons-pool:jar:1.5.4:compile</span><br><span class="line">[INFO] +- javax.servlet:jstl:jar:1.2:compile</span><br><span class="line">[INFO] \- taglibs:standard:jar:1.1.2:compile</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 7.956 s</span><br><span class="line">[INFO] Finished at: 2016-03-03T20:06:00+08:00</span><br><span class="line">[INFO] Final Memory: 11M/126M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>少了spring-aspects,spring-core等依赖，加上</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-orm<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>spring版本统一设置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- jar 版本设置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">spring.version</span>&gt;</span>4.2.4.RELEASE<span class="tag">&lt;/<span class="name">spring.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="mybatis绑定错误"><a href="#mybatis绑定错误" class="headerlink" title="mybatis绑定错误"></a>mybatis绑定错误</h3><p>错误：<code>org.apache.ibatis.binding.BindingException: Invalid bound statement</code></p>
+<p>使用了下面的方法检查，都没有解决。排除了包名不同等低级错误。</p>
+<blockquote>
+<ul>
+<li><a href="http://blog.csdn.net/softwarehe/article/details/8889206" target="_blank" rel="noopener">mybatis绑定错误- softwarehe的专栏- 博客频道- CSDN.NET</a></li>
+<li><a href="http://ljhzzyx.blog.163.com/blog/static/38380312201412453629988/" target="_blank" rel="noopener">Mybatis绑定错误的原因</a></li>
+</ul>
+</blockquote>
+<p>又找到了oschina一个人的帖子，有个回答感觉靠谱</p>
+<blockquote>
+<ul>
+<li><a href="http://www.oschina.net/question/113302_228910" target="_blank" rel="noopener">java spring4+mybatis整合报错BindingException Invalid bound statement</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>是的，是没有在pom.xml配置build包含 xml，导致target目录下没有userMapper.xml<br>      -by 唐小明生</p>
+</blockquote>
+<p>我一看自己的target目录,发现还真是少mapper.xml文件</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png" alt="target少mapper的xml文件" title>
+                </div>
+                <div class="image-caption">target少mapper的xml文件</div>
+            </figure>
+<p>我想到了两种解决方案：</p>
+<ul>
+<li>方案一：自定义一个插件，绑定某个生命周期，比如compile，然后插件目标的功能是将源码包下的xml文件copy到相应的输出目录。(现有插件是否有已有这个功能，通过简单的配置就能完成？我还不清楚)</li>
+<li>方案二：在maven工程的<code>src/main/resource</code>目录下建和mapper接口类相应的包，将每个mapper.xml存在这里</li>
+</ul>
+<p>这里我插件玩的不熟，所以没办法，只能手动在resources目录下建包，把每个mapper.xml手动粘贴进去</p>
+<p>解决后如图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png" alt="mapper.xml存在resources下面" title>
+                </div>
+                <div class="image-caption">mapper.xml存在resources下面</div>
+            </figure>
+<h3 id="请求参数乱码问题"><a href="#请求参数乱码问题" class="headerlink" title="请求参数乱码问题"></a>请求参数乱码问题</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png" alt="springmcv_post请求参数乱码" title>
+                </div>
+                <div class="image-caption">springmcv_post请求参数乱码</div>
+            </figure>
+<p>在web.xml添加post乱码filter</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- post乱码过虑器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以上可以解决post请求乱码问题。解决后调试如图</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png" alt="springmcv_post请求参数乱码解决" title>
+                </div>
+                <div class="image-caption">springmcv_post请求参数乱码解决</div>
+            </figure>
+<p>对于get请求中文参数出现乱码解决方法有两个：</p>
+<p>修改tomcat配置文件添加编码与工程编码一致，如下：</p>
+<p><code>&lt;Connector URIEncoding=&quot;utf-8&quot; connectionTimeout=&quot;20000&quot; port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot;/&gt;</code></p>
+<p>另外一种方法对参数进行重新编码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String userName = <span class="keyword">new</span></span><br><span class="line">String(request.getParamter(<span class="string">"userName"</span>).getBytes(<span class="string">"ISO8859-1"</span>),<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
+<p>ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码</p>
+<h3 id="请求参数类型转换问题"><a href="#请求参数类型转换问题" class="headerlink" title="请求参数类型转换问题"></a>请求参数类型转换问题</h3><p>编写对应的转换类才行,具体参考前面参数绑定的博文<a href="http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定" target="_blank" rel="noopener">《 springmvc学习笔记(11)-springmvc注解开发之简单参数绑定》</a></p>
+<h3 id="maven平台编码问题"><a href="#maven平台编码问题" class="headerlink" title="maven平台编码问题"></a>maven平台编码问题</h3><p><code>[WARNING] Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!</code></p>
+<p>参考:</p>
+<blockquote>
+<ul>
+<li><a href="http://blog.csdn.net/jinguangliu/article/details/43373203" target="_blank" rel="noopener">CSDN博客</a></li>
+<li><a href="http://maven.apache.org/general.html#encoding-warning" target="_blank" rel="noopener">Maven官网在FAQ</a></li>
+</ul>
+</blockquote>
+<p>解决:</p>
+<p>在pom.xml文件的设置编码即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;  </span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;  </span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="json格式数据问题"><a href="#json格式数据问题" class="headerlink" title="json格式数据问题"></a>json格式数据问题</h3><ul>
+<li>1.请求是json格式</li>
+</ul>
+<p>debug窗里报下面的错误：</p>
+<p><code>org.springframework.web.HttpMediaTypeNotSupportedException: Content type &#39;application/json;charset=UTF-8&#39; not supported</code></p>
+<p>浏览器报下面的错误：</p>
+<p><code>HTTP Status 415 -</code>and<code>description The server refused this request because the request entity is in a format not supported by the requested resource for the requested method.</code></p>
+<p>2.请求是key/value格式</p>
+<p>debug窗里报下面的错误：</p>
+<p><code>java.lang.IllegalArgumentException: No converter found for return value of type: class com.iot.learnssm.firstssm.po.ItemsCustom</code></p>
+<p>参考stackoverflow的这个链接:</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/32905917/how-to-return-json-data-from-spring-controller-using-responsebody" target="_blank" rel="noopener">How to return JSON data from spring Controller using @ResponseBody</a></p>
+</blockquote>
+<p>多加一个依赖<code>jackson-databind</code>（之前只加了<code>jackson-mapper-asl</code>的依赖， 间接依赖<code>jackson-core-asl</code>，但还不够。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="还没弄懂但不影响运行的问题"><a href="#还没弄懂但不影响运行的问题" class="headerlink" title="还没弄懂但不影响运行的问题"></a>还没弄懂但不影响运行的问题</h2><h3 id="加载spring容器报红"><a href="#加载spring容器报红" class="headerlink" title="加载spring容器报红"></a>加载spring容器报红</h3><ul>
+<li>web.xml节选</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!-- 加载spring容器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>WEB-INF/classes/spring/applicationContext-*.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  &lt;param-value&gt;classpath:spring/applicationContext-*.xml&lt;/param-value&gt;--&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png" alt="加载spring容器报红" title>
+                </div>
+                <div class="image-caption">加载spring容器报红</div>
+            </figure>
+<p><code>/classes/spring/applicationContext-*.xml</code>这部分字会报红，但运行起来没问题。我使用下面的那句<code>&lt;param-value&gt;classpath:spring/applicationContext-*.xml&lt;/param-value&gt;</code>不报红.原因不清楚。</p>
+<p>这里两种方式都能跑通，但是引用的路径不同:一个是引用的的输出的target目录的classes下的，一个是引用输出的<code>target/learnssm-firstssm-1.0-SNAPSHOT</code>目录(相当于部署的WEBROOT或者叫做webapp)，所以我觉得还是用WEB-INF下面那个更好</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png" alt="容器加载文件的选用" title>
+                </div>
+                <div class="image-caption">容器加载文件的选用</div>
+            </figure>
+<h3 id="参数绑定配置问题"><a href="#参数绑定配置问题" class="headerlink" title="参数绑定配置问题"></a>参数绑定配置问题</h3><p>在自定义参数绑定时，spring.xml的配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 自定义参数绑定 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"conversionService"</span> <span class="attr">class</span>=<span class="string">"org.springframework.format.support.FormattingConversionServiceFactoryBean"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 转换器 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"converters"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 日期类型转换 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.iot.learnssm.firstssm.controller.converter.CustomDateConverter"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中<code>&lt;list&gt;</code>标签会报红，但不影响运行。去掉<code>&lt;list&gt;</code>标签，也可以运行成功。原因我还不知道，以后阅读源码会研究下这个问题。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png" alt="转换器list报红" title>
+                </div>
+                <div class="image-caption">转换器list报红</div>
+            </figure>
+<h3 id="maven依赖分析问题"><a href="#maven依赖分析问题" class="headerlink" title="maven依赖分析问题"></a>maven依赖分析问题</h3><p>输入<code>mvn  dependency:analyze</code>进行依赖分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[INFO]</span><br><span class="line">[INFO] --- maven-dependency-plugin:2.8:analyze (default-cli) @ learnssm-firstssm ---</span><br><span class="line">[WARNING] Used undeclared dependencies found:</span><br><span class="line">[WARNING]    org.springframework:spring-context:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-web:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-beans:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING] Unused declared dependencies found:</span><br><span class="line">[WARNING]    org.springframework:spring-orm:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-aspects:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-test:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-jdbc:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    mysql:mysql-connector-java:jar:5.1.38:compile</span><br><span class="line">[WARNING]    org.mybatis:mybatis-spring:jar:1.2.4:compile</span><br><span class="line">[WARNING]    log4j:log4j:jar:1.2.17:compile</span><br><span class="line">[WARNING]    org.slf4j:slf4j-api:jar:1.7.18:compile</span><br><span class="line">[WARNING]    commons-dbcp:commons-dbcp:jar:1.4:compile</span><br><span class="line">[WARNING]    javax.servlet:jstl:jar:1.2:compile</span><br><span class="line">[WARNING]    taglibs:standard:jar:1.1.2:compile</span><br><span class="line">[WARNING]    org.hibernate:hibernate-validator:jar:5.2.4.Final:compile</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 3.294 s</span><br><span class="line">[INFO] Finished at: 2016-03-06T16:35:23+08:00</span><br><span class="line">[INFO] Final Memory: 16M/164M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>可以看到里面有:</p>
+<ul>
+<li><code>Used undeclared dependencies found:</code></li>
+<li><code>Unused declared dependencies found:</code></li>
+</ul>
+<p>当时为了解决缺包的问题，看到相关的spring-xxx包就加进去了，具体相互之间的依赖关系也没搞清楚，等我以后阅读spring源码再慢慢改好了。反正多引比少引好点，起码不会报错，顶多工程冗余点。</p>
+<p>至于说使用了未声明的包就不知道为啥了，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[WARNING]    org.springframework:spring-context:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-web:jar:4.2.4.RELEASE:compile</span><br><span class="line">[WARNING]    org.springframework:spring-beans:jar:4.2.4.RELEASE:compile</span><br></pre></td></tr></table></figure>
+<p>都被<code>org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile</code>依赖，这点可以从依赖树看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ learnssm-firstssm ---</span><br><span class="line">[INFO] com.iot.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT</span><br><span class="line">[INFO] +- org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-beans:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-context:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  |  \- org.springframework:spring-aop:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  |     \- aopalliance:aopalliance:jar:1.0:compile</span><br><span class="line">[INFO] |  +- org.springframework:spring-expression:jar:4.2.4.RELEASE:compile</span><br><span class="line">[INFO] |  \- org.springframework:spring-web:jar:4.2.4.RELEASE:compile</span><br></pre></td></tr></table></figure>
+<p>总之，上面未解决的问题，我会留意，如果有大神指导原因，请不吝赐教。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.096Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/" target="_blank" rel="external">https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-22-developing-summary/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">springmvc学习笔记(22)-springmvc开发小结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/30/2016-03-30-springmvc-learn-20-interceptor/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springmvc学习笔记(20)-拦截器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/03/30/2016-03-30-springmvc-learn-21-debug-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3aQY7bQAwEwP3/pzdATkESyd0c0XGA0smwtTuqOVCDJr++4uv755V//+uv93+b/Hp/5wMXHh4e3ujR7//d/ec/F/4ur6stS9Z9sQV4eHh4a7z7on8Fvlp+o/Tfr3X5PR4eHt4/5bUFelb0k2/w8PDw/hde+9DnkQQeHh7eJ/OSMCJfINmO2Z2LWQseHh5ezGsbYJ/webG/h4eHh3fQVc+bYcmdzwYc0dPi4eHhLfDyCPVkUKAd55qNLFyuhYeHh7fGa+PXk7D1JN6tD994eHh4j/LuS+39YnmZblfJA9wXz4mHh4f3Rl7bdmpj3zzmaF9deHh4eO/nzcp0EmS0g1yzuKQ43ePh4eGNeEWRHS2ZH39nyCI6wcPDw3uI14akzxb9hHcyyoCHh4e3x2sDiLZBNXvBtCtevhjw8PDwFnizKGG4ZBwlJLwXW4aHh4e3xkuuFpn/t9mBPqLi4eHhvZE3G7rKXxjnYUcUFuPh4eEt8GYDUrP2/0m8m0fGf9kIPDw8vLfw8nD2pA7nJT4PIC7ffnh4eHhrvLYEz0KN2TBBO0CAh4eHt81rG/zb7auTwzceHh7eNi8fmcqPyEnJPmmMzQJfPDw8vHPeLITN75kdiIvm1m37DQ8PD2+PlwcNbTqa35Nv8Uo+jYeHh3fQG8qHopJf20Pz7EB/+eR4eHh4C7z2OJu/HqJQtdzE/PWAh4eHt8ebHZdbTFvi80N5EePi4eHhLfDykan7h56NZLWvjeG4FR4eHt4xb1b681+TsCMfSmg/4+Hh4e3xkpKdjz3Not4XeUm8HUWfDQ8PD++Y92zA2h6Un4px6wYYHh4e3jIvj1lnD9qGvNGG4uHh4X0YLy/3bTMsOV4n/xMPDw9vj3e+cJscz0Le9uiPh4eHt8E7aYDNjto5YDZw8Fh/Dw8PD+/36wc7HivwngZvUgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

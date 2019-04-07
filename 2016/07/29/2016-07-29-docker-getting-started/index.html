@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>docker入门概览 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="安装部署,Docker">
+    <meta name="description" content="本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面">
+<meta name="keywords" content="安装部署,Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker入门概览">
+<meta property="og:url" content="https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/docker_docker-engine.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/dokcer_architecture.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/docker_container-based-on-ubuntu.png">
+<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/docker_multiple-containers.png">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker入门概览">
+<meta name="twitter:description" content="本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面">
+<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/docker_docker-engine.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">docker入门概览</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">docker入门概览</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-29T05:55:11.000Z" itemprop="datePublished" class="page-time">
+  2016-07-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/分布式系统/">分布式系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">2.</span> <span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是Docker"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">什么是Docker?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是Docker-Engine"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">什么是Docker Engine?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Docker的用处"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Docker的用处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ubuntu"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Ubuntu</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mac-OS-X"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Mac OS X</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#演示"><span class="post-toc-number">4.</span> <span class="post-toc-text">演示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#架构和原理"><span class="post-toc-number">5.</span> <span class="post-toc-text">架构和原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结语"><span class="post-toc-number">6.</span> <span class="post-toc-text">结语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">7.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-07-29-docker-getting-started" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">docker入门概览</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-07-29 13:55:11" datetime="2016-07-29T05:55:11.000Z" itemprop="datePublished">2016-07-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/分布式系统/">分布式系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+<li>本文是自己学习docker的一个记录和整理,啃英文文档挺吃力的,懒得翻译，所以写这篇类似“索引”的文章,希望能帮助和我一样的新手快速入门</li>
+<li>本文主要参考<a href="https://docs.docker.com/" target="_blank" rel="noopener">官方文档(Docker Document)</a>和相关技术博客</li>
+<li>如果有理解有误的地方还望不吝指正</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="什么是Docker"><a href="#什么是Docker" class="headerlink" title="什么是Docker?"></a>什么是Docker?</h3><p>可以参考下面三篇文章。从我使用的感受来看，我觉得Docker就是一个应用打包工具，把写好的应用用docker打包发布，然后别人就可以直接部署使用了，特别方便。</p>
+<ul>
+<li><a href="http://www.docker.org.cn/book/docker/what-is-docker-16.html" target="_blank" rel="noopener">Docker是什么</a></li>
+<li><a href="http://www.jianshu.com/p/a75ddf6915e0" target="_blank" rel="noopener">理解Docker</a></li>
+<li><a href="http://dockone.io/article/1534" target="_blank" rel="noopener">What is Docker？(译文)</a></li>
+</ul>
+<h3 id="什么是Docker-Engine"><a href="#什么是Docker-Engine" class="headerlink" title="什么是Docker Engine?"></a>什么是Docker Engine?</h3><p>Docker Engine is a <strong>client-server application</strong> with these major components:</p>
+<ul>
+<li>A <strong>server</strong> which is a type of long-running program called a daemon process.</li>
+<li>A <strong>REST API</strong> which specifies interfaces that programs can use to talk to the daemon and instruct it what to do.</li>
+<li>A command line interface <strong>(CLI) client</strong>.</li>
+</ul>
+<p>我觉得官网的解释很言简意赅，附上图(摘自官网)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/docker_docker-engine.png" alt="Docker Engine" title>
+                </div>
+                <div class="image-caption">Docker Engine</div>
+            </figure>
+<h3 id="Docker的用处"><a href="#Docker的用处" class="headerlink" title="Docker的用处"></a>Docker的用处</h3><ul>
+<li>Faster delivery of your applications</li>
+<li>Deploying and scaling more easily</li>
+<li>Achieving higher density and running more workloads</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装参考<a href="https://docs.docker.com/engine/installation/#installation" target="_blank" rel="noopener">Install Docker Engine</a></p>
+<h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p>以ubuntu 14.04 为例，参考<a href="https://docs.docker.com/engine/installation/linux/ubuntulinux/" target="_blank" rel="noopener">Installation on Ubuntu</a>安装Docker engine</p>
+<p>这里列出重要的步骤：</p>
+<ol>
+<li>更新apt源，包括添加证书，密钥等</li>
+<li>用sudo apt-get安装</li>
+<li>进一步配置，主要是创建docker用户组</li>
+</ol>
+<p>注 ：如果输入<code>docker info</code>出问题，多半是权限问题，以sudo运行试试</p>
+<h3 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h3><p>Mac下安装参考<a href="https://docs.docker.com/engine/installation/mac/" target="_blank" rel="noopener">Installation on Mac OS X</a></p>
+<p>Mac下有两种安装方式供选</p>
+<ul>
+<li>Docker for Mac : Mac的原生应用，没有使用虚拟机(VirtualBox)，而是使用的HyperKit</li>
+<li>Docker Toolbox : 会安装虚拟机，使用docker-machine来运行boot2docker 和Docker Engine</li>
+</ul>
+<p>两者的区别请参考 <a href="https://docs.docker.com/docker-for-mac/docker-toolbox/" target="_blank" rel="noopener">Docker for Mac vs. Docker Toolbox</a></p>
+<h2 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h2><p>先不多说，跑起来体验下。具体的步骤和指令在<a href="https://blog.saymagic.tech/2015/06/01/learning-docker.html" target="_blank" rel="noopener">Docker简明教程</a>这篇文章已经写得很清楚了，在此不再赘述</p>
+<h2 id="架构和原理"><a href="#架构和原理" class="headerlink" title="架构和原理"></a>架构和原理</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/dokcer_architecture.png" alt="dokcer architecture" title>
+                </div>
+                <div class="image-caption">dokcer architecture</div>
+            </figure>
+<p>由上图可知，docker是一个client-server架构</p>
+<ul>
+<li>The Docker daemon : 运行在主机上</li>
+<li>The Docker client : 用户和dokcer daemon交互的接口</li>
+</ul>
+<p>docker的内部主要有三种资源/组件</p>
+<ul>
+<li>docker images : <strong>build</strong> component,只可读</li>
+<li>docker registries : <strong>distribution</strong> component,images共享库</li>
+<li>docker containers : <strong>run</strong> component</li>
+</ul>
+<p>这里重点说说images and containers</p>
+<p>Docker使用<a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="noopener">union file systems</a> 把不同的层(layer)做整合成单一的image. Union File System的中一种是AUFS,可以参考<a href="http://coolshell.cn/articles/17061.html" target="_blank" rel="noopener">这篇博文</a></p>
+<p><a href="https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/" target="_blank" rel="noopener">官网文档</a>对image的layers是这么描述的</p>
+<blockquote>
+<p>Each Docker image references a list of <strong>read-only</strong> layers that represent filesystem differences. Layers are stacked on top of each other to form a base for a container’s root filesystem</p>
+</blockquote>
+<p>新版docker(version&gt;=1.10)的存储模型有变化</p>
+<blockquote>
+<p>Previously, image and layer data was referenced and stored using a randomly generated UUID. In the new model this is replaced by a secure content hash.</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/docker_container-based-on-ubuntu.png" alt="container-based-on-ubuntu15.04" title>
+                </div>
+                <div class="image-caption">container-based-on-ubuntu15.04</div>
+            </figure>
+<p>而container和image的主要区别就在于<strong>top writable layer</strong>，所有对image的更改都保存在这一层。换句话说，多个container可以共享同一个image，这就大大节省了空间。实现image和container的管理有两个关键的技术：stackable image layers 和 copy-on-write (CoW).</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xph6d.com1.z0.glb.clouddn.com/docker_multiple-containers.png" alt="multiple containers" title>
+                </div>
+                <div class="image-caption">multiple containers</div>
+            </figure>
+<p>从图中可以看出，copy-on-write (CoW)是一个很好的策略，既节省了空间，又避免了因数据共享带来的写冲突问题，从而提高效率。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本文主要对docker做简单介绍，对于一些更详细的知识，如docker file,volume,network,docker compose等等，会另写文章进行介绍。至于很具体的操作指令，比如怎么安装，怎么build image和run container来跑一个简单的docker hello world，请参考官方文档Docker Engine部分的“get started with docker”或者”learn by example”,也可参考文末的一些参考资料</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="https://docs.docker.com/" target="_blank" rel="noopener">Docker Documentation</a>(官方文档)</li>
+<li><a href="http://dockone.io/article/111" target="_blank" rel="noopener">Docker入门教程</a>(系列)</li>
+<li><a href="http://blog.saymagic.cn/2015/06/01/learning-docker.html#bqlkp" target="_blank" rel="noopener">Docker简明教程</a>（使用演示）</li>
+<li><a href="http://www.docker.org.cn/book/docker/what-is-docker-16.html" target="_blank" rel="noopener">docker中文</a>（系列)</li>
+<li><a href="http://www.docker.org.cn/page/resources.html" target="_blank" rel="noopener">docker资源</a></li>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/content/" target="_blank" rel="noopener">docker-从入门到实践</a>(gitbook)</li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.000Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/07/29/2016-07-29-docker-getting-started/" target="_blank" rel="external">https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/&title=《docker入门概览》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/&title=《docker入门概览》 — Brian's Homepage&source=本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker入门概览》 — Brian's Homepage&url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Docker commands和Dockerfile</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/06/29/2016-06-29-zookeeper-replicated/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">zookeeper单机伪集群配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/&title=《docker入门概览》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/&title=《docker入门概览》 — Brian's Homepage&source=本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker入门概览》 — Brian's Homepage&url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/07/29/2016-07-29-docker-getting-started/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3aQW7jMBAEwPz/07vXLAw53UNOYCxKJ8NySJYO4qSHX1/x9efb9f2b17vt9TrL0zevd69deHh4eAdLf5o+WVD+CNrZ2weKh4eH9zu8pzfq+1f2+ynfL6XdANrf4OHh4X0O76TwnY2Jh4eH93/wfihkF0bGw8PD+zReO3Q7fR7p5g/lctaCh4eHF/PyLtLnfF7p7+Hh4eEdd9XbTSIpcE+2nHq1eHh4eAu8/IWbF6wnhwNuzY6Hh4e3x0va+XfbVOejFbEIHh4e3gLvfJpZMyyPbtt2WrFT4eHh4Y14edupXXr+t20TLlknHh4e3jbvKMkYjTPDF3sdHh4e3hqvjQySwjq/m8e+eXFfhxF4eHh4l3izqy24T35TNMnw8PDwFnh7AW4bZLQbQ13Q4+Hh4V3inUcS54dZZ48g2lTw8PDwrvKSCfKIIX9xn0QYxZrx8PDw1nhRGBosPf++3RhmDxoPDw9vm9ceFMiL4xNGW8o/HrrCw8PDW+CdNOnzQ1F5BDxrmP0zGh4eHt4CLy9e20MD7UGrfIOZHeTCw8PD2+Ad9dBGxw7aWGT2DwAeHh7eHm8W77ZBcD7jeZSMh4eHt8E7CQJmzbBZqJFvWo9HB/Dw8PAu8drG/K2jBm0gO9ui8PDw8PZ4eRE8CwvarSIfv4ge8PDw8BZ4ecSwF7/mpXYR4+Lh4eGt8fLkcxbU7o32w/rx8PDwrvJmocOsXM4D4ragf7yLh4eHt8CbvcSTRbSv/uT79jMeHh7eHm/W3JrFGUnccBIWP/7HgIeHh7fAa1/Ks2g1L9ZnYcTXrT0HDw8Pb5mXF835Ua1rcQYeHh7ex/ByzPvtJMfMgmY8PDy8Pd7s+NQsbkhi35PGGx4eHt427+RgU4tpm2ptSX0hz8DDw8N7d/0Fp2sr8IBTkvYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

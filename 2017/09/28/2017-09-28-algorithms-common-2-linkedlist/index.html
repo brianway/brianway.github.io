@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>常见算法基础题思路简析(二)-链表篇 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法,数据结构">
+    <meta name="description" content="本文对和 链表 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见算法基础题思路简析(二)-链表篇">
+<meta property="og:url" content="https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文对和 链表 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:20.991Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见算法基础题思路简析(二)-链表篇">
+<meta name="twitter:description" content="本文对和 链表 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常见算法基础题思路简析(二)-链表篇</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">常见算法基础题思路简析(二)-链表篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-28T05:41:00.000Z" itemprop="datePublished" class="page-time">
+  2017-09-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#判断一个单链表是否有环"><span class="post-toc-number">1.</span> <span class="post-toc-text">判断一个单链表是否有环</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#判断两无环单链表是否相交"><span class="post-toc-number">2.</span> <span class="post-toc-text">判断两无环单链表是否相交</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#判断两有环单链表是否相交"><span class="post-toc-number">3.</span> <span class="post-toc-text">判断两有环单链表是否相交</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#判断两单链表是否相交"><span class="post-toc-number">4.</span> <span class="post-toc-text">判断两单链表是否相交</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除特定值的节点"><span class="post-toc-number">5.</span> <span class="post-toc-text">删除特定值的节点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打印两个升序链表公共部分"><span class="post-toc-number">6.</span> <span class="post-toc-text">打印两个升序链表公共部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#复制复杂链表"><span class="post-toc-number">7.</span> <span class="post-toc-text">复制复杂链表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链表partition"><span class="post-toc-number">8.</span> <span class="post-toc-text">链表partition</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#有序环链表中插入值"><span class="post-toc-number">9.</span> <span class="post-toc-text">有序环链表中插入值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链表K逆序"><span class="post-toc-number">10.</span> <span class="post-toc-text">链表K逆序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#检查链表是否回文"><span class="post-toc-number">11.</span> <span class="post-toc-text">检查链表是否回文</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除单节点"><span class="post-toc-number">12.</span> <span class="post-toc-text">删除单节点</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2017-09-28-algorithms-common-2-linkedlist" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">常见算法基础题思路简析(二)-链表篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-28 13:41:00" datetime="2017-09-28T05:41:00.000Z" itemprop="datePublished">2017-09-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法和数据结构/">算法和数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文对和 <strong>链表</strong> 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节</p>
+<a id="more"></a>
+<ul>
+<li>相关题目和代码在 GitHub: <a href="https://github.com/brianway/algorithms-learning" target="_blank" rel="noopener">https://github.com/brianway/algorithms-learning</a></li>
+<li>题目见 <code>com.brianway.learning.algorithms.lectures.linkedlist</code>包</li>
+</ul>
+<p><strong>记号约定：链表未特殊说明则未单链表</strong></p>
+<h2 id="判断一个单链表是否有环"><a href="#判断一个单链表是否有环" class="headerlink" title="判断一个单链表是否有环"></a>判断一个单链表是否有环</h2><p>题目见 <code>ChkLoop</code></p>
+<p>思路：</p>
+<ol>
+<li>判断环：使用快慢两个指针遍历链表，快指针一次移动两个节点，慢指针一次移动一个节点。终止条件为遍历到链表结尾或者快指针和慢指针相遇</li>
+<li>找入环第一个节点：假如快慢指针相遇，则此时将慢指针指向头节点，然后均以每次一个节点的速度同步移动快慢指针，再次相遇点即为入环点</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>快指针移动时需要判断 next 和 next.next 均不为空才行</li>
+<li>第二步的证明可以参考<ul>
+<li><a href="http://blog.csdn.net/wuzhekai1985/article/details/6725263" target="_blank" rel="noopener">http://blog.csdn.net/wuzhekai1985/article/details/6725263</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6a0e04380101a9o2.html</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="判断两无环单链表是否相交"><a href="#判断两无环单链表是否相交" class="headerlink" title="判断两无环单链表是否相交"></a>判断两无环单链表是否相交</h2><p>题目见 <code>CheckIntersect</code></p>
+<p>思路：</p>
+<ol>
+<li>分别遍历两个链表，得到长度 l1 和 l2</li>
+<li>将较长的链表先遍历 <code>|l1-l2|</code> 个节点，再对两个链表同步遍历</li>
+<li>若在遍历完前有相同节点，则相交，否则不相交</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>用新的变量指向链表，不要影响原链表结构</li>
+</ul>
+<h2 id="判断两有环单链表是否相交"><a href="#判断两有环单链表是否相交" class="headerlink" title="判断两有环单链表是否相交"></a>判断两有环单链表是否相交</h2><p>题目见 <code>ChkIntersection</code></p>
+<p>思路：</p>
+<ol>
+<li>先判断两链表是否均有环，有一个无环则不相交</li>
+<li>若入环节点一样，则相交</li>
+<li>若入环节点不一样，则从一个入环点往后遍历，若能和另一个链表的入环点相遇则相交，若遍历回自己的入环点还没相遇，则不相交</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>第 3 步里从一个入环点往后遍历，注意起始条件</li>
+</ul>
+<h2 id="判断两单链表是否相交"><a href="#判断两单链表是否相交" class="headerlink" title="判断两单链表是否相交"></a>判断两单链表是否相交</h2><p>题目见 <code>ChkIntersection2</code></p>
+<p>思路：为前面几题的整合</p>
+<ol>
+<li>先判断两链表是否均有环</li>
+<li>若均无环，按照“判断两无环单链表是否相交”来解</li>
+<li>若均有环，按照“判断两有环单链表是否相交”来解</li>
+<li>若一个有环，一个无环，则不相交</li>
+</ol>
+<h2 id="删除特定值的节点"><a href="#删除特定值的节点" class="headerlink" title="删除特定值的节点"></a>删除特定值的节点</h2><p>题目见 <code>ClearValue</code></p>
+<p>思路：</p>
+<ol>
+<li>找到第一个不为特定值的节点作为新的头节点</li>
+<li>使用双指针 pre 和 current，current 用于依次遍历，pre 用于跳过为特定值的节点，只依次经过满足条件的其余节点</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>一定要循环跳过头节点里为特定值的节点，第二步必须以非特定值节点或者空节点开始</li>
+<li>pre 和 current 的初始化以及移动赋值细节要留意</li>
+</ul>
+<h2 id="打印两个升序链表公共部分"><a href="#打印两个升序链表公共部分" class="headerlink" title="打印两个升序链表公共部分"></a>打印两个升序链表公共部分</h2><p>题目见 <code>Common</code></p>
+<p>思路：</p>
+<p>新建一个数组用于容纳公共部分，同时遍历两个链表，根据当前的节点值分情况进行处理：</p>
+<ol>
+<li>一个链表当前节点值大于另一个链表当前节点值，则较小值的链表节点向后移动一步</li>
+<li>两个链表当前值相等，将公共部分存入数组，两个链表均向后移动一步</li>
+</ol>
+<h2 id="复制复杂链表"><a href="#复制复杂链表" class="headerlink" title="复制复杂链表"></a>复制复杂链表</h2><p>题目见 <code>CopyList</code></p>
+<p>思路：</p>
+<ol>
+<li>在每个节点的后面插入该节点的直接拷贝</li>
+<li>对每个 copy 节点，更新其 random 指针为 random 指向节点的下一个节点(即指向其对应 copy 节点)</li>
+<li>将 copy 节点从中分离出来即可</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>该题的难点主要在于每个节点的随机指针不是简单的直接拷贝就行了（那样会指向原链表中的节点），而需要在复制的链表里指向对应的复制节点</li>
+<li>无论是插入拷贝还是分离节点，都要注意空指针判断和更新指针操作</li>
+</ul>
+<h2 id="链表partition"><a href="#链表partition" class="headerlink" title="链表partition"></a>链表partition</h2><p>题目见 <code>Divide</code></p>
+<p>思路：</p>
+<ol>
+<li>使用两个链表分别收集大于阈值和小于等于阈值的节点</li>
+<li>每次取出当前节点，归入其中一个链表，原链表向后移动一个</li>
+<li>将两个链表首尾相连即可</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>两个链表的首尾节点都要记录</li>
+<li>大于/小于等于的划分要全覆盖</li>
+<li>取出的节点记得“断尾”，即  next 置为 null</li>
+</ul>
+<h2 id="有序环链表中插入值"><a href="#有序环链表中插入值" class="headerlink" title="有序环链表中插入值"></a>有序环链表中插入值</h2><p>题目见 <code>InsertValue</code></p>
+<p>思路：</p>
+<ol>
+<li>以一个节点(head)开始，用两个指针指向前后相邻的节点依次向后遍历，满足 <code>pre.val &lt;= val &lt; after.val</code> 则插入并停止遍历</li>
+<li>若遍历完(<code>after == head</code>)，说明还没插入，此时应插入在 head 前</li>
+<li>若 val 比 head.val 小，则更新头节点</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>注意空链表时该节点自己组环</li>
+<li>插入节点时判断条件，前后的开闭要注意，<code>[pre,after)</code> 还是 <code>(pre,after]</code></li>
+<li>注意特殊情况，此时不满足 <code>pre.val&lt;=val&lt;after.val</code>（例如环全等，插入值是最小/最大等），这时需要插入在头节点之前及更新头节点</li>
+</ul>
+<h2 id="链表K逆序"><a href="#链表K逆序" class="headerlink" title="链表K逆序"></a>链表K逆序</h2><p>题目见 <code>KInverse</code></p>
+<p>思路：</p>
+<ol>
+<li>用 kHead 指向每次 k 个节点的头节点（初始值为头节点）</li>
+<li>遍每计数到 k 时，逆序这部分并返回逆序后的头节点<ul>
+<li>若新的头节点为空，则初始化新的头节点</li>
+<li>否则，将该返回的头节点接在上次逆序完的尾节点 lastTail 后</li>
+</ul>
+</li>
+<li>更新 lastTail 指向该次逆序完的尾节点(即逆序前的 kHead)</li>
+<li>更新 kHead 指向下一个节点继续重复上述步骤直到遍历结束</li>
+</ol>
+<p>逆序部分：</p>
+<ol>
+<li>使用 pre, current, next 分别指向当前节点及其前后节点</li>
+<li>每次先用 pre 保存 newHead，用 next 保存 current.next；再更新 newhead 为 current，更新 newHead.next 指向 pre；最后移动 current 指向 next 即可</li>
+<li>进一步优化，其实只需要 pre 和 current 两个指针就够了</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通反转整个链表</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode newHead = <span class="keyword">null</span>;</span><br><span class="line">    ListNode current = head;</span><br><span class="line">    ListNode pre = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(current != <span class="keyword">null</span>)&#123;</span><br><span class="line">        pre = newHead;</span><br><span class="line">        newHead = current;</span><br><span class="line">        current = current.next;</span><br><span class="line">        newHead.next = pre;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>逆序前需要用 next 指针保留好下一个节点，这样才能正确更新 kHead</li>
+<li>注意循环中计数和清零的位置</li>
+<li>逆序部分，需要把之前的头的 next 置为原末尾的 next，衔接起来</li>
+</ul>
+<h2 id="检查链表是否回文"><a href="#检查链表是否回文" class="headerlink" title="检查链表是否回文"></a>检查链表是否回文</h2><p>题目见 <code>Palindrome</code></p>
+<p>思路：</p>
+<ol>
+<li>通过快慢指针得到链表中点</li>
+<li>将后一半链表逆序</li>
+<li>分别从头尾向中间遍历链表依次比较值，不等则停止，看能否在中点相遇</li>
+<li>将逆序链表还原</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>注意逆序需要根据链表总节点数的分单双讨论<ul>
+<li>单数(<code>quick.next = null</code>)则 slow 指向正中间的节点，所以设置 <code>mid = slow</code></li>
+<li>双数时 slow 指向前一半的最后一个节点，所以设置 <code>mid = slow.next</code></li>
+</ul>
+</li>
+<li>双数时从两头遍历前需要将 slow.next 置为 null，否则两边遍历终止条件不同</li>
+</ul>
+<h2 id="删除单节点"><a href="#删除单节点" class="headerlink" title="删除单节点"></a>删除单节点</h2><p>题目见 <code>Remove</code></p>
+<p>思路：</p>
+<ol>
+<li>若该节点为空或者为最后一个节点，返回 false</li>
+<li>否则将下一个节点的 val 和 next 赋值给当前节点，达到“删除”的效果</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:20.991Z" itemprop="dateUpdated">2019-04-04 01:13:20</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/" target="_blank" rel="external">https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/&title=《常见算法基础题思路简析(二)-链表篇》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/&title=《常见算法基础题思路简析(二)-链表篇》 — Brian's Homepage&source=本文对和 链表 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见算法基础题思路简析(二)-链表篇》 — Brian's Homepage&url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/28/2017-09-28-algorithms-common-3-binarytree/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">常见算法基础题思路简析(三)-二叉树篇</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/28/2017-09-28-algorithms-common-1-sort/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常见算法基础题思路简析(一)-排序篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/&title=《常见算法基础题思路简析(二)-链表篇》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/&title=《常见算法基础题思路简析(二)-链表篇》 — Brian's Homepage&source=本文对和 链表 有关的常见算法基础题思路分类进行分析和总结，并以 Java 为例，适当指出需要注意的编程细节" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常见算法基础题思路简析(二)-链表篇》 — Brian's Homepage&url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2017/09/28/2017-09-28-algorithms-common-2-linkedlist/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3awU7DMBAE0P7/T8MVCdLMrO22SC+nqkTEz5VsZ3Yfj/j6+nFdffPz+9+f1++5unPDhYeHh7cw9N/X1T1XQ8mfsjKVyZjx8PDwTvPapbl4wGjQzyclGTMeHh7e5/ByWLLZtJsTHh4e3v/lJZFEElUkg8bDw8P7TF6+KLdLf7ttrG9UeHh4eKd5eRXpcz4fqe/h4eHhLVfV262ijSdmx+VinHh4eHgHeHkoULz8jw7N63EGHh4e3mt4yQv8+iF4VvRqGxH+mCY8PDy8l/CSF/7ZsbidxDaivcmn8fDw8Dbx2vL/bCNpqckIi2IbHh4e3lZe3krVBgptjLsr5ri5CQ8PD+8AbxYHzA7Quyb08iiPh4eHd4zXBhP5UPIYNw8m6hgCDw8PbysvP163jFkLQh4N1z8MHh4e3gFeWwCbrcDJ4t4e64vx4+Hh4W3izepmyUayMvR2Y3jk/wIPDw9vgbf0eh+HBW2QsdIQhoeHh3ea15bBZiFF20yQhxrRz4OHh4e3lZcfUvPCWNsikMe79Qjx8PDwDvBmDU+z5X423DaquKns4eHh4S3z2pf/WbtVHjTM7rwMRPDw8PCO8fKS1eyQvSukSP7zH28MeHh4eId5SdDQLtazQHa2ReHh4eG9hrdSoDoRK+TtWTfNBHh4eHgHeG20uuugPOuPylsW8PDw8M7xktaB9TLYbBJXNomiMwIPDw+v5CVH2+eDe35n8tdkCvKreIfAw8PDG/FWCv95iJDHFrOGrZumKzw8PLytvHbBnRXy2xbY5Bs8PDy89/JWwtM8mFgvpyUHbjw8PLxX8maNBbvCiGK47XPx8PDw3srLl+/1ECHZriIkHh4e3lt5eQg7YycNVXXKgoeHh3eMlz9spdDVHqk3tB3g4eHhHeC1zUxtQDCLGNpD9rCyh4eHh9fxvgGODV/0nWbxqQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

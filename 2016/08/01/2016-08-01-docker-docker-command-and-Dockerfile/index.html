@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Docker commands和Dockerfile | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Docker">
+    <meta name="description" content="本文主要对Docker commands和Dockerfile的相关知识进行整理">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker commands和Dockerfile">
+<meta property="og:url" content="https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要对Docker commands和Dockerfile的相关知识进行整理">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T17:13:21.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker commands和Dockerfile">
+<meta name="twitter:description" content="本文主要对Docker commands和Dockerfile的相关知识进行整理">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Docker commands和Dockerfile</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Docker commands和Dockerfile</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-31T18:08:07.000Z" itemprop="datePublished" class="page-time">
+  2016-08-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/分布式系统/">分布式系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Docker-commands"><span class="post-toc-number">1.</span> <span class="post-toc-text">Docker commands</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dockerfile"><span class="post-toc-number">2.</span> <span class="post-toc-text">Dockerfile</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-08-01-docker-docker-command-and-Dockerfile" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Docker commands和Dockerfile</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-08-01 02:08:07" datetime="2016-07-31T18:08:07.000Z" itemprop="datePublished">2016-08-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/分布式系统/">分布式系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要对Docker commands和Dockerfile的相关知识进行整理</p>
+<a id="more"></a>
+<h2 id="Docker-commands"><a href="#Docker-commands" class="headerlink" title="Docker commands"></a>Docker commands</h2><p>官网传送门：</p>
+<blockquote>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/run/" target="_blank" rel="noopener">Docker run reference</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/" target="_blank" rel="noopener">Docker commands</a></li>
+</ul>
+</blockquote>
+<p>首先，当然是配置命令自动补全，只需要把一个文件用curl下载copy到特定路径即可，具体操作参考<a href="https://docs.docker.com/compose/completion/" target="_blank" rel="noopener">Command-line Completion</a></p>
+<p>其实docker有很完备的命令帮助提示，对哪个指令不清楚，只需要在后面加<code>--help</code>就能看到帮助说明。例如：</p>
+<ul>
+<li>输入<code>docker --help</code>可以看到所有可执行的命令。</li>
+<li>随便挑一个，比如<code>run</code>命令，则输入<code>docker run --help</code>又能看到<code>run</code>的相关帮助了。</li>
+</ul>
+<p>常用命令：</p>
+<ul>
+<li>查看本地images:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行image</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br><span class="line">//i.e.</span><br><span class="line">docker run image</span><br><span class="line">docker run -it image /bin/bash</span><br></pre></td></tr></table></figure>
+<p>常用的一些参数：</p>
+<ul>
+<li><code>--rm</code>:container退出后自动删除</li>
+<li><code>-i</code>和<code>-t</code>常常一起用，<code>-it</code>:以超级管理员权限打开一个命令行窗口</li>
+<li><code>-d</code>: 后台运行container</li>
+<li><code>--name</code>:给container命名</li>
+</ul>
+<ul>
+<li>查看当前container</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除所有状态的container</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $(docker ps -a -q)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过另外的tty查看已经运行的容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it $&#123;container_id&#125; /bin/bash</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看容器的信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect $&#123;container_id&#125;</span><br></pre></td></tr></table></figure>
+<p>另外， 在以上指令中，容器名和容器的container_id都是可以使用的，如果用户没有指定容器名，docker会默认给每个容器分配一个比较友好的随机名称，像fervent_perlman,high_galileo等等</p>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>官网传送门：</p>
+<blockquote>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/" target="_blank" rel="noopener">Dockerfile reference</a></li>
+<li><a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/" target="_blank" rel="noopener">Best practices for writing Dockerfiles</a></li>
+</ul>
+</blockquote>
+<p>感觉文档里说了很全了，这里稍微提几个容易困惑的点</p>
+<p>1.exec form vs shell form</p>
+<p>在<code>CMD</code>和<code>ENTRYPOINT</code>都涉及到着两种形式(<code>CMD</code>多一种完全作为参数的形式)，例如:</p>
+<ul>
+<li><code>CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]</code>(exec形式,推荐)</li>
+<li><code>CMD command param1 param2</code> (shell形式)</li>
+</ul>
+<p>至于两种形式的区别，官方的几点说明挺详细的，主要就是变量替换，脚本环境等方面有差别：</p>
+<blockquote>
+<ul>
+<li>Note: If CMD is used to provide default arguments for the ENTRYPOINT instruction, both the CMD and ENTRYPOINT instructions should be specified with the JSON array format.</li>
+<li>Note: The exec form is parsed as a JSON array, which means that you must use double-quotes (“) around words not single-quotes (‘).</li>
+<li>Note: Unlike the shell form, the exec form does not invoke a command shell. This means that normal shell processing does not happen. For example, CMD [ “echo”, “$HOME” ] will not do variable substitution on $HOME. If you want shell processing then either use the shell form or execute a shell directly, for example: CMD [ “sh”, “-c”, “echo $HOME” ].</li>
+</ul>
+</blockquote>
+<p>2.ENTRYPOINT vs CMD</p>
+<p>读完官方的<a href="https://docs.docker.com/engine/reference/builder/#/understand-how-cmd-and-entrypoint-interact" target="_blank" rel="noopener">Understand how CMD and ENTRYPOINT interact
+</a>，觉得这两者特别相似，对这两者有什么区别和联系还是有些困惑，阅读下面这篇文章：</p>
+<blockquote>
+<p><a href="https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/" target="_blank" rel="noopener">Dockerfile: ENTRYPOINT vs CMD</a></p>
+</blockquote>
+<p><strong>简而言之，ENTRYPOINT更像一个写死的可执行指令，CMD更像默认的一个可选项。</strong></p>
+<p>一个image只做一个单一的用途，就像一个可执行的命令时，建议使用ENTRYPOINT，把CMD作为默认参数(第三种形式<code>CMD [&quot;param1&quot;,&quot;param2&quot;] (as default parameters to ENTRYPOINT)</code>)。因为一般而言，ENTRYPOINT是不被覆盖的(除非在run时显式使用–entrypoit),而CMD是defaults的选项，从前文的run命令格式<code>docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</code>可知，用户可以在运行images时输入自己的COMMAND来覆盖默认的CMD。</p>
+<p>3.ADD vs COPY</p>
+<p>这两个好像都是把东西从host拷贝到docker的container里,官方比较如下：</p>
+<blockquote>
+<p>Although ADD and COPY are functionally similar, generally speaking, COPY is preferred. That’s because it’s more transparent than ADD. COPY only supports the basic copying of local files into the container, while ADD has some features (like local-only tar extraction and remote URL support) that are not immediately obvious. Consequently, the best use for ADD is local tar file auto-extraction into the image, as in ADD rootfs.tar.xz /.</p>
+</blockquote>
+<p>简单来说，主要就两点区别：</p>
+<ul>
+<li>COPY只能把本地文件拷贝到container里；ADD还支持从远程拷贝(remote URL support)</li>
+<li>ADD可以自动解压本地压缩文件</li>
+</ul>
+<p>官方建议用COPY(preferred)</p>
+<p>参考链接</p>
+<blockquote>
+<ul>
+<li><a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/add-or-copy" target="_blank" rel="noopener">Reference - ADD or COPY</a></li>
+<li><a href="http://stackoverflow.com/questions/24958140/docker-copy-vs-add" target="_blank" rel="noopener">Stackoverflow - Docker COPY vs ADD</a></li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-03T17:13:21.090Z" itemprop="dateUpdated">2019-04-04 01:13:21</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/" target="_blank" rel="external">https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/&title=《Docker commands和Dockerfile》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/&title=《Docker commands和Dockerfile》 — Brian's Homepage&source=本文主要对Docker commands和Dockerfile的相关知识进行整理" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Docker commands和Dockerfile》 — Brian's Homepage&url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/07/2016-08-07-git-install-and-config/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">git在各操作系统平台下的安装和配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/29/2016-07-29-docker-getting-started/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">docker入门概览</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/&title=《Docker commands和Dockerfile》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/&title=《Docker commands和Dockerfile》 — Brian's Homepage&source=本文主要对Docker commands和Dockerfile的相关知识进行整理" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Docker commands和Dockerfile》 — Brian's Homepage&url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2016/08/01/2016-08-01-docker-docker-command-and-Dockerfile/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKklEQVR42u3aUXLiQAwFQO5/aXKABOdJGhLP0P5KEQfcQ9Vq9aTHI76el9f1/dfvM7n/+8+LL2xsbOxN2Anp1QNdv0P+iPmxJp8VfT3Y2NjYx7FfPco1MoFNilNeg3ILNjY2NnZyBNV2JT+4aqHFxsbGxq4WrR4mb3L+oYBhY2Njb8KehDW9oH8+ZsjjLWxsbOyz2Xl8c/+f3zLfxsbGxr4x+1m8ess0c1I1nPpFgY2NjX0Qe7Kyk48HqmODXim9bl1+uB8bGxv7CPba8L0H6wVS1eHBL3UbGxsbe3N28kDzZZ3mI8YtTWFIgI2NjX0cez5GfccwOFq7KT7z4ukxNjY29s3YSYGpDgDyw52seCatUbNzwsbGxr49e/Jwa9dr8vvzMQY2Njb2J7Dz//T3XsmP+Nm6mrEUNjY29kHsfOxaDetz5HzwMP8asLGxsXdnV1uF941mq6VutJSJjY2NfQS7Wq56Y91qQ7KgDuehEjY2NvYR7N4yTXXEWz2IankrLPpgY2NjH8euBvT5B89Xf5JSmoiwsbGxT2VH/9zHaz0JaRI2TUYIhVEBNjY29ubsaktQDXp6ZS8pSL0vDBsbG3t39iTW7zF6LcTiNSBsbGzsD2DP457qO8+RhWgJGxsb+yB2flMvdq8eaP563iBhY2Njn83Oi1BeJHoLN73YKPkCRvNtbGxs7Nuz8/WaPO6ZBFL531aHwVH1xsbGxt6QPV+1mYdNvdWffPDwyCsnNjY29obstS1BEv1MPqVX0qLZCDY2NvYR7DzW74X7k0OpFtpkkQgbGxv7JHYvDJoHSb2WphdOYWNjY5/NTgpVdREnub8XQiWHGA0esLGxsT+GnWPy7L3aJIzGAMl4ABsbG3tb9rN4rR0e91qXPFR6+VtsbGzsg9jv2G+ptgrVo8nf/0/XerCxsbH/lV2Ne3qv5AWm+p1UQzFsbGzsU9lJlJO0EHk5ycvPpPa+PBRsbGxs7OBvq01IHjMtaJOwsbGxP55dLU75wLi6mvOnBQwbGxv7xuxqqFRNafIBcBJOVRuVH17HxsbGPoidl4H5Q+RFqHcEk1AMGxsbe0P2F6ZVpuJPn/64AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
