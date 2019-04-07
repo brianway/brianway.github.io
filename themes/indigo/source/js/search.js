@@ -93,7 +93,7 @@
     function matcher(post, regExp) {
         return regtest(post.title, regExp) || post.tags.some(function (tag) {
             return regtest(tag.name, regExp);
-        }) || regtest(post.text, regExp);
+        })|| regtest(post.excerpt, regExp) || regtest(post.text, regExp);
     }
 
     function search(e) {

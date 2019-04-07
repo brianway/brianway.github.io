@@ -96,7 +96,7 @@ jsonContent:
     title: true
     date: true
     path: true
-    text: true
+    text: false
     raw: false
     content: false
     slug: false
@@ -104,6 +104,6 @@ jsonContent:
     comments: false
     link: false
     permalink: false
-    excerpt: false
+    excerpt: true
     categories: false
     tags: true
