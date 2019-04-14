@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>使用Github+Hexo搭建个人网站 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="GitHub,安装部署">
+    <meta name="description" content="本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。">
+<meta name="keywords" content="GitHub,安装部署">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Github+Hexo搭建个人网站">
+<meta property="og:url" content="https://brianway.github.io/2019/04/14/hexo-github-pages-practice/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-14T12:46:00.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Github+Hexo搭建个人网站">
+<meta name="twitter:description" content="本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用Github+Hexo搭建个人网站</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用Github+Hexo搭建个人网站</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-14T04:40:07.000Z" itemprop="datePublished" class="page-time">
+  2019-04-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么迁移"><span class="post-toc-number">1.</span> <span class="post-toc-text">为什么迁移</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hexo和博客主题"><span class="post-toc-number">2.</span> <span class="post-toc-text">Hexo和博客主题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hexo-简介"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Hexo 简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主题选择"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">主题选择</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#搭建博客"><span class="post-toc-number">3.</span> <span class="post-toc-text">搭建博客</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#我的定制修改"><span class="post-toc-number">4.</span> <span class="post-toc-text">我的定制修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#统计"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">统计</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#搜索"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">搜索</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">5.</span> <span class="post-toc-text">遇到的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装hexo失败"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">安装hexo失败</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义域名"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">自定义域名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#清理DNS缓存"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">清理DNS缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#博客原文的备份"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">博客原文的备份</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-hexo-github-pages-practice" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用Github+Hexo搭建个人网站</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-14 12:40:07" datetime="2019-04-14T04:40:07.000Z" itemprop="datePublished">2019-04-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。</p>
+<a id="more"></a>
+<h2 id="为什么迁移"><a href="#为什么迁移" class="headerlink" title="为什么迁移"></a>为什么迁移</h2><ul>
+<li>Jekyll搭建博客所需的技术栈（如Liquid语言、Ruby、gem等）我不太熟悉，每次想改点啥都不方便；而 Hexo 是基于Node.js的，js相对熟悉一点，定制起来方便一些。</li>
+<li>Hexo 生成站点的速度更快，且该框架是台湾人贡献的，中文文档很多。</li>
+</ul>
+<blockquote>
+<p>网上对比的文章 <a href="https://www.techiediaries.com/jekyll-hugo-hexo/" target="_blank" rel="noopener">How to Choose the Right Static Generator: Jekyll vs. Hugo vs. Hexo</a></p>
+</blockquote>
+<h2 id="Hexo和博客主题"><a href="#Hexo和博客主题" class="headerlink" title="Hexo和博客主题"></a>Hexo和博客主题</h2><h3 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h3><p>Hexo的安装可以参考<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo官网</a>，需要先安装node.js和git，照着文档安装就行了。</p>
+<p>常用指令有：</p>
+<ul>
+<li>清除缓存： <code>hexo clean</code></li>
+<li>生成静态文件：<code>hexo generate</code>，简写<code>hexo g</code></li>
+<li>启动服务器：<code>hexo server</code>，简写<code>hexo s</code></li>
+<li>部署到远程站点： <code>hexo deploy</code>，简写<code>hexo d</code></li>
+</ul>
+<blockquote>
+<p>更多指令：<a href="https://hexo.io/zh-cn/docs/commands" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands</a></p>
+</blockquote>
+<h3 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h3><p>Hexo的主题有很多，可以从下面几篇推荐里挑挑：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/39388850" target="_blank" rel="noopener">知乎 - 在github中有哪些好的hexo博客模板？</a></li>
+<li><a href="https://www.jianshu.com/p/bcdbe7347c8d" target="_blank" rel="noopener">Hexo博客主题推荐</a></li>
+</ul>
+<p>我主要有几个需求：</p>
+<ul>
+<li><strong>支持搜索</strong></li>
+<li><strong>目录显示当前所处章节</strong>：阅读文章时显示目录TOC，且滑动到文章相应位置时，目录同步定位</li>
+<li>支持赞赏展示和自定义页面</li>
+<li>支持标签和分类</li>
+</ul>
+<p>简单比较了下，选择了<a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="noopener">indigo</a> </p>
+<h2 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h2><p>大致以下几个步骤：</p>
+<ol>
+<li>安装Hexo</li>
+<li>选用主题，并根据主题的安装步骤去更改配置项</li>
+<li>本地<code>hexo clean &amp; hexo g</code>生成本地文件，<code>hexo s</code>启动本地服务器，访问<code>http://localhost:4000/</code>查看效果</li>
+</ol>
+<p>可以通读以下博客了解细节：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/MuYunyun/p/5927491.html#_label7" target="_blank" rel="noopener">基于hexo+github搭建一个独立博客</a></li>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="noopener">hexo你的博客</a></li>
+</ul>
+<blockquote>
+<p>indigo 主题的wiki: <a href="https://github.com/yscoder/hexo-theme-indigo/wiki" target="_blank" rel="noopener">https://github.com/yscoder/hexo-theme-indigo/wiki</a></p>
+</blockquote>
+<h2 id="我的定制修改"><a href="#我的定制修改" class="headerlink" title="我的定制修改"></a>我的定制修改</h2><p>我写了个Java程序把原来Jekyll下博客的md文件copy到了新的文件夹下，并对每个md文件需要适配的地方(如摘要是通过<code>&lt;!-- more --&gt;</code>来区分的)进行了批量处理。</p>
+<h3 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h3><p>很多主题都支持访问统计，一般需要在配置文件配置自己对应账号的key，我一般使用Google Analytics+百度统计：</p>
+<ul>
+<li>Google Analytics: <a href="https://analytics.google.com/analytics/web/" target="_blank" rel="noopener">https://analytics.google.com/analytics/web/</a><ul>
+<li><a href="https://support.google.com/analytics/answer/1008080" target="_blank" rel="noopener">https://support.google.com/analytics/answer/1008080</a></li>
+<li><a href="http://cn.analyticsbook.org/google-analytics-tracking-codes/" target="_blank" rel="noopener">Analytics Book 中文版</a>：16年的，感觉过时了。</li>
+</ul>
+</li>
+<li>百度统计: <a href="https://tongji.baidu.com/web/homepage/index" target="_blank" rel="noopener">https://tongji.baidu.com/web/homepage/index</a></li>
+</ul>
+<p>其中有官方提供的统计js代码，indigo的代码有些过时了，可通过配置文件里统计配置对应的关键字全局搜索，找到对应代码，并更新成最新的js。</p>
+<p>具体地，indigo主题的统计代码在<code>themes/indigo/layout/_partial/plugins</code>目录下的<code>baidu.ejs</code>和<code>google-analytics.ejs</code>，其他主题也可通过类似方法修改</p>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>针对无数据库的静态博客搜索方案一般有两种：</p>
+<ul>
+<li>第三方搜索服务；</li>
+<li>序列化站点内容作为数据源，然后自己写查询方法。</li>
+</ul>
+<p>indigo作者是通过自定义搜索实现的，搜索方案为：<a href="https://yscoder.github.io/20160511/hexo-search.html#%E6%90%9C%E7%B4%A2%E6%96%B9%E6%A1%88" target="_blank" rel="noopener">Hexo添加站内搜索功能初步完成</a>。原理比较简单，简单概括就是：<br>先通过<code>hexo-generator-json-content</code>插件生成json格式的数据文件，然后将这个数据文件作为数据源，对输入进行正则匹配。由于我只需要简单搜索，简单正则就能满足我的要求，该方案基本可以，所有没有增加分词等高级搜索的功能。</p>
+<p>但有他的实现有几个问题：</p>
+<ul>
+<li>没有对输入转义，直接根据输入生成正则，当输入包含正则元字符时前端会报错，且把空格替换为了<code>或</code>的逻辑，而不是<code>且</code>的逻辑</li>
+<li>没有权重，标题、正文等只要出现关键字就显示，导致我很多文章都有git地址，只要输入git，全匹配了，没有区分度</li>
+<li>没有对摘要进行搜索</li>
+</ul>
+<p>所以我做了简单的修改：</p>
+<ul>
+<li>转义用户输入中的正则元字符</li>
+<li>生成json数据文件时增加摘要字段，去掉正文字段，以减少json文件大小（可选，也可以不去掉）</li>
+<li>增加权重，权重大小：标题&gt;摘要&gt;标签&gt;正文</li>
+</ul>
+<p>修改<code>themes/indigo/source/js/search.js</code>即可在本地测试，发布线上的话，需要mimify js文件，然后替换掉原来的<code>themes/indigo/source/js/search.min.js</code>，压缩js的工具网站：<a href="https://javascript-minifier.com/" target="_blank" rel="noopener">https://javascript-minifier.com/</a></p>
+<p><em>以下是具体实现，没兴趣可略过</em></p>
+<p>修改前后的正则(注释的为修改前的)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var regExp = new RegExp(key.replace(/[ ]/g, '|'), 'gmi');</span></span><br><span class="line"><span class="keyword">var</span> regExp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(escapeRegExp(key), <span class="string">'gmi'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escapeRegExp</span>(<span class="params">string</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> string.replace(<span class="regexp">/([.*+?^=!:$&#123;&#125;()|[\]\/\\])/g</span>, <span class="string">'\\$&amp;'</span>);</span><br><span class="line">        <span class="comment">//$&amp;表示整个被匹配的字符串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>function escapeRegExp(string)</code>参考<strong>正则escape</strong>：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions</a></li>
+<li><a href="https://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript" target="_blank" rel="noopener">https://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript</a></li>
+</ul>
+<p>同时，匹配结果不再只返回<code>true/false</code>，而是返回权重，搜索结果更根据权重排序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 匹配文章内容返回结果，返回值代表权重。按照标题，摘要，标签，正文的顺序递减</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">matcher</span>(<span class="params">post, regExp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (regtest(post.title, regExp)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (regtest(post.excerpt, regExp)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (post.tags.some(<span class="function"><span class="keyword">function</span> (<span class="params">tag</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> regtest(tag.name, regExp);</span><br><span class="line">    &#125;)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(regtest(post.text, regExp))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配文章内容返回结果</span></span><br><span class="line">loadData(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 结果按照匹配程度过滤并排序</span></span><br><span class="line">    <span class="keyword">var</span> result = data.map(<span class="function"><span class="params">post</span> =&gt;</span> &#123;</span><br><span class="line">        post.search_order = matcher(post, regExp);</span><br><span class="line">        <span class="keyword">return</span> post;</span><br><span class="line">    &#125;);</span><br><span class="line">    result = result.filter(<span class="function"><span class="params">post</span> =&gt;</span> post.search_order &amp;&amp; post.search_order &gt; <span class="number">0</span>);</span><br><span class="line">    result = result.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b.search_order - a.search_order);</span><br><span class="line"></span><br><span class="line">    render(result);</span><br><span class="line">    Control.show();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="安装hexo失败"><a href="#安装hexo失败" class="headerlink" title="安装hexo失败"></a>安装hexo失败</h3><ul>
+<li>报错：<code>Missing write access to /usr/local/lib/node_modules/hexo-cli</code></li>
+<li>解决： 进入文件夹<code>/usr/local/lib</code>，修改权限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ cd /usr/local/lib where the global node_module folder is found</span><br><span class="line">$ sudo chown -R username:group node_modules</span><br></pre></td></tr></table></figure>
+<ul>
+<li>参考：<ul>
+<li><a href="https://github.com/hexojs/hexo/issues/2545" target="_blank" rel="noopener">https://github.com/hexojs/hexo/issues/2545</a></li>
+<li><a href="https://github.com/npm/npm/issues/10683" target="_blank" rel="noopener">https://github.com/npm/npm/issues/10683</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h3><ul>
+<li>问题：绑定失败</li>
+<li><p>解决：</p>
+<ul>
+<li>申请并购买一个自定义域名 </li>
+<li>ping你的github.io域名，得到一个IP</li>
+<li>在你的域名的 DNS 配置中添加A类型的记录，主机记录为<code>@</code>，记录值为上述IP</li>
+<li>在仓库根目录添加<code>CNAME</code>文件，并在文件中填写绑定的顶级域名</li>
+<li>在对应仓库的设置里<code>Settings-&gt;GitHub Pages-&gt;Custom domain</code>写上你的自定义域名</li>
+<li>有的博客说还要更换DNS服务器地址为<code>f1g1ns1.dnspod.net</code>和<code>f1g1ns2.dnspod.net</code>，我没换也成功了。</li>
+</ul>
+</li>
+<li><p>参考</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/31377141" target="_blank" rel="noopener">https://www.zhihu.com/question/31377141</a></li>
+<li><a href="https://help.github.com/en/articles/using-a-custom-domain-with-github-pages" target="_blank" rel="noopener">https://help.github.com/en/articles/using-a-custom-domain-with-github-pages</a> </li>
+</ul>
+</li>
+</ul>
+<p>由于自定义域名后原来的统计数据就从零重计了，所以就放弃了，还是使用github.io的域名算了。</p>
+<h3 id="清理DNS缓存"><a href="#清理DNS缓存" class="headerlink" title="清理DNS缓存"></a>清理DNS缓存</h3><ul>
+<li>问题：配置自定义域名失败，一直跳空白或者找不到地址，删除DNS解析配置也没用</li>
+<li>解决：需要清除本地DNS缓存以及chrome缓存</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo killall -HUP mDNSResponder; sleep 2;</span><br><span class="line">sudo killall mDNSResponderHelper</span><br><span class="line">sudo dscacheutil -flushcache</span><br></pre></td></tr></table></figure>
+<p>chrome缓存清理：<code>设置-&gt;高级-&gt;隐私设置和安全性-&gt;清除浏览数据</code>或者<code>右上角三个点-&gt;更多工具-&gt;清除浏览数据</code></p>
+<ul>
+<li>参考：<ul>
+<li><a href="https://www.hongkiat.com/blog/how-to-clear-dns-cache-in-macos-mojave/" target="_blank" rel="noopener">How to Clear DNS Cache in macOS Mojave</a></li>
+<li><a href="https://coolestguidesontheplanet.com/clear-the-local-dns-cache-in-osx/" target="_blank" rel="noopener">Flush DNS cache locally in macOS Mojave, Sierra, OSX, Linux and Windows</a></li>
+<li><a href="https://www.cnblogs.com/qq952693358/p/9126860.html" target="_blank" rel="noopener">Mac OS X 清除DNS缓存</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="博客原文的备份"><a href="#博客原文的备份" class="headerlink" title="博客原文的备份"></a>博客原文的备份</h3><ul>
+<li>问题：使用Hexo后，仓库只有生成的public文件夹下的文件，博客都是html，原来的博客原文没有版本管理</li>
+<li>解决：新建分支<code>hexo-public</code>（名字自取），将hexo的根目录作为仓库根目录，这样发布的内容在<code>master</code>分支，而编辑的内容和各种配置等原始信息在<code>hexo-public</code>实现版本管理<ul>
+<li>使用的主题的对应文件夹下会包含<code>.git</code>，<code>git add</code>时会有一些提示，根据自己需要删除<code>.git</code>，或者作为子模块进行管理。最好不要直接<code>git rm --cached</code>，否则后续对主题的修改不会被追踪</li>
+</ul>
+</li>
+<li>参考：<ul>
+<li><a href="https://lrscy.github.io/2018/01/26/Hexo-Github-Backup/#%E5%9C%A8Github%E4%B8%8A%E5%A4%87%E4%BB%BD" target="_blank" rel="noopener">在Github上备份Hexo博客</a> </li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://threehao.com/2016/08/22/Github%20Pages%20+%20Hexo/" target="_blank" rel="noopener">利用Github Pages + Hexo搭建个人博客</a></li>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="noopener">hexo你的博客</a></li>
+<li><a href="http://www.cylong.com/blog/2016/04/25/hexo-faq/" target="_blank" rel="noopener">Hexo 使用总结 &amp; 常见问题</a></li>
+<li><a href="https://xuanwo.io/2014/08/14/hexo-usual-problem/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">Hexo常见问题解决方案</a></li>
+<li><a href="http://blog.geekaholic.cn/2017/03/06/%E5%88%B6%E4%BD%9CHexo%E4%B8%BB%E9%A2%98%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" target="_blank" rel="noopener">制作Hexo主题详细教程（2）</a></li>
+<li><a href="https://liam.page/2017/09/21/local-search-engine-in-Hexo-site/" target="_blank" rel="noopener">为 Hexo 博客创建本地搜索引擎</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-14T12:46:00.944Z" itemprop="dateUpdated">2019-04-14 20:46:00</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2019/04/14/hexo-github-pages-practice/" target="_blank" rel="external">https://brianway.github.io/2019/04/14/hexo-github-pages-practice/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/&title=《使用Github+Hexo搭建个人网站》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/&title=《使用Github+Hexo搭建个人网站》 — Brian's Homepage&source=本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Github+Hexo搭建个人网站》 — Brian's Homepage&url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/05/advanced-guide-to-werewolf-kill/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">狼人杀新手进阶指南</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/&title=《使用Github+Hexo搭建个人网站》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/&title=《使用Github+Hexo搭建个人网站》 — Brian's Homepage&source=本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Github+Hexo搭建个人网站》 — Brian's Homepage&url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2019/04/14/hexo-github-pages-practice/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3aQXLbQAwEQP3/0841KUfyDLCrKFXNk8qmyG0eiNUAj0d8fD05knN+PzP5/P1qz845duDh4eEdWvr3S+eLTv4yu3v+LTw8PLzbvGdv1BkguX57r6RI4OHh4X0m7/V3f3hNx9d//Rc8PDy8/4v3+vx8ofuNOx4eHt6/5e3j11mIkFxnFmHg4eHh3ePlXaTP+Xylv4eHh4e37qrPBgU2V54NJTy9Jh4eHt4FXtug2jyCfe1q14mHh4d3g7dpUyVx7eYBtcNbf1kJHh4e3tt5++BgtrikmtX5NB4eHt4hXl4MZk2sdilnow08PDy8e7zNCzp/KPk5SQxRFBg8PDy8o7w2jGiXvgk1Doxe4eHh4V3gtRedtfzzsYC8GNTlDQ8PD+8Q72xTql1Q23JrQ148PDy89/Da2+xb/nX7Kq94eHh4eNd47dZ5P0BwYxzhaWHAw8PDO8qbxQ35ovMgeBMoD7MWPDw8vKO8hJQPE7QjAvn2vbgLHh4e3iFe3nqf4WfNtiRoiB4BHh4e3ht57Yt4FuNurhwFE3h4eHgXeO14U/sgZhHtbAShboPh4eHhrXn5Nrodk/paH20ojIeHh3ebN3s1H7txOdQ1a7nh4eHh3eMlo06zDXExIFWWk+iB4uHh4R3ltS/udgigjWVnExBF1oKHh4d3iDcLW5PykDfDTrXK8PDw8N7P22ysNxvxpOTURQsPDw/vKO9UIyqPGPJG2qyH9cd/8fDw8C7w2pfv2c10vsluh7ces9qCh4eHF/PyyLVt2+f9t1kUcmBjjYeHh7fg5T/yk7C1DWofi+OHZhgeHh7eB/DyfXrR4I9LVFsw8PDw8D6Bl0QMszLTDgoUowN4eHh4F3htUNtGt23xyL8VFQY8PDy8o7zND/594Jsw2q05Hh4e3jXeL5MrQQXzOvdLAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
