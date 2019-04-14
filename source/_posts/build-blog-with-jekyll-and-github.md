@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  在github搭建个人网站
+title:  在GitHub搭建个人网站
 date:   2016-01-07 22:35:11 +08:00
 category: 其他
 tags: [GitHub, 安装部署]
