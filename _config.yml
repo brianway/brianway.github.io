@@ -86,7 +86,7 @@ deploy:
 ## 自定义
 feed:
   type: atom
-  path: //atom.xml
+  path: /atom.xml
   limit: 0
 
 jsonContent:
