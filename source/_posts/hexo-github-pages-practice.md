@@ -177,10 +177,10 @@ loadData(function (data) {
 - 解决： 进入文件夹`/usr/local/lib`，修改权限
 
 ```
-
 $ cd /usr/local/lib where the global node_module folder is found
 $ sudo chown -R username:group node_modules
 ```
+
 - 参考：
   - https://github.com/hexojs/hexo/issues/2545
   - https://github.com/npm/npm/issues/10683
@@ -189,16 +189,15 @@ $ sudo chown -R username:group node_modules
 
 - 问题：绑定失败
 - 解决：
-    - 申请并购买一个自定义域名 
-    - ping你的github.io域名，得到一个IP
-    - 在你的域名的 DNS 配置中添加A类型的记录，主机记录为`@`，记录值为上述IP
-    - 在仓库根目录添加`CNAME`文件，并在文件中填写绑定的顶级域名
-    - 在对应仓库的设置里`Settings->GitHub Pages->Custom domain`写上你的自定义域名
-    - 有的博客说还要更换DNS服务器地址为`f1g1ns1.dnspod.net`和`f1g1ns2.dnspod.net`，我没换也成功了。
-
+  - 申请并购买一个自定义域名 
+  - ping你的github.io域名，得到一个IP
+  - 在你的域名的 DNS 配置中添加A类型的记录，主机记录为`@`，记录值为上述IP
+  - 在仓库根目录添加`CNAME`文件，并在文件中填写绑定的顶级域名
+  - 在对应仓库的设置里`Settings->GitHub Pages->Custom domain`写上你的自定义域名
+  - 有的博客说还要更换DNS服务器地址为`f1g1ns1.dnspod.net`和`f1g1ns2.dnspod.net`，我没换也成功了。
 - 参考
-    - https://www.zhihu.com/question/31377141
-    - https://help.github.com/en/articles/using-a-custom-domain-with-github-pages 
+  - https://www.zhihu.com/question/31377141
+  - https://help.github.com/en/articles/using-a-custom-domain-with-github-pages 
 
 
 由于自定义域名后原来的统计数据就从零重计了，所以就放弃了，还是使用github.io的域名算了。
