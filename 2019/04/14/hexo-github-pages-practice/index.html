@@ -66,12 +66,12 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-14T13:08:55.647Z">
+<meta property="og:updated_time" content="2019-04-15T15:40:11.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GitHub+Hexo搭建个人网站">
 <meta name="twitter:description" content="本文主要记录我将 GitHub 的个人博客从 Jekyll 迁移到 Hexo 的一些踩坑实践。">
     
-        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="//atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.7.2">
@@ -328,7 +328,7 @@ ga('send', 'pageview');
 <li>报错：<code>Missing write access to /usr/local/lib/node_modules/hexo-cli</code></li>
 <li>解决： 进入文件夹<code>/usr/local/lib</code>，修改权限</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ cd /usr/local/lib where the global node_module folder is found</span><br><span class="line">$ sudo chown -R username:group node_modules</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd /usr/local/lib where the global node_module folder is found</span><br><span class="line">$ sudo chown -R username:group node_modules</span><br></pre></td></tr></table></figure>
 <ul>
 <li>参考：<ul>
 <li><a href="https://github.com/hexojs/hexo/issues/2545" target="_blank" rel="noopener">https://github.com/hexojs/hexo/issues/2545</a></li>
@@ -338,8 +338,7 @@ ga('send', 'pageview');
 </ul>
 <h3 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h3><ul>
 <li>问题：绑定失败</li>
-<li><p>解决：</p>
-<ul>
+<li>解决：<ul>
 <li>申请并购买一个自定义域名 </li>
 <li>ping你的github.io域名，得到一个IP</li>
 <li>在你的域名的 DNS 配置中添加A类型的记录，主机记录为<code>@</code>，记录值为上述IP</li>
@@ -348,8 +347,7 @@ ga('send', 'pageview');
 <li>有的博客说还要更换DNS服务器地址为<code>f1g1ns1.dnspod.net</code>和<code>f1g1ns2.dnspod.net</code>，我没换也成功了。</li>
 </ul>
 </li>
-<li><p>参考</p>
-<ul>
+<li>参考<ul>
 <li><a href="https://www.zhihu.com/question/31377141" target="_blank" rel="noopener">https://www.zhihu.com/question/31377141</a></li>
 <li><a href="https://help.github.com/en/articles/using-a-custom-domain-with-github-pages" target="_blank" rel="noopener">https://help.github.com/en/articles/using-a-custom-domain-with-github-pages</a> </li>
 </ul>
@@ -397,7 +395,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-04-14T13:08:55.647Z" itemprop="dateUpdated">2019-04-14 21:08:55</time>
+    最后更新时间：<time datetime="2019-04-15T15:40:11.256Z" itemprop="dateUpdated">2019-04-15 23:40:11</time>
 </span><br>
 
 
@@ -565,7 +563,7 @@ ga('send', 'pageview');
 
         <p>
             
-                <span><a href="//atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
             <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
