@@ -58,13 +58,13 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="SpringMVC,debug">
-    <meta name="description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
+    <meta name="description" content="本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法">
 <meta name="keywords" content="SpringMVC,debug">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结">
 <meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
-<meta property="og:description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
+<meta property="og:description" content="本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png">
@@ -73,10 +73,10 @@ ga('send', 'pageview');
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png">
-<meta property="og:updated_time" content="2022-01-08T16:36:35.676Z">
+<meta property="og:updated_time" content="2022-01-08T16:48:37.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结">
-<meta name="twitter:description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
+<meta name="twitter:description" content="本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法">
 <meta name="twitter:image" content="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
@@ -244,7 +244,7 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法</p>
+            <p>本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法</p>
 <a id="more"></a>
 <h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="在web-xml中-lt-listener-class-gt-标签报红"><a href="#在web-xml中-lt-listener-class-gt-标签报红" class="headerlink" title="在web.xml中&lt;listener-class&gt;标签报红"></a>在web.xml中<code>&lt;listener-class&gt;</code>标签报红</h3><p>参考：</p>
 <blockquote>
@@ -325,7 +325,7 @@ ga('send', 'pageview');
 <p>另外一种方法对参数进行重新编码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String userName = <span class="keyword">new</span></span><br><span class="line">String(request.getParamter(<span class="string">"userName"</span>).getBytes(<span class="string">"ISO8859-1"</span>),<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
 <p>ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码</p>
-<h3 id="请求参数类型转换问题"><a href="#请求参数类型转换问题" class="headerlink" title="请求参数类型转换问题"></a>请求参数类型转换问题</h3><p>编写对应的转换类才行,具体参考前面参数绑定的博文<a href="http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定" target="_blank" rel="noopener">《 SpringMVC学习笔记(11)-springmvc注解开发之简单参数绑定》</a></p>
+<h3 id="请求参数类型转换问题"><a href="#请求参数类型转换问题" class="headerlink" title="请求参数类型转换问题"></a>请求参数类型转换问题</h3><p>编写对应的转换类才行,具体参考前面参数绑定的博文<a href="http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定" target="_blank" rel="noopener">《 SpringMVC学习笔记(11)-SpringMVC注解开发之简单参数绑定》</a></p>
 <h3 id="maven平台编码问题"><a href="#maven平台编码问题" class="headerlink" title="maven平台编码问题"></a>maven平台编码问题</h3><p><code>[WARNING] Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!</code></p>
 <p>参考:</p>
 <blockquote>
@@ -404,7 +404,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T16:36:35.676Z" itemprop="dateUpdated">2022-01-09 00:36:35</time>
+    最后更新时间：<time datetime="2022-01-08T16:48:37.794Z" itemprop="dateUpdated">2022-01-09 00:48:37</time>
 </span><br>
 
 
@@ -452,7 +452,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -613,7 +613,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
