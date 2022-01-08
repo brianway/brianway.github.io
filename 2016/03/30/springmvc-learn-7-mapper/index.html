@@ -51,7 +51,7 @@ ga('send', 'pageview');
     
     
     
-    <title>springmvc学习笔记(7)-springmvc整合mybatis之mapper | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <title>SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -61,15 +61,15 @@ ga('send', 'pageview');
     <meta name="description" content="本文记录springmvc整合dao的配置">
 <meta name="keywords" content="SpringMVC,MyBatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springmvc学习笔记(7)-springmvc整合mybatis之mapper">
+<meta property="og:title" content="SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper">
 <meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文记录springmvc整合dao的配置">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-2.png">
-<meta property="og:updated_time" content="2022-01-08T11:43:33.932Z">
+<meta property="og:updated_time" content="2022-01-08T16:07:42.323Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springmvc学习笔记(7)-springmvc整合mybatis之mapper">
+<meta name="twitter:title" content="SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper">
 <meta name="twitter:description" content="本文记录springmvc整合dao的配置">
 <meta name="twitter:image" content="http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-2.png">
     
@@ -166,7 +166,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">springmvc学习笔记(7)-springmvc整合mybatis之mapper</div>
+        <div class="flex-col header-title ellipsis">SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -188,7 +188,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">springmvc学习笔记(7)-springmvc整合mybatis之mapper</h1>
+        <h1 class="title">SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-03-29T22:28:07.000Z" itemprop="datePublished" class="page-time">
@@ -196,7 +196,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
             
         </h5>
@@ -221,12 +221,12 @@ ga('send', 'pageview');
 <article id="post-springmvc-learn-7-mapper" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">springmvc学习笔记(7)-springmvc整合mybatis之mapper</h1>
+        <h1 class="post-card-title">SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper</h1>
         <div class="post-meta">
             <time class="post-time" title="2016-03-30 06:28:07" datetime="2016-03-29T22:28:07.000Z" itemprop="datePublished">2016-03-30</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
 
 
@@ -260,7 +260,7 @@ ga('send', 'pageview');
 <li>mapper扫描器</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath:db.properties"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置数据源 ，dbcp --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driver&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxActive"</span> <span class="attr">value</span>=<span class="string">"30"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxIdle"</span> <span class="attr">value</span>=<span class="string">"5"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 从整合包里找，org.mybatis:mybatis-spring:1.2.4 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- sqlSessionFactory --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 数据库连接池 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 加载mybatis的全局配置文件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span> <span class="attr">value</span>=<span class="string">"classpath:mybatis/sqlMapConfig.xml"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- mapper扫描器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperScannerConfigurer"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"basePackage"</span> <span class="attr">value</span>=<span class="string">"com.iot.learnssm.firstssm.mapper"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactoryBeanName"</span> <span class="attr">value</span>=<span class="string">"sqlSessionFactory"</span> /&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- &lt;property name="sqlSessionFactory" ref="sqlSessionFactory" /&gt;</span></span><br><span class="line"><span class="comment">       会导致数据源配置不管用，数据库连接不上。</span></span><br><span class="line"><span class="comment">       且spring 4弃用</span></span><br><span class="line"><span class="comment">       --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="逆向工程生成po类及mapper-单表增删改查"><a href="#逆向工程生成po类及mapper-单表增删改查" class="headerlink" title="逆向工程生成po类及mapper(单表增删改查)"></a>逆向工程生成po类及mapper(单表增删改查)</h3><p>方法参见<a href="http://blog.csdn.net/h3243212/article/details/50778937" target="_blank" rel="noopener">《mybatis学习笔记(18)-mybatis逆向工程》</a></p>
+<h3 id="逆向工程生成po类及mapper-单表增删改查"><a href="#逆向工程生成po类及mapper-单表增删改查" class="headerlink" title="逆向工程生成po类及mapper(单表增删改查)"></a>逆向工程生成po类及mapper(单表增删改查)</h3><p>方法参见<a href="http://blog.csdn.net/h3243212/article/details/50778937" target="_blank" rel="noopener">《MyBatis学习笔记(18)-mybatis逆向工程》</a></p>
 <h3 id="手动定义商品查询mapper"><a href="#手动定义商品查询mapper" class="headerlink" title="手动定义商品查询mapper"></a>手动定义商品查询mapper</h3><p>针对综合查询mapper，一般情况会有关联查询，建议自定义mapper</p>
 <ul>
 <li>ItemsMapperCustom.xml</li>
@@ -294,7 +294,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T11:43:33.932Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
+    最后更新时间：<time datetime="2022-01-08T16:07:42.323Z" itemprop="dateUpdated">2022-01-09 00:07:42</time>
 </span><br>
 
 
@@ -332,7 +332,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《springmvc学习笔记(7)-springmvc整合mybatis之mapper》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -342,7 +342,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《springmvc学习笔记(7)-springmvc整合mybatis之mapper》 — Brian's Homepage&source=本文记录springmvc整合dao的配置" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper》 — Brian's Homepage&source=本文记录springmvc整合dao的配置" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -352,7 +352,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(7)-springmvc整合mybatis之mapper》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -382,7 +382,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect prev">
       <a href="/2016/03/30/springmvc-learn-8-service/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">springmvc学习笔记(8)-springmvc整合mybatis之service</h4>
+        <h4 class="title">SpringMVC学习笔记(8)-SpringMVC整合MyBatis之Service</h4>
       </a>
     </div>
   
@@ -391,7 +391,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect next">
       <a href="/2016/03/30/springmvc-learn-6-integrate-mybatis/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)</h4>
+        <h4 class="title">SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)</h4>
       </a>
     </div>
   
@@ -493,7 +493,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《springmvc学习笔记(7)-springmvc整合mybatis之mapper》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -503,7 +503,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《springmvc学习笔记(7)-springmvc整合mybatis之mapper》 — Brian's Homepage&source=本文记录springmvc整合dao的配置" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&title=《SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper》 — Brian's Homepage&source=本文记录springmvc整合dao的配置" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -513,7 +513,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(7)-springmvc整合mybatis之mapper》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-7-mapper/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

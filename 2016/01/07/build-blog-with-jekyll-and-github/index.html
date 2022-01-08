@@ -57,16 +57,16 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="GitHub,安装部署">
+    <meta name="keywords" content="GitHub">
     <meta name="description" content="先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。">
-<meta name="keywords" content="GitHub,安装部署">
+<meta name="keywords" content="GitHub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在GitHub搭建个人网站">
 <meta property="og:url" content="https://brianway.github.io/2016/01/07/build-blog-with-jekyll-and-github/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-01-08T09:15:39.872Z">
+<meta property="og:updated_time" content="2022-01-08T16:17:04.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在GitHub搭建个人网站">
 <meta name="twitter:description" content="先搜篇中文博客了解下流程，再根据下面的官方文档按顺序看一遍就差不多了。 这里不得不吐槽windows太垃圾了，linux下三行指令解决的问题，windows还要一个个安装、改配置文件。">
@@ -194,7 +194,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/开发实践/">开发实践</a></li></ul>
 
             
         </h5>
@@ -211,7 +211,7 @@ ga('send', 'pageview');
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考教程"><span class="post-toc-number">1.</span> <span class="post-toc-text">参考教程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#感想"><span class="post-toc-number">3.</span> <span class="post-toc-text">感想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">遇到的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主题"><span class="post-toc-number">5.</span> <span class="post-toc-text">主题</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考教程"><span class="post-toc-number">1.</span> <span class="post-toc-text">参考教程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#感想"><span class="post-toc-number">3.</span> <span class="post-toc-text">感想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">遇到的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-windows下安装ruby的devkit遇到问题"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1.windows下安装ruby的devkit遇到问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-kunka主题jekyll-build问题"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2.kunka主题jekyll build问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-markdown显示问题"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3.markdown显示问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-jekyll-build失败报错-多版本冲突"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.jekyll build失败报错(多版本冲突)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-bundle-install-SSL接连不上-其实是网速不好，多试几次。下载前gem-update-system"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前gem update --system)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-jekyll升级到3-0"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">6.jekyll升级到3.0</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-gem-install出现error，伟大的防火墙问题"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">7.gem install出现error，伟大的防火墙问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-MAC下gem-install-jekyll失败"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">8.MAC下gem install jekyll失败</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-mac下bundle执行失败"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">9.mac下bundle执行失败</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主题"><span class="post-toc-number">5.</span> <span class="post-toc-text">主题</span></a></li></ol>
         </nav>
     </aside>
 
@@ -224,7 +224,7 @@ ga('send', 'pageview');
             <time class="post-time" title="2016-01-07 14:35:11" datetime="2016-01-07T06:35:11.000Z" itemprop="datePublished">2016-01-07</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/其他/">其他</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/开发实践/">开发实践</a></li></ul>
 
 
 
@@ -270,43 +270,34 @@ ga('send', 'pageview');
 <p>2.安装jekyll和bundle</p>
 <p>参考：<a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/" target="_blank" rel="noopener">Setting up your GitHub Pages site locally with Jekyll</a></p>
 <h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>主要是我完全不懂ruby和python,前端也只有少的可怜的一点常识。搭建环境不复杂，基本安装好了后<code>jekyll new myblog</code>就有个基础模板了，不过很难看。所以我主要花了一整天时间去找主题、P图、了解jekyll的目录结构和用法、测试显示效果。总算搞定了，不过markdown的语法高亮我还是不满意，比较喜欢SegmentFault的高亮。有空再说这部分。</p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>1.windows下安装ruby的devkit遇到问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Invalid configuration or no Rubies listed. Please fix &apos;config.yml&apos;</span><br><span class="line">and rerun &apos;ruby dk.rb install&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="1-windows下安装ruby的devkit遇到问题"><a href="#1-windows下安装ruby的devkit遇到问题" class="headerlink" title="1.windows下安装ruby的devkit遇到问题"></a>1.windows下安装ruby的devkit遇到问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Invalid configuration or no Rubies listed. Please fix &apos;config.yml&apos;</span><br><span class="line">and rerun &apos;ruby dk.rb install&apos;</span><br></pre></td></tr></table></figure>
 <p>解决：<a href="http://stackoverflow.com/questions/20810653/how-do-i-configure-config-yml-so-that-i-can-install-devkit" target="_blank" rel="noopener">How do I configure config.yml so that I can install devkit?</a></p>
-<p>2.kunka主题jekyll build问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deprecation: You appear to have pagination turned on, but you haven&apos;t included the `jekyll-paginate` gem. Ensure you have `gems: [jekyll-paginate]` in your configuration fil e.</span><br></pre></td></tr></table></figure>
+<h3 id="2-kunka主题jekyll-build问题"><a href="#2-kunka主题jekyll-build问题" class="headerlink" title="2.kunka主题jekyll build问题"></a>2.kunka主题jekyll build问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deprecation: You appear to have pagination turned on, but you haven&apos;t included the `jekyll-paginate` gem. Ensure you have `gems: [jekyll-paginate]` in your configuration fil e.</span><br></pre></td></tr></table></figure>
 <p>解决：<a href="https://teamtreehouse.com/community/jekyllpaginate-gem" target="_blank" rel="noopener">jekyll-paginate gem</a></p>
-<p>3.markdown显示问题</p>
-<p>这里很蛋疼，我写markdown的习惯是代码都是前后各三个反单引号包起来的。使用kramdown解析markdown不能对含三个反单引号的代码块进行识别，默认按单行代码处理，缩进都没了；使用redcarpet能识别代码块，但没高亮，rouge又提示什么要下1.3版本，反正神烦。</p>
+<h3 id="3-markdown显示问题"><a href="#3-markdown显示问题" class="headerlink" title="3.markdown显示问题"></a>3.markdown显示问题</h3><p>这里很蛋疼，我写markdown的习惯是代码都是前后各三个反单引号包起来的。使用kramdown解析markdown不能对含三个反单引号的代码块进行识别，默认按单行代码处理，缩进都没了；使用redcarpet能识别代码块，但没高亮，rouge又提示什么要下1.3版本，反正神烦。</p>
 <p>参考：</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/8648390/syntax-highlighting-markdown-code-blocks-in-jekyll-without-using-liquid-tags" target="_blank" rel="noopener">Syntax highlighting markdown code blocks in Jekyll (without using liquid tags)</a></li>
 <li><a href="http://blog.javachen.com/2015/06/30/jekyll-kramdown-config.html" target="_blank" rel="noopener">Jekyll kramdown配置</a></li>
 </ul>
-<p>4.jekyll build失败报错(多版本冲突)</p>
-<p>解决：<a href="http://stackoverflow.com/questions/31417469/jekyll-ruby-kramdown-missing-dependency" target="_blank" rel="noopener">Jekyll/Ruby Kramdown Missing Dependency</a></p>
-<p>5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前<code>gem update --system</code>)</p>
-<p>查阅：<a href="http://stackoverflow.com/questions/10246023/bundle-install-fails-with-ssl-certificate-verification-error" target="_blank" rel="noopener">SSL Error When installing rubygems, Unable to pull data from ‘https://rubygems.org/</a></p>
-<p>6.jekyll升级到3.0</p>
-<blockquote>
+<h3 id="4-jekyll-build失败报错-多版本冲突"><a href="#4-jekyll-build失败报错-多版本冲突" class="headerlink" title="4.jekyll build失败报错(多版本冲突)"></a>4.jekyll build失败报错(多版本冲突)</h3><p>解决：<a href="http://stackoverflow.com/questions/31417469/jekyll-ruby-kramdown-missing-dependency" target="_blank" rel="noopener">Jekyll/Ruby Kramdown Missing Dependency</a></p>
+<h3 id="5-bundle-install-SSL接连不上-其实是网速不好，多试几次。下载前gem-update-system"><a href="#5-bundle-install-SSL接连不上-其实是网速不好，多试几次。下载前gem-update-system" class="headerlink" title="5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前gem update --system)"></a>5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前<code>gem update --system</code>)</h3><p>查阅：<a href="http://stackoverflow.com/questions/10246023/bundle-install-fails-with-ssl-certificate-verification-error" target="_blank" rel="noopener">SSL Error When installing rubygems, Unable to pull data from ‘https://rubygems.org/</a></p>
+<h3 id="6-jekyll升级到3-0"><a href="#6-jekyll升级到3-0" class="headerlink" title="6.jekyll升级到3.0"></a>6.jekyll升级到3.0</h3><blockquote>
 <ul>
 <li><a href="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0" target="_blank" rel="noopener">GitHub Pages now faster and simpler with Jekyll 3.0</a></li>
 <li><a href="http://jekyllrb.com/docs/upgrading/2-to-3/" target="_blank" rel="noopener">Upgrading from 2.x to 3.x</a></li>
 </ul>
 </blockquote>
-<p>7.gem install出现error，伟大的防火墙问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brian@brianway:~$ gem install jekyll</span><br><span class="line">ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)</span><br><span class="line">Errno::ECONNRESET: Connection reset by peer - SSL_connect (https://api.rubygems.org/quick/Marshal.4.8/jekyll-3.1.6.gemspec.rz)</span><br></pre></td></tr></table></figure>
+<h3 id="7-gem-install出现error，伟大的防火墙问题"><a href="#7-gem-install出现error，伟大的防火墙问题" class="headerlink" title="7.gem install出现error，伟大的防火墙问题"></a>7.gem install出现error，伟大的防火墙问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brian@brianway:~$ gem install jekyll</span><br><span class="line">ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)</span><br><span class="line">Errno::ECONNRESET: Connection reset by peer - SSL_connect (https://api.rubygems.org/quick/Marshal.4.8/jekyll-3.1.6.gemspec.rz)</span><br></pre></td></tr></table></figure>
 <p>解决：换成淘宝的镜像 <a href="https://ruby.taobao.org/" target="_blank" rel="noopener">https://ruby.taobao.org/</a></p>
-<p>8.MAC下<code>gem install jekyll</code>失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR:  While executing gem ... (Gem::FilePermissionError)</span><br><span class="line">You don&apos;t have write permissions for the /Library/Ruby/Gems/2.0.0 directory.</span><br></pre></td></tr></table></figure>
+<h3 id="8-MAC下gem-install-jekyll失败"><a href="#8-MAC下gem-install-jekyll失败" class="headerlink" title="8.MAC下gem install jekyll失败"></a>8.MAC下<code>gem install jekyll</code>失败</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR:  While executing gem ... (Gem::FilePermissionError)</span><br><span class="line">You don&apos;t have write permissions for the /Library/Ruby/Gems/2.0.0 directory.</span><br></pre></td></tr></table></figure>
 <p>好像不建议使用<code>sudo</code>,需要另外弄一套包管理rbenv或者RVM，图省事的话，可以直接安装在本地用户目录,指令格式：<code>gem install *** --user-install</code>，<code>***</code>是要安装的包名，具体可以输入<code>gem help install</code>查看参数意义</p>
 <p>参考：</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/14607193/installing-gem-or-updating-rubygems-fails-with-permissions-error" target="_blank" rel="noopener">Installing gem or updating RubyGems fails with permissions error</a></li>
 <li><a href="http://stackoverflow.com/questions/31972968/cant-install-gems-on-os-x-el-capitan" target="_blank" rel="noopener">Can’t install gems on OS X “El Capitan”</a></li>
 </ul>
-<p>9.mac下bundle执行失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">brian@brianway:~/mygit/brianway.github.io (master)$ bundle exec jekyll serve</span><br><span class="line">Configuration file: /Users/brian/mygit/brianway.github.io/_config.yml</span><br><span class="line">Source: /Users/brian/mygit/brianway.github.io</span><br><span class="line">Destination: /Users/brian/mygit/brianway.github.io/_site</span><br><span class="line">Incremental build: disabled. Enable with --incremental</span><br><span class="line">Generating...</span><br><span class="line">ERROR: YOUR SITE COULD NOT BE BUILT:</span><br><span class="line">------------------------------------</span><br><span class="line">Invalid date &apos;&lt;%= Time.now.strftime(&apos;%Y-%m-%d %H:%M:%S %z&apos;) %&gt;&apos;: Document &apos;vendor/bundle/ruby/2.0.0/gems/jekyll-3.1.6/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb&apos; does not have a valid date in the YAML front matter.</span><br></pre></td></tr></table></figure>
+<h3 id="9-mac下bundle执行失败"><a href="#9-mac下bundle执行失败" class="headerlink" title="9.mac下bundle执行失败"></a>9.mac下bundle执行失败</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">brian@brianway:~/mygit/brianway.github.io (master)$ bundle exec jekyll serve</span><br><span class="line">Configuration file: /Users/brian/mygit/brianway.github.io/_config.yml</span><br><span class="line">Source: /Users/brian/mygit/brianway.github.io</span><br><span class="line">Destination: /Users/brian/mygit/brianway.github.io/_site</span><br><span class="line">Incremental build: disabled. Enable with --incremental</span><br><span class="line">Generating...</span><br><span class="line">ERROR: YOUR SITE COULD NOT BE BUILT:</span><br><span class="line">------------------------------------</span><br><span class="line">Invalid date &apos;&lt;%= Time.now.strftime(&apos;%Y-%m-%d %H:%M:%S %z&apos;) %&gt;&apos;: Document &apos;vendor/bundle/ruby/2.0.0/gems/jekyll-3.1.6/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb&apos; does not have a valid date in the YAML front matter.</span><br></pre></td></tr></table></figure>
 <p>解决：在<code>_config.yml</code>文件添加<code>exclude: [&quot;vendor&quot;]</code></p>
 <p>参考：</p>
 <ul>
@@ -331,7 +322,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T09:15:39.872Z" itemprop="dateUpdated">2022-01-08 17:15:39</time>
+    最后更新时间：<time datetime="2022-01-08T16:17:04.179Z" itemprop="dateUpdated">2022-01-09 00:17:04</time>
 </span><br>
 
 
@@ -359,7 +350,7 @@ ga('send', 'pageview');
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装部署/">安装部署</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li></ul>
 
 
             
@@ -420,7 +411,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect prev">
       <a href="/2016/01/08/javase-learn-note-1-Reflect/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">java基础巩固笔记(1)-反射</h4>
+        <h4 class="title">Java基础巩固笔记(1)-反射</h4>
       </a>
     </div>
   
@@ -429,7 +420,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect next">
       <a href="/2015/12/17/hadoop-Fully-distributed-setup/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">hadoop完全分布式模式的安装和配置步骤</h4>
+        <h4 class="title">Hadoop完全分布式模式的安装和配置步骤</h4>
       </a>
     </div>
   

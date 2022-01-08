@@ -51,7 +51,7 @@ ga('send', 'pageview');
     
     
     
-    <title>springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建) | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <title>SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建) | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -61,16 +61,16 @@ ga('send', 'pageview');
     <meta name="description" content="本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。">
 <meta name="keywords" content="IntelliJ-IDEA,SpringMVC,MyBatis,Maven">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)">
+<meta property="og:title" content="SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)">
 <meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88mybatis%E6%80%9D%E8%B7%AF.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-1.png">
-<meta property="og:updated_time" content="2022-01-08T11:43:33.931Z">
+<meta property="og:updated_time" content="2022-01-08T16:07:42.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)">
+<meta name="twitter:title" content="SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)">
 <meta name="twitter:description" content="本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。">
 <meta name="twitter:image" content="http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88mybatis%E6%80%9D%E8%B7%AF.png">
     
@@ -167,7 +167,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)</div>
+        <div class="flex-col header-title ellipsis">SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -189,7 +189,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)</h1>
+        <h1 class="title">SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-03-29T22:28:06.000Z" itemprop="datePublished" class="page-time">
@@ -197,7 +197,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
             
         </h5>
@@ -222,12 +222,12 @@ ga('send', 'pageview');
 <article id="post-springmvc-learn-6-integrate-mybatis" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)</h1>
+        <h1 class="post-card-title">SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)</h1>
         <div class="post-meta">
             <time class="post-time" title="2016-03-30 06:28:06" datetime="2016-03-29T22:28:06.000Z" itemprop="datePublished">2016-03-30</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
 
 
@@ -269,8 +269,8 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><p>不同于<a href="http://blog.csdn.net/h3243212/article/details/50778934" target="_blank" rel="noopener">《mybatis学习笔记(17)-spring和mybatis整合》</a>中的示例demo,<strong>本文的整合采用maven构建</strong>。</p>
-<p>如何创建使用maven构建的web应用可以参考前面的一篇<a href="http://blog.csdn.net/h3243212/article/details/50828141#环境搭建" target="_blank" rel="noopener">《springmvc学习笔记(1)-框架原理和入门配置》</a></p>
+<h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><p>不同于<a href="http://blog.csdn.net/h3243212/article/details/50778934" target="_blank" rel="noopener">《MyBatis学习笔记(17)-spring和mybatis整合》</a>中的示例demo,<strong>本文的整合采用maven构建</strong>。</p>
+<p>如何创建使用maven构建的web应用可以参考前面的一篇<a href="http://blog.csdn.net/h3243212/article/details/50828141#环境搭建" target="_blank" rel="noopener">《SpringMVC学习笔记(1)-框架原理和入门配置》</a></p>
 <p><code>new-&gt;project-&gt;maven</code>，建一个裸的maven工程，手动建webapp的目录</p>
 <p>在<code>src/main</code>下新建文件夹<code>webapp</code></p>
 <h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><p>pom.xml文件</p>
@@ -307,7 +307,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T11:43:33.931Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
+    最后更新时间：<time datetime="2022-01-08T16:07:42.322Z" itemprop="dateUpdated">2022-01-09 00:07:42</time>
 </span><br>
 
 
@@ -345,7 +345,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -355,7 +355,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)》 — Brian's Homepage&source=本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)》 — Brian's Homepage&source=本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -365,7 +365,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -395,7 +395,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect prev">
       <a href="/2016/03/30/springmvc-learn-7-mapper/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">springmvc学习笔记(7)-springmvc整合mybatis之mapper</h4>
+        <h4 class="title">SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper</h4>
       </a>
     </div>
   
@@ -404,7 +404,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect next">
       <a href="/2016/03/30/springmvc-learn-5-Start-Summary/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">springmvc学习笔记(5)-入门程序小结</h4>
+        <h4 class="title">SpringMVC学习笔记(5)-入门程序小结</h4>
       </a>
     </div>
   
@@ -506,7 +506,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -516,7 +516,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)》 — Brian's Homepage&source=本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&title=《SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)》 — Brian's Homepage&source=本文主要展示如何在intellij IDEA中通过maven构建springmvc+mybatis框架的开发环境。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -526,7 +526,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-6-integrate-mybatis/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

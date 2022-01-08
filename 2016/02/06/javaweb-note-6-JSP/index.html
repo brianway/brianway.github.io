@@ -51,7 +51,7 @@ ga('send', 'pageview');
     
     
     
-    <title>javaweb入门笔记(6)-JSP技术 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <title>Java Web入门笔记(6)-JSP技术 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -61,14 +61,14 @@ ga('send', 'pageview');
     <meta name="description" content="JSP：Java Server Pages，一种动态web资源的开发技术">
 <meta name="keywords" content="JavaWeb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javaweb入门笔记(6)-JSP技术">
+<meta property="og:title" content="Java Web入门笔记(6)-JSP技术">
 <meta property="og:url" content="https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="JSP：Java Server Pages，一种动态web资源的开发技术">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-01-08T09:15:39.882Z">
+<meta property="og:updated_time" content="2022-01-08T16:07:42.323Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javaweb入门笔记(6)-JSP技术">
+<meta name="twitter:title" content="Java Web入门笔记(6)-JSP技术">
 <meta name="twitter:description" content="JSP：Java Server Pages，一种动态web资源的开发技术">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
@@ -164,7 +164,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">javaweb入门笔记(6)-JSP技术</div>
+        <div class="flex-col header-title ellipsis">Java Web入门笔记(6)-JSP技术</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -186,7 +186,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">javaweb入门笔记(6)-JSP技术</h1>
+        <h1 class="title">Java Web入门笔记(6)-JSP技术</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-02-06T02:46:12.000Z" itemprop="datePublished" class="page-time">
@@ -194,7 +194,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
             
         </h5>
@@ -219,12 +219,12 @@ ga('send', 'pageview');
 <article id="post-javaweb-note-6-JSP" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">javaweb入门笔记(6)-JSP技术</h1>
+        <h1 class="post-card-title">Java Web入门笔记(6)-JSP技术</h1>
         <div class="post-meta">
             <time class="post-time" title="2016-02-06 10:46:12" datetime="2016-02-06T02:46:12.000Z" itemprop="datePublished">2016-02-06</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
 
 
@@ -290,7 +290,7 @@ ga('send', 'pageview');
 <li><code>&lt;jsp:param&gt;</code></li>
 </ul>
 <hr>
-<h2 id="九大隐式对象"><a href="#九大隐式对象" class="headerlink" title="九大隐式对象"></a>九大隐式对象</h2><p>JSP引擎在调用JSP对应的<code>_jspServlet</code>时，会传递和创建9个web开发相关的对象供使用。后两者(<code>out</code>和<code>pageContext</code>)为JSP独有</p>
+<h2 id="九大隐式对象"><a href="#九大隐式对象" class="headerlink" title="九大隐式对象"></a>九大隐式对象</h2><p>JSP引擎在调用JSP对应的<code>_jspServlet</code>时，会传递和创建9个Web开发相关的对象供使用。后两者(<code>out</code>和<code>pageContext</code>)为JSP独有</p>
 <ul>
 <li>request</li>
 <li>response</li>
@@ -318,7 +318,7 @@ ga('send', 'pageview');
 <ul>
 <li>封装了对其他8大隐式对象的引用(主要用于自定义标签开发)</li>
 <li>自身是一个域对象，可用来保存数据(page域存的东西只能在页面范围内拿得出来)</li>
-<li>封装了web开发中的一些常用操作(提供管理所有域的入口)，如：引入和跳转其他资源、检索其他域对象中的属性等</li>
+<li>封装了Web开发中的一些常用操作(提供管理所有域的入口)，如：引入和跳转其他资源、检索其他域对象中的属性等</li>
 </ul>
 <p>Class PageContext的API文档</p>
 <blockquote>
@@ -367,7 +367,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T09:15:39.882Z" itemprop="dateUpdated">2022-01-08 17:15:39</time>
+    最后更新时间：<time datetime="2022-01-08T16:07:42.323Z" itemprop="dateUpdated">2022-01-09 00:07:42</time>
 </span><br>
 
 
@@ -405,7 +405,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《javaweb入门笔记(6)-JSP技术》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《Java Web入门笔记(6)-JSP技术》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -415,7 +415,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《javaweb入门笔记(6)-JSP技术》 — Brian's Homepage&source=JSP：Java Server Pages，一种动态web资源的开发技术" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《Java Web入门笔记(6)-JSP技术》 — Brian's Homepage&source=JSP：Java Server Pages，一种动态web资源的开发技术" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -425,7 +425,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(6)-JSP技术》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java Web入门笔记(6)-JSP技术》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -464,7 +464,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect next">
       <a href="/2016/02/06/javaweb-note-5-cookie-and-session/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">javaweb入门笔记(5)-cookie和session</h4>
+        <h4 class="title">Java Web入门笔记(5)-cookie和session</h4>
       </a>
     </div>
   
@@ -566,7 +566,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《javaweb入门笔记(6)-JSP技术》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《Java Web入门笔记(6)-JSP技术》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -576,7 +576,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《javaweb入门笔记(6)-JSP技术》 — Brian's Homepage&source=JSP：Java Server Pages，一种动态web资源的开发技术" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&title=《Java Web入门笔记(6)-JSP技术》 — Brian's Homepage&source=JSP：Java Server Pages，一种动态web资源的开发技术" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -586,7 +586,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb入门笔记(6)-JSP技术》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java Web入门笔记(6)-JSP技术》 — Brian's Homepage&url=https://brianway.github.io/2016/02/06/javaweb-note-6-JSP/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

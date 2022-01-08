@@ -51,17 +51,17 @@ ga('send', 'pageview');
     
     
     
-    <title>springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <title>SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="SpringMVC,总结,debug">
+    <meta name="keywords" content="SpringMVC,debug">
     <meta name="description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
-<meta name="keywords" content="SpringMVC,总结,debug">
+<meta name="keywords" content="SpringMVC,debug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结">
+<meta property="og:title" content="SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结">
 <meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
@@ -69,13 +69,13 @@ ga('send', 'pageview');
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png">
+<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png">
-<meta property="og:updated_time" content="2022-01-08T11:43:33.932Z">
+<meta property="og:updated_time" content="2022-01-08T16:07:42.154Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结">
+<meta name="twitter:title" content="SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结">
 <meta name="twitter:description" content="本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法">
 <meta name="twitter:image" content="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
     
@@ -172,7 +172,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</div>
+        <div class="flex-col header-title ellipsis">SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -194,7 +194,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</h1>
+        <h1 class="title">SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-03-29T22:28:21.000Z" itemprop="datePublished" class="page-time">
@@ -202,7 +202,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
             
         </h5>
@@ -227,12 +227,12 @@ ga('send', 'pageview');
 <article id="post-springmvc-learn-21-debug-summary" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结</h1>
+        <h1 class="post-card-title">SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结</h1>
         <div class="post-meta">
             <time class="post-time" title="2016-03-30 06:28:21" datetime="2016-03-29T22:28:21.000Z" itemprop="datePublished">2016-03-30</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
 
 
@@ -305,9 +305,9 @@ ga('send', 'pageview');
 <h3 id="请求参数乱码问题"><a href="#请求参数乱码问题" class="headerlink" title="请求参数乱码问题"></a>请求参数乱码问题</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png" alt="springmcv_post请求参数乱码" title>
+                    <img src="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png" alt="springmvc_post请求参数乱码" title>
                 </div>
-                <div class="image-caption">springmcv_post请求参数乱码</div>
+                <div class="image-caption">springmvc_post请求参数乱码</div>
             </figure>
 <p>在web.xml添加post乱码filter</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- post乱码过虑器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -315,9 +315,9 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png" alt="springmcv_post请求参数乱码解决" title>
+                    <img src="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png" alt="springmvc_post请求参数乱码解决" title>
                 </div>
-                <div class="image-caption">springmcv_post请求参数乱码解决</div>
+                <div class="image-caption">springmvc_post请求参数乱码解决</div>
             </figure>
 <p>对于get请求中文参数出现乱码解决方法有两个：</p>
 <p>修改tomcat配置文件添加编码与工程编码一致，如下：</p>
@@ -325,7 +325,7 @@ ga('send', 'pageview');
 <p>另外一种方法对参数进行重新编码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String userName = <span class="keyword">new</span></span><br><span class="line">String(request.getParamter(<span class="string">"userName"</span>).getBytes(<span class="string">"ISO8859-1"</span>),<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
 <p>ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码</p>
-<h3 id="请求参数类型转换问题"><a href="#请求参数类型转换问题" class="headerlink" title="请求参数类型转换问题"></a>请求参数类型转换问题</h3><p>编写对应的转换类才行,具体参考前面参数绑定的博文<a href="http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定" target="_blank" rel="noopener">《 springmvc学习笔记(11)-springmvc注解开发之简单参数绑定》</a></p>
+<h3 id="请求参数类型转换问题"><a href="#请求参数类型转换问题" class="headerlink" title="请求参数类型转换问题"></a>请求参数类型转换问题</h3><p>编写对应的转换类才行,具体参考前面参数绑定的博文<a href="http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定" target="_blank" rel="noopener">《 SpringMVC学习笔记(11)-springmvc注解开发之简单参数绑定》</a></p>
 <h3 id="maven平台编码问题"><a href="#maven平台编码问题" class="headerlink" title="maven平台编码问题"></a>maven平台编码问题</h3><p><code>[WARNING] Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!</code></p>
 <p>参考:</p>
 <blockquote>
@@ -404,7 +404,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T11:43:33.932Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
+    最后更新时间：<time datetime="2022-01-08T16:07:42.154Z" itemprop="dateUpdated">2022-01-09 00:07:42</time>
 </span><br>
 
 
@@ -432,7 +432,7 @@ ga('send', 'pageview');
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li></ul>
 
 
             
@@ -442,7 +442,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -452,7 +452,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -462,7 +462,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -492,7 +492,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect prev">
       <a href="/2016/03/30/springmvc-learn-22-developing-summary/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">springmvc学习笔记(22)-springmvc开发小结</h4>
+        <h4 class="title">SpringMVC学习笔记(22)-SpringMVC开发小结</h4>
       </a>
     </div>
   
@@ -501,7 +501,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect next">
       <a href="/2016/03/30/springmvc-learn-20-interceptor/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">springmvc学习笔记(20)-拦截器</h4>
+        <h4 class="title">SpringMVC学习笔记(20)-拦截器</h4>
       </a>
     </div>
   
@@ -603,7 +603,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -613,7 +613,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&title=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&source=本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -623,7 +623,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-21-debug-summary/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

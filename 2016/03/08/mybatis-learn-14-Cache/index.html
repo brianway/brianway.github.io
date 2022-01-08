@@ -51,26 +51,26 @@ ga('send', 'pageview');
     
     
     
-    <title>mybatis学习笔记(14)-查询缓存之一级缓存 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <title>MyBatis学习笔记(14)-查询缓存之一级缓存 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="MyBatis,缓存">
+    <meta name="keywords" content="MyBatis">
     <meta name="description" content="本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。">
-<meta name="keywords" content="MyBatis,缓存">
+<meta name="keywords" content="MyBatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis学习笔记(14)-查询缓存之一级缓存">
+<meta property="og:title" content="MyBatis学习笔记(14)-查询缓存之一级缓存">
 <meta property="og:url" content="https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png">
 <meta property="og:image" content="http://blog.qiniu.brianway.site/mybatis_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png">
-<meta property="og:updated_time" content="2022-01-08T11:43:33.820Z">
+<meta property="og:updated_time" content="2022-01-08T16:07:42.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis学习笔记(14)-查询缓存之一级缓存">
+<meta name="twitter:title" content="MyBatis学习笔记(14)-查询缓存之一级缓存">
 <meta name="twitter:description" content="本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。">
 <meta name="twitter:image" content="http://blog.qiniu.brianway.site/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png">
     
@@ -167,7 +167,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">mybatis学习笔记(14)-查询缓存之一级缓存</div>
+        <div class="flex-col header-title ellipsis">MyBatis学习笔记(14)-查询缓存之一级缓存</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -189,7 +189,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">mybatis学习笔记(14)-查询缓存之一级缓存</h1>
+        <h1 class="title">MyBatis学习笔记(14)-查询缓存之一级缓存</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-03-07T18:39:14.000Z" itemprop="datePublished" class="page-time">
@@ -197,7 +197,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
             
         </h5>
@@ -222,12 +222,12 @@ ga('send', 'pageview');
 <article id="post-mybatis-learn-14-Cache" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">mybatis学习笔记(14)-查询缓存之一级缓存</h1>
+        <h1 class="post-card-title">MyBatis学习笔记(14)-查询缓存之一级缓存</h1>
         <div class="post-meta">
             <time class="post-time" title="2016-03-08 02:39:14" datetime="2016-03-07T18:39:14.000Z" itemprop="datePublished">2016-03-08</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
 
 
@@ -284,7 +284,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T11:43:33.820Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
+    最后更新时间：<time datetime="2022-01-08T16:07:42.155Z" itemprop="dateUpdated">2022-01-09 00:07:42</time>
 </span><br>
 
 
@@ -312,7 +312,7 @@ ga('send', 'pageview');
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li></ul>
 
 
             
@@ -322,7 +322,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《MyBatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -332,7 +332,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&source=本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《MyBatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&source=本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -342,7 +342,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MyBatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -372,7 +372,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect prev">
       <a href="/2016/03/08/mybatis-learn-15-Secondary-Cache/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">mybatis学习笔记(15)-查询缓存之二级缓存</h4>
+        <h4 class="title">MyBatis学习笔记(15)-查询缓存之二级缓存</h4>
       </a>
     </div>
   
@@ -381,7 +381,7 @@ ga('send', 'pageview');
     <div class="waves-block waves-effect next">
       <a href="/2016/03/08/mybatis-learn-13-lazeloading/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">mybatis学习笔记(13)-延迟加载</h4>
+        <h4 class="title">MyBatis学习笔记(13)-延迟加载</h4>
       </a>
     </div>
   
@@ -483,7 +483,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《MyBatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -493,7 +493,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&source=本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&title=《MyBatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&source=本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -503,7 +503,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MyBatis学习笔记(14)-查询缓存之一级缓存》 — Brian's Homepage&url=https://brianway.github.io/2016/03/08/mybatis-learn-14-Cache/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

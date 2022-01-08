@@ -51,24 +51,24 @@ ga('send', 'pageview');
     
     
     
-    <title>springmvc+mybatis学习笔记(汇总) | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <title>springmvc+MyBatis学习笔记(汇总) | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="SpringMVC,总结">
+    <meta name="keywords" content="SpringMVC">
     <meta name="description" content="笔记分为两大部分：mybatis和springmvc  mybatis springmvc  笔记内容主要是mybatis和springmvc的一些基本概念和使用方法，涉及概念介绍、环境搭建、编程细节、运行调试等方面。 这套笔记整体偏入门和应用，适合快速上手，对底层实现和机理并未做过多分析。我后续会研读spring源码，并把学习的收获写成博客分享出来，根据情况再开一个仓库或者贴博客链接。">
-<meta name="keywords" content="SpringMVC,总结">
+<meta name="keywords" content="SpringMVC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springmvc+mybatis学习笔记(汇总)">
+<meta property="og:title" content="springmvc+MyBatis学习笔记(汇总)">
 <meta property="og:url" content="https://brianway.github.io/2016/03/30/springmvc-learn-TOC/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="笔记分为两大部分：mybatis和springmvc  mybatis springmvc  笔记内容主要是mybatis和springmvc的一些基本概念和使用方法，涉及概念介绍、环境搭建、编程细节、运行调试等方面。 这套笔记整体偏入门和应用，适合快速上手，对底层实现和机理并未做过多分析。我后续会研读spring源码，并把学习的收获写成博客分享出来，根据情况再开一个仓库或者贴博客链接。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-01-08T09:15:39.895Z">
+<meta property="og:updated_time" content="2022-01-08T16:07:42.323Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springmvc+mybatis学习笔记(汇总)">
+<meta name="twitter:title" content="springmvc+MyBatis学习笔记(汇总)">
 <meta name="twitter:description" content="笔记分为两大部分：mybatis和springmvc  mybatis springmvc  笔记内容主要是mybatis和springmvc的一些基本概念和使用方法，涉及概念介绍、环境搭建、编程细节、运行调试等方面。 这套笔记整体偏入门和应用，适合快速上手，对底层实现和机理并未做过多分析。我后续会研读spring源码，并把学习的收获写成博客分享出来，根据情况再开一个仓库或者贴博客链接。">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
@@ -164,7 +164,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">springmvc+mybatis学习笔记(汇总)</div>
+        <div class="flex-col header-title ellipsis">springmvc+MyBatis学习笔记(汇总)</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -186,7 +186,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">springmvc+mybatis学习笔记(汇总)</h1>
+        <h1 class="title">springmvc+MyBatis学习笔记(汇总)</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-03-30T01:40:00.000Z" itemprop="datePublished" class="page-time">
@@ -194,7 +194,7 @@ ga('send', 'pageview');
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
             
         </h5>
@@ -219,12 +219,12 @@ ga('send', 'pageview');
 <article id="post-springmvc-learn-TOC" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">springmvc+mybatis学习笔记(汇总)</h1>
+        <h1 class="post-card-title">springmvc+MyBatis学习笔记(汇总)</h1>
         <div class="post-meta">
             <time class="post-time" title="2016-03-30 09:40:00" datetime="2016-03-30T01:40:00.000Z" itemprop="datePublished">2016-03-30</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web开发/">web开发</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web开发/">Web开发</a></li></ul>
 
 
 
@@ -254,50 +254,50 @@ ga('send', 'pageview');
 <hr>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
 <li><a href="/mybatis">mybatis</a><ul>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50756617" target="_blank" rel="noopener">mybatis学习笔记(1)-对原生jdbc程序中的问题总结.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50756622" target="_blank" rel="noopener">mybatis学习笔记(2)-mybatis概述.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50756631" target="_blank" rel="noopener">mybatis学习笔记(3)-入门程序一.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50756635" target="_blank" rel="noopener">mybatis学习笔记(3)-入门程序二.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50756808" target="_blank" rel="noopener">mybatis学习笔记(4)-开发dao方法.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50759845" target="_blank" rel="noopener">mybatis学习笔记(5)-配置文件.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50765375" target="_blank" rel="noopener">mybatis学习笔记(6)-输入映射.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50765422" target="_blank" rel="noopener">mybatis学习笔记(7)-输出映射.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50766105" target="_blank" rel="noopener">mybatis学习笔记(8)-动态sql.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50770013" target="_blank" rel="noopener">mybatis学习笔记(9)-订单商品数据模型分析.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50770023" target="_blank" rel="noopener">mybatis学习笔记(10)-一对一查询.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50770026" target="_blank" rel="noopener">mybatis学习笔记(11)-一对多查询.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50770032" target="_blank" rel="noopener">mybatis学习笔记(12)-多对多查询.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50770050" target="_blank" rel="noopener">mybatis学习笔记(13)-延迟加载.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50774921" target="_blank" rel="noopener">mybatis学习笔记(14)-查询缓存之一级缓存.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50778927" target="_blank" rel="noopener">mybatis学习笔记(15)-查询缓存之二级缓存.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50778933" target="_blank" rel="noopener">mybatis学习笔记(16)-mybatis整合ehcache.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50778934" target="_blank" rel="noopener">mybatis学习笔记(17)-spring和mybatis整合.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50778937" target="_blank" rel="noopener">mybatis学习笔记(18)-mybatis逆向工程.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50756617" target="_blank" rel="noopener">MyBatis学习笔记(1)-对原生jdbc程序中的问题总结.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50756622" target="_blank" rel="noopener">MyBatis学习笔记(2)-mybatis概述.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50756631" target="_blank" rel="noopener">MyBatis学习笔记(3)-入门程序一.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50756635" target="_blank" rel="noopener">MyBatis学习笔记(3)-入门程序二.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50756808" target="_blank" rel="noopener">MyBatis学习笔记(4)-开发dao方法.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50759845" target="_blank" rel="noopener">MyBatis学习笔记(5)-配置文件.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50765375" target="_blank" rel="noopener">MyBatis学习笔记(6)-输入映射.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50765422" target="_blank" rel="noopener">MyBatis学习笔记(7)-输出映射.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50766105" target="_blank" rel="noopener">MyBatis学习笔记(8)-动态sql.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50770013" target="_blank" rel="noopener">MyBatis学习笔记(9)-订单商品数据模型分析.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50770023" target="_blank" rel="noopener">MyBatis学习笔记(10)-一对一查询.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50770026" target="_blank" rel="noopener">MyBatis学习笔记(11)-一对多查询.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50770032" target="_blank" rel="noopener">MyBatis学习笔记(12)-多对多查询.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50770050" target="_blank" rel="noopener">MyBatis学习笔记(13)-延迟加载.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50774921" target="_blank" rel="noopener">MyBatis学习笔记(14)-查询缓存之一级缓存.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50778927" target="_blank" rel="noopener">MyBatis学习笔记(15)-查询缓存之二级缓存.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50778933" target="_blank" rel="noopener">MyBatis学习笔记(16)-mybatis整合ehcache.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50778934" target="_blank" rel="noopener">MyBatis学习笔记(17)-spring和mybatis整合.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50778937" target="_blank" rel="noopener">MyBatis学习笔记(18)-mybatis逆向工程.md</a></li>
 </ul>
 </li>
 <li><a href="/springmvc">springmvc</a><ul>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50828141" target="_blank" rel="noopener">springmvc学习笔记(1)-框架原理和入门配置.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50829777" target="_blank" rel="noopener">springmvc学习笔记(2)-非注解的处理器映射器和适配器.md</a>   </li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50834272" target="_blank" rel="noopener">springmvc学习笔记(3)-注解的处理器映射器和适配器.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50834276" target="_blank" rel="noopener">springmvc学习笔记(4)-前端控制器.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50834278" target="_blank" rel="noopener">springmvc学习笔记(5)-入门程序小结.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50837187" target="_blank" rel="noopener">springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建).md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50837878" target="_blank" rel="noopener">springmvc学习笔记(7)-springmvc整合mybatis之mapper.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50843840" target="_blank" rel="noopener">springmvc学习笔记(8)-springmvc整合mybatis之service.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50845546" target="_blank" rel="noopener">springmvc学习笔记(9)-springmvc整合mybatis之controller.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50845549" target="_blank" rel="noopener">springmvc学习笔记(10)-springmvc注解开发之商品修改功能.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50854748" target="_blank" rel="noopener">springmvc学习笔记(11)-springmvc注解开发之简单参数绑定.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50854757" target="_blank" rel="noopener">springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50854765" target="_blank" rel="noopener">springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50864737" target="_blank" rel="noopener">springmvc学习笔记(14)-springmvc校验.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50864744" target="_blank" rel="noopener">springmvc学习笔记(15)-数据回显.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50864745" target="_blank" rel="noopener">springmvc学习笔记(16)-异常处理器.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50885274" target="_blank" rel="noopener">springmvc学习笔记(17)-上传图片.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50885288" target="_blank" rel="noopener">springmvc学习笔记(18)-json数据交互.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50885293" target="_blank" rel="noopener">springmvc学习笔记(19)-RESTful支持.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50894887" target="_blank" rel="noopener">springmvc学习笔记(20)-拦截器.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50894901" target="_blank" rel="noopener">springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结.md</a></li>
-<li><a href="http://blog.csdn.net/h3243212/article/details/50894913" target="_blank" rel="noopener">springmvc学习笔记(22)-springmvc开发小结.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50828141" target="_blank" rel="noopener">SpringMVC学习笔记(1)-框架原理和入门配置.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50829777" target="_blank" rel="noopener">SpringMVC学习笔记(2)-非注解的处理器映射器和适配器.md</a>   </li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50834272" target="_blank" rel="noopener">SpringMVC学习笔记(3)-注解的处理器映射器和适配器.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50834276" target="_blank" rel="noopener">SpringMVC学习笔记(4)-前端控制器.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50834278" target="_blank" rel="noopener">SpringMVC学习笔记(5)-入门程序小结.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50837187" target="_blank" rel="noopener">SpringMVC学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建).md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50837878" target="_blank" rel="noopener">SpringMVC学习笔记(7)-springmvc整合mybatis之mapper.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50843840" target="_blank" rel="noopener">SpringMVC学习笔记(8)-springmvc整合mybatis之service.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50845546" target="_blank" rel="noopener">SpringMVC学习笔记(9)-springmvc整合mybatis之controller.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50845549" target="_blank" rel="noopener">SpringMVC学习笔记(10)-springmvc注解开发之商品修改功能.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50854748" target="_blank" rel="noopener">SpringMVC学习笔记(11)-springmvc注解开发之简单参数绑定.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50854757" target="_blank" rel="noopener">SpringMVC学习笔记(12)-springmvc注解开发之包装类型参数绑定.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50854765" target="_blank" rel="noopener">SpringMVC学习笔记(13)-springmvc注解开发之集合类型参数绑定.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50864737" target="_blank" rel="noopener">SpringMVC学习笔记(14)-springmvc校验.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50864744" target="_blank" rel="noopener">SpringMVC学习笔记(15)-数据回显.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50864745" target="_blank" rel="noopener">SpringMVC学习笔记(16)-异常处理器.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50885274" target="_blank" rel="noopener">SpringMVC学习笔记(17)-上传图片.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50885288" target="_blank" rel="noopener">SpringMVC学习笔记(18)-json数据交互.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50885293" target="_blank" rel="noopener">SpringMVC学习笔记(19)-RESTful支持.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50894887" target="_blank" rel="noopener">SpringMVC学习笔记(20)-拦截器.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50894901" target="_blank" rel="noopener">SpringMVC学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结.md</a></li>
+<li><a href="http://blog.csdn.net/h3243212/article/details/50894913" target="_blank" rel="noopener">SpringMVC学习笔记(22)-springmvc开发小结.md</a></li>
 </ul>
 </li>
 </ul>
@@ -322,7 +322,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T09:15:39.895Z" itemprop="dateUpdated">2022-01-08 17:15:39</time>
+    最后更新时间：<time datetime="2022-01-08T16:07:42.323Z" itemprop="dateUpdated">2022-01-09 00:07:42</time>
 </span><br>
 
 
@@ -350,7 +350,7 @@ ga('send', 'pageview');
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
 
 
             
@@ -360,7 +360,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+mybatis学习笔记(汇总)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+MyBatis学习笔记(汇总)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -370,7 +370,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+mybatis学习笔记(汇总)》 — Brian's Homepage&source=笔记分为两大部分：mybatis和springmvc
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+MyBatis学习笔记(汇总)》 — Brian's Homepage&source=笔记分为两大部分：mybatis和springmvc
 
 mybatis
 springmvc
@@ -385,7 +385,7 @@ springmvc
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc+mybatis学习笔记(汇总)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc+MyBatis学习笔记(汇总)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -424,7 +424,7 @@ springmvc
     <div class="waves-block waves-effect next">
       <a href="/2016/03/30/springmvc-learn-22-developing-summary/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">springmvc学习笔记(22)-springmvc开发小结</h4>
+        <h4 class="title">SpringMVC学习笔记(22)-SpringMVC开发小结</h4>
       </a>
     </div>
   
@@ -526,7 +526,7 @@ springmvc
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+mybatis学习笔记(汇总)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+MyBatis学习笔记(汇总)》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -536,7 +536,7 @@ springmvc
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+mybatis学习笔记(汇总)》 — Brian's Homepage&source=笔记分为两大部分：mybatis和springmvc
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&title=《springmvc+MyBatis学习笔记(汇总)》 — Brian's Homepage&source=笔记分为两大部分：mybatis和springmvc
 
 mybatis
 springmvc
@@ -551,7 +551,7 @@ springmvc
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc+mybatis学习笔记(汇总)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&via=https://brianway.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springmvc+MyBatis学习笔记(汇总)》 — Brian's Homepage&url=https://brianway.github.io/2016/03/30/springmvc-learn-TOC/&via=https://brianway.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
