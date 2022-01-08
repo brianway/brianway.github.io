@@ -66,12 +66,12 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文以商品修改为例，记录springmvc的注解开发，包括mapper,service,controller,@RequestMapping,controller方法的返回值等">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png">
-<meta property="og:updated_time" content="2019-04-07T16:16:59.979Z">
+<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png">
+<meta property="og:updated_time" content="2022-01-08T11:43:33.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springmvc学习笔记(10)-springmvc注解开发之商品修改功能">
 <meta name="twitter:description" content="本文以商品修改为例，记录springmvc的注解开发，包括mapper,service,controller,@RequestMapping,controller方法的返回值等">
-<meta name="twitter:image" content="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png">
+<meta name="twitter:image" content="http://blog.qiniu.brianway.site/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
     
@@ -277,7 +277,7 @@ ga('send', 'pageview');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//商品信息修改页面显示</span></span><br><span class="line">    <span class="comment">//@RequestMapping("/editItems")</span></span><br><span class="line">    <span class="comment">//限制http请求方法，可以post和get</span></span><br><span class="line">	<span class="meta">@RequestMapping</span>(value=<span class="string">"/editItems"</span>,method=&#123;RequestMethod.POST, RequestMethod.GET&#125;)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> ModelAndView <span class="title">editItems</span><span class="params">()</span><span class="keyword">throws</span> Exception </span>&#123;</span><br></pre></td></tr></table></figure>
 <p>如果限制请求为post方法，进行get请求，即将上面代码的注解改为<code>@RequestMapping(value=&quot;/editItems&quot;,method={RequestMethod.POST})</code></p>
 <p>报错，状态码405：</p>
-<p><img src="http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png" alt="GET拒绝"></p>
+<p><img src="http://blog.qiniu.brianway.site/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png" alt="GET拒绝"></p>
 <h2 id="controller方法的返回值"><a href="#controller方法的返回值" class="headerlink" title="controller方法的返回值"></a>controller方法的返回值</h2><ul>
 <li>返回<code>ModelAndView</code></li>
 </ul>
@@ -314,7 +314,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-04-07T16:16:59.979Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+    最后更新时间：<time datetime="2022-01-08T11:43:33.769Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
 </span><br>
 
 
@@ -495,7 +495,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>Brian Way &copy; 2015 - 2019</span>
+        <p><span>Brian Way &copy; 2015 - 2022</span>
             <span>
                 
                 Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

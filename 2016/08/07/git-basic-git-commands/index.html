@@ -66,7 +66,7 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文是git系列博客的第二篇。本文对指令按照使用场景(建库，查看，修改，分支)进行分类归纳，介绍指令基本含义和用法，方便查阅。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-07T16:16:59.800Z">
+<meta property="og:updated_time" content="2022-01-08T11:43:33.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git常用指令整理及说明(详细)">
 <meta name="twitter:description" content="本文是git系列博客的第二篇。本文对指令按照使用场景(建库，查看，修改，分支)进行分类归纳，介绍指令基本含义和用法，方便查阅。">
@@ -290,7 +290,7 @@ ga('send', 'pageview');
 <li><code>git checkout -- 文件名</code>把没暂存(即没add)的干掉，或者说，丢弃工作区，回到到暂存状态</li>
 <li><code>git reset HEAD 文件名</code>把暂存的状态取消，工作区内容不变，但状态变为“未暂存”。</li>
 </ul>
-<p>简单来说，没有add过的修改，只需要<code>git checkout -- 文件名</code>即可撤销；add 过的修改，先<code>git reset HEAD 文件名</code>变成没add 过的修改，再<code>git checkout -- 文件名</code>撤销。操作示例可以看<a href="http://7xph6d.com1.z0.glb.clouddn.com/git_%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9.png" target="_blank" rel="noopener">这张图</a></p>
+<p>简单来说，没有add过的修改，只需要<code>git checkout -- 文件名</code>即可撤销；add 过的修改，先<code>git reset HEAD 文件名</code>变成没add 过的修改，再<code>git checkout -- 文件名</code>撤销。操作示例可以看<a href="http://blog.qiniu.brianway.site/git_%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9.png" target="_blank" rel="noopener">这张图</a></p>
 <ul>
 <li><code>git reset --hard HEAD^</code> 会回退到上一个版本</li>
 <li><code>git reset --hard 某版本号前几位</code>通过命令行上的历史信息（假如你没清屏的话），找到某版本 的版本号回到指定版本。不一定要全部的版本号，就像这个命令的例子，只要前面的约7、8位这样就可以。</li>
@@ -344,7 +344,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-04-07T16:16:59.800Z" itemprop="dateUpdated">2019-04-08 00:16:59</time>
+    最后更新时间：<time datetime="2022-01-08T11:43:33.931Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
 </span><br>
 
 
@@ -525,7 +525,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>Brian Way &copy; 2015 - 2019</span>
+        <p><span>Brian Way &copy; 2015 - 2022</span>
             <span>
                 
                 Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
