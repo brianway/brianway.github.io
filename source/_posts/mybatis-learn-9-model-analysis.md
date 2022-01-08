@@ -33,7 +33,7 @@ comments: true
 ##	数据模型分析
 
 
-![数据模型分析](http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90.png)
+![数据模型分析](http://blog.qiniu.brianway.site/mybatis_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90.png)
 
 - 用户表user：记录了购买商品的用户信息
 - 订单表orders：记录了用户所创建的订单（购买商品的订单）

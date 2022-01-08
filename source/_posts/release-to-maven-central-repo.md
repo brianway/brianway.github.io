@@ -32,7 +32,7 @@ comments: true
 
 等待审批通过后，就可以在中央仓库中搜索到自己发布的构件了！下面是我在 Maven 中央仓库的构件：
 
-![webporter 发布到 maven 中央仓库](http://7xph6d.com1.z0.glb.clouddn.com/webporter_maven-release-v1.0.png)
+![webporter 发布到 maven 中央仓库](http://blog.qiniu.brianway.site/webporter_maven-release-v1.0.png)
 
 
 - 搜索地址： [https://search.maven.org/](https://search.maven.org/)
@@ -57,7 +57,7 @@ comments: true
 
 在 IntelliJ IDEA 中，pom.xml 里的插件找不到并报红，如下图：
 
-![maven 依赖不识别](http://7xph6d.com1.z0.glb.clouddn.com/maven_%E6%8F%92%E4%BB%B6%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB-2.jpeg)
+![maven 依赖不识别](http://blog.qiniu.brianway.site/maven_%E6%8F%92%E4%BB%B6%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB-2.jpeg)
 
 自己使用 mvn 指令构建的话，会提示
 
@@ -80,7 +80,7 @@ mvn dependency:get -DrepoUrl=http://repo.maven.apache.org/maven2/ -Dartifact=org
 
 这个过程耗时视网速而定，大概 5～10 分钟。
 
-![maven 依赖不识别解决方案](http://7xph6d.com1.z0.glb.clouddn.com/maven_%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png)
+![maven 依赖不识别解决方案](http://blog.qiniu.brianway.site/maven_%E4%BE%9D%E8%B5%96%E4%B8%8D%E8%AF%86%E5%88%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png)
 
 
 方案一是参考下面第二个链接；方案二是我自己提出并验证是有效的。

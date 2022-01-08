@@ -205,7 +205,7 @@ public class ItemsController {
 报错，状态码405：
 
 
-![GET拒绝](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png)
+![GET拒绝](http://blog.qiniu.brianway.site/springmvc_%E9%99%90%E5%88%B6http%E8%AF%B7%E6%B1%82-GET%E6%8B%92%E7%BB%9D.png)
 
 
 ## controller方法的返回值

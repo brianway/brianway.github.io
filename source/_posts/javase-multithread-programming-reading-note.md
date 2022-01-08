@@ -80,7 +80,7 @@ comments: true
 
 *线程的私有堆栈图*
 
-![javaSE_多线程-线程的私有堆栈](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png)
+![javaSE_多线程-线程的私有堆栈](http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png)
 
 
 - volatile关键字：主要作用是使变量在多个线程间可见。**加volatile关键字可强制性从公共堆栈进行取值,而不是从线程私有数据栈中取得变量的值**
@@ -92,7 +92,7 @@ comments: true
 
 *读取公共内存图*
 
-![javaSE_多线程-读取公共内存.png](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E8%AF%BB%E5%8F%96%E5%85%AC%E5%85%B1%E5%86%85%E5%AD%98.png)
+![javaSE_多线程-读取公共内存.png](http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E8%AF%BB%E5%8F%96%E5%85%AC%E5%85%B1%E5%86%85%E5%AD%98.png)
 
 辨析和零散补充
 
@@ -110,7 +110,7 @@ comments: true
 
 *变量在内存中的工作过程图*
 
-![javaSE_多线程-变量在内存中的工作过程.png](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%98%E9%87%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png)
+![javaSE_多线程-变量在内存中的工作过程.png](http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%98%E9%87%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png)
 
 
 ## 线程间通信
@@ -228,7 +228,7 @@ Object与Condition方法对比
 
 *方法与状态关系示意图*
 
-![javaSE_多线程-方法与状态关系示意图.png](http://7xph6d.com1.z0.glb.clouddn.com/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
+![javaSE_多线程-方法与状态关系示意图.png](http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
 
 - 线程的状态：`Thread.State`枚举类,参考官网API[Enum Thread.State](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Thread.State.html)
 - 线程组：线程组中可以有线程对象，也可以有线程组，组中还可以有线程。可批量管理线程或线程组对象。

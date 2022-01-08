@@ -74,7 +74,7 @@ date: 2019-04-04 02:04:54
    - [webporter](https://github.com/brianway/webporter)：个人爬虫项目，曾荣登 Github 单日 trending 总榜第七名和 Java 榜第一名
    - [Shepher](https://github.com/XiaoMi/shepher)：小米公司开源的 ZooKeeper 网页管理工具，核心开发
    - [algorithms-learning](https://github.com/brianway/algorithms-learning)：[牛客网算法精品课](https://www.nowcoder.com/courses/1)相关代码 
-   - [算法 Part I](https://www.coursera.org/course/algs4partI)：Coursera 上普林斯顿的算法课程，成绩 98.4%([成绩单](http://7xph6d.com1.z0.glb.clouddn.com/%E9%9A%8F%E7%AC%94_part-I-total.png))
+   - [算法 Part I](https://www.coursera.org/course/algs4partI)：Coursera 上普林斯顿的算法课程，成绩 98.4%([成绩单](http://blog.qiniu.brianway.site/%E9%9A%8F%E7%AC%94_part-I-total.png))
    - [springmvc-mybatis-learning](https://github.com/brianway/springmvc-mybatis-learning)：SpringMVC+MyBatis 系列学习笔记+源码
 - 2015 及以前
    - [贪吃蛇小游戏](https://wenku.baidu.com/view/da510316cc7931b765ce152a.html)：大学 C 语言课程设计项目

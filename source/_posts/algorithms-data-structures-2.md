@@ -48,7 +48,7 @@ private class Node {
 }
 ```
 
-![Binary Search Tree](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_BST.png)
+![Binary Search Tree](http://blog.qiniu.brianway.site/algorithms_BST.png)
 
 
 - 查找：得到相应键的值，若无此键则返回null.
@@ -139,7 +139,7 @@ private Node delete(Node x, Key key) {
 - 2-node:一个键，两个分叉（smaller,larger）
 - 3-node:两个键，三个分叉（smaller,between,larger）
 
-![2-3 trees](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_2-3%20trees.png)
+![2-3 trees](http://blog.qiniu.brianway.site/algorithms_2-3%20trees.png)
 
 在底部向一个3-node插入。
 
@@ -150,7 +150,7 @@ private Node delete(Node x, Key key) {
 
 总结起来就是：当插入的值导致节点变四叉时进行分裂，将中间的值传给上一个节点，并将另外两个值作为两个子节点分开，若上一节点也因此变成四叉，依次类推。分裂4-node是一个local transformation，只会进行常数次数的操作。**高度加一由且仅由顶节点分裂造成**
 
-![2-3 trees proof](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_2-3%20trees-proof.png)
+![2-3 trees proof](http://blog.qiniu.brianway.site/algorithms_2-3%20trees-proof.png)
 
 树的高度，在查找和插入时，保证了logarithmic的性能。
 
@@ -162,7 +162,7 @@ private Node delete(Node x, Key key) {
 
 这里的红黑树均指Left-leaning red-black BSTs。主要是用二叉树的形式来表示2-3树，用一个“内部”的left-leaning连接来表示3-node。red link是2-3tree的三叉节点的连接两个key的内部link，大值作为根节点，小值作为左子节点，故名left leaning 红黑树。
 
-![红黑树定义](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-definition.png)
+![红黑树定义](http://blog.qiniu.brianway.site/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-definition.png)
 
 一个等价的定义,A BST such that:
 
@@ -170,7 +170,7 @@ private Node delete(Node x, Key key) {
 - Every path from root to null link has the same number of black links.
 - Red links lean left.
 
-![红黑树对应2-3树](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8C2-3%E6%A0%91%E5%AF%B9%E5%BA%94.png)
+![红黑树对应2-3树](http://blog.qiniu.brianway.site/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8C2-3%E6%A0%91%E5%AF%B9%E5%BA%94.png)
 
 红黑树的java表示
 
@@ -203,7 +203,7 @@ private boolean isRed(Node x) {
 
 - 左转
 
-![红黑树左转](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-left-rotate.png)
+![红黑树左转](http://blog.qiniu.brianway.site/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-left-rotate.png)
 
 ```java
 /* left rotate */
@@ -220,7 +220,7 @@ private Node rotateLeft(Node h) {
 
 - 右转
 
-![红黑树右转](http://7xph6d.com1.z0.glb.clouddn.com/algorithims_%E7%BA%A2%E9%BB%91%E6%A0%91-rigtht-rotate.png)
+![红黑树右转](http://blog.qiniu.brianway.site/algorithims_%E7%BA%A2%E9%BB%91%E6%A0%91-rigtht-rotate.png)
 
 ```java
 /* right rotate */
@@ -237,7 +237,7 @@ private Node rotateRight(Node h) {
 
 - 变色
 
-![红黑树变色](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-flip-colors.png)
+![红黑树变色](http://blog.qiniu.brianway.site/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-flip-colors.png)
 
 ```java
 /* flip colors */
@@ -253,7 +253,7 @@ private void flipColors(Node h) {
 
 ### 插入操作
 
-![红黑树插入两个节点](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-%E6%8F%92%E5%85%A5%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9.png)
+![红黑树插入两个节点](http://blog.qiniu.brianway.site/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-%E6%8F%92%E5%85%A5%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9.png)
 
 从图中可以看出，插入的次序不同，需要转换的操作也不同，分三种情况（图中每一列是一种情况）：
 
@@ -263,7 +263,7 @@ private void flipColors(Node h) {
 
 从上面的分析可以看出，三种情况之间有转换关系，且逐步趋向简单，如下图所示：
 
-![红黑树状态转换](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2.png)
+![红黑树状态转换](http://blog.qiniu.brianway.site/algorithms_%E7%BA%A2%E9%BB%91%E6%A0%91-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2.png)
 
 **根本原因在于，2-3树中，是把3-node中处于中间的那个键传递给父节点，所以在红黑树中，当有一个节点连了两个 red link时，说明这三个点是一个3-node，但次序还需要调整，从而达到中间键在最上的状态，进而变色。而这个这个调整的趋势则是先让b处于a,c中间(即a的父，c的左子，成一条线)，再让b成为a,c的父节点，最后变色。记住这个顺序和原因，写代码就简单了，状态3->状态2->状态1**
 
@@ -306,7 +306,7 @@ private Node put(Node h, Key key, Value val) {
 - External nodes contain client keys.
 - Internal nodes contain copies of keys to guide search.
 
-![B-Trees](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_B-Trees.png)
+![B-Trees](http://blog.qiniu.brianway.site/algorithms_B-Trees.png)
 
 在B树中查找
 

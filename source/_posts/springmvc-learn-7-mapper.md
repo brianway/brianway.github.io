@@ -229,4 +229,4 @@ public class ItemsQueryVo {
 
 整合好dao后的工程目录如图
 
-![springmvc_整合工程-2](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-2.png)
+![springmvc_整合工程-2](http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-2.png)

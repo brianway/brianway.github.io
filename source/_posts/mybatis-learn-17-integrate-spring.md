@@ -30,7 +30,7 @@ jar包：
 - spring3.2.0的jar包
 - mybatis和spring的整合包：早期ibatis和spring整合是由spring官方提供，mybatis和spring整合由mybatis提供。
 
-![mybatis与spring整合工程结构图](http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E4%B8%8Espring%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+![mybatis与spring整合工程结构图](http://blog.qiniu.brianway.site/mybatis_%E4%B8%8Espring%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
 ## sqlSessionFactory
 

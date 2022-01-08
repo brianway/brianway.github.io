@@ -78,7 +78,7 @@ When you open the file inside your browser, `this` object is the `window` object
 
 **Global means "Not Inside a Funciton".** Global variables and functions get attached to the global object.
 
-![Execution Context](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_execution-context.png)
+![Execution Context](http://blog.qiniu.brianway.site/JavaScript_execution-context.png)
 
 **hoisting**: variables and functions are to some degree available even though they're written later in the code.
 
@@ -87,7 +87,7 @@ The phenomenon is because the exection context is created in two phases.
 1. creation phase: global object and `this` set up in memory,an outer environment, also **set up memory space for variables and functions**(this step called **hoisting**).
 2. execution phase: runs the code you've written line by line,interpreting it,covering it,compling it,executing it.
 
-![creation phase](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_creation-phase.png)
+![creation phase](http://blog.qiniu.brianway.site/JavaScript_creation-phase.png)
 
 All variables in JavaScript are initally set to undefined,and functions are sitting in memory in their entirety.
 
@@ -136,13 +136,13 @@ console.log(myVar);//1 (5th line)
 
 **Scope Chain**:those links of outer environment references where you can access variables.
 
-![Scope Chain](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_scope-chain.png)
+![Scope Chain](http://blog.qiniu.brianway.site/JavaScript_scope-chain.png)
 
 **scope**: where a variable is available in your code.
 
 **asynchronous**: more than one at a time.(Asynchronous part is about what's happening outside the JavaScrip engine rather than inside it.)
 
-![asynchronous](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_asynchronous.png)
+![asynchronous](http://blog.qiniu.brianway.site/JavaScript_asynchronous.png)
 
 Any events that happen outside of the engine get placed into the **event queue**,an if the execution stack is **empty**,if JavaScrip isn't working on anything else currently,it'll process those events in the order they happend via the event loop **synchronously**.
 
@@ -198,7 +198,7 @@ Object have properties and methods:
 - Object "property"
 - Function "method"
 
-![Object](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_object.png)
+![Object](http://blog.qiniu.brianway.site/JavaScript_object.png)
 
 
 Both `[]` and `.` can find the property on the object and give you the value.
@@ -224,7 +224,7 @@ In JavaScrip,**functions are objects**.The function is an object with other prop
 - it has a hidden **optional name property** which can be anonymous then if you don't have a name.
 - we have **code property** that contains the code and that code property is **invocable** so we can run the code.
 
-![function](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_function.png)
+![function](http://blog.qiniu.brianway.site/JavaScript_function.png)
 
 
 **expression**: a unit of code that results in a value.
@@ -300,11 +300,11 @@ To wrap your function in parentheses.This is when you want a function expression
 
 Even though the outer function ended/finished,any functions created inside of it when they are called will still have a reference to that outer function's memory.
 
-![closure](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_closure-1.png)
+![closure](http://blog.qiniu.brianway.site/JavaScript_closure-1.png)
 
 Outer function is gone,the exectution context is gone.But what's in memory for that execution context isn't and JavaScript engine makes sure that the inner function can still go down the scope chain and find it.
 
-![closure](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_closure-2.png)
+![closure](http://blog.qiniu.brianway.site/JavaScript_closure-2.png)
 
 In this way we say that the execution context has closed in its outer variables.And so this phenomenon,of it closing in all the variables that it's supposed to have access to,is called a **closure**. This is the feature of the language JavaScript,very important.
 
@@ -341,7 +341,7 @@ All objects include functions hava a prototype property.The prototype is simply 
 
 The prototype chain,the concept of prototypes is just I have this special reference in my object that says where to look for other properties and methods without manually going dot prototype.
 
-![prototype chain](http://7xph6d.com1.z0.glb.clouddn.com/JavaScript_prototype-chain.png)
+![prototype chain](http://blog.qiniu.brianway.site/JavaScript_prototype-chain.png)
 
 **reflection**: an object can look at itself,listening and changing its properties and methods.
 

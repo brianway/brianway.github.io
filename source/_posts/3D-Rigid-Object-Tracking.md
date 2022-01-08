@@ -82,7 +82,7 @@ The objective of 3D rigid object tracking is to associate 3D target objects in c
 
 为了熟悉一下openCV，我们运行了一个tracking ball的小程序，没有考虑物体的3D信息：
 
-![http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_trackingball.jpg](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_trackingball.jpg)
+![http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_trackingball.jpg](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_trackingball.jpg)
 
 
 3D object tracking的复杂性在于要估计物体姿态，逼近物体表面，而不是简单地用一个方形或者圆形的框把物体框住。由于没有采集深度信息的设备，如Kinect等，我们只能利用基于模型的方法来实现。
@@ -93,7 +93,7 @@ Proposed 方法把object detection和tracking结合起来了，可以满足实�
 
 Proposed 方法由两个可以并行的模型组成，object detection和object tracking，如下图所示：
 
-![图像处理课_reference1-proposed方法.png](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_reference1-proposed%E6%96%B9%E6%B3%95.png)
+![图像处理课_reference1-proposed方法.png](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_reference1-proposed%E6%96%B9%E6%B3%95.png)
 
 
 用于表示物体的数据结构：
@@ -116,7 +116,7 @@ Proposed 方法由两个可以并行的模型组成，object detection和object 
 - 先用keypoints完成Global Pose Estimation(GPE)中的estimate the initial pose步骤
 - 然后用edge做tracking, 即Local Pose Estimation(LPE)
 
-![图像处理课_reference2-LPE.png](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_reference2-LPE.png)
+![图像处理课_reference2-LPE.png](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_reference2-LPE.png)
 
 和[1]一样，这里也用到了事先存储好的关键帧（keyframe）集合；先得到当前帧的SURF keypoints，再利用这些keypoints将当前帧和关键帧match；keypoints的3D坐标也是通过在CAD model上进行back-projecting得到的，从而可以进行pose estimation。
 
@@ -140,7 +140,7 @@ Proposed 方法由两个可以并行的模型组成，object detection和object 
 
 菜单见下图（菜单中包含照相、分析、关于我们三部分）
 
-![图像处理课_week2-菜单](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week2-%E8%8F%9C%E5%8D%95.jpg)
+![图像处理课_week2-菜单](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week2-%E8%8F%9C%E5%8D%95.jpg)
 
 
 
@@ -166,7 +166,7 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 防止其对主线程的阻塞。在AsyncTask类中有三个主要的方法，分别是onPreExecute（）、doInBackground（）、onPostExecute（）。首先在onPreExecute中初始化加载对话框提示用户
 正在进行加载，然后将人脸识别的任务放在异步的doInBackground方法中进行执行，最后onPostExecute方法回到主线程来取消加载对话框并显示人脸识别后的图像。
 
-![图像处理课_week2-识别人脸](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week2-%E8%AF%86%E5%88%AB%E4%BA%BA%E8%84%B8.jpg)
+![图像处理课_week2-识别人脸](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week2-%E8%AF%86%E5%88%AB%E4%BA%BA%E8%84%B8.jpg)
 
 
 - app中内嵌web页面：
@@ -185,14 +185,14 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 
 上周完成了两个任务，一是单目摄像机的标定，主要是利用棋盘格子和opencv的`calibrateCamera()`函数，计算摄像机的内参矩阵和RT矩阵。那么对于图像平面上的二维点，可以求出对应的三维坐标，找到物体平面和图像平面之间的关系，如图所示：
 
-![week3-平面](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week3-%E5%B9%B3%E9%9D%A2.png)
+![week3-平面](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week3-%E5%B9%B3%E9%9D%A2.png)
 
 
 可以看出，与视线垂直的棋盘面上的物体是垂直于棋盘面的。
 
 另外一个就是以棋盘为参照物，在棋盘旁放置物体，可以找到该物体上的角点，用于后面的三维重建：
 
-![week3-棋盘格](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week3-%E6%A3%8B%E7%9B%98%E6%A0%BC.png)
+![week3-棋盘格](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week3-%E6%A3%8B%E7%9B%98%E6%A0%BC.png)
 
 
 
@@ -207,7 +207,7 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 
 效果如图(tracking的框画漏了)，具体可看视频部分：
 
-![PC](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-PC.png)
+![PC](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-PC.png)
 
 
 实现思路是选择一帧图像作为参考，具体而言就是，在棋盘图像上放置物体，利用棋盘对摄像头进行标定，并计算出棋盘坐标系。然后找出图中物体的特征点，计算ORB特征描述。对物体的特征点进行kmeans聚类，可以得到物体的中心点，在中心点处的棋盘坐标系上以长方体给出物体的姿态估计。
@@ -231,7 +231,7 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 
 其中物体的特征识别使用的是Vuforia的Scanner软件，将物体放在定标纸可以定标的区域，然后对物体进行360度的拍摄扫描得到物体的特征信息如图（示例中扫描的物体为一个鼠标）
 
-![scanner](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-scanner.png)
+![scanner](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-scanner.png)
 
 
 特征信息会保存到一个od文件中。在Vuforia的开发者平台上，开发者可以创建自己的数据库，在数据库中添加刚刚得到的od文件，之后便可以下载得到这个od文件对应的xml数据文件，这个xml数据文件会在后面我们设计的app中用到。
@@ -252,4 +252,4 @@ TimeInterpolator用来控制在哪里取，而TypeEvaluator用来控制取多少
 初始化时界面背景为黑色，且中间会显示一个进度条代表正在进行初始化，初始化完毕以后显示摄像头界面并取消进度条。初始化完成以后就可开始物体的识别和追踪了。该activity设置了GestureListener实现了手势监听，单击屏幕中要追踪的物体则会显示一个正方体块将目标物体包住（这里需要借助定标纸），与此同时会初始化一个Object Tracker来跟踪物体实时位置变化使包络能和物体一起移动。现在拖动定标纸，就可以看到正方形包络和物体一起发生移动，效果如下图，具体可看视频部分。
 
 
-![android](http://7xph6d.com1.z0.glb.clouddn.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-Android.png)
+![android](http://blog.qiniu.brianway.site/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%AF%BE_week4-Android.png)

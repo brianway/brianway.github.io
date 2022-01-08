@@ -38,7 +38,7 @@ comments: true
 9. **业务拆分**：将整个网站业务拆分成不同的应用，每个应用独立部署维护，应用之间通过超链接建立联系/消息队列进行数据分发/访问同一数据存储系统
 10. **分布式服务**：公共业务提取出来独立部署
 
-![架构演化-分布式服务](http://7xph6d.com1.z0.glb.clouddn.com/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1.png)
+![架构演化-分布式服务](http://blog.qiniu.brianway.site/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1.png)
 
 演化的价值观
 
@@ -108,7 +108,7 @@ comments: true
 - 压力测试
 - 稳定性测试
 
-![性能测试曲线](http://7xph6d.com1.z0.glb.clouddn.com/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1_%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%9B%B2%E7%BA%BF.png)
+![性能测试曲线](http://blog.qiniu.brianway.site/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1_%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%9B%B2%E7%BA%BF.png)
 
 
 性能优化,根据网站分层架构，可以分为三大类：

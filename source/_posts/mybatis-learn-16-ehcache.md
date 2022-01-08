@@ -15,7 +15,7 @@ ehcache是一个分布式缓存框架
 
 我们系统为了提高系统并发，性能、一般对系统进行分布式部署（集群部署方式）
 
-![分布缓存](http://7xph6d.com1.z0.glb.clouddn.com/mybatis_%E5%88%86%E5%B8%83%E7%BC%93%E5%AD%98.png)
+![分布缓存](http://blog.qiniu.brianway.site/mybatis_%E5%88%86%E5%B8%83%E7%BC%93%E5%AD%98.png)
 
 
 不使用分布缓存，缓存的数据在各各服务单独存储，不方便系统开发。所以要使用分布式缓存对缓存数据进行集中管理。

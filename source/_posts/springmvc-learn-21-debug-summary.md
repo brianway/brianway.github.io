@@ -146,7 +146,7 @@ spring版本统一设置
 
 我一看自己的target目录,发现还真是少mapper.xml文件
 
-![target少mapper的xml文件](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png)
+![target少mapper的xml文件](http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png)
 
 
 我想到了两种解决方案：
@@ -158,11 +158,11 @@ spring版本统一设置
 
 解决后如图：
 
-![mapper.xml存在resources下面](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png)
+![mapper.xml存在resources下面](http://blog.qiniu.brianway.site/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png)
 
 ### 请求参数乱码问题
 
-![springmcv_post请求参数乱码](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png)
+![springmcv_post请求参数乱码](http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png)
 
 
 在web.xml添加post乱码filter
@@ -185,7 +185,7 @@ spring版本统一设置
 
 以上可以解决post请求乱码问题。解决后调试如图
 
-![springmcv_post请求参数乱码解决](http://7xph6d.com1.z0.glb.clouddn.com/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png)
+![springmcv_post请求参数乱码解决](http://blog.qiniu.brianway.site/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png)
 
 对于get请求中文参数出现乱码解决方法有两个：
 
@@ -279,14 +279,14 @@ debug窗里报下面的错误：
  </context-param>
 ```
 
-![加载spring容器报红](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png)
+![加载spring容器报红](http://blog.qiniu.brianway.site/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png)
 
 
 `/classes/spring/applicationContext-*.xml`这部分字会报红，但运行起来没问题。我使用下面的那句` <param-value>classpath:spring/applicationContext-*.xml</param-value>`不报红.原因不清楚。
 
 这里两种方式都能跑通，但是引用的路径不同:一个是引用的的输出的target目录的classes下的，一个是引用输出的`target/learnssm-firstssm-1.0-SNAPSHOT`目录(相当于部署的WEBROOT或者叫做webapp)，所以我觉得还是用WEB-INF下面那个更好
 
-![容器加载文件的选用](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png)
+![容器加载文件的选用](http://blog.qiniu.brianway.site/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png)
 
 
 ### 参数绑定配置问题
@@ -308,7 +308,7 @@ debug窗里报下面的错误：
 
 其中`<list>`标签会报红，但不影响运行。去掉`<list>`标签，也可以运行成功。原因我还不知道，以后阅读源码会研究下这个问题。
 
-![转换器list报红](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png)
+![转换器list报红](http://blog.qiniu.brianway.site/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png)
 
 ### maven依赖分析问题
 

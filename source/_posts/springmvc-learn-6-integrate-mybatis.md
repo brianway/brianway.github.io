@@ -15,7 +15,7 @@ comments: true
 
 ## 整合思路
 
-![springmvc_整合mybatis思路](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%95%B4%E5%90%88mybatis%E6%80%9D%E8%B7%AF.png)
+![springmvc_整合mybatis思路](http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88mybatis%E6%80%9D%E8%B7%AF.png)
 
 
 - 第一步：整合dao层
@@ -177,7 +177,7 @@ pom.xml文件
 
 项目结构如图：
 
-![springmvc_整合工程-1](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-1.png)
+![springmvc_整合工程-1](http://blog.qiniu.brianway.site/springmvc_%E6%95%B4%E5%90%88%E5%B7%A5%E7%A8%8B-1.png)
 
 
 后面几篇笔记会依次记录mapper,service,controller各个部分的整合

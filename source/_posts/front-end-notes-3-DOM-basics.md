@@ -42,7 +42,7 @@ JavaScript 可以访问和操作存储在 DOM 中的内容:
 
 文档对象模型 DOM（Document Object Model）定义访问和处理HTML文档的标准方法。DOM 将 HTML 文档呈现为带有元素、属性和文本的树结构（节点树）
 
-![HTML DOM 树](http://7xph6d.com1.z0.glb.clouddn.com/dom_ct-htmltree.gif)
+![HTML DOM 树](http://blog.qiniu.brianway.site/dom_ct-htmltree.gif)
 
 
 HTML 文档可以说由节点构成的集合,常见的 DOM 节点:

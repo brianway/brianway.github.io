@@ -201,7 +201,7 @@ public class UnorderedMaxPQ<Key extends Comparable<Key>> {
 - Parent of node at k is at k/2.
 - Children of node at k are at 2k and 2k+1.
 
-![数组表示二叉堆](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_binary-heap.png)
+![数组表示二叉堆](http://blog.qiniu.brianway.site/algorithms_binary-heap.png)
 
 ### 上浮和下沉
 
@@ -298,7 +298,7 @@ public Key delMax(){
 
 在有序数组进行查找时使用二分查找。两种方式的对比如下图：
 
-![elementary ST implementations summary](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_SymbolTable-Compare.png)
+![elementary ST implementations summary](http://blog.qiniu.brianway.site/algorithms_SymbolTable-Compare.png)
 
 
 ## Hash Tables(哈希表)
@@ -354,7 +354,7 @@ Use an array of M < N linked lists.
 - 插入：将值插在第i个链的前端
 - 查找：只需遍历第i个链
 
-![separate chaining](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_HashTable-seperate-chain.png)
+![separate chaining](http://blog.qiniu.brianway.site/algorithms_HashTable-seperate-chain.png)
 
 ### linear probing
 

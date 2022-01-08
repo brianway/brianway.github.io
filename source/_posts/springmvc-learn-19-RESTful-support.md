@@ -95,7 +95,7 @@ public @ResponseBody ItemsCustom itemsView(@PathVariable("id") Integer items_id)
 
 访问结果如图：
 
-![RESTful格式访问](http://7xph6d.com1.z0.glb.clouddn.com/springmvc_RESTful%E6%A0%BC%E5%BC%8F%E8%AE%BF%E9%97%AE.png)
+![RESTful格式访问](http://blog.qiniu.brianway.site/springmvc_RESTful%E6%A0%BC%E5%BC%8F%E8%AE%BF%E9%97%AE.png)
 
 
 ## 对静态资源的解析

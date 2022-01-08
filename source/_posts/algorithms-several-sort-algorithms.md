@@ -68,7 +68,7 @@ private static void exch(Comparable[] a,, int i, int j) {
 - ↑ 左边的元素（包括↑）固定了，且升序
 - ↑ 右边的任一元素全部比左边的所有元素都大
 
-![选择排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_selectionsort-1.png)
+![选择排序](http://blog.qiniu.brianway.site/algorithms_selectionsort-1.png)
 
 步骤：
 
@@ -76,7 +76,7 @@ private static void exch(Comparable[] a,, int i, int j) {
 - indentify index of minimun entry on right
 - exchange into positon
 
-![选择排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_selectionsort-2.png)
+![选择排序](http://blog.qiniu.brianway.site/algorithms_selectionsort-2.png)
 
 java实现：
 
@@ -110,14 +110,14 @@ public static void sort(Comparable[] a) {
 - ↑ 左边的元素（包括↑）且升序，但位置不固定(因为后续可能会因插入而移动)
 - ↑ 右边的元素还不可见
 
-![插入排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_insertionsort-1.png)
+![插入排序](http://blog.qiniu.brianway.site/algorithms_insertionsort-1.png)
 
 步骤：
 
 - Move the pointer to the right.
 - Moving from right to left, exchange `a[i]` with each larger entry to its left.
 
-![插入排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_insertionsort-2.png)
+![插入排序](http://blog.qiniu.brianway.site/algorithms_insertionsort-2.png)
 
 java实现：
 
@@ -159,7 +159,7 @@ inversion（倒置）：An inversion is a pair of keys that are out of order
 - A g-sorted array remains g-sorted after h-sorting it.
 
 
-![希尔排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_shellsort-1.png)
+![希尔排序](http://blog.qiniu.brianway.site/algorithms_shellsort-1.png)
 
 性质：
 
@@ -277,7 +277,7 @@ private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
 
 自顶向下的归并排序的轨迹图
 
-![归并排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_mergesort-1.png)
+![归并排序](http://blog.qiniu.brianway.site/algorithms_mergesort-1.png)
 
 由图可知，原地归并排序的大致趋势是，先局部排序，再扩大规模；先左边排序，再右边排序；每次都是左边一半局部排完且merge了，右边一半才开始从最局部的地方开始排序。
 
@@ -315,7 +315,7 @@ public class MergeBU{
 
 自底向上的归并排序的轨迹图
 
-![归并排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_mergesort-2.png)
+![归并排序](http://blog.qiniu.brianway.site/algorithms_mergesort-2.png)
 
 由图可知，自底向上归并排序的大致趋势是，先局部排序，逐步扩大到全局排序；步调均匀，稳步扩大
 
@@ -395,7 +395,7 @@ private static void sort(Comparable[] a, int lo, int hi) {
 
 快排的轨迹图
 
-![快速排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_quicksort-1.png)
+![快速排序](http://blog.qiniu.brianway.site/algorithms_quicksort-1.png)
 
 由图可知，和归并排序不同，快排的大致趋势是，先全局大体有个走势——左边比右边小，逐步细化到局部；也是先左后右；局部完成时全部排序也就完成了。
 
@@ -432,7 +432,7 @@ private static void sort(Comparable[] a, int lo, int hi) {
 
 三切分的示意图
 
-![三向切分](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_quicksort-3way-1.png)
+![三向切分](http://blog.qiniu.brianway.site/algorithms_quicksort-3way-1.png)
 
 
 三向切分的java实现：
@@ -494,7 +494,7 @@ public static void sort(Comparable[] pq) {
 
 堆排序的轨迹图
 
-![堆排序](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_heapsort-1.png)
+![堆排序](http://blog.qiniu.brianway.site/algorithms_heapsort-1.png)
 
 由图看出，堆排序的趋势是，堆构造阶段，大致是降序的走势，到了下沉阶段，从右到左（或者说从后往前）逐步有序
 
@@ -514,7 +514,7 @@ Significance： In-place sorting algorithm with N log N worst-case.
 
 排序算法总结表
 
-![总结](http://7xph6d.com1.z0.glb.clouddn.com/algorithms_sort-summary.png)
+![总结](http://blog.qiniu.brianway.site/algorithms_sort-summary.png)
 
 最好情况和最坏情况：参见上面的表格
 
