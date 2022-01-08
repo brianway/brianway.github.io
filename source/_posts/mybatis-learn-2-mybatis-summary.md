@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  MyBatis学习笔记(2)-mybatis概述
+title:  MyBatis学习笔记(2)-MyBatis概述
 date:   2016-03-08 10:38:02 +08:00
 category: 入门系列笔记
 tags: [MyBatis]

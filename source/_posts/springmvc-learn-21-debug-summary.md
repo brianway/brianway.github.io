@@ -7,7 +7,7 @@ tags: [SpringMVC, debug]
 comments: true
 ---
 
-本文主要记录springmvc整合mybatis整合过程中遇到的各种问题和解决方法
+本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法
 
 <!-- more -->
 
@@ -207,7 +207,7 @@ ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
 
 ### 请求参数类型转换问题
 
-编写对应的转换类才行,具体参考前面参数绑定的博文[《 SpringMVC学习笔记(11)-springmvc注解开发之简单参数绑定》](http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定)
+编写对应的转换类才行,具体参考前面参数绑定的博文[《 SpringMVC学习笔记(11)-SpringMVC注解开发之简单参数绑定》](http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定)
 
 
 ### maven平台编码问题

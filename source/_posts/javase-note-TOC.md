@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  我的java&javaweb学习笔记(汇总)
+title:  我的Java&JavaWeb学习笔记(汇总)
 date:   2016-02-09 15:00:00 +08:00
 category: 入门系列笔记
 tags: [Java]
 comments: true
 ---
 
-笔记分为两大部分：javase和javaweb
+笔记分为两大部分：Java SE和 Java Web
 
 - [javase](http://my.oschina.net/brianway/blog?catalog=3475426)
 - [javaweb](http://my.oschina.net/brianway/blog?catalog=3475425)
@@ -43,7 +43,7 @@ github：
 	- [Java基础巩固笔记(6)-注解](http://my.oschina.net/brianway/blog/618037)
   - [javaweb](http://my.oschina.net/brianway/blog?catalog=3475425)
     - [Java Web入门笔记(1)-Tomcat](http://my.oschina.net/brianway/blog/614205)
-    - [Java Web入门笔记(2)-http入门](http://my.oschina.net/brianway/blog/614213)
+    - [Java Web入门笔记(2)-HTTP入门](http://my.oschina.net/brianway/blog/614213)
     - [Java Web入门笔记(3)-Servlet](http://my.oschina.net/brianway/blog/614214)
     - [Java Web入门笔记(4)-request和response](http://my.oschina.net/brianway/blog/614215)
     - [Java Web入门笔记(5)-cookie和session](http://my.oschina.net/brianway/blog/614216)
