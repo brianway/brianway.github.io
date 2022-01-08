@@ -2,7 +2,7 @@
 layout: post
 title:  Elasticsearch 5.0-基本操作
 date:   2016-12-13 21:42:07 +08:00
-category: 基础教程
+category: 入门系列笔记
 tags: [Elasticsearch]
 comments: true
 ---

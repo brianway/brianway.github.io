@@ -2,7 +2,7 @@
 layout: post
 title:  MyBatis学习笔记(3)-入门程序一
 date:   2016-03-08 10:38:03 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [MyBatis]
 comments: true
 ---

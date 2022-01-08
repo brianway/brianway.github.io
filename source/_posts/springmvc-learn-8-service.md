@@ -2,7 +2,7 @@
 layout: post
 title:  SpringMVC学习笔记(8)-SpringMVC整合MyBatis之Service
 date:   2016-03-30 14:28:08 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [SpringMVC, MyBatis]
 comments: true
 ---

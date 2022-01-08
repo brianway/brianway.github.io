@@ -2,7 +2,7 @@
 layout: post
 title:  Java Web入门笔记(1)-Tomcat
 date:   2016-02-06 17:55:12 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [JavaWeb, Tomcat]
 comments: true
 ---

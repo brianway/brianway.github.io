@@ -2,7 +2,7 @@
 layout: post
 title:  Java Web入门笔记(5)-cookie和session
 date:   2016-02-06 18:44:12 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [JavaWeb]
 comments: true
 ---

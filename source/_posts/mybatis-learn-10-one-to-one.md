@@ -2,7 +2,7 @@
 layout: post
 title:  MyBatis学习笔记(10)-一对一查询
 date:   2016-03-08 10:39:10 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [MyBatis]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  MyBatis学习笔记(7)-输出映射
 date:   2016-03-08 10:39:07 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [MyBatis]
 comments: true
 ---

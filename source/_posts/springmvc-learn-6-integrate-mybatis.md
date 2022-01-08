@@ -2,7 +2,7 @@
 layout: post
 title:  SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)
 date:   2016-03-30 14:28:06 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [SpringMVC, MyBatis, Maven, IntelliJ-IDEA]
 comments: true
 ---

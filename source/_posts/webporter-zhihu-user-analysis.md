@@ -3,7 +3,7 @@ layout: post
 title:  爬取知乎60万用户信息之后的简单分析
 date:   2016-12-20 21:03:07 +08:00
 category: 开发实践
-tags: [随笔]]
+tags: [随笔]
 comments: true
 ---
 
@@ -14,6 +14,7 @@ comments: true
 ---
 
 项目源码 [GitHub - webporter](https://github.com/brianway/webporter)
+本文图片如加载失败，请移步至知乎 [https://zhuanlan.zhihu.com/p/24411711](https://zhuanlan.zhihu.com/p/24411711)
 
 ## 动机
 

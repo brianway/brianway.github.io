@@ -163,7 +163,7 @@ comments: true
 
 - Java 语言基础的学习笔记可以参考我的 GitHub 仓库：[java-learning](https://github.com/brianway/java-learning)
 - 算法主要就是刷普林斯顿的算法公开课(偏重数据结构)和牛客网的课程[《算法面试精品课》](https://www.nowcoder.com/study/vod/1)，我整理的博客和每一题成功提交的源码：[algorithms-learning](https://github.com/brianway/algorithms-learning)。后来才发现，70% 以上都和《剑指Offer》重复。
-- 框架主要就是看视频，整理的学习笔记：[springmvc+MyBatis学习笔记(汇总)](http://brianway.github.io/2016/03/30/springmvc-learn-TOC/)
+- 框架主要就是看视频，整理的学习笔记：[SpringMVC+MyBatis学习笔记(汇总)](http://brianway.github.io/2016/03/30/springmvc-learn-TOC/)
 
 
 ## 如何有针对性地做面试准备

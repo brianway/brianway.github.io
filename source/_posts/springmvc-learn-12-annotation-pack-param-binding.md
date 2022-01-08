@@ -2,7 +2,7 @@
 layout: post
 title:  SpringMVC学习笔记(12)-SpringMVC注解开发之包装类型参数绑定
 date:   2016-03-30 14:28:12 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [SpringMVC]
 comments: true
 ---

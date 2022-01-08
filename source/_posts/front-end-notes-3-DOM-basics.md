@@ -2,7 +2,7 @@
 layout: post
 title:  前端学习笔记(3)-DOM 基础
 date:   2017-05-18 22:27:07 +08:00
-category: 基础教程
+category: 入门系列笔记
 tags: [前端]
 comments: true
 ---

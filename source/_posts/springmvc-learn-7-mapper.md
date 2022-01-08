@@ -2,7 +2,7 @@
 layout: post
 title:  SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper
 date:   2016-03-30 14:28:07 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [SpringMVC, MyBatis]
 comments: true
 ---

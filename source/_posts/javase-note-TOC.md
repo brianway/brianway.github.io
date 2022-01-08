@@ -2,7 +2,7 @@
 layout: post
 title:  我的java&javaweb学习笔记(汇总)
 date:   2016-02-09 15:00:00 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [Java]
 comments: true
 ---

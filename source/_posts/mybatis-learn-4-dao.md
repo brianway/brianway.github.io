@@ -2,7 +2,7 @@
 layout: post
 title:  MyBatis学习笔记(4)-开发dao方法
 date:   2016-03-08 10:39:04 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [MyBatis]
 comments: true
 ---

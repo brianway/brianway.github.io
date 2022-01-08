@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc+MyBatis学习笔记(汇总)
+title:  SpringMVC+MyBatis学习笔记(汇总)
 date:   2016-03-30 17:40:00 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [SpringMVC]
 comments: true
 ---

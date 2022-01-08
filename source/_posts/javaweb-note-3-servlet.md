@@ -2,7 +2,7 @@
 layout: post
 title:  Java Web入门笔记(3)-Servlet
 date:   2016-02-06 18:29:12 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [JavaWeb, Servlet]
 comments: true
 ---

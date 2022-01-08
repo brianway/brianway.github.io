@@ -2,7 +2,7 @@
 layout: post
 title:  SpringMVC学习笔记(19)-RESTful支持
 date:   2016-03-30 14:28:19 +08:00
-category: Web开发
+category: 入门系列笔记
 tags: [SpringMVC, RESTful]
 comments: true
 ---
