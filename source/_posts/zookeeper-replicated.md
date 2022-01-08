@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  zookeeper单机伪集群配置
+title:  ZooKeeper单机伪集群配置
 date:   2016-06-29 20:36:11 +08:00
-category: 分布式系统
-tags: [ZooKeeper, 安装部署]
+category: 基础教程
+tags: [ZooKeeper]
 comments: true
 ---
 

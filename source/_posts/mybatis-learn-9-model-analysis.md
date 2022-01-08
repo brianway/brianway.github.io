@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  mybatis学习笔记(9)-订单商品数据模型分析
+title:  MyBatis学习笔记(9)-订单商品数据模型分析
 date:   2016-03-08 10:39:09 +08:00
-category: web开发
-tags: [MyBatis, examples]
+category: Web开发
+tags: [MyBatis]
 comments: true
 ---
 

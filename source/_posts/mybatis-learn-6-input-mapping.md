@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  mybatis学习笔记(6)-输入映射
+title:  MyBatis学习笔记(6)-输入映射
 date:   2016-03-08 10:39:06 +08:00
-category: web开发
+category: Web开发
 tags: [MyBatis]
 comments: true
 ---

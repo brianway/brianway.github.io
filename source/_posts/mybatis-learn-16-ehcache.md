@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  mybatis学习笔记(16)-mybatis整合ehcache
+title:  MyBatis学习笔记(16)-mybatis整合ehcache
 date:   2016-03-08 10:39:16 +08:00
-category: web开发
-tags: [MyBatis, 缓存]
+category: Web开发
+tags: [MyBatis]
 comments: true
 ---
 

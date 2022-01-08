@@ -3,7 +3,7 @@ layout: post
 title:  一个例子记住C++对象的生存周期
 date:   2016-01-11 22:41:10 +08:00
 category: 编程语言
-tags: [cpp, examples]
+tags: [C++]
 comments: true
 ---
 

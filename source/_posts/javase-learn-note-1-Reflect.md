@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  java基础巩固笔记(1)-反射
+title:  Java基础巩固笔记(1)-反射
 date:   2016-01-08 12:39:11 +08:00
 category: 编程语言
 tags: [Java]

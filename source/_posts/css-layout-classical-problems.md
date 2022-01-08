@@ -2,7 +2,7 @@
 layout: post
 title:  CSS 布局经典问题初步整理
 date:   2017-05-18 22:51:07 +08:00
-category: 前端
+category: 基础教程
 tags: [CSS, 前端]
 comments: true
 ---

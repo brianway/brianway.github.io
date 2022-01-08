@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  mybatis学习笔记(8)-动态sql
+title:  MyBatis学习笔记(8)-动态sql
 date:   2016-03-08 10:39:08 +08:00
-category: web开发
+category: Web开发
 tags: [MyBatis]
 comments: true
 ---

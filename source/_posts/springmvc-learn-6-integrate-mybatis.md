@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建)
+title:  SpringMVC学习笔记(6)-SpringMVC整合MyBatis(IDEA中通过maven构建)
 date:   2016-03-30 14:28:06 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC, MyBatis, Maven, IntelliJ-IDEA]
 comments: true
 ---
@@ -34,9 +34,9 @@ comments: true
 
 ## 工程结构
 
-不同于[《mybatis学习笔记(17)-spring和mybatis整合》](http://blog.csdn.net/h3243212/article/details/50778934)中的示例demo,**本文的整合采用maven构建**。
+不同于[《MyBatis学习笔记(17)-spring和mybatis整合》](http://blog.csdn.net/h3243212/article/details/50778934)中的示例demo,**本文的整合采用maven构建**。
 
-如何创建使用maven构建的web应用可以参考前面的一篇[《springmvc学习笔记(1)-框架原理和入门配置》](http://blog.csdn.net/h3243212/article/details/50828141#环境搭建)
+如何创建使用maven构建的web应用可以参考前面的一篇[《SpringMVC学习笔记(1)-框架原理和入门配置》](http://blog.csdn.net/h3243212/article/details/50828141#环境搭建)
 
 `new->project->maven`，建一个裸的maven工程，手动建webapp的目录
 

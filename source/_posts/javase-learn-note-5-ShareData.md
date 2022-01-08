@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  java基础巩固笔记(5)-多线程之共享数据
+title:  Java基础巩固笔记(5)-多线程之共享数据
 date:   2016-02-06 14:20:12 +08:00
 category: 编程语言
 tags: [Java, 多线程]

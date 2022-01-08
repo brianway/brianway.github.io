@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(3)-注解的处理器映射器和适配器
+title:  SpringMVC学习笔记(3)-注解的处理器映射器和适配器
 date:   2016-03-30 14:28:03 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC]
 comments: true
 ---

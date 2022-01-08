@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结
+title:  SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结
 date:   2016-03-30 14:28:21 +08:00
-category: web开发
-tags: [SpringMVC, debug, 总结]
+category: Web开发
+tags: [SpringMVC, debug]
 comments: true
 ---
 
@@ -162,7 +162,7 @@ spring版本统一设置
 
 ### 请求参数乱码问题
 
-![springmcv_post请求参数乱码](http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png)
+![springmvc_post请求参数乱码](http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png)
 
 
 在web.xml添加post乱码filter
@@ -185,7 +185,7 @@ spring版本统一设置
 
 以上可以解决post请求乱码问题。解决后调试如图
 
-![springmcv_post请求参数乱码解决](http://blog.qiniu.brianway.site/springmcv_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png)
+![springmvc_post请求参数乱码解决](http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png)
 
 对于get请求中文参数出现乱码解决方法有两个：
 
@@ -207,7 +207,7 @@ ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
 
 ### 请求参数类型转换问题
 
-编写对应的转换类才行,具体参考前面参数绑定的博文[《 springmvc学习笔记(11)-springmvc注解开发之简单参数绑定》](http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定)
+编写对应的转换类才行,具体参考前面参数绑定的博文[《 SpringMVC学习笔记(11)-springmvc注解开发之简单参数绑定》](http://blog.csdn.net/h3243212/article/details/50854748#自定义参数绑定实现日期类型绑定)
 
 
 ### maven平台编码问题

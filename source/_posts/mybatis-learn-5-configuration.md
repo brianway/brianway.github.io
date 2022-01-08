@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  mybatis学习笔记(5)-配置文件
+title:  MyBatis学习笔记(5)-配置文件
 date:   2016-03-08 10:39:05 +08:00
-category: web开发
+category: Web开发
 tags: [MyBatis]
 comments: true
 ---

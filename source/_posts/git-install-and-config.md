@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  git在各操作系统平台下的安装和配置
+title:  Git在各操作系统平台下的安装和配置
 date:   2016-08-07 19:40:07 +08:00
-category: 其他
-tags: [git, 安装部署]
+category: 基础教程
+tags: [Git]
 comments: true
 ---
 

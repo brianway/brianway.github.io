@@ -21,7 +21,7 @@ date: 2019-04-04 02:04:54
   - 本硕均就读于 [华中科技大学](http://www.hust.edu.cn/) (2011-2015，2015-2018)
   - 曾在 [阿里巴巴](http://www.alibabagroup.com/cn/global/home) 和 [小米科技](https://www.mi.com/about/) 实习过
 - 爱好
-  - [Switch](https://www.nintendo.com/switch/): 塞尔达遍地屠人马; 健身环200+级
+  - [Switch](https://www.nintendo.com/switch/): 塞尔达遍地屠人马; 健身环 200+ 级
   - 王者荣耀: 段位星耀I(王者守门员)，全能补位
   - 桌游: 阿瓦隆，新手；狼人杀，2.5 阶水平([【狼人杀实力评分标准】](http://weibo.com/ttarticle/p/show?id=2309403968483011469741#_0) by 二龙)
   - 炉石传说(已弃坑): 天梯传说+竞技场12胜，[武汉高校星联赛季军](https://brianway.github.io/img/record/heartstone-prize.png)

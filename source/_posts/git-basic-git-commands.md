@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  git常用指令整理及说明(详细)
+title:  Git常用指令整理及说明(详细)
 date:   2016-08-07 20:16:07 +08:00
-category: 其他
-tags: [git]
+category: 基础教程
+tags: [Git, 备忘指南]
 comments: true
 ---
 

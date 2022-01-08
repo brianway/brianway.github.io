@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  javaweb入门笔记(2)-http入门
+title:  Java Web入门笔记(2)-http入门
 date:   2016-02-06 18:04:12 +08:00
-category: web开发
+category: Web开发
 tags: [JavaWeb, HTTP]
 comments: true
 ---

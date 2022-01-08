@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(20)-拦截器
+title:  SpringMVC学习笔记(20)-拦截器
 date:   2016-03-30 14:28:20 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC]
 comments: true
 ---

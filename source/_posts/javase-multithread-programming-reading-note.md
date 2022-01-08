@@ -23,7 +23,7 @@ comments: true
 
 基础知识
 
-- 创建线程的两种方式：1.继承Thread类，2.实现Runnable接口。具体两者的联系可以参考我之前的博文[《java基础巩固笔记(5)-多线程之传统多线程》](http://blog.csdn.net/h3243212/article/details/50659389)
+- 创建线程的两种方式：1.继承Thread类，2.实现Runnable接口。具体两者的联系可以参考我之前的博文[《Java基础巩固笔记(5)-多线程之传统多线程》](http://blog.csdn.net/h3243212/article/details/50659389)
 - 一些基本API：isAlive(),sleep(),getId(),yield()等。
    - `isAlive()`测试线程是否处于活动状态
    - `sleep()`让“正在执行的线程”休眠

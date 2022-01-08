@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  javaweb入门笔记(6)-JSP技术
+title:  Java Web入门笔记(6)-JSP技术
 date:   2016-02-06 18:46:12 +08:00
-category: web开发
+category: Web开发
 tags: [JavaWeb]
 comments: true
 ---
@@ -143,7 +143,7 @@ JSP常用标签
 
 ## 九大隐式对象
 
-JSP引擎在调用JSP对应的`_jspServlet`时，会传递和创建9个web开发相关的对象供使用。后两者(`out`和`pageContext`)为JSP独有
+JSP引擎在调用JSP对应的`_jspServlet`时，会传递和创建9个Web开发相关的对象供使用。后两者(`out`和`pageContext`)为JSP独有
 
 - request
 - response
@@ -189,7 +189,7 @@ out.write
 
 - 封装了对其他8大隐式对象的引用(主要用于自定义标签开发)
 - 自身是一个域对象，可用来保存数据(page域存的东西只能在页面范围内拿得出来)
-- 封装了web开发中的一些常用操作(提供管理所有域的入口)，如：引入和跳转其他资源、检索其他域对象中的属性等
+- 封装了Web开发中的一些常用操作(提供管理所有域的入口)，如：引入和跳转其他资源、检索其他域对象中的属性等
 
 Class PageContext的API文档
 

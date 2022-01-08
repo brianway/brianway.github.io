@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  mybatis学习笔记(17)-spring和mybatis整合
+title:  MyBatis学习笔记(17)-Spring和MyBatis整合
 date:   2016-03-08 10:39:17 +08:00
-category: web开发
+category: Web开发
 tags: [MyBatis, SpringMVC]
 comments: true
 ---

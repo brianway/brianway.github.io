@@ -2,7 +2,7 @@
 layout: post
 title:  前端学习笔记(1)-HTML
 date:   2017-05-18 21:34:07 +08:00
-category: 前端
+category: 基础教程
 tags: [HTML, 前端]
 comments: true
 ---

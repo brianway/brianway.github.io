@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(17)-上传图片
+title:  SpringMVC学习笔记(17)-上传图片
 date:   2016-03-30 14:28:17 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC]
 comments: true
 ---

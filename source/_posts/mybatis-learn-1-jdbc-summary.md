@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  mybatis学习笔记(1)-对原生jdbc程序中的问题总结
+title:  MyBatis学习笔记(1)-对原生JDBC程序中的问题总结
 date:   2016-03-08 10:38:01 +08:00
-category: web开发
+category: Web开发
 tags: [MyBatis, JDBC]
 comments: true
 ---

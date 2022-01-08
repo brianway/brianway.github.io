@@ -2,8 +2,8 @@
 layout: post
 title: 将项目发布到 Maven 中央仓库踩过的坑
 date:   2017-05-17 10:39:07 +08:00
-category: 其他
-tags: [Maven, IntelliJ-IDEA, 安装部署]
+category: 开发实践
+tags: [Maven]
 comments: true
 ---
 

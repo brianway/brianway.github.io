@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(4)-前端控制器
+title:  SpringMVC学习笔记(4)-前端控制器
 date:   2016-03-30 14:28:04 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC]
 comments: true
 ---

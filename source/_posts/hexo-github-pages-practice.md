@@ -2,8 +2,8 @@
 layout: post
 title:  使用GitHub+Hexo搭建个人网站
 date:   2019-04-14 20:40:07 +08:00
-category: 其他
-tags: [GitHub, 安装部署]
+category: 开发实践
+tags: [GitHub]
 comments: true
 ---
 

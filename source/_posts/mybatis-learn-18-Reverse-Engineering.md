@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  mybatis学习笔记(18)-mybatis逆向工程
+title:  MyBatis学习笔记(18)-MyBatis逆向工程
 date:   2016-03-08 10:39:18 +08:00
-category: web开发
+category: Web开发
 tags: [MyBatis]
 comments: true
 ---

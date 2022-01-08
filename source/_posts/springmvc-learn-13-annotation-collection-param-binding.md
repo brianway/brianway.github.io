@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定
+title:  SpringMVC学习笔记(13)-SpringMVC注解开发之集合类型参数绑定
 date:   2016-03-30 14:28:13 +08:00
-category: web开发
-tags: [SpringMVC, 注解]
+category: Web开发
+tags: [SpringMVC]
 comments: true
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(7)-springmvc整合mybatis之mapper
+title:  SpringMVC学习笔记(7)-SpringMVC整合MyBatis之Mapper
 date:   2016-03-30 14:28:07 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC, MyBatis]
 comments: true
 ---
@@ -128,7 +128,7 @@ mybatis自己的配置文件
 
 ### 逆向工程生成po类及mapper(单表增删改查)
 
-方法参见[《mybatis学习笔记(18)-mybatis逆向工程》](http://blog.csdn.net/h3243212/article/details/50778937)
+方法参见[《MyBatis学习笔记(18)-mybatis逆向工程》](http://blog.csdn.net/h3243212/article/details/50778937)
 
 
 ### 手动定义商品查询mapper

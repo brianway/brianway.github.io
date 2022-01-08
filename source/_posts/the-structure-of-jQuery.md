@@ -2,7 +2,7 @@
 layout: post
 title:  The Structure of jQuery
 date:   2017-05-18 21:20:07 +08:00
-category: 前端
+category: 基础教程
 tags: [JavaScript, jQuery, 前端]
 comments: true
 ---

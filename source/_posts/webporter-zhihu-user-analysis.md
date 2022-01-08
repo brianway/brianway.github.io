@@ -2,8 +2,8 @@
 layout: post
 title:  爬取知乎60万用户信息之后的简单分析
 date:   2016-12-20 21:03:07 +08:00
-category: project
-tags: [Elasticsearch, Kibana, webporter]
+category: 开发实践
+tags: [随笔]]
 comments: true
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  springmvc学习笔记(1)-框架原理和入门配置
+title:  SpringMVC学习笔记(1)-框架原理和入门配置
 date:   2016-03-30 14:28:01 +08:00
-category: web开发
-tags: [SpringMVC, 安装部署]
+category: Web开发
+tags: [SpringMVC]
 comments: true
 ---
 

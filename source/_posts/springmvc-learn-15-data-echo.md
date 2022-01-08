@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(15)-数据回显
+title:  SpringMVC学习笔记(15)-数据回显
 date:   2016-03-30 14:28:15 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC]
 comments: true
 ---

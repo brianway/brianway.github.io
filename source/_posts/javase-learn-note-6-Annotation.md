@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  java基础巩固笔记(6)-注解
+title:  Java基础巩固笔记(6)-注解
 date:   2016-02-20 17:45:12 +08:00
 category: 编程语言
 tags: [Java, 注解]

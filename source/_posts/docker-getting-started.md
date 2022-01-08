@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  docker入门概览
+title:  Docker入门概览
 date:   2016-07-29 21:55:11 +08:00
-category: 分布式系统
-tags: [Docker, 安装部署]
+category: 基础教程
+tags: [Docker]
 comments: true
 ---
 
-本文对docker进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面
+本文对 Docker 进行大致介绍，包括概述,安装,简单使用,架构,基本原理等方面
 
 <!-- more -->
 

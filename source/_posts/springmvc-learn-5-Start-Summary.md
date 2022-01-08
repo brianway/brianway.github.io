@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  springmvc学习笔记(5)-入门程序小结
+title:  SpringMVC学习笔记(5)-入门程序小结
 date:   2016-03-30 14:28:05 +08:00
-category: web开发
+category: Web开发
 tags: [SpringMVC]
 comments: true
 ---

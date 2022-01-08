@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  mybatis学习笔记(14)-查询缓存之一级缓存
+title:  MyBatis学习笔记(14)-查询缓存之一级缓存
 date:   2016-03-08 10:39:14 +08:00
-category: web开发
-tags: [MyBatis, 缓存]
+category: Web开发
+tags: [MyBatis]
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  Elasticsearch 5.0-简单查询
 date:   2016-12-13 21:45:07 +08:00
-category: 分布式系统
+category: 基础教程
 tags: [Elasticsearch]
 comments: true
 ---

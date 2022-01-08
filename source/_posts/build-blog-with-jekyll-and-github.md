@@ -2,8 +2,8 @@
 layout: post
 title:  在GitHub搭建个人网站
 date:   2016-01-07 22:35:11 +08:00
-category: 其他
-tags: [GitHub, 安装部署]
+category: 开发实践
+tags: [GitHub]
 comments: true
 ---
 
@@ -50,7 +50,7 @@ comments: true
 主要是我完全不懂ruby和python,前端也只有少的可怜的一点常识。搭建环境不复杂，基本安装好了后`jekyll new myblog`就有个基础模板了，不过很难看。所以我主要花了一整天时间去找主题、P图、了解jekyll的目录结构和用法、测试显示效果。总算搞定了，不过markdown的语法高亮我还是不满意，比较喜欢SegmentFault的高亮。有空再说这部分。
 
 ## 遇到的问题
-1.windows下安装ruby的devkit遇到问题
+### 1.windows下安装ruby的devkit遇到问题
 
 ```
 Invalid configuration or no Rubies listed. Please fix 'config.yml'
@@ -60,7 +60,7 @@ and rerun 'ruby dk.rb install'
 
 解决：[How do I configure config.yml so that I can install devkit?](http://stackoverflow.com/questions/20810653/how-do-i-configure-config-yml-so-that-i-can-install-devkit)
 
-2.kunka主题jekyll build问题
+### 2.kunka主题jekyll build问题
 
 ```
 Deprecation: You appear to have pagination turned on, but you haven't included the `jekyll-paginate` gem. Ensure you have `gems: [jekyll-paginate]` in your configuration fil e.
@@ -68,7 +68,7 @@ Deprecation: You appear to have pagination turned on, but you haven't included t
 
 解决：[jekyll-paginate gem](https://teamtreehouse.com/community/jekyllpaginate-gem)
 
-3.markdown显示问题
+### 3.markdown显示问题
 
 这里很蛋疼，我写markdown的习惯是代码都是前后各三个反单引号包起来的。使用kramdown解析markdown不能对含三个反单引号的代码块进行识别，默认按单行代码处理，缩进都没了；使用redcarpet能识别代码块，但没高亮，rouge又提示什么要下1.3版本，反正神烦。
 
@@ -79,20 +79,20 @@ Deprecation: You appear to have pagination turned on, but you haven't included t
 
 
 
-4.jekyll build失败报错(多版本冲突)
+### 4.jekyll build失败报错(多版本冲突)
 
 解决：[Jekyll/Ruby Kramdown Missing Dependency](http://stackoverflow.com/questions/31417469/jekyll-ruby-kramdown-missing-dependency)
 
-5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前`gem update --system`)
+### 5.bundle install SSL接连不上(其实是网速不好，多试几次。下载前`gem update --system`)
 
 查阅：[SSL Error When installing rubygems, Unable to pull data from 'https://rubygems.org/](http://stackoverflow.com/questions/10246023/bundle-install-fails-with-ssl-certificate-verification-error)
 
-6.jekyll升级到3.0
+### 6.jekyll升级到3.0
 
 >* [GitHub Pages now faster and simpler with Jekyll 3.0](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0)
 >* [Upgrading from 2.x to 3.x](http://jekyllrb.com/docs/upgrading/2-to-3/)
 
-7.gem install出现error，伟大的防火墙问题
+### 7.gem install出现error，伟大的防火墙问题
 
 ```
 brian@brianway:~$ gem install jekyll
@@ -102,7 +102,7 @@ Errno::ECONNRESET: Connection reset by peer - SSL_connect (https://api.rubygems.
 
 解决：换成淘宝的镜像 https://ruby.taobao.org/
 
-8.MAC下`gem install jekyll`失败
+### 8.MAC下`gem install jekyll`失败
 
 ```
 ERROR:  While executing gem ... (Gem::FilePermissionError)
@@ -117,7 +117,7 @@ You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
 - [Installing gem or updating RubyGems fails with permissions error](http://stackoverflow.com/questions/14607193/installing-gem-or-updating-rubygems-fails-with-permissions-error)
 - [Can't install gems on OS X “El Capitan”](http://stackoverflow.com/questions/31972968/cant-install-gems-on-os-x-el-capitan)
 
-9.mac下bundle执行失败
+### 9.mac下bundle执行失败
 
 ```
 brian@brianway:~/mygit/brianway.github.io (master)$ bundle exec jekyll serve

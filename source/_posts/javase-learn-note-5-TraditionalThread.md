@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  java基础巩固笔记(5)-多线程之传统多线程
+title:  Java基础巩固笔记(5)-多线程之传统多线程
 date:   2016-02-06 14:18:12 +08:00
 category: 编程语言
 tags: [Java, 多线程]

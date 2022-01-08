@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  将nutch2.3的bin/crawl脚本改写为java类
+title:  将 Nutch 2.3 的 bin/crawl 脚本改写为 Java 类
 date:   2016-01-19 21:01:11 +08:00
-category: 其他
-tags: [Nutch, shell]
+category: 开发实践
+tags: [Nutch, Shell]
 comments: true
 ---
 
@@ -22,7 +22,7 @@ nutch1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，
 - `public void preConfig(Configuration conf,String options)`用于根据带`-D`参数 commonOptions等指令设置每个Job的配置项
 - `CLASS_MAP`是静态(`static`)属性，一个记录JobName和对应的类名的映射关系的哈希表(`HashMap`)
 
-## gora BUG说明
+## Gora BUG说明
 我之前是在每个job是按照脚本使用batchId参数的，遇到了下面这个问题:
 
 >[Gora MongoDb Exception, can't serialize Utf8](http://stackoverflow.com/questions/30662489/gora-mongodb-exception-cant-serialize-utf8)
@@ -33,7 +33,7 @@ nutch1.8以后，以前的主控代码`org.apache.nutch.crawl.Crawl`类没了，
 
 通过这个脚本的改写，我了解了脚本的基本使用，同时对之前看的java反射等知识进行了实践，并对nutch的完整爬取流程、主要控制逻辑有了深刻的印象。主要是前面那个gora的BUG卡了我几天，我还以为自己翻译的有问题，看来调试能力还需要加强。
 
-## java代码
+## Java代码
 
 这段代码是翻译nutch2.3的`bin/crawl`和`bin/nutch`脚本
 

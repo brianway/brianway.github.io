@@ -2,8 +2,8 @@
 layout: post
 title:  狼人杀新手进阶指南
 date:   2017-10-05 20:16:07 +08:00
-category: 随笔
-tags: [随笔]
+category: 杂记
+tags: [狼人杀]
 comments: true
 ---
 
