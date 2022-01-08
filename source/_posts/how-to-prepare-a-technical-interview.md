@@ -155,9 +155,9 @@ comments: true
 
 附上买书的截图
 
-![书1](http://7xsna4.com1.z0.glb.clouddn.com/2017-9_%E4%B9%A61.jpg)
+![书1](https://pic1.zhimg.com/80/v2-1865097000f702745b8cab50bc68a020_1440w.jpg)
 
-![书2](http://7xsna4.com1.z0.glb.clouddn.com/2017-9_%E4%B9%A62.jpg)
+![书2](https://pic1.zhimg.com/80/v2-4ad7956c59553ebad9ea7aa28412e104_1440w.jpg)
 
 我整理了一些学习笔记和源码：
 
