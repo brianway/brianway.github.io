@@ -168,6 +168,50 @@ loadData(function (data) {
 });
 ```
 
+### 归档样式
+
+indigo主题默认archives(归档)的样式有两点不满足我的偏好：
+
+1. 默认的卡片样式太占地方，一个分页放不下几篇博客名。归档我想尽可能多的按时间降序排列展示博客列表，而默认的归档样式，和categories(分类)以及tags(标签)的样式一样，使用了卡片作为列表项，不太喜欢。
+2. 时间按月划分而非按年划分。我希望以年为粒度来归档
+
+涉及的文件/用途：
+- `themes/indigo/layout/archive.ejs`: 归档页面主体内容对应的文件，类似HTML模板的作用
+- `themes/indigo/layout/_partial/archive.ejs`: 列表项的展示内容，类似可复用的HTML公共模板
+- `themes/indigo/source/css/_partial/archives.less`: 归档页面的对应样式
+- `themes/indigo/source/js/main.js`: 原列表项的瀑布流是每行两列的，一些展示逻辑例如每一项(`.waterfall-item`)的元素位置高度在该文件计算和补充
+
+我的修改：
+- **修改归档时间粒度**：将`themes/indigo/layout/archive.ejs`文件内的“by年月”分组的逻辑改为按年分组。同时，列表项的时间格式改为自己喜欢的`MM-DD`
+- **修改每个列表项的展示内容**
+    - 上述 `archive.ejs` 文件使用了 hexo 的 `partial` 辅助函数引用了`themes/indigo/layout/_partial/archive` 文件，但由于该文件被categories(分类)以及tags(标签)页面共用了，所以**不要直接修改**，而是在同目录(`_partial`)下新建自己的归档文件`my-archive`并修改引用
+    - 在`my-archive`文件定制自己喜欢的列表展示信息，可借鉴参考原来的写法。并在 `themes/indigo/source/css/_partial/archives.less` 定制CSS样式，建议添加新className(例如`.archive-item`)而非直接在原样式上修改
+    - 原列表项样式`.waterfall-item`的渲染逻辑涉及到了`themes/indigo/source/js/main.js`文件，仿照其写法补充自定义列表项(`.archive-item`)的元素位置高度
+- **bugfix**: 修改原博客列表项的日期格式`config.date_format`-> `date_format`，(位于文件`themes/indigo/layout/_partial/post/date.ejs`)，否则引用它的文件传入的日期格式没法生效
+
+
+`main.js`的补充代码如下（原`.waterfall-item`的渲染是两列，归档`.archive-item`的渲染改为一列）
+
+```js
+// 自定义的归档
+forEach.call($$('.waterfall'), function (el) {
+    var childs = el.querySelectorAll('.archive-item');
+    if (!(childs && childs.length > 0)) {
+        // 避免干扰分cate和tag的样式 
+        return;
+    }
+    var itemHeight = 0;
+    forEach.call(childs, function (item) {
+        item.style.cssText = 'top:' + itemHeight + 'px;';
+        itemHeight += item.offsetHeight;
+    });
+    el.style.height = Math.max(itemHeight, 0) + 'px';
+    el.classList.add('in');
+});
+
+```
+
+和前面的“搜索”定制一样，修改`themes/indigo/source/js/main.js`即可在本地测试，发布线上的话，需要mimify js文件，然后替换掉原来的`themes/indigo/source/js/main.min.js`，压缩js的工具网站：https://javascript-minifier.com/
 
 ## 遇到的问题
 
