@@ -32,7 +32,7 @@
                 y: y
             };
         },
-        rootScollTop = function() {
+        rootScollTop = function () {
             return d.documentElement.scrollTop || d.body.scrollTop;
         };
 
@@ -263,11 +263,27 @@
                     var i = columns[0] <= columns[1] ? 0 : 1;
                     item.style.cssText = 'top:' + columns[i] + 'px;left:' + (i > 0 ? '50%' : 0);
                     columns[i] += item.offsetHeight;
-                })
+                });
 
                 el.style.height = Math.max(columns[0], columns[1]) + 'px';
                 el.classList.add('in')
-            })
+            });
+
+            // 自定义的归档
+            forEach.call($$('.waterfall'), function (el) {
+                var childs = el.querySelectorAll('.archive-item');
+                if (!(childs && childs.length > 0)) {
+                    // 避免干扰分cate和tag的样式 
+                   return;
+                }
+                var itemHeight = 0;
+                forEach.call(childs, function (item) {
+                    item.style.cssText = 'top:' + itemHeight + 'px;';
+                    itemHeight += item.offsetHeight;
+                });
+                el.style.height = Math.max(itemHeight, 0) + 'px';
+                el.classList.add('in');
+            });
 
         },
         tabBar: function (el) {
@@ -461,7 +477,7 @@
 
     var ignoreUnload = false;
     var $mailTarget = $('a[href^="mailto"]');
-    if($mailTarget) {
+    if ($mailTarget) {
         $mailTarget.addEventListener(even, function () {
             ignoreUnload = true;
         });

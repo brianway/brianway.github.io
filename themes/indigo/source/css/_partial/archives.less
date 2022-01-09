@@ -54,6 +54,60 @@
     padding: 0 10px 20px;
 }
 
+// 自定义的归档样式，覆盖一些默认样式
+.archive-item {
+    padding-left: 10px;
+    border-bottom: 1px dashed @borderColor;
+
+    .post-title {
+        display: inline-block;
+        font-size: 14px;
+        padding-bottom: 0px;
+        padding-top: 10px;
+    }
+
+    .post-time {
+        font-size: 12px;
+    }
+
+    .archive-article {
+        border: none;
+    }
+
+    // &::before {
+    //     content: " ";
+    //     position: absolute;
+    //     left: 0;
+    //     // top: 12px;
+    //     width: 6px;
+    //     height: 6px;
+    //     margin-top: 20px;
+    //     margin-left: -3px;
+    //     background: @primaryColor;
+    //     border-radius: 50%;
+    //     border: 1px solid #fff;
+    //     transition-duration: .2s;
+    //     transition-timing-function: ease-in-out;
+    //     transition-delay: 0s;
+    // }
+        
+}
+
+// // 时间线样式
+// .archive-collapse::after {
+//     content: " ";
+//     position: absolute;
+//     top: 0px;
+//     left: 0;
+//     margin-left: -2px;
+//     width: 3px;
+//     height: 100%;
+//     background: @lightPrimaryColor;
+//     z-index: -1;
+// }
+
+
+
 @media screen and (max-width:760px) {
     .archive-article {
         display: block;
@@ -83,6 +137,12 @@
     }
 
     .waterfall-item {
+        position: static;
+        width: 100%;
+        padding: 0;
+    }
+
+    .archive-item {
         position: static;
         width: 100%;
         padding: 0;

@@ -2,7 +2,7 @@
     title: theme.archives_title,
     hdClass: 'archives-header'
 }) %>
-<div class="container body-wrap fade">
+<div class="container body-wrap fade archive-collapse">
     <%
         var posts = [];
 
@@ -19,18 +19,21 @@
         var dt = post.date;
         var ny = post.date.year();
         var nm = post.date.month();
-
-        if(ny !== y || nm !== m) {
-
+        
+        <!-- if(ny !== y || nm !== m) { -->
+        if(ny !== y) {
             y = ny;
-            m = nm;
+            <!-- m = nm; -->
     %>
-            <% if(i > 0){%></div> <% } %>
-            <h3 class="archive-separator"><%=dt.format('MMMM, YYYY')%></h3>
-            <div class="waterfall">
+            <% if(i > 0){ %>
+            </div> 
+            <% } %>
+            <!-- <h3 class="archive-separator"><%=dt.format('MMMM, YYYY')%></h3> -->
+            <h3 class="archive-separator"><%=dt.format('YYYY年')%></h3>
+            <div class="waterfall archive-collapse">
     <%    } %>
 
-        <%- partial('_partial/archive', {post: post, date_format: 'MMM D'}) %>
+        <%- partial('_partial/my-archive', {post: post, date_format: 'MM-DD'}) %>
 
     <%})%>
     </div>
