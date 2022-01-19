@@ -128,7 +128,7 @@ bin/zkCli.sh  -server 127.0.0.1:2180
 
 运行截图
 
-![zookeeper_单机集群运行截图](http://blog.qiniu.brianway.site/zookeeper_%E5%8D%95%E6%9C%BA%E9%9B%86%E7%BE%A4%E8%BF%90%E8%A1%8C%E6%88%AA%E5%9B%BE-1.png)
+![zookeeper_单机集群运行截图](/img/blog/zookeeper_%E5%8D%95%E6%9C%BA%E9%9B%86%E7%BE%A4%E8%BF%90%E8%A1%8C%E6%88%AA%E5%9B%BE-1.png)
 
 
 ## 参考链接
