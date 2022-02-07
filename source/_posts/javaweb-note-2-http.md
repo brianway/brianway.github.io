@@ -38,7 +38,7 @@ comments: true
 
 ### 响应状态行
 
-![HTTP响应状态码简表](http://blog.qiniu.brianway.site/javaweb_HttpResponseStatus.png)
+![HTTP响应状态码简表](/img/blog/javaweb_HttpResponseStatus.png)
 
 详情可参考
 

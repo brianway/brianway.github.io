@@ -26,16 +26,16 @@ comments: true
 
 - 1.点击工具栏的运行配置`Edit Configurations`
 
-![Edit Configurations](http://blog.qiniu.brianway.site/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9501.png)
+![Edit Configurations](/img/blog/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9501.png)
 
 
 - 2.在弹出的`Run/debug Configurations`中选中tomcat容器，选择`deployment`这个tab
 
-![deployment](http://blog.qiniu.brianway.site/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9502.png)
+![deployment](/img/blog/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9502.png)
 
 - 3.添加物理目录和并设置虚拟目录路径
 
-![添加物理目录和并设置虚拟目录路径](http://blog.qiniu.brianway.site/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9503.png)
+![添加物理目录和并设置虚拟目录路径](/img/blog/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9503.png)
 
 这里我选择了D盘下面的tmp文件夹作为物理目录，虚拟目录设为了`/pic`,我试了下，虽然斜杠少了也没什么影响，一样能访问，不过还是建议加上吧。
 
@@ -43,12 +43,12 @@ comments: true
 
 附上博主帅照一张
 
-![访问图片资源](http://blog.qiniu.brianway.site/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9504.png)
+![访问图片资源](/img/blog/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9504.png)
 
 
 这里需要接上具体访问资源的文件名，不然后访问不到的，如下图
 
-![访问不到](http://blog.qiniu.brianway.site/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9505.png)
+![访问不到](/img/blog/IDEA_web-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%9505.png)
 
 
 ## 在非IDE环境下配置虚拟目录

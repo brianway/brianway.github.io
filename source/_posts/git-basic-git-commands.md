@@ -80,7 +80,7 @@ comments: true
 - `git checkout -- 文件名`把没暂存(即没add)的干掉，或者说，丢弃工作区，回到到暂存状态
 - `git reset HEAD 文件名`把暂存的状态取消，工作区内容不变，但状态变为“未暂存”。
 
-简单来说，没有add过的修改，只需要`git checkout -- 文件名`即可撤销；add 过的修改，先`git reset HEAD 文件名`变成没add 过的修改，再`git checkout -- 文件名`撤销。操作示例可以看[这张图](http://blog.qiniu.brianway.site/git_%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9.png)
+简单来说，没有add过的修改，只需要`git checkout -- 文件名`即可撤销；add 过的修改，先`git reset HEAD 文件名`变成没add 过的修改，再`git checkout -- 文件名`撤销。操作示例可以看[这张图](/img/blog/git_%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9.png)
 
 - `git reset --hard HEAD^` 会回退到上一个版本
 - `git reset --hard 某版本号前几位`通过命令行上的历史信息（假如你没清屏的话），找到某版本 的版本号回到指定版本。不一定要全部的版本号，就像这个命令的例子，只要前面的约7、8位这样就可以。

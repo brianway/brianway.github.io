@@ -28,7 +28,7 @@ mybatis可以将向 preparedStatement中的输入参数自动进行输入映射�
 
 mybatis框架
 
-![mybatis框架图](http://blog.qiniu.brianway.site/mybatis_%E6%A1%86%E6%9E%B6%E5%9B%BE.png)
+![mybatis框架图](/img/blog/mybatis_%E6%A1%86%E6%9E%B6%E5%9B%BE.png)
 
 
 ## mybatis框架执行过程

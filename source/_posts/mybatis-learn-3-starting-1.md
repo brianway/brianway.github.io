@@ -15,7 +15,7 @@ mybatis入门程序
 
 在IDEA中新建了一个普通的java项目，新建文件夹lib,加入jar包,工程结构如图。
 
-![mybatis_入门程序一-工程结构图](http://blog.qiniu.brianway.site/mybatis_%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F%E4%B8%80-%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+![mybatis_入门程序一-工程结构图](/img/blog/mybatis_%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F%E4%B8%80-%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
 
 

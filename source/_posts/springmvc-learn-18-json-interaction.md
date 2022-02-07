@@ -17,7 +17,7 @@ json数据格式在接口调用中、html页面中较常用，json格式比较�
 
 比如：webservice接口，传输json数据.
 
-![json交互](http://blog.qiniu.brianway.site/springmvc_json%E4%BA%A4%E4%BA%92.png)
+![json交互](/img/blog/springmvc_json%E4%BA%A4%E4%BA%92.png)
 
 - 请求json、输出json，要求请求的是json串，所以在前端页面中需要将请求的内容转成json，不太方便。
 - 请求key/value、输出json。此方法比较常用。
@@ -161,11 +161,11 @@ public @ResponseBody ItemsCustom requestJson(@RequestBody ItemsCustom itemsCusto
 
 - 测试结果
 
-![请求json，返回json](http://blog.qiniu.brianway.site/springmvc_json-request-json-1.png)
+![请求json，返回json](/img/blog/springmvc_json-request-json-1.png)
 
 可以看到，request和response的HTTP头的Content-Type都是`application/json;charset=utf-8`
 
-![请求json，返回json,response的body](http://blog.qiniu.brianway.site/springmvc_json-request-json-2.png)
+![请求json，返回json,response的body](/img/blog/springmvc_json-request-json-2.png)
 
 
 ### 输入key/value，输出是json串
@@ -209,7 +209,7 @@ public @ResponseBody ItemsCustom responseJson(ItemsCustom itemsCustom){
 
 - 测试结果
 
-![请求key/value,返回json](http://blog.qiniu.brianway.site/springmvc_json-request-keyvalue-1.png)
+![请求key/value,返回json](/img/blog/springmvc_json-request-keyvalue-1.png)
 
 
 可以看到，key/value键值对的默认Content-Type是`application/x-www-form-urlencoded`,同时，我们收到了响应“手机”

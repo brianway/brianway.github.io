@@ -17,7 +17,7 @@ mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。
 
 mybaits提供一级缓存，和二级缓存。
 
-![查询缓存](http://blog.qiniu.brianway.site/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png)
+![查询缓存](/img/blog/mybatis_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png)
 
 一级缓存是SqlSession级别的缓存。在操作数据库时需要构造sqlSession对象，在对象中有一个数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）是互相不影响的。
 
@@ -32,7 +32,7 @@ mybaits提供一级缓存，和二级缓存。
 
 ### 一级缓存工作原理
 
-![一级缓存工作原理](http://blog.qiniu.brianway.site/mybatis_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png)
+![一级缓存工作原理](/img/blog/mybatis_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png)
 
 第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。得到用户信息，将用户信息存储到一级缓存中。
 

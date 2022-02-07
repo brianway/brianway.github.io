@@ -13,7 +13,7 @@ comments: true
 
 ## springmvc框架
 
-![springmvc_核心架构图](http://blog.qiniu.brianway.site/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+![springmvc_核心架构图](/img/blog/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 - `DispatcherServlet`前端控制器：接收request，进行response
 - **`HandlerMapping`处理器映射器**：根据url查找Handler。（可以通过xml配置方式，注解方式）

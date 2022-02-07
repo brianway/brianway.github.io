@@ -177,7 +177,7 @@ public void generator() throws Exception{
 
 生成后的代码：
 
-![逆向工程](http://blog.qiniu.brianway.site/mybatis_%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.png)
+![逆向工程](/img/blog/mybatis_%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.png)
 
 ### 使用生成的代码
 

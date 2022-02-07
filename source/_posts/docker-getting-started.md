@@ -40,7 +40,7 @@ Docker Engine is a **client-server application** with these major components:
 
 我觉得官网的解释很言简意赅，附上图(摘自官网)
 
-![Docker Engine](http://blog.qiniu.brianway.site/docker_docker-engine.png)
+![Docker Engine](/img/blog/docker_docker-engine.png)
 
 ### Docker的用处
 
@@ -83,7 +83,7 @@ Mac下有两种安装方式供选
 
 ## 架构和原理
 
-![dokcer architecture](http://blog.qiniu.brianway.site/dokcer_architecture.png)
+![dokcer architecture](/img/blog/dokcer_architecture.png)
 
 由上图可知，docker是一个client-server架构
 
@@ -109,11 +109,11 @@ Docker使用[union file systems](https://en.wikipedia.org/wiki/UnionFS) 把不�
 
 > Previously, image and layer data was referenced and stored using a randomly generated UUID. In the new model this is replaced by a secure content hash.
 
-![container-based-on-ubuntu15.04](http://blog.qiniu.brianway.site/docker_container-based-on-ubuntu.png)
+![container-based-on-ubuntu15.04](/img/blog/docker_container-based-on-ubuntu.png)
 
 而container和image的主要区别就在于**top writable layer**，所有对image的更改都保存在这一层。换句话说，多个container可以共享同一个image，这就大大节省了空间。实现image和container的管理有两个关键的技术：stackable image layers 和 copy-on-write (CoW).
 
-![multiple containers](http://blog.qiniu.brianway.site/docker_multiple-containers.png)
+![multiple containers](/img/blog/docker_multiple-containers.png)
 
 从图中可以看出，copy-on-write (CoW)是一个很好的策略，既节省了空间，又避免了因数据共享带来的写冲突问题，从而提高效率。
 

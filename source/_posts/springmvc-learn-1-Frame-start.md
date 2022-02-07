@@ -32,7 +32,7 @@ springmvc是spring框架的一个模块，springmvc和spring无需通过中间�
 
 文末参考链接中《跟开涛学SpringMVC》里面有张图挺好的，感觉很详细.
 
-![springmvc_核心架构图](http://blog.qiniu.brianway.site/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+![springmvc_核心架构图](/img/blog/springmvc_%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 
 步骤：

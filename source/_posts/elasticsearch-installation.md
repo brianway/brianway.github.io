@@ -98,6 +98,6 @@ bin/kibana
 
 在左边输入 `GET /`，点绿色的播放按钮发送请求，就可以看到和刚才在终端里输入`curl -XGET 'localhost:9200/?pretty'`同样的的响应了。如图所示：
 
-![Kibana - Console界面](http://blog.qiniu.brianway.site/Kibana_Console%E7%95%8C%E9%9D%A2.png)
+![Kibana - Console界面](/img/blog/Kibana_Console%E7%95%8C%E9%9D%A2.png)
 
 后面的Elasticsearch的文章演示部分都会基于 `Console - Kibana` ，请安装好。

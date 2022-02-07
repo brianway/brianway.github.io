@@ -104,4 +104,4 @@ fun( )函数体内的自动对象FunObj被撤消时调用析构函数 !
 - 在堆区分配：动态分配内存。用new/malloc时开辟，delete/free时释放。生存期由用户指定，灵活。但有内存泄露等问题
 
 
-![内存分配](http://blog.qiniu.brianway.site/cpp_%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)
+![内存分配](/img/blog/cpp_%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)

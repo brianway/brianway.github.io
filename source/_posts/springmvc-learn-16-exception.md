@@ -22,7 +22,7 @@ comments: true
 
 系统的dao、service、controller出现都通过throws Exception向上抛出，最后由springmvc前端控制器交由异常处理器进行异常处理，如下图：
 
-![springmvc异常处理](http://blog.qiniu.brianway.site/springmvc_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png)
+![springmvc异常处理](/img/blog/springmvc_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png)
 
 springmvc提供全局异常处理器（一个系统只有一个异常处理器）进行统一异常处理。
 
