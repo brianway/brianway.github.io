@@ -66,15 +66,15 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文对多线程基础知识进行梳理，主要包括多线程的基本使用，对象及变量的并发访问，线程间通信，lock的使用，定时器，单例模式，以及线程状态与线程组。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E8%AF%BB%E5%8F%96%E5%85%AC%E5%85%B1%E5%86%85%E5%AD%98.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%98%E9%87%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
-<meta property="og:updated_time" content="2022-01-08T16:15:12.786Z">
+<meta property="og:image" content="https://brianway.github.io/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E8%AF%BB%E5%8F%96%E5%85%AC%E5%85%B1%E5%86%85%E5%AD%98.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%98%E9%87%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:updated_time" content="2022-02-07T07:14:21.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java多线程核心技术梳理(附源码)">
 <meta name="twitter:description" content="本文对多线程基础知识进行梳理，主要包括多线程的基本使用，对象及变量的并发访问，线程间通信，lock的使用，定时器，单例模式，以及线程状态与线程组。">
-<meta name="twitter:image" content="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png">
+<meta name="twitter:image" content="https://brianway.github.io/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
     
@@ -344,7 +344,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png" alt="javaSE_多线程-线程的私有堆栈" title>
+                    <img src="/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A7%81%E6%9C%89%E5%A0%86%E6%A0%88.png" alt="javaSE_多线程-线程的私有堆栈" title>
                 </div>
                 <div class="image-caption">javaSE_多线程-线程的私有堆栈</div>
             </figure>
@@ -361,7 +361,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E8%AF%BB%E5%8F%96%E5%85%AC%E5%85%B1%E5%86%85%E5%AD%98.png" alt="javaSE_多线程-读取公共内存.png" title>
+                    <img src="/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E8%AF%BB%E5%8F%96%E5%85%AC%E5%85%B1%E5%86%85%E5%AD%98.png" alt="javaSE_多线程-读取公共内存.png" title>
                 </div>
                 <div class="image-caption">javaSE_多线程-读取公共内存.png</div>
             </figure>
@@ -385,7 +385,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%98%E9%87%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png" alt="javaSE_多线程-变量在内存中的工作过程.png" title>
+                    <img src="/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%98%E9%87%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png" alt="javaSE_多线程-变量在内存中的工作过程.png" title>
                 </div>
                 <div class="image-caption">javaSE_多线程-变量在内存中的工作过程.png</div>
             </figure>
@@ -599,7 +599,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="javaSE_多线程-方法与状态关系示意图.png" title>
+                    <img src="/img/blog/javaSE_%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8A%B6%E6%80%81%E5%85%B3%E7%B3%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="javaSE_多线程-方法与状态关系示意图.png" title>
                 </div>
                 <div class="image-caption">javaSE_多线程-方法与状态关系示意图.png</div>
             </figure>
@@ -632,7 +632,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T16:15:12.786Z" itemprop="dateUpdated">2022-01-09 00:15:12</time>
+    最后更新时间：<time datetime="2022-02-07T07:14:21.711Z" itemprop="dateUpdated">2022-02-07 15:14:21</time>
 </span><br>
 
 

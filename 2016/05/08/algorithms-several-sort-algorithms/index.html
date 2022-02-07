@@ -66,22 +66,22 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文介绍几种常见排序算法（选择排序，插入排序，希尔排序，归并排序，快速排序，堆排序），对算法的思路、性质、特点、具体步骤、java实现以及trace图解进行了全面的说明。最后对几种排序算法进行了比较和总结。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_selectionsort-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_selectionsort-2.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_insertionsort-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_insertionsort-2.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_shellsort-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_mergesort-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_mergesort-2.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_quicksort-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_quicksort-3way-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_heapsort-1.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/algorithms_sort-summary.png">
-<meta property="og:updated_time" content="2022-01-08T11:43:33.819Z">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_selectionsort-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_selectionsort-2.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_insertionsort-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_insertionsort-2.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_shellsort-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_mergesort-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_mergesort-2.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_quicksort-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_quicksort-3way-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_heapsort-1.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/algorithms_sort-summary.png">
+<meta property="og:updated_time" content="2022-02-07T07:14:21.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="几种常见排序算法">
 <meta name="twitter:description" content="本文介绍几种常见排序算法（选择排序，插入排序，希尔排序，归并排序，快速排序，堆排序），对算法的思路、性质、特点、具体步骤、java实现以及trace图解进行了全面的说明。最后对几种排序算法进行了比较和总结。">
-<meta name="twitter:image" content="http://blog.qiniu.brianway.site/algorithms_selectionsort-1.png">
+<meta name="twitter:image" content="https://brianway.github.io/img/blog/algorithms_selectionsort-1.png">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
     
@@ -285,7 +285,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_selectionsort-1.png" alt="选择排序" title>
+                    <img src="/img/blog/algorithms_selectionsort-1.png" alt="选择排序" title>
                 </div>
                 <div class="image-caption">选择排序</div>
             </figure>
@@ -298,7 +298,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_selectionsort-2.png" alt="选择排序" title>
+                    <img src="/img/blog/algorithms_selectionsort-2.png" alt="选择排序" title>
                 </div>
                 <div class="image-caption">选择排序</div>
             </figure>
@@ -324,7 +324,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_insertionsort-1.png" alt="插入排序" title>
+                    <img src="/img/blog/algorithms_insertionsort-1.png" alt="插入排序" title>
                 </div>
                 <div class="image-caption">插入排序</div>
             </figure>
@@ -336,7 +336,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_insertionsort-2.png" alt="插入排序" title>
+                    <img src="/img/blog/algorithms_insertionsort-2.png" alt="插入排序" title>
                 </div>
                 <div class="image-caption">插入排序</div>
             </figure>
@@ -363,7 +363,7 @@ ga('send', 'pageview');
 <li>数组中任意间隔为h的元素都是有序的</li>
 <li>A g-sorted array remains g-sorted after h-sorting it.</li>
 </ul>
-<p><img src="http://blog.qiniu.brianway.site/algorithms_shellsort-1.png" alt="希尔排序"></p>
+<p><img src="/img/blog/algorithms_shellsort-1.png" alt="希尔排序"></p>
 <p>性质：</p>
 <blockquote>
 <ul>
@@ -427,7 +427,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_mergesort-1.png" alt="归并排序" title>
+                    <img src="/img/blog/algorithms_mergesort-1.png" alt="归并排序" title>
                 </div>
                 <div class="image-caption">归并排序</div>
             </figure>
@@ -451,7 +451,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_mergesort-2.png" alt="归并排序" title>
+                    <img src="/img/blog/algorithms_mergesort-2.png" alt="归并排序" title>
                 </div>
                 <div class="image-caption">归并排序</div>
             </figure>
@@ -484,7 +484,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_quicksort-1.png" alt="快速排序" title>
+                    <img src="/img/blog/algorithms_quicksort-1.png" alt="快速排序" title>
                 </div>
                 <div class="image-caption">快速排序</div>
             </figure>
@@ -524,7 +524,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_quicksort-3way-1.png" alt="三向切分" title>
+                    <img src="/img/blog/algorithms_quicksort-3way-1.png" alt="三向切分" title>
                 </div>
                 <div class="image-caption">三向切分</div>
             </figure>
@@ -552,7 +552,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_heapsort-1.png" alt="堆排序" title>
+                    <img src="/img/blog/algorithms_heapsort-1.png" alt="堆排序" title>
                 </div>
                 <div class="image-caption">堆排序</div>
             </figure>
@@ -572,7 +572,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/algorithms_sort-summary.png" alt="总结" title>
+                    <img src="/img/blog/algorithms_sort-summary.png" alt="总结" title>
                 </div>
                 <div class="image-caption">总结</div>
             </figure>
@@ -611,7 +611,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T11:43:33.819Z" itemprop="dateUpdated">2022-01-08 19:43:33</time>
+    最后更新时间：<time datetime="2022-02-07T07:14:21.711Z" itemprop="dateUpdated">2022-02-07 15:14:21</time>
 </span><br>
 
 

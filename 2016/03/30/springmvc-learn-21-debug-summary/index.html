@@ -66,18 +66,18 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png">
-<meta property="og:image" content="http://blog.qiniu.brianway.site/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png">
-<meta property="og:updated_time" content="2022-01-08T16:48:37.794Z">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png">
+<meta property="og:image" content="https://brianway.github.io/img/blog/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png">
+<meta property="og:updated_time" content="2022-02-07T07:14:21.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC学习笔记(21)-SpringMVC整合MyBatis遇到的问题及解决小结">
 <meta name="twitter:description" content="本文主要记录SpringMVC整合MyBatis整合过程中遇到的各种问题和解决方法">
-<meta name="twitter:image" content="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
+<meta name="twitter:image" content="https://brianway.github.io/img/blog/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
     
@@ -284,7 +284,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png" alt="target少mapper的xml文件" title>
+                    <img src="/img/blog/springmvc_bug_target%E5%B0%91xml%E6%96%87%E4%BB%B6.png" alt="target少mapper的xml文件" title>
                 </div>
                 <div class="image-caption">target少mapper的xml文件</div>
             </figure>
@@ -298,14 +298,14 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png" alt="mapper.xml存在resources下面" title>
+                    <img src="/img/blog/springmvc_solve_mapper%E7%9A%84xml%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8resources.png" alt="mapper.xml存在resources下面" title>
                 </div>
                 <div class="image-caption">mapper.xml存在resources下面</div>
             </figure>
 <h3 id="请求参数乱码问题"><a href="#请求参数乱码问题" class="headerlink" title="请求参数乱码问题"></a>请求参数乱码问题</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png" alt="springmvc_post请求参数乱码" title>
+                    <img src="/img/blog/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81.png" alt="springmvc_post请求参数乱码" title>
                 </div>
                 <div class="image-caption">springmvc_post请求参数乱码</div>
             </figure>
@@ -315,7 +315,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png" alt="springmvc_post请求参数乱码解决" title>
+                    <img src="/img/blog/springmvc_post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3.png" alt="springmvc_post请求参数乱码解决" title>
                 </div>
                 <div class="image-caption">springmvc_post请求参数乱码解决</div>
             </figure>
@@ -360,7 +360,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png" alt="加载spring容器报红" title>
+                    <img src="/img/blog/springmvc_bug_%E5%AE%B9%E5%99%A8%E8%B7%AF%E5%BE%84%E6%8A%A5%E7%BA%A2.png" alt="加载spring容器报红" title>
                 </div>
                 <div class="image-caption">加载spring容器报红</div>
             </figure>
@@ -369,7 +369,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png" alt="容器加载文件的选用" title>
+                    <img src="/img/blog/springmvc_solve_%E5%AE%B9%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%89%E7%94%A8.png" alt="容器加载文件的选用" title>
                 </div>
                 <div class="image-caption">容器加载文件的选用</div>
             </figure>
@@ -379,7 +379,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blog.qiniu.brianway.site/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png" alt="转换器list报红" title>
+                    <img src="/img/blog/springmvc_bug_%E8%BD%AC%E6%8D%A2%E5%99%A8list%E6%8A%A5%E7%BA%A2.png" alt="转换器list报红" title>
                 </div>
                 <div class="image-caption">转换器list报红</div>
             </figure>
@@ -404,7 +404,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-01-08T16:48:37.794Z" itemprop="dateUpdated">2022-01-09 00:48:37</time>
+    最后更新时间：<time datetime="2022-02-07T07:14:21.771Z" itemprop="dateUpdated">2022-02-07 15:14:21</time>
 </span><br>
 
 
