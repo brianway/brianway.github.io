@@ -66,7 +66,7 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Brian&#39;s Homepage">
 <meta property="og:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-02-22T16:05:19.157Z">
+<meta property="og:updated_time" content="2022-02-22T16:10:00.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL原理学习-事务隔离">
 <meta name="twitter:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
@@ -406,15 +406,15 @@ ga('send', 'pageview');
 <p>对于当前事务，数据版本的可见性计算规则如下（PS：逻辑有点绕，但推导很简单）：<br>前提：</p>
 <ul>
 <li>InnoDB 为每个事务构造了一个数组，用来保存这个事务启动瞬间，当前正在“活跃”（指<strong>启动了但还没提交</strong>）的所有事务 ID。</li>
-<li>假如将<strong>事务启动瞬间</strong>，当前正在“活跃”（指<strong>启动了但还没提交</strong>）的所有事务 ID对应的数组记作active_trxid_arr；</li>
-<li><em>min(active_trxid_arr)</em> 表示数组active_trxid_arr的最小值；</li>
+<li>假如将<strong>事务启动瞬间</strong>，当前正在“活跃”（指<strong>启动了但还没提交</strong>）的所有事务 ID对应的数组记作 <em>active_trxid_arr</em>；</li>
+<li><em>min(active_trxid_arr)</em> 表示数组 <em>active_trxid_arr</em> 的最小值；</li>
 <li><em>max(系统创建过的事务 ID) </em>表示系统创建过的事务 ID的最大值。显然地，<em>min(active_trxid_arr)  &lt;=  max(系统创建过的事务 ID)</em>​</li>
 </ul>
-<p>对于任意数据版本的 row trx_id ，按照按 _min(active_trxid_arr) _ 和 <em>max(系统创建过的事务 ID)</em> 划分的范围区间作分类讨论：</p>
+<p>对于任意数据版本的 row trx_id ，按照按 <em>min(active_trxid_arr)</em> 和 <em>max(系统创建过的事务 ID)</em> 划分的范围区间作分类讨论：</p>
 <ul>
-<li><strong>row trx_id &lt; </strong>_<strong>min(active_trxid_arr)</strong>_<strong> </strong>，表示这个版本是已提交的事务或者是当前事务自己生成的，可见</li>
-<li><strong>row trx_id &gt; </strong><em><strong>max(系统创建过的事务 ID)</strong></em>，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见</li>
-<li><strong>row trx_id &gt;= </strong>_<strong>min(active_trxid_arr)</strong>_<strong>  &amp;&amp;   row trx_id  &lt;= </strong>_<strong>max(系统创建过的事务 ID)</strong> _，分两种情况：<ul>
+<li><em>row trx_id &lt; <strong>_</strong>min(active_trxid_arr)</em>，表示这个版本是已提交的事务或者是当前事务自己生成的，可见</li>
+<li><em>row trx_id &gt; <strong>_</strong>max(系统创建过的事务 ID)</em>，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见</li>
+<li><em>row trx_id &gt;= min(active_trxid_arr)  &amp;&amp;  row trx_id  &lt;= max(系统创建过的事务 ID)</em>，分两种情况：<ul>
 <li>row trx_id 在 active_trxid_arr 中，表示这个版本是由还没提交的事务生成的，不可见</li>
 <li>row trx_id 不在 active_trxid_arr 中，表示这个版本是已经提交了的事务生成的，可见</li>
 </ul>
@@ -529,7 +529,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-02-22T16:05:19.157Z" itemprop="dateUpdated">2022-02-23 00:05:19</time>
+    最后更新时间：<time datetime="2022-02-22T16:10:00.122Z" itemprop="dateUpdated">2022-02-23 00:10:00</time>
 </span><br>
 
 
