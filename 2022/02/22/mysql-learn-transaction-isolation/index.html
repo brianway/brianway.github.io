@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<!--
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-77782495-1', 'auto');
+ga('send', 'pageview');
+</script>
+ <script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77782495-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77782495-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<!--
+<script>var _hmt = _hmt || [];</script>
+<script async src="//hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e"></script>
+-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01ead8d132fad393952a3d004d92453e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>MySQL原理学习-事务隔离 | Brian&#39;s Homepage | 猥琐发育，别浪！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="MySQL">
+    <meta name="description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍MySQL事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL原理学习-事务隔离">
+<meta property="og:url" content="https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/index.html">
+<meta property="og:site_name" content="Brian&#39;s Homepage">
+<meta property="og:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍MySQL事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-02-22T15:45:02.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL原理学习-事务隔离">
+<meta name="twitter:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍MySQL事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me_640.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Brian Way</h5>
+          <a href="mailto:weichuyang(at)163.com" title="weichuyang(at)163.com" class="mail">weichuyang(at)163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/brianway" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links">
+                <i class="icon icon-lg icon-star"></i>
+                Links
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL原理学习-事务隔离</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">MySQL原理学习-事务隔离</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-02-22T07:43:11.000Z" itemprop="datePublished" class="page-time">
+  2022-02-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原理学习/">原理学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事务介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">事务介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务隔离级别"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">事务隔离级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#隔离级别与读现象的关系"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">隔离级别与读现象的关系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务启动方式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">事务启动方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一个例子"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">一个例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离性实现-MVCC"><span class="post-toc-number">2.</span> <span class="post-toc-text">隔离性实现- MVCC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多版本是如何实现的"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">多版本是如何实现的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#InnoDB-的-MVCC-是如何实现的"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">InnoDB 的 MVCC 是如何实现的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图数据如何计算"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">视图数据如何计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离性实现-锁机制"><span class="post-toc-number">3.</span> <span class="post-toc-text">隔离性实现- 锁机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实践避坑"><span class="post-toc-number">4.</span> <span class="post-toc-text">实践避坑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#避免长事务"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">避免长事务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用程序正确使用“乐观锁”"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">应用程序正确使用“乐观锁”</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-number">5.</span> <span class="post-toc-text">相关链接</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-mysql-learn-transaction-isolation" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MySQL原理学习-事务隔离</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-02-22 15:43:11" datetime="2022-02-22T07:43:11.000Z" itemprop="datePublished">2022-02-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原理学习/">原理学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍MySQL事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。</p>
+<a id="more"></a>
+<h2 id="事务介绍"><a href="#事务介绍" class="headerlink" title="事务介绍"></a>事务介绍</h2><p>在 MySQL 中，事务支持是在<strong>引擎层</strong>实现的。提到事务，绕不开它的四个特性–<strong>ACID</strong>（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）。本文重点谈论事务的<strong>隔离性</strong>及其实现方式。<br>​</p>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>SQL 标准义的事务隔离级别包括：</p>
+<ul>
+<li><strong>读未提交（read-uncommitted）</strong></li>
+<li><strong>读提交（read-committed）</strong></li>
+<li><strong>可重复读（repeatable-read）</strong></li>
+<li><strong>串行化（serializable ）</strong></li>
+</ul>
+<p>​</p>
+<p>上述每一种级别都规定了一个事务中的修改，哪些是事务之间可见的，哪些是不可见的。<br>InnoDB中事务的默认隔离级别是可重复读的（REPEATABLE-READ），而公司里一般会将事务默认隔离级别设置为读提交（READ-COMMITTED）</p>
+<p>MySQL中查看和修改事务隔离级别的常用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;transaction_isolation&apos;;</span><br><span class="line"></span><br><span class="line">// 补充：修改隔离级别 set session|global  transaction_isolation = &apos;隔离级别名&apos;;</span><br><span class="line">// 注：实践得知，set global变量值不会影响已有session的变量值，仅会影响新建立的session的变量值，（global变量值本身是全局修改即可见的）</span><br><span class="line">set global transaction_isolation =&apos;read-committed&apos;;</span><br><span class="line">show global variables like &apos;%isolation%&apos;;</span><br><span class="line">show session variables like &apos;%isolation%&apos;;</span><br><span class="line"></span><br><span class="line">// 当前执行中的事务</span><br><span class="line">select * from information_schema.innodb_trx;</span><br></pre></td></tr></table></figure></p>
+<h3 id="隔离级别与读现象的关系"><a href="#隔离级别与读现象的关系" class="headerlink" title="隔离级别与读现象的关系"></a>隔离级别与读现象的关系</h3><p>不同隔离级别下，可能出现的读现象(read phenomena)如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>隔离级别</strong></th>
+<th><strong>脏读（Dirty Read）</strong></th>
+<th><strong>不可重复读（NonRepeatable Read）</strong></th>
+<th><strong>幻读（Phantom Read）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未提交读（Read uncommitted）</td>
+<td>可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>已提交读（Read committed）</td>
+<td>不可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可重复读（Repeatable read）</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可串行化（Serializable ）</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>不可能</td>
+</tr>
+</tbody>
+</table>
+<p>相关概念见维基百科: <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Isolation_(database_systems)#Read_phenomena</a>#Read_phenomena)</p>
+<blockquote>
+<p>说明：InnoDB实现的可重复读通过<strong>next-key lock机制</strong>避免了幻读现象。next-key lock是行锁的一种，实现相当于record lock(记录锁) + gap lock(间隙锁)。关于InnoDB锁机制的相关问题，本文不作展开。</p>
+</blockquote>
+<p>### </p>
+<h3 id="事务启动方式"><a href="#事务启动方式" class="headerlink" title="事务启动方式"></a>事务启动方式</h3><p>MySQL 的事务启动方式：</p>
+<ul>
+<li>（建议）显式启动事务语句， <code>begin</code> 或 <code>start transaction</code>。<code>commit work and chain</code>语法可以不用每次事务开始时<code>begin</code></li>
+<li>（不建议） <code>set autocommit=0</code>，这个命令会将这个线程的自动提交关掉。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 关于MySQL中的commit work、commit work and chain 参考 https://juejin.cn/post/6987373561836994590#heading-7</span><br><span class="line">show variables like &apos;completion_type&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h3><p>下面通过一个例子展示不同隔离级别。<br>表格中，事务A和B两列对应的内容分别表示在这两个事务中执行的SQL，每一行表示SQL执行的时间顺序。</p>
+<table>
+<thead>
+<tr>
+<th>事务A</th>
+<th>事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启动事务</td>
+</tr>
+</tbody>
+</table>
+<p>查询得到值1 | 启动事务 |<br>|  | 查询得到值1 |<br>|  | 将1改成2 |<br>| 查询得到V1 |  |<br>|  | 提交事务B |<br>| 查询得到值V2 |  |<br>| 提交事务A |  |<br>| 查询得到值V3 |  |</p>
+<p>不同隔离级别下，V1、V2、V3的值：</p>
+<ul>
+<li>若隔离级别是“读未提交”， 则 V1 的值就是 2。这时候事务 B 虽然还没有提交，但是结果已经被 A 看到了。因此，V2、V3 也都是 2。</li>
+<li>若隔离级别是“读提交”，则 V1 是 1，V2 的值是 2。事务 B 的更新在提交后才能被 A 看到。所以， V3 的值也是 2。</li>
+<li>若隔离级别是“可重复读”，则 V1、V2 是 1，V3 是 2。之所以 V2 还是 1，遵循的就是这个要求：事务在执行期间看到的数据前后必须是一致的。</li>
+<li>若隔离级别是“串行化”，则在事务 B 执行“将 1 改成 2”的时候，会被锁住。直到事务 A 提交后，事务 B 才可以继续执行。所以从 A 的角度看， V1、V2 值是 1，V3 的值是 2。</li>
+</ul>
+<h2 id="隔离性实现-MVCC"><a href="#隔离性实现-MVCC" class="headerlink" title="隔离性实现- MVCC"></a>隔离性实现- MVCC</h2><p>​</p>
+<p>从上面的例子可以看出，对于同一段SQL和相同的执行顺序，设置为不同的隔离级别时，事务之间的相互影响是不同的，那到底是如何实现的呢？<br>显然地，不同事务的读操作之间并不会相互影响，所以只需要考虑一个事务的写操作对其他事务的影响：</p>
+<ul>
+<li>(一个事务)写操作对(另一个事务)读操作的影响</li>
+<li>(一个事务)写操作对(另一个事务)写操作的影响</li>
+</ul>
+<p>​</p>
+<p>其中，前者是通过<strong>MVCC</strong> (MultiVersion Concurrency Control，即多版本并发控制) 保证隔离性；后者是通过<strong>锁机制</strong>保证隔离性。<br><del>​</del></p>
+<h3 id="多版本是如何实现的"><a href="#多版本是如何实现的" class="headerlink" title="多版本是如何实现的"></a>多版本是如何实现的</h3><p><strong>MVCC</strong> (MultiVersion Concurrency Control，即多版本并发控制) 的思想就是保存数据的历史版本，通过对数据行的<strong>多个版本管理</strong>来实现数据库的并发控制。<br>​</p>
+<p>在介绍InnoDB的MVCC实现之前，我们可以先自己设计实现一下多版本实现方式。显然，很容易想到以下两种思路：</p>
+<ul>
+<li><ol>
+<li>每次记录全量： 初始版本 ，历史版本1， 历史版本2, … ，历史版本n ，最新版本</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>每次记录增量： 初始版本 + ∑每次增量 = 最新版本；历史某个版本+ ∑若干增量 =  最新版本。典型的应用如git，文档编辑时的撤销、恢复，等等。<blockquote>
+<p><em>注：∑是数学中的求和符号，在这里引申一下表示“累计、叠加”的含义。</em></p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<p>​</p>
+<p>InnoDB的MVCC原理和记录增量类似， 历史某个版本 =  最新版本 - ∑若干增量 。而<strong>undo log</strong>（回滚日志，用于记录数据<strong>被修改前</strong>的信息）里记录的就是这个“若干增量”。</p>
+<p>快照数据是将 undo log 的日志操作按一定的规则应用到“当前数据”上，即<strong>当前值通过“回滚”回溯到某个历史值</strong>。从而达到同一条记录在系统中可以存在多个版本，这就是数据库的多版本并发控制（MVCC）。<br>换成数学方式表达就是：<strong>快照数据  = func(当前数据，undo log)</strong><br><strong>​</strong></p>
+<p><strong>每行数据有多个版本</strong>。从前面的分析可知，数据的多个版本但并不是物理真是存在的，而是基于某个版本和undo log，可以计算出之前版本的数据，从而达到“旧的数据版本被保留”的效果。<br><strong>InnoDB里每个事务有个唯一的事务 ID</strong>，叫作 transaction id，是在事务开始的时候向 InnoDB 的事务系统申请的，是<strong>按申请顺序严格递增</strong>的。<br>每次事务更新数据的时候，都会生成一个新的数据版本，并且把 transaction id 赋值给这个数据版本的事务 ID，记为 row trx_id。所以InnoDB中历史版本的数据结构示意是下面的样子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 记号 （v, row trx_id, k） 表示某个数据行的一个快照版本</span><br><span class="line">// v表示虚拟的版本号，用于方便描述；k表示某个数据列的值，row trx_id表示数据版本的事务ID。</span><br><span class="line">// &lt;--- 后面表示生成该快照版本的的SQL逻辑，transaction id表示执行这个SQL的事务ID。</span><br><span class="line">// 则一行数据在执行的三段SQL前后后的四个数据快照V1～V4的数据结构示意如下：</span><br><span class="line"></span><br><span class="line">(V1, row trx_id =10, k=1) </span><br><span class="line">          ^</span><br><span class="line">          | 指向                   </span><br><span class="line">(V2, row trx_id =50, k=10)   &lt;---  transaction id=50, set k=10</span><br><span class="line">          ^</span><br><span class="line">          | 指向                    </span><br><span class="line">(V3, row trx_id =32, k=11)   &lt;---  transaction id=32, set k=k+1</span><br><span class="line">          ^</span><br><span class="line">          | 指向                    </span><br><span class="line">(V4, row trx_id =44, k=110)  &lt;---  transaction id=44, set k=k*10</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：历史版本从数据结构的角度看是个链表，图中链表节点的row trx_id大小不一定是单调递增/递减的，而是<strong>按照事务提交的顺序</strong>。上述链接节点间的指针就是通过undo log实现的。</p>
+</blockquote>
+<h3 id="InnoDB-的-MVCC-是如何实现的"><a href="#InnoDB-的-MVCC-是如何实现的" class="headerlink" title="InnoDB 的 MVCC 是如何实现的"></a>InnoDB 的 MVCC 是如何实现的</h3><p>InnoDB 在实现 MVCC 时用到了<strong>一致性读视图</strong>，即 <strong>consistent read view</strong> 。访问的时候以视图的逻辑结果为准：</p>
+<ul>
+<li>“读未提交”隔离级别下，直接返回记录上的最新值，没有视图概念</li>
+<li>“读提交”隔离级别下，视图是在每个 SQL 语句开始执行的时候创建的</li>
+<li>“可重复读”隔离级别下，视图是在第一个SQL启动时创建的，整个事务存在期间都用这个视图</li>
+<li>“串行化”隔离级别下，直接用加锁的方式来避免并行访问</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>PS: 这个“视图”概念区别于MySQL中另一个常见的“视图”——用查询语句定义的一个虚拟表，在调用的时候执行查询语句并生成结果</p>
+</blockquote>
+<p>关于一致性视图的创建时机：</p>
+<ul>
+<li><code>begin</code>/<code>start transaction</code><strong>并不马上启动事务</strong>。一致性视图是在执行<strong>第一个快照读</strong>语句时创建的。</li>
+<li><code>start transaction with consistent snapshot</code>，马上启动一个事务。一致性视图是在执行 <code>start transaction with consistent snapshot</code>时创建的。</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>参考：MySQL 8.0 Reference Manual - START TRANSACTION, COMMIT, and ROLLBACK Statements: <a href="https://dev.mysql.com/doc/refman/8.0/en/" target="_blank" rel="noopener"> https://dev.mysql.com/doc/refman/8.0/en/commit.html</a></p>
+</blockquote>
+<p>可重复读 vs. 读提交：</p>
+<ul>
+<li><strong>创建视图的时机不同</strong>​<ul>
+<li>在可重复读隔离级别下，只需要<strong>在事务开始的时候</strong>创建一致性视图，之后事务里的其他查询都共用这个一致性视图；</li>
+<li>在读提交隔离级别下，每一个语句执行前都会重新算出一个新的视图。</li>
+</ul>
+</li>
+<li>进而表现为<strong>可见的数据版本不同</strong><ul>
+<li>对于可重复读，查询只承认在<strong>事务启动前</strong>就已经提交完成的数据；</li>
+<li>对于读提交，查询只承认在<strong>语句启动前</strong>就已经提交完成的数据。</li>
+</ul>
+</li>
+</ul>
+<h3 id="视图数据如何计算"><a href="#视图数据如何计算" class="headerlink" title="视图数据如何计算"></a>视图数据如何计算</h3><p>前面提到了，<strong>快照数据  = func(当前数据，undo log)</strong>，而一致性视图就是由这些快照数据中的一部分组成的。<br>​</p>
+<p>一个数据版本，对于一个事务视图来说，除了自己的更新总是可见以外，有三种情况：</p>
+<ul>
+<li>版本未提交，不可见；</li>
+<li>版本已提交，但是是在视图创建后提交的，不可见；</li>
+<li>版本已提交，而且是在视图创建前提交的，可见。</li>
+</ul>
+<p>​</p>
+<p>这个逻辑很简单，但假如通过代码来实现时会发现没法落地。例如，如何确定版本是否提交，以及在视图创建前还是创建后提交的？也就是说如果通过合适的func，使得计算出的快照数据就是当前事务的一致性视图呢？</p>
+<p>对于当前事务，数据版本的可见性计算规则如下（PS：逻辑有点绕，但推导很简单）：<br>前提：</p>
+<ul>
+<li>InnoDB 为每个事务构造了一个数组，用来保存这个事务启动瞬间，当前正在“活跃”（指<strong>启动了但还没提交</strong>）的所有事务 ID。</li>
+<li>假如将<strong>事务启动瞬间</strong>，当前正在“活跃”（指<strong>启动了但还没提交</strong>）的所有事务 ID对应的数组记作active_trxid_arr；</li>
+<li>_min(active_trxid_arr)_ 表示数组active_trxid_arr的最小值；</li>
+<li>_max(系统创建过的事务 ID) _表示系统创建过的事务 ID的最大值。显然地，_min(active_trxid_arr) _ &lt;=  <em>max(系统创建过的事务 ID)</em>​</li>
+</ul>
+<p>​</p>
+<p>对于任意数据版本的 row trx_id ，按照按 _min(active_trxid_arr) _ 和 <em>max(系统创建过的事务 ID)</em> 划分的范围区间作分类讨论：<br>​</p>
+<ul>
+<li><strong>row trx_id &lt; </strong>_<strong>min(active_trxid_arr)</strong>_<strong> </strong>，表示这个版本是已提交的事务或者是当前事务自己生成的，可见</li>
+<li><strong>row trx_id &gt; </strong><em><strong>max(系统创建过的事务 ID)</strong></em>，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见</li>
+<li><strong>row trx_id &gt;= </strong>_<strong>min(active_trxid_arr)</strong>_<strong>  &amp;&amp;   row trx_id  &lt;= </strong>_<strong>max(系统创建过的事务 ID)</strong> _，分两种情况：<ul>
+<li>row trx_id 在 active_trxid_arr 中，表示这个版本是由还没提交的事务生成的，不可见</li>
+<li>row trx_id 不在 active_trxid_arr 中，表示这个版本是已经提交了的事务生成的，可见</li>
+</ul>
+</li>
+</ul>
+<h2 id="隔离性实现-锁机制"><a href="#隔离性实现-锁机制" class="headerlink" title="隔离性实现- 锁机制"></a>隔离性实现- 锁机制</h2><p>讨论完了事务一个事务写操作对另一个事务读操作的影响，下面看看一个事务写操作对另一个事务写操作的影响。<br>​</p>
+<p>先来看一个事务并发更新的例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE `t` ( </span><br><span class="line">  `id` int(11) NOT NULL, </span><br><span class="line">  `k` int(11) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t(<span class="keyword">id</span>, k) <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>),(<span class="number">2</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>事务A</th>
+<th>事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start transaction with consistent snapshot;</td>
+<td>​</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>start transaction with consistent snapshot;</td>
+</tr>
+</tbody>
+</table>
+<p>​</p>
+<p>update set k = k+1 where id = 1; |<br>| update t set k=k+1 where id = 1;<br>select k from t where id = 1; |  |<br>|  | commit; |<br>| commit; |  |</p>
+<p>​</p>
+<p>可以看出，如果这里还是使用“一致性视图”，那肯定会有问题： 在事务B执行commit语句前，事务A也对id=1这一行进行了修改，假如使用“一致性视图”，则事务A是看不见事务B对id=1这一行的修改的，事务B执行commit后，事务A紧接着commit会覆盖掉事务B的修改 ，即事务B的更新会丢失。<br>​</p>
+<p>实际上事务在更新数据时，使用的是“<strong>当前读”</strong>（<strong>current read</strong>），而当“当前读”是会加锁的，从而避免其他事务同时更新这部分数据。<br>更新数据都是先读后写的，而这个读，只能读当前的值，称为“<strong>当前读”</strong>（<strong>current read</strong>）。“当前读”总是读取已经提交完成的最新版本。</p>
+<p>一致性读 vs. 当前读：</p>
+<ul>
+<li>一致性读，又称快照读，一致性读会根据 row trx_id 和一致性视图确定数据版本的可见性。（读取的是undo log中已提交的数据，可能是数据的历史版本，no-locking，所以是非阻塞的读取操作。）</li>
+<li>当前读，读取的是数据的<strong>已提交完成</strong>的最新版本, 加锁保证事务隔离性。​</li>
+</ul>
+<p><strong>可重复读的核心就是一致性读（consistent read）；而事务更新数据的时候，只能用当前读。</strong></p>
+<h2 id="实践避坑"><a href="#实践避坑" class="headerlink" title="实践避坑"></a>实践避坑</h2><h3 id="避免长事务"><a href="#避免长事务" class="headerlink" title="避免长事务"></a>避免长事务</h3><p><strong>尽量不要使用长事务</strong>：从前面MVCC的机制可以看出，事务的一致性视图是基于当前数据配合回滚日志(undo log)得到的，如果事务一直不关闭或提交，则这些回滚日志就会一直保留，会占用存储空间。<br>​</p>
+<p>当没有事务再需要用到这些回滚日志时，回滚日志会被删除，从这角度可以推理出，回滚日志占用存储是应尽量避免长事务原因之一。<br>​</p>
+<p>可以通过下面的SQL查询长事务<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查询长事务，例如超过60秒的</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema.innodb_trx <span class="keyword">where</span> TIME_TO_SEC(<span class="keyword">timediff</span>(<span class="keyword">now</span>(),trx_started))&gt;<span class="number">60</span>;</span><br></pre></td></tr></table></figure></p>
+<p>### </p>
+<h3 id="应用程序正确使用“乐观锁”"><a href="#应用程序正确使用“乐观锁”" class="headerlink" title="应用程序正确使用“乐观锁”"></a>应用程序正确使用“乐观锁”</h3><p>​</p>
+<p>后端开发时，有时会用到“乐观锁”，大概使用方式就是基于version字段对数据行row进行CAS式的更新，类似<code>update t set ... where id = 111 and version = xxx</code>。<br><strong>当事务隔离级别均为为“可重复读”时</strong>，如果其他事务抢先更新了version字段，当前事务是有可能出现明明能查询到对应version的数据，执行update语句也能顺利执行，但就是数据无法更新的情况。所以<strong>判断是否成功的标准是 affected_rows 是不是等于预期值。</strong><br>​</p>
+<p>可以试着运行下面这个例子印证该结论（事务隔离级别均为为“可重复读”）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE `t` ( </span><br><span class="line">  `id` int(11) NOT NULL, </span><br><span class="line">  `k` int(11) DEFAULT NULL,</span><br><span class="line">  `version` int(11) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t(<span class="keyword">id</span>, k, <span class="keyword">version</span>) <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>),(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<p>场景</p>
+<table>
+<thead>
+<tr>
+<th>事务A</th>
+<th>事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin;</td>
+</tr>
+</tbody>
+</table>
+<p>select <em> from t; |  |<br>|  | update t set k=30, version=version+1 where id = 1 and version = 1; |<br>| update t set k=20, version=version+1 where id = 1 and version = 1;<br>select </em> from t;<br>commit; |  |</p>
+<table>
+<thead>
+<tr>
+<th>事务A</th>
+<th>事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>begin;</td>
+</tr>
+</tbody>
+</table>
+<p>select <em> from t; |<br>| begin;<br>select </em> from t; |  |<br>|  | update t set k=30, version=version+1 where id = 1 and version = 1;<br>commit; |<br>| update t set k=20, version=version+1 where id = 1 and version = 1;<br>select * from t;<br>commit; |  |</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li>理解事务 - MySQL 事务处理机制  <a href="https://www.jianshu.com/p/bcc614524024" target="_blank" rel="noopener">https://www.jianshu.com/p/bcc614524024</a></li>
+<li>『浅入深出』MySQL 中事务的实现 <a href="https://draveness.me/mysql-transaction" target="_blank" rel="noopener">https://draveness.me/mysql-transaction</a></li>
+<li>『浅入浅出』MySQL 和 InnoDB   <a href="https://draveness.me/mysql-innodb" target="_blank" rel="noopener">https://draveness.me/mysql-innodb</a></li>
+<li>MySQL 四种事务隔离级的说明  <a href="https://www.cnblogs.com/zhoujinyi/p/3437475.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhoujinyi/p/3437475.html</a></li>
+<li>Innodb中的事务隔离级别和锁的关系  <a href="https://tech.meituan.com/2014/08/20/innodb-lock.html" target="_blank" rel="noopener">https://tech.meituan.com/2014/08/20/innodb-lock.html</a></li>
+<li>图文并茂讲解Mysql事务实现原理 <a href="https://cloud.tencent.com/developer/article/1431307" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1431307</a></li>
+<li>深入学习MySQL事务：ACID特性的实现原理 <a href="https://cloud.tencent.com/developer/article/1408793" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1408793</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-22T15:45:02.391Z" itemprop="dateUpdated">2022-02-22 23:45:02</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2022/02/22/mysql-learn-transaction-isolation/" target="_blank" rel="external">https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/</a>
+<br>转载须知：<a href="/about/#版权声明" target="_blank" rel="copyright">版权声明</a>
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://brianway.github.io">
+            <img src="/img/me_640.jpg" alt="Brian Way">
+            Brian Way
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&source=在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL原理学习-事务隔离》 — Brian's Homepage&url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/14/hexo-github-pages-practice/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用GitHub+Hexo搭建个人网站</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        欢迎请我喝杯豆浆~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechatpay_small.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechatpay_small.png" data-alipay="/img/alipay_small.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+    <span id="busuanzi_container_page_pv" style="display:none">
+        本文总阅读量：<span id="busuanzi_value_page_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Brian Way &copy; 2015 - 2022</span>
+            <span>
+                
+                <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备18051434号</a><br>
+                
+                Power by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&pic=https://brianway.github.io/img/me_640.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&source=在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL原理学习-事务隔离》 — Brian's Homepage&url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&via=https://brianway.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqUlEQVR42u3aQW7DMAwEwP7/0ynQU4E2zpIUDR/Gp8BJZY0LWPSKX1/x8fo53p3/ffw9/26E1+VxPf7hAw8PD6819eQy7z4nf1W9Yn77PtwCPDw8vDXe9WJQHTqZ9Lsl5Pp25HPGw8PDewIvmWhe3ya83pKDh4eH9xxedfFI2NUlBA8PD+85vLxEzpeBZPxT8e6BrAUPDw8v5lU3wJ7weXF/Dw8PD2/8yD4QB7TC2df4wMPDw9vg5VtQGz1OSQCRBMofZo6Hh4d3lDffdsonnW93HQuU8fDw8Lb2qpqYfOr5AjD5tpBS4+Hh4Q141Qf95NGfTCgfv/CugIeHh7fAqw6aLCpVwHXc0Asp8PDw8DZ4vcK6OvQktO0V7qP3Bjw8PLzgKtV2z7zIro5ZLb6bO3J4eHh4A96kuSq/TK91oFqI4+Hh4d3Dm2//T1pa8xvXuxF4eHh4G7xkcr0NrclikIS8UfGNh4eHt8Drbcz3CuI8Ms5HGPVK4OHh4Y15Z5eHvO1g0vJ1rHUADw8PL+bNGwV6cUPy7SQs/ueNAQ8PD+8Qr5z4tkrk6o3Lg+NC+xceHh7eAm9SWM/xvYih2UaAh4eHN+b1yt95CFsdIfr/4OHh4d3Im1MnyN7ykMS7eHh4eBu83rO09+ifLAC9hi08PDy8PV6+GZZvTU1gk/aF6L0BDw8Pb8DLp1htiqoW09XoIaLi4eHh3cLrgatneq0GZSQeHh7eUd6reFQjgHnz6yQgxsPDw9vgndp/78UE1cK6F1Xg4eHhbfCqgUJ1kaien0fAeHh4ePfweqHD/Hb0Aty8TQEPDw/vCbzeNv98Y6waBOPh4eE9gVcNanvFev6bqH7Gw8PDW+P1AoV5UZ4HuM00Gg8PD2+BN+/bqj7ue8tDtdDHw8PDW+B9A8OfK/AJzibKAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
