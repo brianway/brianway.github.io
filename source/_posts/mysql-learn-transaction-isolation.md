@@ -193,15 +193,15 @@ InnoDB 在实现 MVCC 时用到了**一致性读视图**，即 **consistent read
 前提：
 
 - InnoDB 为每个事务构造了一个数组，用来保存这个事务启动瞬间，当前正在“活跃”（指**启动了但还没提交**）的所有事务 ID。
-- 假如将**事务启动瞬间**，当前正在“活跃”（指**启动了但还没提交**）的所有事务 ID对应的数组记作active_trxid_arr；
-- *min(active_trxid_arr)* 表示数组active_trxid_arr的最小值；
+- 假如将**事务启动瞬间**，当前正在“活跃”（指**启动了但还没提交**）的所有事务 ID对应的数组记作 *active_trxid_arr*；
+- *min(active_trxid_arr)* 表示数组 *active_trxid_arr* 的最小值；
 - *max(系统创建过的事务 ID) *表示系统创建过的事务 ID的最大值。显然地，*min(active_trxid_arr)  <=  max(系统创建过的事务 ID)*​
 
-对于任意数据版本的 row trx_id ，按照按 _min(active_trxid_arr) _ 和 _max(系统创建过的事务 ID)_ 划分的范围区间作分类讨论：
+对于任意数据版本的 row trx_id ，按照按 *min(active_trxid_arr)* 和 *max(系统创建过的事务 ID)* 划分的范围区间作分类讨论：
 
-- **row trx_id < **_**min(active_trxid_arr)**_** **，表示这个版本是已提交的事务或者是当前事务自己生成的，可见
-- **row trx_id > **_**max(系统创建过的事务 ID)**_，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见
-- **row trx_id >= **_**min(active_trxid_arr)**_**  &&   row trx_id  <= **_**max(系统创建过的事务 ID)** _，分两种情况：
+- *row trx_id < **_**min(active_trxid_arr)*，表示这个版本是已提交的事务或者是当前事务自己生成的，可见
+- *row trx_id > **_**max(系统创建过的事务 ID)*，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见
+- *row trx_id >= min(active_trxid_arr)  &&  row trx_id  <= max(系统创建过的事务 ID)*，分两种情况：
    - row trx_id 在 active_trxid_arr 中，表示这个版本是由还没提交的事务生成的，不可见
    - row trx_id 不在 active_trxid_arr 中，表示这个版本是已经提交了的事务生成的，可见
 
