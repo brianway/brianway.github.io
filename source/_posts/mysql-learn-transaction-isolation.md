@@ -28,7 +28,8 @@ SQL 标准义的事务隔离级别包括：
 - **串行化（serializable ）**
 
 上述每一种级别都规定了一个事务中的修改，哪些是事务之间可见的，哪些是不可见的。
-InnoDB中事务的默认隔离级别是可重复读的（REPEATABLE-READ），而公司里一般会将事务默认隔离级别设置为读提交（READ-COMMITTED）
+
+> InnoDB中事务的默认隔离级别是可重复读的（REPEATABLE-READ），而公司里一般会将事务默认隔离级别设置为读提交（READ-COMMITTED）
 
 
 MySQL中查看和修改事务隔离级别的常用命令如下：
@@ -115,12 +116,12 @@ show variables like 'completion_type';
 
 在介绍InnoDB的MVCC实现之前，我们可以先自己设计实现一下多版本实现方式。显然，很容易想到以下两种思路：
 
-1. 每次记录全量： 初始版本 ，历史版本1， 历史版本2, ... ，历史版本n ，最新版本
-2. 每次记录增量： 初始版本 + ∑每次增量 = 最新版本；历史某个版本+ ∑若干增量 =  最新版本。典型的应用如git，文档编辑时的撤销、恢复，等等。
+- 思路一：每次记录全量： 初始版本 ，历史版本1， 历史版本2, ... ，历史版本n ，最新版本
+- 思路二：每次记录增量： 初始版本 + ∑每次增量 = 最新版本；历史某个版本+ ∑若干增量 =  最新版本。典型的应用如git，文档编辑时的撤销、恢复，等等。
 
-> _注：∑是数学中的求和符号，在这里引申一下表示“累计、叠加”的含义。_
+> *注：∑是数学中的求和符号，在这里引申一下表示“累计、叠加”的含义。*
 
-InnoDB的MVCC原理和记录增量类似， 历史某个版本 =  最新版本 - ∑若干增量 。而**undo log**（回滚日志，用于记录数据**被修改前**的信息）里记录的就是这个“若干增量”。
+InnoDB的MVCC原理和记录增量类似， 历史某个版本 =  最新版本 - ∑若干增量 。而 **undo log**（回滚日志，用于记录数据**被修改前**的信息）里记录的就是这个“若干增量”。
 
 
 快照数据是将 undo log 的日志操作按一定的规则应用到“当前数据”上，即**当前值通过“回滚”回溯到某个历史值**。从而达到同一条记录在系统中可以存在多个版本，这就是数据库的多版本并发控制（MVCC）。
@@ -149,7 +150,7 @@ InnoDB的MVCC原理和记录增量类似， 历史某个版本 =  最新版本 -
 > 注：历史版本从数据结构的角度看是个链表，图中链表节点的row trx_id大小不一定是单调递增/递减的，而是**按照事务提交的顺序**。上述链接节点间的指针就是通过undo log实现的。
 
 ### InnoDB 的 MVCC 是如何实现的
-InnoDB 在实现 MVCC 时用到了**一致性读视图**，即 **consistent read view** 。访问的时候以视图的逻辑结果为准：
+InnoDB 在实现 MVCC 时用到了**一致性读视图**，即 **consistent read view** 。前面提到了，**快照数据  = func(当前数据，undo log)**，而一致性视图就是由这些快照数据中满足某些规则条件的版本构成的。​访问的时候以视图的逻辑结果为准：
 
 - “读未提交”隔离级别下，直接返回记录上的最新值，没有视图概念
 - “读提交”隔离级别下，视图是在每个 SQL 语句开始执行的时候创建的
@@ -157,14 +158,6 @@ InnoDB 在实现 MVCC 时用到了**一致性读视图**，即 **consistent read
 - “串行化”隔离级别下，直接用加锁的方式来避免并行访问
 
 > PS: 这个“视图”概念区别于MySQL中另一个常见的“视图”——用查询语句定义的一个虚拟表，在调用的时候执行查询语句并生成结果
-
-关于一致性视图的创建时机：
-
-- `begin`/`start transaction`**并不马上启动事务**。一致性视图是在执行**第一个快照读**语句时创建的。
-- `start transaction with consistent snapshot`，马上启动一个事务。一致性视图是在执行 `start transaction with consistent snapshot`时创建的。
-
-> 参考：MySQL 8.0 Reference Manual - START TRANSACTION, COMMIT, and ROLLBACK Statements: [ https://dev.mysql.com/doc/refman/8.0/en/commit.html](https://dev.mysql.com/doc/refman/8.0/en/)
-
 
 可重复读 vs. 读提交：
 
@@ -175,11 +168,16 @@ InnoDB 在实现 MVCC 时用到了**一致性读视图**，即 **consistent read
    - 对于可重复读，查询只承认在**事务启动前**就已经提交完成的数据；
    - 对于读提交，查询只承认在**语句启动前**就已经提交完成的数据。
 
+关于一致性视图的创建时机：
+
+- `begin`/`start transaction`**并不马上启动事务**。一致性视图是在执行**第一个快照读**语句时创建的。
+- `start transaction with consistent snapshot`，马上启动一个事务。一致性视图是在执行 `start transaction with consistent snapshot`时创建的。
+
+> 参考：MySQL 8.0 Reference Manual - START TRANSACTION, COMMIT, and ROLLBACK Statements: [ https://dev.mysql.com/doc/refman/8.0/en/commit.html](https://dev.mysql.com/doc/refman/8.0/en/)
 
 
 ### 视图数据如何计算
-前面提到了，**快照数据  = func(当前数据，undo log)**，而一致性视图就是由这些快照数据中的一部分组成的。
-​
+
 一个数据版本，对于一个事务视图来说，除了自己的更新总是可见以外，有三种情况：
 
 - 版本未提交，不可见；
@@ -199,8 +197,8 @@ InnoDB 在实现 MVCC 时用到了**一致性读视图**，即 **consistent read
 
 对于任意数据版本的 row trx_id ，按照按 *min(active_trxid_arr)* 和 *max(系统创建过的事务 ID)* 划分的范围区间作分类讨论：
 
-- *row trx_id < **_**min(active_trxid_arr)*，表示这个版本是已提交的事务或者是当前事务自己生成的，可见
-- *row trx_id > **_**max(系统创建过的事务 ID)*，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见
+- *row trx_id < min(active_trxid_arr)*，表示这个版本是已提交的事务或者是当前事务自己生成的，可见
+- *row trx_id > max(系统创建过的事务 ID)*，表示这个版本是由将来启动的事务生成的（即该事务启动时，该row trx_id 对应的事务还未启动），不可见
 - *row trx_id >= min(active_trxid_arr)  &&  row trx_id  <= max(系统创建过的事务 ID)*，分两种情况：
    - row trx_id 在 active_trxid_arr 中，表示这个版本是由还没提交的事务生成的，不可见
    - row trx_id 不在 active_trxid_arr 中，表示这个版本是已经提交了的事务生成的，可见
@@ -256,10 +254,11 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 ```
 
 ### 应用程序正确使用“乐观锁”
-​后端开发时，有时会用到“乐观锁”，大概使用方式就是基于version字段对数据行row进行CAS式的更新，类似`update t set ... where id = 111 and version = xxx`。
-**当事务隔离级别均为为“可重复读”时**，如果其他事务抢先更新了version字段，当前事务是有可能出现明明能查询到对应version的数据，执行update语句也能顺利执行，但就是数据无法更新的情况。所以**判断是否成功的标准是 affected_rows 是不是等于预期值。**
+​后端开发时，有时会用到“乐观锁”，大概使用方式就是基于version字段对数据行row进行CAS式的更新，类似`update t set ... where id = 111 and version = xxx`。在“读提交（read-committed）”的隔离级别下还好，
+**当事务隔离级别均为“可重复读（repeatable-read）”时**，如果其他事务抢先更新了version字段，当前事务是有可能出现明明能查询到对应version的数据，执行update语句也能顺利执行，但就是数据无法更新的情况。所以**判断是否成功的标准是 affected_rows 是不是等于预期值。**
 ​
-可以试着运行下面这个例子印证该结论（事务隔离级别均为为“可重复读”）：
+可以试着运行下面这个例子印证该结论（事务隔离级别均为“可重复读”），可以发现事务A明明能查到version=1的数据，但就是修改不了，执行update后，version还是1。
+
 ```sql
 mysql> CREATE TABLE `t` ( 
   `id` int(11) NOT NULL, 
@@ -304,6 +303,14 @@ insert into t(id, k, version) values(1,1,1),(2,2,2);
 - Innodb中的事务隔离级别和锁的关系  [https://tech.meituan.com/2014/08/20/innodb-lock.html](https://tech.meituan.com/2014/08/20/innodb-lock.html)
 - 图文并茂讲解Mysql事务实现原理 [https://cloud.tencent.com/developer/article/1431307](https://cloud.tencent.com/developer/article/1431307)
 - 深入学习MySQL事务：ACID特性的实现原理 [https://cloud.tencent.com/developer/article/1408793](https://cloud.tencent.com/developer/article/1408793)
+- [MySQL 默认隔离级别是RR，为什么阿里这种大厂会改成RC？](https://developer.aliyun.com/article/801013)
 
 
 
+> 最后打个广告
+> 本文是笔者学习“极客时间”的专栏《MySQL 实战 45 讲》后结合个人理解归纳和梳理的。
+> **通过下方链接或者扫描图片中二维码购买该专栏可以享受一些折扣，我也可从中分得推广佣金**👇👇👇
+> 欢迎感兴趣的朋友多多支持！
+> - 分享购买链接：http://gk.link/a/11c0B
+
+![《MySQL实战45讲》- shared by brianway](/img/ads/geektime-mysql-practice-45.jpeg)
