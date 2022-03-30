@@ -58,19 +58,19 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="MySQL">
-    <meta name="description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
+    <meta name="description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL原理学习-事务隔离">
 <meta property="og:url" content="https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/index.html">
 <meta property="og:site_name" content="Brian&#39;s Homepage">
-<meta property="og:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
+<meta property="og:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://brianway.github.io/img/ads/geektime-mysql-practice-45.jpeg">
-<meta property="og:updated_time" content="2022-02-24T14:26:24.759Z">
+<meta property="og:updated_time" content="2022-03-30T15:15:06.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL原理学习-事务隔离">
-<meta name="twitter:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
+<meta name="twitter:description" content="在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。">
 <meta name="twitter:image" content="https://brianway.github.io/img/ads/geektime-mysql-practice-45.jpeg">
     
         <link rel="alternate" type="application/atom+xml" title="Brian&#39;s Homepage" href="/atom.xml">
@@ -213,7 +213,7 @@ ga('send', 'pageview');
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事务介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">事务介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务隔离级别"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">事务隔离级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#隔离级别与读现象的关系"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">隔离级别与读现象的关系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务启动方式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">事务启动方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一个例子"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">一个例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离性实现-MVCC"><span class="post-toc-number">2.</span> <span class="post-toc-text">隔离性实现- MVCC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多版本是如何实现的"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">多版本是如何实现的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#InnoDB-的-MVCC-是如何实现的"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">InnoDB 的 MVCC 是如何实现的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图数据如何计算"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">视图数据如何计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离性实现-锁机制"><span class="post-toc-number">3.</span> <span class="post-toc-text">隔离性实现- 锁机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实践避坑"><span class="post-toc-number">4.</span> <span class="post-toc-text">实践避坑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#避免长事务"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">避免长事务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用程序正确使用“乐观锁”"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">应用程序正确使用“乐观锁”</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-number">5.</span> <span class="post-toc-text">相关链接</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事务介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">事务介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务隔离级别"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">事务隔离级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#隔离级别与读现象的关系"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">隔离级别与读现象的关系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一个不同隔离级别的例子"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">一个不同隔离级别的例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离性实现-MVCC"><span class="post-toc-number">2.</span> <span class="post-toc-text">隔离性实现- MVCC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多版本是如何实现的"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">多版本是如何实现的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#InnoDB-的-MVCC-是如何实现的"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">InnoDB 的 MVCC 是如何实现的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图数据如何计算"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">视图数据如何计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离性实现-锁机制"><span class="post-toc-number">3.</span> <span class="post-toc-text">隔离性实现- 锁机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实践避坑"><span class="post-toc-number">4.</span> <span class="post-toc-text">实践避坑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#避免长事务"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">避免长事务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用程序正确使用“乐观锁”"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">应用程序正确使用“乐观锁”</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-number">5.</span> <span class="post-toc-text">相关链接</span></a></li></ol>
         </nav>
     </aside>
 
@@ -238,9 +238,14 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。</p>
+            <p>在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。</p>
 <a id="more"></a>
-<h2 id="事务介绍"><a href="#事务介绍" class="headerlink" title="事务介绍"></a>事务介绍</h2><p>在 MySQL 中，事务支持是在<strong>引擎层</strong>实现的。提到事务，绕不开它的四个特性–<strong>ACID</strong>（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）。本文重点谈论事务的<strong>隔离性</strong>及其实现方式。<br>​</p>
+<h2 id="事务介绍"><a href="#事务介绍" class="headerlink" title="事务介绍"></a>事务介绍</h2><p>在 MySQL 中，事务支持是在<strong>引擎层</strong>实现的。<br>​<br>MySQL 的事务启动方式：</p>
+<ul>
+<li>（建议）显式启动事务语句， <code>begin</code> 或 <code>start transaction</code>。<code>commit work and chain</code>语法可以不用每次事务开始时<code>begin</code></li>
+<li>（不建议） <code>set autocommit=0</code>，这个命令会将这个线程的自动提交关掉。</li>
+</ul>
+<p>提到事务，绕不开它的四个特性–<strong>ACID</strong>（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）。本文重点谈论事务的<strong>隔离性</strong>及其实现方式。</p>
 <h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>SQL 标准义的事务隔离级别包括：</p>
 <ul>
 <li><strong>读未提交（read-uncommitted）</strong></li>
@@ -294,13 +299,7 @@ ga('send', 'pageview');
 <blockquote>
 <p>说明：InnoDB实现的可重复读通过<strong>next-key lock机制</strong>避免了幻读现象。next-key lock是行锁的一种，实现相当于record lock(记录锁) + gap lock(间隙锁)。关于InnoDB锁机制的相关问题，本文不作展开。</p>
 </blockquote>
-<h3 id="事务启动方式"><a href="#事务启动方式" class="headerlink" title="事务启动方式"></a>事务启动方式</h3><p>MySQL 的事务启动方式：</p>
-<ul>
-<li>（建议）显式启动事务语句， <code>begin</code> 或 <code>start transaction</code>。<code>commit work and chain</code>语法可以不用每次事务开始时<code>begin</code></li>
-<li>（不建议） <code>set autocommit=0</code>，这个命令会将这个线程的自动提交关掉。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 关于MySQL中的commit work、commit work and chain 参考 https://juejin.cn/post/6987373561836994590#heading-7</span><br><span class="line">show variables like &apos;completion_type&apos;;</span><br></pre></td></tr></table></figure>
-<h3 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h3><p>下面通过一个例子展示不同隔离级别。<br>表格中，事务A和B两列对应的内容分别表示在这两个事务中执行的SQL，每一行表示SQL执行的时间顺序。</p>
+<h3 id="一个不同隔离级别的例子"><a href="#一个不同隔离级别的例子" class="headerlink" title="一个不同隔离级别的例子"></a>一个不同隔离级别的例子</h3><p>下面通过一个例子展示不同隔离级别。<br>表格中，事务A和B两列对应的内容分别表示在这两个事务中执行的SQL，每一行表示SQL执行的时间顺序。</p>
 <table>
 <thead>
 <tr>
@@ -366,9 +365,9 @@ ga('send', 'pageview');
 </blockquote>
 <p>InnoDB的MVCC原理和记录增量类似， 历史某个版本 =  最新版本 - ∑若干增量 。而 <strong>undo log</strong>（回滚日志，用于记录数据<strong>被修改前</strong>的信息）里记录的就是这个“若干增量”。</p>
 <p>快照数据是将 undo log 的日志操作按一定的规则应用到“当前数据”上，即<strong>当前值通过“回滚”回溯到某个历史值</strong>。从而达到同一条记录在系统中可以存在多个版本，这就是数据库的多版本并发控制（MVCC）。<br>换成数学方式表达就是：<strong>快照数据  = func(当前数据，undo log)</strong></p>
-<p><strong>每行数据有多个版本</strong>。从前面的分析可知，数据的多个版本但并不是物理真是存在的，而是基于某个版本和undo log，可以计算出之前版本的数据，从而达到“旧的数据版本被保留”的效果。<br><strong>InnoDB里每个事务有个唯一的事务 ID</strong>，叫作 transaction id，是在事务开始的时候向 InnoDB 的事务系统申请的，是<strong>按申请顺序严格递增</strong>的。<br>每次事务更新数据的时候，都会生成一个新的数据版本，并且把 transaction id 赋值给这个数据版本的事务 ID，记为 row trx_id。所以InnoDB中历史版本的数据结构示意是下面的样子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 记号 （v, row trx_id, k） 表示某个数据行的一个快照版本</span><br><span class="line">// v表示虚拟的版本号，用于方便描述；k表示某个数据列的值，row trx_id表示数据版本的事务ID。</span><br><span class="line">// &lt;--- 后面表示生成该快照版本的的SQL逻辑，transaction id表示执行这个SQL的事务ID。</span><br><span class="line">// 则一行数据在执行的三段SQL前后后的四个数据快照V1～V4的数据结构示意如下：</span><br><span class="line"></span><br><span class="line">(V1, row trx_id =10, k=1) </span><br><span class="line">          ^</span><br><span class="line">          | 指向                   </span><br><span class="line">(V2, row trx_id =50, k=10)   &lt;---  transaction id=50, set k=10</span><br><span class="line">          ^</span><br><span class="line">          | 指向                    </span><br><span class="line">(V3, row trx_id =32, k=11)   &lt;---  transaction id=32, set k=k+1</span><br><span class="line">          ^</span><br><span class="line">          | 指向                    </span><br><span class="line">(V4, row trx_id =44, k=110)  &lt;---  transaction id=44, set k=k*10</span><br></pre></td></tr></table></figure></p>
+<p><strong>每行数据有多个版本</strong>。从前面的分析可知，数据的多个版本但并不是物理真是存在的，而是基于某个版本和undo log，可以计算出之前版本的数据，从而达到“旧的数据版本被保留”的效果。<br><strong>InnoDB里每个事务有个唯一的事务 ID</strong>，叫作 transaction id，是在事务开始的时候向 InnoDB 的事务系统申请的，是<strong>按申请顺序严格递增</strong>的。<br>每次事务更新数据的时候，都会生成一个新的数据版本，并且把 transaction id 赋值给这个数据版本的事务 ID，记为 row trx_id。所以InnoDB中历史版本的数据结构示意是下面的样子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 记号 （v, row trx_id, k） 表示某个数据行的一个快照版本</span><br><span class="line">// v表示虚拟的版本号，用于方便描述；k表示某个数据列的值，row trx_id表示数据版本的事务ID。</span><br><span class="line">// &lt;--- 后面表示生成该快照版本的的SQL逻辑，transaction id表示执行这个SQL的事务ID。</span><br><span class="line">// 则一行数据在执行的三段SQL前后的四个数据快照V1～V4的数据结构示意如下：</span><br><span class="line"></span><br><span class="line">(V1, row trx_id =10, k=1) </span><br><span class="line">          ^</span><br><span class="line">          | 指向                   </span><br><span class="line">(V2, row trx_id =50, k=10)   &lt;---  transaction id=50, set k=10</span><br><span class="line">          ^</span><br><span class="line">          | 指向                    </span><br><span class="line">(V3, row trx_id =32, k=11)   &lt;---  transaction id=32, set k=k+1</span><br><span class="line">          ^</span><br><span class="line">          | 指向                    </span><br><span class="line">(V4, row trx_id =44, k=110)  &lt;---  transaction id=44, set k=k*10</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>注：历史版本从数据结构的角度看是个链表，图中链表节点的row trx_id大小不一定是单调递增/递减的，而是<strong>按照事务提交的顺序</strong>。上述链接节点间的指针就是通过undo log实现的。</p>
+<p>注：历史版本从数据结构的角度看是个链表，图中链表节点的row trx_id大小不一定是单调递增/递减的，而是<strong>按照事务提交的顺序</strong>。上述链表节点间的指针就是通过undo log实现的。</p>
 </blockquote>
 <h3 id="InnoDB-的-MVCC-是如何实现的"><a href="#InnoDB-的-MVCC-是如何实现的" class="headerlink" title="InnoDB 的 MVCC 是如何实现的"></a>InnoDB 的 MVCC 是如何实现的</h3><p>InnoDB 在实现 MVCC 时用到了<strong>一致性读视图</strong>，即 <strong>consistent read view</strong> 。前面提到了，<strong>快照数据  = func(当前数据，undo log)</strong>，而一致性视图就是由这些快照数据中满足某些规则条件的版本构成的。​访问的时候以视图的逻辑结果为准：</p>
 <ul>
@@ -407,7 +406,7 @@ ga('send', 'pageview');
 <li>版本已提交，但是是在视图创建后提交的，不可见；</li>
 <li>版本已提交，而且是在视图创建前提交的，可见。</li>
 </ul>
-<p>这个逻辑很简单，但假如通过代码来实现时会发现没法落地。例如，如何确定版本是否提交，以及在视图创建前还是创建后提交的？也就是说如果通过合适的func，使得计算出的快照数据就是当前事务的一致性视图呢？</p>
+<p>这个逻辑很简单，但假如通过代码来实现时会发现没法落地。例如，如何确定版本是否提交，以及在视图创建前还是创建后提交的？也就是说如何通过合适的func，使得计算出的快照数据就是当前事务的一致性视图呢？</p>
 <p>对于当前事务，数据版本的可见性计算规则如下（PS：逻辑有点绕，但推导很简单）：<br>前提：</p>
 <ul>
 <li>InnoDB 为每个事务构造了一个数组，用来保存这个事务启动瞬间，当前正在“活跃”（指<strong>启动了但还没提交</strong>）的所有事务 ID。</li>
@@ -438,9 +437,6 @@ ga('send', 'pageview');
 <tr>
 <td>start transaction with consistent snapshot;</td>
 <td>​</td>
-</tr>
-<tr>
-<td></td>
 </tr>
 <tr>
 <td></td>
@@ -527,6 +523,7 @@ ga('send', 'pageview');
 <li>图文并茂讲解Mysql事务实现原理 <a href="https://cloud.tencent.com/developer/article/1431307" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1431307</a></li>
 <li>深入学习MySQL事务：ACID特性的实现原理 <a href="https://cloud.tencent.com/developer/article/1408793" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1408793</a></li>
 <li><a href="https://developer.aliyun.com/article/801013" target="_blank" rel="noopener">MySQL 默认隔离级别是RR，为什么阿里这种大厂会改成RC？</a></li>
+<li><a href="https://juejin.cn/post/6987373561836994590#heading-7" target="_blank" rel="noopener">关于MySQL中的commit work、commit work and chain</a></li>
 </ul>
 <blockquote>
 <p>最后打个广告<br>本文是笔者学习“极客时间”的专栏《MySQL 实战 45 讲》后结合个人理解归纳和梳理的。<br><strong>通过下方链接或者扫描图片中二维码购买该专栏可以享受一些折扣，我也可从中分得推广佣金</strong>👇👇👇<br>欢迎感兴趣的朋友多多支持！</p>
@@ -548,7 +545,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-02-24T14:26:24.759Z" itemprop="dateUpdated">2022-02-24 22:26:24</time>
+    最后更新时间：<time datetime="2022-03-30T15:15:06.300Z" itemprop="dateUpdated">2022-03-30 23:15:06</time>
 </span><br>
 
 
@@ -596,7 +593,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&source=在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&source=在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 ..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -752,7 +749,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&source=在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://brianway.github.io/2022/02/22/mysql-learn-transaction-isolation/&title=《MySQL原理学习-事务隔离》 — Brian's Homepage&source=在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 ..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
