@@ -8,15 +8,20 @@ tags: [MySQL]
 comments: true
 ---
 
-在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读、幻读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。
+在开发过程中经常会使用到 MySQL，也可能多少了解事务隔离级别、脏读等名词，但总觉得不够系统和深入，希望对事务隔离相关知识进行一个梳理。本文先简单介绍 MySQL 事务相关的概念，重点谈论事务的隔离性及其实现方式，最后结合这些原理举了两个避坑实践案例。
 
 <!-- more -->
 
 ## 事务介绍
 
 
-在 MySQL 中，事务支持是在**引擎层**实现的。提到事务，绕不开它的四个特性--**ACID**（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）。本文重点谈论事务的**隔离性**及其实现方式。
+在 MySQL 中，事务支持是在**引擎层**实现的。
 ​
+MySQL 的事务启动方式：
+- （建议）显式启动事务语句， `begin` 或 `start transaction`。`commit work and chain`语法可以不用每次事务开始时`begin`
+- （不建议） `set autocommit=0`，这个命令会将这个线程的自动提交关掉。
+
+提到事务，绕不开它的四个特性--**ACID**（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）。本文重点谈论事务的**隔离性**及其实现方式。
 
 ### 事务隔离级别
 
@@ -65,18 +70,8 @@ select * from information_schema.innodb_trx;
 > 说明：InnoDB实现的可重复读通过**next-key lock机制**避免了幻读现象。next-key lock是行锁的一种，实现相当于record lock(记录锁) + gap lock(间隙锁)。关于InnoDB锁机制的相关问题，本文不作展开。
 
 
-### 事务启动方式
-MySQL 的事务启动方式：
-- （建议）显式启动事务语句， `begin` 或 `start transaction`。`commit work and chain`语法可以不用每次事务开始时`begin`
-- （不建议） `set autocommit=0`，这个命令会将这个线程的自动提交关掉。
 
-```
-# 关于MySQL中的commit work、commit work and chain 参考 https://juejin.cn/post/6987373561836994590#heading-7
-show variables like 'completion_type';
-```
-
-
-### 一个例子
+### 一个不同隔离级别的例子
 下面通过一个例子展示不同隔离级别。
 表格中，事务A和B两列对应的内容分别表示在这两个事务中执行的SQL，每一行表示SQL执行的时间顺序。
 
@@ -134,7 +129,7 @@ InnoDB的MVCC原理和记录增量类似， 历史某个版本 =  最新版本 -
 // 记号 （v, row trx_id, k） 表示某个数据行的一个快照版本
 // v表示虚拟的版本号，用于方便描述；k表示某个数据列的值，row trx_id表示数据版本的事务ID。
 // <--- 后面表示生成该快照版本的的SQL逻辑，transaction id表示执行这个SQL的事务ID。
-// 则一行数据在执行的三段SQL前后后的四个数据快照V1～V4的数据结构示意如下：
+// 则一行数据在执行的三段SQL前后的四个数据快照V1～V4的数据结构示意如下：
 
 (V1, row trx_id =10, k=1) 
           ^
@@ -219,8 +214,7 @@ insert into t(id, k) values(1,1),(2,2);
 ```
 | 事务A | 事务B |
 | --- | --- |
-| start transaction with consistent snapshot; | ​
- |
+| start transaction with consistent snapshot; | ​ |
 |  | start transaction with consistent snapshot;<br/>update set k = k+1 where id = 1; |
 | update t set k=k+1 where id = 1;<br/> select k from t where id = 1; |  |
 |  | commit; |
@@ -304,6 +298,7 @@ insert into t(id, k, version) values(1,1,1),(2,2,2);
 - 图文并茂讲解Mysql事务实现原理 [https://cloud.tencent.com/developer/article/1431307](https://cloud.tencent.com/developer/article/1431307)
 - 深入学习MySQL事务：ACID特性的实现原理 [https://cloud.tencent.com/developer/article/1408793](https://cloud.tencent.com/developer/article/1408793)
 - [MySQL 默认隔离级别是RR，为什么阿里这种大厂会改成RC？](https://developer.aliyun.com/article/801013)
+- [关于MySQL中的commit work、commit work and chain](https://juejin.cn/post/6987373561836994590#heading-7)
 
 
 
